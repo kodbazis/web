@@ -1,0 +1,125 @@
+<div class="row">
+	<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+		<div class="page-header">
+			<h2 class="pageheader-title">Új beágyazható</h2>
+		</div>
+	</div>
+</div>
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+	<div class="card">
+		<div class="card-body">
+			<form action="/admin/beagyazhatok/create" method="post">
+
+
+				<input type="hidden" name="csrfToken" value="{{ csrfToken }}">
+				<div class="form-group">
+					<label class="w-100">
+						Név
+						<input type="text" class="form-control" name="name">
+					</label>
+				</div>
+
+
+				<label class="w-100 mb-3">
+					Típus
+					<select id="type-select" name="type" class="custom-select">
+						<option value="gif">GIF</option>
+						<option value="youtube">Youtube</option>
+						<option value="codeAssistant">Kódsegéd</option>
+						<option value="codeAssistantGif">Kódsegéd GIF</option>
+						<option value="codeAssistantYoutube">Kódsegéd Youtube</option>
+					</select>
+				</label>
+				<div id="groups">
+					<div id="gif">
+						Gif
+						<label class="w-100">
+							Filename
+							<input type="text" class="form-control" name="fileName">
+						</label>
+					</div>
+
+
+					<div id="youtube">
+						Youtube
+						<label class="w-100">
+							Video ID
+							<input type="text" class="form-control" name="videoId">
+						</label>
+					</div>
+
+					<div id="codeAssistant">
+						Kódsegéd
+						<label class="w-100">
+							FileChanges Name
+							<input type="text" class="form-control" name="filechangesName">
+						</label>
+						<label class="w-100">
+							Video FileName
+							<input type="text" class="form-control" name="videoFileName">
+						</label>
+					</div>
+
+					<div id="codeAssistantGif">
+						Kódsegéd GIF
+						<label class="w-100">
+							FileChanges Name
+							<input type="text" class="form-control" name="filechangesName">
+						</label>
+						<label class="w-100">
+							Filename
+							<input type="text" class="form-control" name="fileName">
+						</label>
+						<label class="w-100">
+							Show frame number
+							<input type="checkbox" class="form-control" name="showFrameNumber">
+						</label>
+						<label class="w-100">
+							Layout
+							<select name="layout" class="custom-select">
+								<option value="block">Block</option>
+								<option value="inline">Inline</option>
+							</select>
+						</label>
+					</div>
+
+					<div id="codeAssistantYoutube">
+						Kódsegéd Youtube
+						<label class="w-100">
+							FileChanges Name
+							<input type="text" class="form-control" name="filechangesName">
+						</label>
+						<label class="w-100">
+							Video ID
+							<input type="text" class="form-control" name="videoId">
+						</label>
+					</div>
+				</div>
+				<button class="btn btn-primary" type="submit">Elküldés</button>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	let selected = 'gif';
+let elements = {};
+window.onload = init;
+document.getElementById('type-select').onchange = (e) => {
+selected = e.target.value;
+render();
+}
+
+function render() {
+document.getElementById('groups').innerHTML = '';
+document.getElementById('groups').appendChild(elements[selected]);
+}
+
+function init() {
+elements = Array.from(document.getElementById('groups').children).reduce((acc, cr) => ({
+...acc,
+[cr.id]: cr
+}), {});
+render();
+}
+</script>

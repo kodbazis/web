@@ -1,0 +1,104 @@
+<?xml version = "1.0"?>
+<root>
+    <item>
+    <frame>0</frame>
+    <fileName>Dockerfile</fileName>
+    <content>
+FROM node:12
+WORKDIR /usr/src/app\nCOPY package.json .
+RUN npm install
+COPY index.js .
+ENTRYPOINT [ "node", "index.js" ]
+    </content>
+    </item>
+    <item>
+    <frame>90</frame>
+    <fileName>lepesek.txt</fileName>
+    <content>
+A docker megkapja a dockerfile-t 
+és a kontextust, majd elkezd 
+végiggyalogolni az utasításaidon.
+
+Az első utasítás kapcsán letöltődik 
+a base image.
+Ez tulajdonképpen egy könnyed linux 
+disztribúció és egyúttal a 
+node js programnak a fájlrendszerét 
+is magában foglalja.
+
+A docker az utasítás kapcsán létrehoz 
+egy réteget az image-ben.
+    </content>
+    </item>
+    <item>
+    <frame>125</frame>
+    <fileName>lepesek.txt</fileName>
+    <content> 
+A következő utasítás az image 
+fájlrendszerben átnavigál a 
+/usr/src/app mappába.
+
+Itt az image fájlrendszerében módosítás 
+nem történik, de az előző lépéshez 
+hasonlóan létrejön egy réteg és a navigálás 
+bekerül a réteg metadatai közé. 
+
+Tehát az egyes rétegek a 
+készülő image fájlrendszerében 
+bekövetkezett változásokat tartalmazzák.
+    </content>
+    </item>
+    <item>
+    <frame>130</frame>
+    <fileName>lepesek.txt</fileName>
+    <content> 
+Az ezt követő utasítás átmásolja 
+a package.json fájlt a kontextusodból 
+az image-be.
+
+Majd ezek után futtatja az npm install 
+parancsot az image-nek a 
+fájlrendszeréből. 
+
+Ez beolvassa a package.json fájlt, 
+meghatározza az app dependenciáit 
+és feltelepíti őket.
+    </content>
+    </item>
+    <item>
+    <frame>150</frame>
+    <fileName>lepesek.txt</fileName>
+    <content> 
+A rétegek azok egymásra halmozódnak és 
+mindegyik rétegre igaz, hogy csak olvasni 
+tud az alatta lévő retegekből, 
+de írni nem tud beléjük. 
+
+Ha egy olyan utasításra kerülne sor, 
+ami kihatással lenne egy 
+lentebbi rétegben lévő fájlra, 
+akkor a docker az úgynevezett 
+copy-on-write stratégiát valósítja meg.
+
+Ez azt jelenti, hogy a lentebbi 
+réteg fájlrendszerében nem végez módosítást, 
+ehelyett felmásolja a módosítandó fájlt 
+az aktuális rétegbe és ott módosítja azt.
+    </content>
+    </item>
+    <item>
+    <frame>160</frame>
+    <fileName>lepesek.txt</fileName>
+    <content> 
+A további két utasítás átmásolja az 
+index.js fájlt, majd regisztrálja azt a 
+parancsot aminek a rendszer elindulásakor 
+futnia kell. Végső soron a docker 
+legyártja az image-et.
+
+A réteges felépítés azért előnyös, mert 
+a read only rétegeket több image is fel 
+tudja használni egymástól függetlenül.
+    </content>
+    </item>
+</root>

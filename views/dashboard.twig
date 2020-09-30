@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta
+		name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/public/css/bootstrap/bootstrap.min.css">
+		<link rel="stylesheet" href="/public/css/admin.css">
+		<link rel="stylesheet" href="/public/css/fonts/fontawesome/css/fontawesome-all.css">
+		<link rel="stylesheet" href="/public/css/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
+		{% for style in styles %}
+			{% if style.isCdn %}
+				<link rel="stylesheet" href="{{ style.path }}">
+			{% else %}
+				<link rel="stylesheet" href="/public/{{ style.path }}">
+			{% endif %}
+		{% endfor %}
+
+		<title>Kódbázis Admin</title>
+		<style>
+			body {
+				font-family: 'Circular Std', sans-serif;
+			}
+
+			.tableFixHead {
+				overflow-y: auto;
+				height: 100px;
+			}
+
+			.tableFixHead thead th {
+				position: sticky;
+				top: 0;
+				z-index: 1;
+			}
+
+			th {
+				background: #eee;
+			}
+
+
+			.dashboard-header .navbar {
+				border-bottom: none;
+			}
+
+			.sidebar-dark {
+				background-color: #222;
+			}
+		</style>
+	</head>
+
+	<body>
+			<div class="dashboard-main-wrapper"> 
+				<div class="dashboard-header"> <nav class="navbar navbar-expand-lg bg-dark fixed-top">
+					<a class="navbar-brand" href="/">
+						<img src="public/images/logo.png" alt="Kódbázis" width="150px" class="logo"/>
+						<span class="text-white">Admin</span>
+					</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse " id="navbarSupportedContent">
+						<ul class="navbar-nav ml-auto navbar-right-top">
+						</ul>
+					</div>
+				</nav>
+			</div>
+				<div class="nav-left-sidebar sidebar-dark"> <div class="menu-list">
+					<nav class="navbar navbar-expand-lg navbar-light">
+						<a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarNav">
+							<ul class="navbar-nav flex-column">
+								<li class="nav-divider">
+									Menu
+								</li>
+								<li class="nav-item ">
+									<a class="nav-link {{ activePath == '/admin' ? 'active' : '' }}" href="/admin">
+										<i class="fa fa-newspaper"></i>Cikkek
+									</a>
+									<a class="nav-link {{ activePath == '/admin/kurzusok' ? 'active' : '' }}" href="/admin/kurzusok">
+										<i class="fa fa-list"></i>Kurzusok
+									</a>
+									<a class="nav-link {{ activePath == '/admin/epizodok' ? 'active' : '' }}" href="/admin/epizodok">
+										<i class="fa fa-play"></i>Epizódok
+									</a>
+									<a class="nav-link {{ activePath == '/admin/beagyazhatok' ? 'active' : '' }}" href="/admin/beagyazhatok">
+										<i class="fa fa-image"></i>Beágyazhatók
+									</a>
+								</li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+				<div class="dashboard-wrapper"> <div class="dashboard-ecommerce">
+					<div
+						class="container-fluid dashboard-content ">
+						{# main content #}
+						{% include content %}
+					</div>
+				</div>
+			</div>
+		</div>
+			{% if scripts is defined %}
+				{% for script in scripts %}
+					{% if script.isCdn %}<script src="{{ script.path }}"> </script>
+				{% else %}
+					<script src="/public/{{ script.path }}"></script>
+				{% endif %}
+
+			{% endfor %}
+		{% endif %}
+	</body>
+</html>

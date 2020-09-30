@@ -1,0 +1,60 @@
+<?xml version = "1.0"?>
+<root>
+    <item>
+    <frame>0</frame>
+    <fileName>parancs.sh</fileName>
+    <content>
+#!/bin/bash
+docker-compose up
+    </content>
+    </item>
+    <item>
+    <frame>105</frame>
+    <fileName>docker-compose.yml</fileName>
+    <content>
+version: "3"
+services:
+  webszerver_kontener:
+    build:
+      context: ./webszerver
+      dockerfile: ./Dockerfile
+    ports:
+      - "8181:80"
+    environment:
+      API_KEY: "5nN6XD42"
+    networks:
+      - pelda_net
+    volumes:
+      - ./webszerver/src:/app/user/src
+  idoszakos_folyamat_kontener:
+    build:
+      context: ./idoszakos-folyamat
+      dockerfile: ./Dockerfile
+    networks:
+      - pelda_net
+  adatbazis_kontener:
+    build:
+      context: ./adatbazis
+      dockerfile: Dockerfile
+    ports:
+      - 3308:3308
+    networks:
+      - pelda_net
+networks:
+  pelda_net:
+    driver: bridge
+    </content>
+    </item>
+
+    <item>
+    <frame>140</frame>
+    <fileName>info.txt</fileName>
+    <content>
+- Portok mappelése a konténerbe
+- Környezeti változók
+- Network amin folyik a konténerek 
+  közötti kommunikáció
+- Volume-ok
+    </content>
+    </item>
+</root>

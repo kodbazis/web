@@ -1,0 +1,51 @@
+h1 {
+  margin-bottom: 20px !important;
+}
+
+
+h2 {
+  font-weight: 300 !important;
+  color: black !important;
+  font-size: 2.5em !important;
+}
+
+.ui-slider .ui-slider-handle {
+  height: 30px !important;
+  width: 13px !important;
+  padding-left: 21px !important;
+}
+.ui-slider .ui-slider-handle:hover {
+  cursor: pointer;
+}
+
+.jsgif {
+  margin-bottom: 20px;
+}
+
+.ui-slider-horizontal {
+  height: 25px !important;
+}
+
+.ui-state-default {
+  background: #f92672 !important;
+}
+
+@media screen and (max-width: 600px) {
+  .ui-slider .ui-slider-handle {
+    height: 50px !important;
+    width: 33px !important;
+    padding-left: 41px !important;
+  }
+
+  .ui-slider-horizontal {
+    height: 45px !important;
+  }
+
+  .ui-state-default {
+    background: #f92672 !important;
+  }
+
+  .card-body {
+    padding: 0 !important;
+  }
+}

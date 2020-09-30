@@ -1,0 +1,73 @@
+<?xml version = "1.0"?>
+<root>
+    <item>
+    <frame>0</frame>
+    <fileName>index.html</fileName>
+    <content>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
+    </content>
+    </item>
+
+    <item>
+    <frame>30</frame>
+    <fileName>app.js</fileName>
+    <content>
+[7, 11, 2]
+    </content>
+    </item>
+
+    <item>
+    <frame>50</frame>
+    <fileName>app.js</fileName>
+    <content>
+[7, 11, 2].map(szam => szam * 5);
+    </content>
+    </item>
+    
+    <item>
+    <frame>72</frame>
+    <fileName>app.js</fileName>
+    <content>
+[7, 11, 2].map(szam => szam * 5);
+// 7 * 5 = 35
+    </content>
+    </item>
+    
+    <item>
+    <frame>100</frame>
+    <fileName>app.js</fileName>
+    <content>
+[7, 11, 2].map(szam => szam * 5);
+// 11 * 5 = 55
+    </content>
+    </item>
+    
+    <item>
+    <frame>125</frame>
+    <fileName>app.js</fileName>
+    <content>
+[7, 11, 2].map(szam => szam * 5);
+// 2 * 5 = 10
+    </content>
+    </item>
+    
+    <item>
+    <frame>147</frame>
+    <fileName>app.js</fileName>
+    <content>
+[7, 11, 2].map(szam => szam * 5);
+// Vegeredmeny: [35, 55, 10]
+    </content>
+    </item>
+    
+</root>

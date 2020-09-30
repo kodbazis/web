@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico?v=3" />  
+    <link rel="stylesheet" href="/public/css/bootstrap/bootstrap.min.css">
+    {% for style in styles %}
+      {% if style.isCdn %}
+        <link rel="stylesheet" href="{{ style.path }}">
+      {% else %}
+        <link rel="stylesheet" href="/public/{{ style.path }}">
+      {% endif %}
+    {% endfor %}
+    <link type="text/css" href="public/css/pages.css" media="all" rel="stylesheet" />
+    <title>
+      {{ title is defined ? title : 'Kódbázis | Programozás egyszerűen, közérthetően elmagyarázva.' }}
+    </title>
+    <meta property="og:locale" content="hu_HU" />
+    <meta name="description" content="{{ description is defined ? description : 'Programozás egyszerűen, közérthetően elmagyarázva.' }}"/>
+    {% for ogTag in ogTags %}
+          <meta property="{{ogTag.property}}" content="{{ogTag.content}}"/>
+    {% endfor %}
+  </head>
+
+  <body class="home">
+    <nav class="navbar fixed-top bg m-auto">
+      <a href="/" class="m-auto"><img src="public/images/logo.png" alt="Kódbázis" class="logo" /></a>
+    </nav>
+      {% include content %}
+    <footer class="page-footer">
+      <ul class="site-footer-links right">
+        <li>
+          <a target="_blank" href="https://facebook.com/kodbazis">
+            <img height="30px" src="public/images/facebook.png" />
+          </a>
+        </li>
+        <li>
+          <a target="_blank" href="https://youtube.com/kodbazis">
+            <img height="30px" src="public/images/youtube.png" />
+          </a>
+        </li>
+      </ul>
+
+      <ul class="site-footer-links">
+        <li>&copy; 2020 <span>Kódbázis</span></li>
+        <li>
+          <a href="/adatvedelmi-szabalyzat">
+            Adatvédelmi szabályzat
+          </a>
+        </li>
+      </ul>
+    </footer>
+
+    {% if scripts is defined %}
+      {% for script in scripts %}
+        {% if script.isCdn %}
+          <script src="{{ script.path }}"></script>
+        {% else %}
+          <script src="/public/{{ script.path }}"></script>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  </body>
+</html>

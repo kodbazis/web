@@ -1,0 +1,91 @@
+<div class="row">
+	<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+		<div class="page-header">
+			<h2 class="pageheader-title">Beágyazható szerkesztése</h2>
+		</div>
+	</div>
+</div>
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+	<div class="card">
+		<div class="card-body">
+			<form action="/admin/beagyazhatok/update/{{embeddable.id}}" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="csrfToken" value="{{ csrfToken }}">
+				<div class="form-group">
+					<label class="w-100">
+						Név
+						<input type="text" class="form-control" name="name" value="{{embeddable.name}}">
+					</label>
+				</div>
+				<div class="form-group">
+					<label class="w-100">
+						<input type="hidden" class="form-control" name="type" value="{{embeddable.type}}">
+					</label>
+				</div>
+				{% if embeddable.type == 'gif' %}
+					Gif
+					<label class="w-100">
+						Filename
+						<input type="text" class="form-control" name="fileName" value="{{embeddable.fileName}}">
+					</label>
+				{% endif %}
+
+				{% if embeddable.type == 'youtube' %}
+					Youtube
+					<label class="w-100">
+						Video ID
+						<input type="text" class="form-control" name="videoId" value="{{embeddable.videoId}}">
+					</label>
+				{% endif %}
+
+				{% if embeddable.type == 'codeAssistant' %}
+					Kódsegéd
+					<label class="w-100">
+						FileChanges Name
+						<input type="text" class="form-control" name="filechangesName" value="{{embeddable.filechangesName}}">
+					</label>
+					<label class="w-100">
+						Video FileName
+						<input type="text" class="form-control" name="videoFileName" value="{{embeddable.videoFileName}}">
+					</label>
+				{% endif %}
+
+				{% if embeddable.type == 'codeAssistantGif' %}
+					Kódsegéd
+					<label class="w-100">
+						FileChanges Name
+						<input type="text" class="form-control" name="filechangesName" value="{{embeddable.filechangesName}}">
+					</label>
+					<label class="w-100">
+						Filename
+						<input type="text" class="form-control" name="fileName" value="{{embeddable.fileName}}">
+					</label>
+					<label class="w-100">
+						Show frame number
+						<input type="checkbox" class="form-control" name="showFrameNumber" {{embeddable.showFrameNumber ? 'checked' : ''}}>
+					</label>
+					<label class="w-100">
+						Layout
+						<select name="layout" class="custom-select">
+							<option {{embeddable.layout == 'block' ? 'selected' : ''}} value="block">Block</option>
+							<option {{embeddable.layout == 'inline' ? 'selected' : ''}} value="inline">Inline</option>
+						</select>
+					</label>
+				{% endif %}
+
+				{% if embeddable.type == 'codeAssistantYoutube' %}
+					Kódsegéd Youtube
+					<label class="w-100">
+						FileChanges Name
+						<input type="text" class="form-control" name="filechangesName" value="{{embeddable.filechangesName}}">
+					</label>
+					<label class="w-100">
+						Video ID
+						<input type="text" class="form-control" name="videoId" value="{{embeddable.videoId}}">
+					</label>
+				{% endif %}
+				<button class="btn btn-primary" type="submit">Elküldés</button>
+			</form>
+		</div>
+	</div>
+</div>

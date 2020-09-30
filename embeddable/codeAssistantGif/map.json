@@ -1,0 +1,37 @@
+[
+  {
+    "frame": 0,
+    "fileName": "index.html",
+    "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Document</title>\n</head>\n<body>\n    <div id=\"app\"></div>\n    <script src=\"./app.js\"></script>\n</body>\n</html>"
+  },
+  {
+    "frame": 1,
+    "fileName": "app.js",
+    "content": "[7, 11, 2]"
+  },
+  {
+    "frame": 50,
+    "fileName": "app.js",
+    "content": "[7, 11, 2].map(szam => szam * 5);"
+  },
+  {
+    "frame": 72,
+    "fileName": "app.js",
+    "content": "[7, 11, 2].map(szam => szam * 5);\n // 7 * 5 = 35"
+  },
+  {
+    "frame": 100,
+    "fileName": "app.js",
+    "content": "[7, 11, 2].map(szam => szam * 5);\n // 11 * 5 = 55"
+  },
+  {
+    "frame": 125,
+    "fileName": "app.js",
+    "content": "[7, 11, 2].map(szam => szam * 5);\n // 2 * 5 = 10"
+  },
+  {
+    "frame": 147,
+    "fileName": "app.js",
+    "content": "[7, 11, 2].map(szam => szam * 5);\n // Vegeredmeny: [35, 55, 10]"
+  }
+]

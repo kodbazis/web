@@ -1,0 +1,15 @@
+{% if type == 'codeAssistantGif' %}
+	<div class='kodseged' data-filechangesurl='/embeddable/codeAssistantGif/{{id}}/fileChanges' data-gifurl='/embeddable/codeAssistantGif/{{id}}/gif' data-type='codeAssistantGif' data-showframenumber='{{showFrameNumber}}' data-layout='{{layout}}'></div>
+{% elseif type == 'codeAssistantYoutube'  %}
+	<div class="kodseged" data-videoid="{{videoId}}" data-filechangesurl="/embeddable/codeAssistantYoutube/{{id}}/fileChanges" data-type="codeAssistantYoutube"></div>
+{% elseif type == 'codeAssistant'  %}
+	<div class='kodseged' data-filechangesurl='/embeddable/codeAssistant/{{id}}/fileChanges' data-videourl='/embeddable/codeAssistant/{{id}}/video' data-type='onSite'></div>
+{% elseif type == 'youtube'  %}
+	<p class='text-center'>
+		<div class="kodseged" data-videoid="{{videoId}}" data-type="youtube"></div>
+	</p>
+{% elseif type == 'gif'  %}
+	<div class='kodseged' data-gifurl='/embeddable/gif/{{id}}/gif' data-type='gif'></div>
+{% else %}
+	<p>No embeddable content...</p>
+{% endif %}
