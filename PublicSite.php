@@ -78,6 +78,7 @@ class PublicSite
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
                 'content' => 'privacy-policy.html',
+                'description' => 'A Kódbázis adatvédelmi szabályzata'
             ]);
         });
 
