@@ -1,26 +1,20 @@
 <section class="first-section wrapper">
-  <div class="mt-5 mb-3">
-    {% for row in posts %}
-    <div class="row">
-      {% for post in row %}
-      <div class="col-sm-4">
-        <a href="/cikkek/{{ post.slug }}">
-          <div class="card" class="w-100">
-            <img class="card-img-top" src="/public/files/md-{{ post.imgUrl }}" alt="Card image cap" />
-            {# <img class="card-img-top" src="https://via.placeholder.com/300x180" alt="Card image cap" /> #}
-            <div class="card-body">
-              <h5 class="card-title">{{ post.title }}</h5>
-              {#
-              <p class="card-text">{{ post.description | raw }}</p>
-              #}
-            </div>
-          </div>
-        </a>
-      </div>
-      {% endfor %}
-    </div>
-    {% endfor %}
-  </div>
+	<div class="mt-5 mb-3">
+		{% for row in posts %}
+			<div class="row">
+				{% for post in row %}
+					<div class="col-sm-4">
+						<a href="/cikkek/{{ post.slug }}">
+							<div class="card" class="w-100">
+								<img class="card-img-top" src="/public/files/md-{{ post.imgUrl }}" alt=""/>
+								<div class="card-body">
+									<h5 class="card-title">{{ post.title }}</h5>
+								</div>
+							</div>
+						</a>
+					</div>
+				{% endfor %}
+			</div>
+		{% endfor %}
+	</div>
 </section>
-
-
