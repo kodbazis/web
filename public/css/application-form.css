@@ -60,3 +60,7 @@
   font-size: 28px;
   left: 6px;
 }
+
+#start-date {
+  background-color: white !important;
+}
