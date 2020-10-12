@@ -12,6 +12,7 @@ use Kodbazis\Generated\Repository\Post\SqlLister;
 use Kodbazis\Generated\Repository\Course\SqlLister as CourseLister;
 use Kodbazis\Generated\Repository\Embeddable\SqlByIdGetter;
 use Kodbazis\Generated\Repository\Episode\SqlLister as EpisodeLister;
+use Kodbazis\Mailer\Mailer;
 
 class PublicSite
 {
@@ -40,11 +41,31 @@ class PublicSite
         });
         $r->get('/trening', function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
-
             echo $twig->render('wrapper.twig', [
                 'content' => 'training.twig',
-                'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.'
+                'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.',
+                'styles' => [
+                    ['path' => 'css/bootstrap-datetimepicker.min.css'],
+                    ['path' => 'css/application-form.css'],
+                ],
+                'scripts' => [
+                    ['path' => 'js/jquery.js'],
+                    ['path' => 'js/moment.js'],
+                    ['path' => 'js/moment-timezone.js'],
+                    ['path' => 'js/bootstrap-datetimepicker.min.js'],
+                    ['path' => 'js/application-form.js'],
+                ],
             ]);
+        });
+
+        $r->post('/apply-to-training', function (Request $request) use ($conn, $twig) {
+            $msg = "Név: " . $request->body['name'] . "<br/>" .
+                "Email: " . $request->body['email'] . "<br/>" .
+                "Dátum: " . $request->body['date'] . "<br/>" .
+                "Megjegyzések: " . $request->body['remarks'] . "<br/>";
+
+            @(new Mailer())->sendMail('Új jelentkező: ' . $request->body['name'], $msg);
+            echo json_encode(['message' => 'success']);
         });
 
         $r->get('/cikkek', function (Request $request) use ($conn, $twig) {

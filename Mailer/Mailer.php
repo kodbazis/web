@@ -6,10 +6,11 @@ use Exception;
 
 class Mailer
 {
-    public function sendMail($subject, $body, $recepientEmail)
+    public function sendMail($subject, $body)
     {
         $mail = new \PHPMailer\PHPMailer\PHPMailer();
         $mail->isSMTP();
+        // $mail->SMTPDebug = 3;
         $mail->setFrom($_SERVER['SMTP_SENDER_EMAIL'], $_SERVER['SMTP_SENDER_NAME']);
         $mail->addAddress($_SERVER['SMTP_SENDER_EMAIL']);
         $mail->Username = $_SERVER['SMTP_USERNAME'];
@@ -28,13 +29,6 @@ class Mailer
                 'allow_self_signed' => true
             ]
         ];
-
-        var_dump(
-            $_SERVER['SMTP_HOST'],
-            $_SERVER['SMTP_USERNAME'],
-            $_SERVER['SMTP_PASSWORD'],
-            $_SERVER['SMTP_PORT'],
-        );
         $mail->isHTML(true);
         return $mail->send();
     }
