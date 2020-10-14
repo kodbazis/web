@@ -48,6 +48,13 @@
 						Video FileName
 						<input type="text" class="form-control" name="videoFileName" value="{{embeddable.videoFileName}}">
 					</label>
+					<label class="w-100">
+						Layout
+						<select name="layout" class="custom-select">
+							<option {{embeddable.layout == 'block' ? 'selected' : ''}} value="block">Block</option>
+							<option {{embeddable.layout == 'inline' ? 'selected' : ''}} value="inline">Inline</option>
+						</select>
+					</label>
 				{% endif %}
 
 				{% if embeddable.type == 'codeAssistantGif' %}
@@ -82,6 +89,13 @@
 					<label class="w-100">
 						Video ID
 						<input type="text" class="form-control" name="videoId" value="{{embeddable.videoId}}">
+					</label>
+					<label class="w-100">
+						Layout
+						<select name="layout" class="custom-select">
+							<option {{embeddable.layout == 'block' ? 'selected' : ''}} value="block">Block</option>
+							<option {{embeddable.layout == 'inline' ? 'selected' : ''}} value="inline">Inline</option>
+						</select>
 					</label>
 				{% endif %}
 				<button class="btn btn-primary" type="submit">Elküldés</button>

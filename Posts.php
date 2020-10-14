@@ -168,18 +168,34 @@ class Posts
             $codeAssistScriptPaths = array_map(fn ($item) => ['path' => "kodseged/js/$item"], $codeAssistScripts);
             $codeAssistStylePaths = array_map(fn ($item) => ['path' => "kodseged/css/$item"], $codeAssistStyles);
 
+            $ids = Embeddables::getIds($post->getContent());
+            $embeddables = Embeddables::getEmbeddables($ids, $conn);
+            $templates = Embeddables::mapEmbeddablesToTemplates($embeddables, $twig);
+            $content = Embeddables::insertEmbeddablesToContent($templates, $post->getContent());
+
+
+
+            $apps = array_filter($embeddables, fn ($em) => $em->getType() === 'application');
+            $appStyles = array_map(function ($app) use ($filterExtension) {
+                $codeAssistScripts2 = array_filter(scandir('../public/app/' . $app->getName()), $filterExtension('css'));
+                return array_map(fn ($item) => ['path' => "app/" . $app->getName() . "/$item"], $codeAssistScripts2);
+            }, $apps);
+            $appScripts = array_map(function ($app) use ($filterExtension) {
+                $codeAssistScripts2 = array_filter(scandir('../public/app/' . $app->getName()), $filterExtension('js'));
+                return array_map(fn ($item) => ['path' => "app/" . $app->getName() . "/$item"], $codeAssistScripts2);
+            }, $apps);
 
             echo $twig->render('wrapper.twig', [
                 'title' => $post->getTitle(),
                 'description' => $post->getDescription(),
                 'post' => $post,
-                'postContent' => Embeddables::toEmbedded($post->getContent(), $conn, $twig),
+                'postContent' => $content,
                 'content' => 'post-single.twig',
                 'url' => Router::siteUrl() . $_SERVER['REQUEST_URI'],
-                'scripts' => $codeAssistScriptPaths,
+                'scripts' => array_merge($codeAssistScriptPaths, ...$appScripts),
                 'styles' => array_merge([
                     ['path' => 'css/post-single.css'],
-                ], $codeAssistStylePaths),
+                ], $codeAssistStylePaths, ...$appStyles),
                 'ogTags' => [
                     [
                         'property' => 'og:url',

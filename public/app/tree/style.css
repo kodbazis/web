@@ -1,24 +1,19 @@
-body {
-  background-color: black;
-  color: white !important;
-}
-
 .table {
   color: white;
 }
 
 .value {
-  color: #E6DB74;
+  color: #e6db74;
 }
 .id {
-  color: #AE81FF;
+  color: #ae81ff;
 }
 .parentId {
-  color: #AE81FF;
+  color: #ae81ff;
 }
 
 code {
-  color: #F92672;
+  color: #f92672;
 }
 
 .tree,
@@ -49,7 +44,7 @@ code {
 }
 /* _________ */
 .tree li:before {
-  outline: solid 1px white;
+  outline: solid 1px black;
   content: "";
   left: 0;
   position: absolute;
@@ -65,7 +60,7 @@ code {
 
 .tree code,
 .tree span {
-  border: solid 0.1em white;
+  border: solid 0.1em black;
   border-radius: 0.2em;
   display: inline-block;
   margin: 0 0.2em 0.5em;
@@ -81,7 +76,7 @@ code {
 .tree ul:before,
 .tree code:before,
 .tree span:before {
-  outline: solid 1px white;
+  outline: solid 1px black;
   content: "";
   height: 0.5em;
   left: 50%;

@@ -83,15 +83,30 @@ class Embeddables
                 $codeAssistScriptPaths = array_map(fn ($item) => ['path' => "kodseged/js/$item"], $codeAssistScripts);
                 $codeAssistStylePaths = array_map(fn ($item) => ['path' => "kodseged/css/$item"], $codeAssistStyles);
 
+
+                $embeddables = Embeddables::getEmbeddables([$request->vars['id']], $conn);
+                $apps = array_filter($embeddables, fn ($em) => $em->getType() === 'application');
+                $appStyles = array_map(function ($app) use ($filterExtension) {
+                    $codeAssistScripts2 = array_filter(scandir('../public/app/' . $app->getName()), $filterExtension('css'));
+                    return array_map(fn ($item) => ['path' => "app/" . $app->getName() . "/$item"], $codeAssistScripts2);
+                }, $apps);
+                $appScripts = array_map(function ($app) use ($filterExtension) {
+                    $codeAssistScripts2 = array_filter(scandir('../public/app/' . $app->getName()), $filterExtension('js'));
+                    return array_map(fn ($item) => ['path' => "app/" . $app->getName() . "/$item"], $codeAssistScripts2);
+                }, $apps);
+
+
+                $templates = Embeddables::mapEmbeddablesToTemplates($embeddables, $twig);
+
                 header("Content-Type: text/html");
                 $twig->display('dashboard.twig', [
                     'csrfToken' => $request->params['csrfToken'],
                     'mainLabel' => 'Beágyazható',
                     'content' => "embeddable-single.twig",
-                    'embeddable' => self::toEmbedded('{{' . $request->vars['id'] .  '}}', $conn, $twig),
+                    'embeddable' => $templates[0]['content'],
                     'activePath' => '/admin/beagyazhatok',
-                    'scripts' => $codeAssistScriptPaths,
-                    'styles' => $codeAssistStylePaths,
+                    'scripts' => array_merge($codeAssistScriptPaths, ...$appScripts),
+                    'styles' => array_merge($codeAssistStylePaths, ...$appStyles),
                 ]);
             }
         );
@@ -133,6 +148,7 @@ class Embeddables
                         'raw' => json_encode([
                             'filechangesName' => $request->body['filechangesName'],
                             'videoFileName' => $request->body['videoFileName'],
+                            'layout' => $request->body['layout'],
                         ])
                     ];
                 }
@@ -155,6 +171,7 @@ class Embeddables
                         'raw' => json_encode([
                             'filechangesName' => $request->body['filechangesName'],
                             'videoId' => $request->body['videoId'],
+                            'layout' => $request->body['layout'],
                         ])
                     ];
                 }
@@ -164,7 +181,7 @@ class Embeddables
                         'name' => $request->body['name'],
                         'type' => $request->body['type'],
                         'raw' => json_encode([
-                            'videoId' => $request->body['videoId']
+                            'videoId' => $request->body['videoId'],
                         ])
                     ];
                 }
@@ -174,6 +191,15 @@ class Embeddables
                         'type' => $request->body['type'],
                         'raw' => json_encode([
                             'fileName' => $request->body['fileName'],
+                        ])
+                    ];
+                }
+                if ($request->body['type'] === 'application') {
+                    $request->body = [
+                        'name' => $request->body['name'],
+                        'type' => $request->body['type'],
+                        'raw' => json_encode([
+                            'name' => $request->body['name'],
                         ])
                     ];
                 }
@@ -205,12 +231,14 @@ class Embeddables
                     $request->body['raw'] = json_encode([
                         'filechangesName' => $request->body['filechangesName'],
                         'videoFileName' => $request->body['videoFileName'],
+                        'layout' => $request->body['layout'],
                     ]);
                 }
                 if ($request->body['type'] === 'codeAssistantYoutube') {
                     $request->body['raw'] = json_encode([
                         'filechangesName' => $request->body['filechangesName'],
                         'videoId' => $request->body['videoId'],
+                        'layout' => $request->body['layout'],
                     ]);
                 }
 
@@ -234,28 +262,55 @@ class Embeddables
                     ]);
                 }
 
+                if ($request->body['type'] === 'application') {
+                    $request->body['raw'] = [
+                        'raw' => json_encode([
+                            'name' => $request->body['name'],
+                        ])
+                    ];
+                }
+
                 (new EmbeddablePatcher())->getRoute($request);
                 header('Location: /admin/beagyazhatok?isSuccess=1');
             }
         );
     }
-    public static function toEmbedded($content, $conn, $twig)
+
+    public static function getIds($content)
     {
         $matches = [];
         $pattern = '{{([0-9]+)}}';
         preg_match_all($pattern, $content, $matches);
+        return $matches[1];
+    }
 
+    public static function getEmbeddables($ids, $conn)
+    {
+        return (new SqlLister($conn))->list(Router::where('id', 'in', $ids))->getEntities();
+    }
+
+    public static function mapEmbeddablesToTemplates($embeddables, $twig)
+    {
         $ret = [];
-        foreach ($matches[1] as $id) {
-            $byId = (new EmbeddableByIdGetter($conn))->byId($id);
-            if (!$byId) {
+        foreach ($embeddables as $embeddable) {
+            $raw = json_decode($embeddable->getRaw(), true);
+            if ($embeddable->getType() === 'application') {
+                $content = file_get_contents('../public/app/' . $raw['name'] . '/index.html');
+                $ret[] = ['id' => $embeddable->getId(), 'content' => $content];
                 continue;
             }
 
-            $raw = json_decode($byId->getRaw(), true);
-            $ret[] = ['id' => $id, 'content' => $twig->render('embeddable-content.twig', array_merge($raw, ['id' => $id, 'type' => $byId->getType()]))];
+            $ret[] = [
+                'id' => $embeddable->getId(),
+                'content' => $twig->render('embeddable-content.twig', array_merge($raw, ['id' => $embeddable->getId(), 'type' => $embeddable->getType()]))
+            ];
         }
-        foreach ($ret as $item) {
+        return $ret;
+    }
+
+    public static function insertEmbeddablesToContent($templates, $content)
+    {
+        foreach ($templates as $item) {
             $content = str_replace(
                 "{{" . $item['id'] . "}}",
                 $item['content'],

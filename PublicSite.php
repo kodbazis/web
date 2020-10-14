@@ -289,16 +289,6 @@ class PublicSite
             echo $content;
         });
 
-        $r->get('/embeddable/app/{id}/{filename}', function (Request $request) use ($conn, $twig) {
-
-            header('Access-Control-Allow-Origin: *');
-            // $item = (new SqlByIdGetter($conn))->byId($request->vars['id']);
-            // $raw = json_decode($item->getRaw(), true);
-            // $content = file_get_contents('../embeddable/app/' . $raw['folderName'] . '/' . $request->vars['filename']);
-            $content = file_get_contents('../embeddable/app/tree/' . $request->vars['filename']);
-            echo $content;
-        });
-
         $r->get('/cikkek/{slug}', Posts::postSingleHandler($conn, $twig));
     }
 }

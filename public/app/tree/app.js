@@ -1,5 +1,3 @@
-console.log('okokk');
-
 let state = [
   {
     id: 1,
@@ -104,7 +102,7 @@ function itemSubmit(e) {
 
 function renderTable() {
   document.getElementById("table-component").innerHTML = `
-    <table class="table table-striped text-center">
+    <table class="table table-striped table-dark text-center">
         <thead>
           <tr>
             <th scope="col">ID</th>
@@ -136,10 +134,6 @@ function renderTree() {
   const root = state.find((item) => !item.szuloId);
   const fa = buildTree(root, state);
 
-  console.clear()
-  console.log(state);
-  console.log(fa);
-
   document.getElementById("tree-component").innerHTML = `
           <ul class="tree">
               <li>${drawTree(fa)}</li>
@@ -166,13 +160,6 @@ function drawTree(node) {
     `;
   return sablon;
 }
-
-
-
-
-
-
-
 
 document.getElementById("delete-state").onclick = function () {
   state = [];
