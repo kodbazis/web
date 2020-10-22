@@ -169,7 +169,7 @@ class Posts
             $codeAssistStylePaths = array_map(fn ($item) => ['path' => "kodseged/css/$item"], $codeAssistStyles);
 
             $ids = Embeddables::getIds($post->getContent());
-            $embeddables = Embeddables::getEmbeddables($ids, $conn);
+            $embeddables = count($ids) ? Embeddables::getEmbeddables($ids, $conn) : [];
             $templates = Embeddables::mapEmbeddablesToTemplates($embeddables, $twig);
             $content = Embeddables::insertEmbeddablesToContent($templates, $post->getContent());
 
