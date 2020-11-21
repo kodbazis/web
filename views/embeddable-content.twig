@@ -10,6 +10,8 @@
 	</p>
 {% elseif type == 'gif'  %}
 	<div class='kodseged' data-gifurl='/embeddable/gif/{{id}}/gif' data-type='gif'></div>
+{% elseif type == 'gifImproved'  %}
+	<div class='kodseged' data-gifurl='/embeddable/gif/{{id}}/gif' data-type='gifImproved'></div>
 {% else %}
 	<p>No embeddable content...</p>
 {% endif %}

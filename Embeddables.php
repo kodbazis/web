@@ -194,6 +194,15 @@ class Embeddables
                         ])
                     ];
                 }
+                if ($request->body['type'] === 'gifImproved') {
+                    $request->body = [
+                        'name' => $request->body['name'],
+                        'type' => $request->body['type'],
+                        'raw' => json_encode([
+                            'fileName' => $request->body['fileName'],
+                        ])
+                    ];
+                }
                 if ($request->body['type'] === 'application') {
                     $request->body = [
                         'name' => $request->body['name'],
@@ -248,6 +257,11 @@ class Embeddables
                     ]);
                 }
                 if ($request->body['type'] === 'gif') {
+                    $request->body['raw'] = json_encode([
+                        'fileName' => $request->body['fileName'],
+                    ]);
+                }
+                if ($request->body['type'] === 'gifImproved') {
                     $request->body['raw'] = json_encode([
                         'fileName' => $request->body['fileName'],
                     ]);

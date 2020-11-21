@@ -29,6 +29,13 @@
 						<input type="text" class="form-control" name="fileName" value="{{embeddable.fileName}}">
 					</label>
 				{% endif %}
+				{% if embeddable.type == 'gifImproved' %}
+					Gif Improved
+					<label class="w-100">
+						Filename
+						<input type="text" class="form-control" name="fileName" value="{{embeddable.fileName}}">
+					</label>
+				{% endif %}
 
 				{% if embeddable.type == 'youtube' %}
 					Youtube
