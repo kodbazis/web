@@ -42,6 +42,9 @@
 					<textarea style="width: 100%; height: 200px;" name="description">{{ episode.description }}</textarea>
 				</label>
 				<label class="w-100">
+                 {% if episode.imgUrl %}
+                    <img src="/src/public/files/{{ episode.imgUrl }}" class="img-fluid">
+                {% endif %}
 					Kép
 					<input type="file" name="mainImage">
 				</label>
