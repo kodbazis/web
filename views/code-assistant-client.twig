@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="/favicon.ico?v=3"/>
+		<style>
+			html,
+			body {
+				background-color: rgb(35, 36, 31) !important;
+			}
+		</style>
+		{% for style in styles %}
+			{% if style.isCdn %}
+				<link rel="stylesheet" href="{{ style.path }}">
+			{% else %}
+				<link rel="stylesheet" href="/public/{{ style.path }}">
+			{% endif %}
+		{% endfor %}
+		<title>
+			{{ title is defined ? title : 'Kódbázis | Programozás egyszerűen, közérthetően elmagyarázva.' }}
+		</title>
+		<meta property="og:locale" content="hu_HU"/>
+		<meta name="description" content="{{ description is defined ? description : 'Programozás egyszerűen, közérthetően elmagyarázva.' }}"/>
+		{% for ogTag in ogTags %}
+			<meta property="{{ogTag.property}}" content="{{ogTag.content}}"/>
+		{% endfor %}
+	</head>
+
+	<body>
+		<div class="kodseged" data-type="codeAssistantYoutubeFullWidthClient"></div>
+		{% if scripts is defined %}
+			{% for script in scripts %}
+				{% if script.isCdn %}
+					<script src="{{ script.path }}"></script>
+				{% else %}
+					<script defer src="/public/{{ script.path }}"></script>
+				{% endif %}
+			{% endfor %}
+		{% endif %}	
+	</body>
+</html>

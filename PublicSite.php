@@ -30,6 +30,23 @@ class PublicSite
 
             ]);
         });
+        $r->get('/kodseged-kliens', function (Request $request) use ($conn, $twig) {
+            header('Content-Type: text/html; charset=UTF-8');
+
+            $getFileExtension = fn ($fileName) => pathinfo($fileName)['extension'];
+
+            $filterExtension = fn ($ext) => fn ($item) => $getFileExtension($item) === $ext;
+            $codeAssistScripts = array_filter(scandir('../public/kodseged/js'), $filterExtension('js'));
+            $codeAssistStyles = array_filter(scandir('../public/kodseged/css'), $filterExtension('css'));
+
+            $codeAssistScriptPaths = array_map(fn ($item) => ['path' => "kodseged/js/$item"], $codeAssistScripts);
+            $codeAssistStylePaths = array_map(fn ($item) => ['path' => "kodseged/css/$item"], $codeAssistStyles);
+
+            echo $twig->render('code-assistant-client.twig', [
+                'scripts' => $codeAssistScriptPaths,
+                'styles' => $codeAssistStylePaths,
+            ]);
+        });
 
         $r->get('/elerhetoseg', function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
