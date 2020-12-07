@@ -1,0 +1,667 @@
+[
+  {
+    "timestamp": 1,
+    "fileName": "index.html",
+    "content": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <title>Document</title>\n  </head>\n  <link\n    rel=\"stylesheet\"\n    href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css\"\n    integrity=\"sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk\"\n    crossorigin=\"anonymous\"\n  />\n  <body>\n    <div class=\"container\">\n      <div class=\"row m-5 border p-5\">\n        <div id=\"app-container\"></div>\n      </div>\n    </div>\n    <script src=\"https://unpkg.com/react@16/umd/react.development.js\" crossorigin></script>\n    <script src=\"https://unpkg.com/react-dom@16/umd/react-dom.development.js\" crossorigin></script>\n    <script src=\"./app.js\"></script>\n  </body>\n</html>\n"
+  },
+  {
+    "timestamp": 2,
+    "fileName": "app.js",
+    "content": "// App, az előző részből... \n ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\", felirat: 1 }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\", felirat: 2 }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\", felirat: 3 })\n  );\n}\nfunction BoxComponent(props) {\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 48.833,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\", felirat: 2 }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\", felirat: 3 })\n  );\n}\nfunction BoxComponent(props) {\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 49.25,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\", felirat: 3 })\n  );\n}\nfunction BoxComponent(props) {\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 49.583,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\nfunction BoxComponent(props) {\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 50.125,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\nfunction BoxComponent(props) {\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 50.791,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 52.791,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  \n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 54.75,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  React.useState()\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 56.333,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 57.5,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 62.916,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 74.916,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 76.625,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 78.041,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const []React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 78.458,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 79.291,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 80.916,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 83.291,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 85.875,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 86.25,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlalo] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 87.5,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllpota] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 88.375,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllpota] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 88.625,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 89.5,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 90,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 94.833,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSz] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 95.333,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSz] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 95.583,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlalo] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 97.958,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 98.541,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, props.felirat)\n  );\n}\n"
+  },
+  {
+    "timestamp": 102.666,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 103.625,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 107.333,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onC\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 107.666,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onC\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 109.291,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClcik\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 109.75,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: ()\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 110.875,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {}\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 111.875,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 111.916,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 112.291,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 113,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa()\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 121.583,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 122.416,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"ts\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 123.25,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"test\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 123.458,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 124.75,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 128.041,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 130.541,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 132.625,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 134.041,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 137.416,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 142.25,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 143.541,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 146.541,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 153.458,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 158.458,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 159.708,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 163.333,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 166.166,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 168.791,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 169.541,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 171.833,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 173.875,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 178.166,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\")\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 181.208,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\");\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 186.166,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(\"teszt\");\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 189.583,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function() );\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 189.958,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function() );\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 190.375,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function() {} );\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 190.583,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function() {} );\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 190.666,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function() {\n          \n        } );\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 191.125,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function() {\n\n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 191.333,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function() {\n\n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 195.5,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function() {\n\n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 196.5,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozo) {\n\n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 196.791,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozo) {\n\n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 198.291,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n\n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 199.208,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n\n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 201.416,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n            \n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 203.166,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n            \n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 206.166,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n            \n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 209.166,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n            \n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 211.875,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n            ret\n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 212.958,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n            ret\n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 213.5,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n            return\n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 214.958,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n            return \n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 216.958,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n            return \n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 218.958,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n            return elozoAllapot\n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 220,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n            return elozoAllapot \n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 220.958,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n            return elozoAllapot + 1\n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 221.5,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n            return elozoAllapot + 1;\n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 222.416,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n            return elozoAllapot + 1;\n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 228.708,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n            return elozoAllapot + 1;\n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 231.958,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n            return elozoAllapot + 1;\n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 235.416,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n            return elozoAllapot + 1;\n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 239.208,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n            return elozoAllapot + 1;\n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 240.791,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(szamlaloAllapota);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 242,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(szamlaloAllapota);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 242.875,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(szamlaloAllapota +);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 243.375,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(szamlaloAllapota + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 245,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(szamlaloAllapota + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 252.916,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(szamlaloAllapota + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 258.458,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(szamlaloAllapota + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 260.916,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(szamlaloAllapota + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 263.333,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(szamlaloAllapota + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 270.458,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(szamlaloAllapota );\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 271.25,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(szamlaloAllapota);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 272.875,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n            return elozoAllapot + 1;\n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 276.333,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(function(elozoAllapot) {\n            return elozoAllapot + 1;\n        });\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 280.833,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot =>);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 281.625,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => );\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 282.5,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => elozoAllapot +);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 283.25,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => elozoAllapot + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 283.583,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => elozoAllapot + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 286.625,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => elozoAllapot + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 290.5,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\",  }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => elozoAllapot + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 295.041,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\",  }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => elozoAllapot + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 296.041,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\", kezdeti }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => elozoAllapot + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 296.833,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\", kezdetiSzamalo }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => elozoAllapot + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 298.166,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\", kezdetiSzamlalo: 0 }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\" }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\" })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => elozoAllapot + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 300.791,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\", kezdetiSzamlalo: 0 }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\", kezdetiSzamlalo: 0 }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\", kezdetiSzamlalo: 0 })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => elozoAllapot + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 301.375,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\", kezdetiSzamlalo: 0 }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\", kezdetiSzamlalo: 0 }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\", kezdetiSzamlalo: 0 })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(0);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => elozoAllapot + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 301.875,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\", kezdetiSzamlalo: 0 }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\", kezdetiSzamlalo: 1 }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\", kezdetiSzamlalo: 2 })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState();\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => elozoAllapot + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 304.083,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\", kezdetiSzamlalo: 0 }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\", kezdetiSzamlalo: 1 }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\", kezdetiSzamlalo: 2 })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(props);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => elozoAllapot + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 305.625,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\", kezdetiSzamlalo: 0 }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\", kezdetiSzamlalo: 1 }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\", kezdetiSzamlalo: 2 })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(props.);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => elozoAllapot + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 308.958,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\", kezdetiSzamlalo: 0 }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\", kezdetiSzamlalo: 1 }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\", kezdetiSzamlalo: 2 })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(props.);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => elozoAllapot + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 309.583,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\", kezdetiSzamlalo: 0 }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\", kezdetiSzamlalo: 1 }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\", kezdetiSzamlalo: 2 })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(props.kezdetiSzamlalo);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => elozoAllapot + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 310.583,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\", kezdetiSzamlalo: 0 }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\", kezdetiSzamlalo: 1 }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\", kezdetiSzamlalo: 2 })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(props.kezdetiSzamlalo);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => elozoAllapot + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 311.666,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\", kezdetiSzamlalo: 0 }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\", kezdetiSzamlalo: 1 }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\", kezdetiSzamlalo: 2 })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(props.kezdetiSzamlalo);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => elozoAllapot + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 315.791,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\", kezdetiSzamlalo: 0 }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\", kezdetiSzamlalo: 1 }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\", kezdetiSzamlalo: 2 })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(props.kezdetiSzamlalo);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => elozoAllapot + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 317.083,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\", kezdetiSzamlalo: 0 }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\", kezdetiSzamlalo: 1 }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\", kezdetiSzamlalo: 2 })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(props.kezdetiSzamlalo);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => elozoAllapot + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  },
+  {
+    "timestamp": 318.333,
+    "fileName": "app.js",
+    "content": "ReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n\nfunction App() {\n  return React.createElement(\n    \"div\",\n    {\n      className: \"border\",\n    },\n    \"App\",\n    React.createElement(BoxComponent, { hatterSzin: \"red\", kezdetiSzamlalo: 0 }),\n    React.createElement(BoxComponent, { hatterSzin: \"blue\", kezdetiSzamlalo: 1 }),\n    React.createElement(BoxComponent, { hatterSzin: \"green\", kezdetiSzamlalo: 2 })\n  );\n}\n\nfunction BoxComponent(props) {\n  const [szamlaloAllapota, ujSzamlaloAllapotBeallitasa] = React.useState(props.kezdetiSzamlalo);\n  return React.createElement(\n    \"div\",\n    {\n      style: {\n        width: \"200px\",\n        height: \"200px\",\n        backgroundColor: props.hatterSzin,\n      },\n      className: \"p-2 m-5 rounded\",\n      onClick: () => {\n        ujSzamlaloAllapotBeallitasa(elozoAllapot => elozoAllapot + 1);\n      }\n    },\n    React.createElement(\"h1\", {}, szamlaloAllapota)\n  );\n}\n"
+  }
+]

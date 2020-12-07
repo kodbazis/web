@@ -279,7 +279,7 @@ class Embeddables
                 if ($request->body['type'] === 'application') {
                     $request->body['raw'] = [
                         'raw' => json_encode([
-                            'name' => $request->body['name'],
+                            'directoryName' => $request->body['directoryName'],
                         ])
                     ];
                 }
@@ -309,7 +309,7 @@ class Embeddables
         foreach ($embeddables as $embeddable) {
             $raw = json_decode($embeddable->getRaw(), true);
             if ($embeddable->getType() === 'application') {
-                $content = file_get_contents('../public/app/' . $raw['name'] . '/index.html');
+                $content = file_get_contents('../public/app/' . $raw['directoryName'] . '/index.html');
                 $ret[] = ['id' => $embeddable->getId(), 'content' => $content];
                 continue;
             }

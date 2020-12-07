@@ -185,12 +185,16 @@ class Episodes
 
             $apps = array_filter($embeddables, fn ($em) => $em->getType() === 'application');
             $appStyles = array_map(function ($app) use ($filterExtension) {
-                $codeAssistScripts2 = array_filter(scandir('../public/app/' . $app->getName()), $filterExtension('css'));
-                return array_map(fn ($item) => ['path' => "app/" . $app->getName() . "/$item"], $codeAssistScripts2);
+                $dirName = json_decode($app->getRaw(), true)['directoryName'];
+                $codeAssistScripts2 = array_filter(scandir('../public/app/' . $dirName), $filterExtension('css'));
+                return array_map(fn ($item) => ['path' => "app/" . $dirName . "/$item"], $codeAssistScripts2);
             }, $apps);
             $appScripts = array_map(function ($app) use ($filterExtension) {
-                $codeAssistScripts2 = array_filter(scandir('../public/app/' . $app->getName()), $filterExtension('js'));
-                return array_map(fn ($item) => ['path' => "app/" . $app->getName() . "/$item"], $codeAssistScripts2);
+                $dirName = json_decode($app->getRaw(), true)['directoryName'];
+                // var_dump($dirName);
+                // exit;
+                $codeAssistScripts2 = array_filter(scandir('../public/app/' . $dirName), $filterExtension('js'));
+                return array_map(fn ($item) => ['path' => "app/" . $dirName . "/$item"], $codeAssistScripts2);
             }, $apps);
 
             echo $twig->render('wrapper.twig', [

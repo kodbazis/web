@@ -105,6 +105,13 @@
 						</select>
 					</label>
 				{% endif %}
+				{% if embeddable.type == 'application' %}
+					Application
+					<label class="w-100">
+						 Directory Name
+						<input type="text" class="form-control" name="directoryName" value="{{embeddable.directoryName}}">
+					</label>
+				{% endif %}
 				<button class="btn btn-primary" type="submit">Elküldés</button>
 			</form>
 		</div>
