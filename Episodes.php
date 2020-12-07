@@ -12,6 +12,9 @@ use Kodbazis\Generated\Route\Episode\EpisodePatcher;
 use Kodbazis\Generated\Route\Episode\EpisodeSaver;
 use Kodbazis\Image\ImageSaver;
 use Twig\Environment;
+use Kodbazis\Generated\Repository\Course\SqlLister as CourseLister;
+use Kodbazis\Generated\Repository\Episode\SqlLister as EpisodeLister;
+
 
 class Episodes
 {
@@ -70,7 +73,7 @@ class Episodes
 
 
         $r->get(
-            '/admin/epizodok/epizod-szerkesztes/{id:\d+}',
+            '/admin/epizodok/szerkesztes/{id:\d+}',
             [Router::class, 'setCsrfToken'],
             [Auth::class, 'validate'],
             function (Request $request) use ($conn, $twig) {
@@ -84,7 +87,7 @@ class Episodes
                     'csrfToken' => $request->params['csrfToken'],
                     'scripts' => [
                         ['path' => 'ckeditor/ckeditor.js'],
-                        ['path' => 'js/episode-create.js'],
+                        ['path' => 'js/ckeditor-init.js'],
                     ],
                 ]);
             }
@@ -133,5 +136,101 @@ class Episodes
                 header('Location: /admin/epizodok?isSuccess=1');
             }
         );
+    }
+
+    public static function episodeSingleHandler($conn, $twig)
+    {
+        return function (Request $request) use ($conn, $twig) {
+
+            $courseBySlug = (new CourseLister($conn))->list(Router::where('slug', 'eq', $request->vars['slug']));
+            $course = $courseBySlug->getEntities()[0];
+            if (!$course) {
+                return;
+            }
+            $episodesByCourseId = (new EpisodeLister($conn))->list(Router::where('courseId', 'eq', $course->getId()))->getEntities();
+
+            $filtered = array_filter($episodesByCourseId, fn ($ep) => $ep->getSlug() === $request->vars['episode-slug']);
+
+            $post = $filtered[0];
+            if (!$post) {
+                return;
+            }
+            // getCourse({course-slug})
+            // getEpisodes({course.id})
+            // getEpisode({episode-slug})
+
+            // render course title
+            // render episodes breadcrumbs
+            // render epsiode title
+            // render epsiode player
+            // render episode content
+
+
+            header('Content-Type: text/html; charset=UTF-8');
+            $getFileExtension = fn ($fileName) => pathinfo($fileName)['extension'];
+
+            $filterExtension = fn ($ext) => fn ($item) => $getFileExtension($item) === $ext;
+            $codeAssistScripts = array_filter(scandir('../public/kodseged/js'), $filterExtension('js'));
+            $codeAssistStyles = array_filter(scandir('../public/kodseged/css'), $filterExtension('css'));
+
+            $codeAssistScriptPaths = array_map(fn ($item) => ['path' => "kodseged/js/$item"], $codeAssistScripts);
+            $codeAssistStylePaths = array_map(fn ($item) => ['path' => "kodseged/css/$item"], $codeAssistStyles);
+
+            $ids = Embeddables::getIds($post->getContent());
+            $embeddables = count($ids) ? Embeddables::getEmbeddables($ids, $conn) : [];
+            $templates = Embeddables::mapEmbeddablesToTemplates($embeddables, $twig);
+            $content = Embeddables::insertEmbeddablesToContent($templates, $post->getContent());
+
+
+
+            $apps = array_filter($embeddables, fn ($em) => $em->getType() === 'application');
+            $appStyles = array_map(function ($app) use ($filterExtension) {
+                $codeAssistScripts2 = array_filter(scandir('../public/app/' . $app->getName()), $filterExtension('css'));
+                return array_map(fn ($item) => ['path' => "app/" . $app->getName() . "/$item"], $codeAssistScripts2);
+            }, $apps);
+            $appScripts = array_map(function ($app) use ($filterExtension) {
+                $codeAssistScripts2 = array_filter(scandir('../public/app/' . $app->getName()), $filterExtension('js'));
+                return array_map(fn ($item) => ['path' => "app/" . $app->getName() . "/$item"], $codeAssistScripts2);
+            }, $apps);
+
+            echo $twig->render('wrapper.twig', [
+                'title' => $post->getTitle(),
+                'description' => $post->getDescription(),
+                'post' => $post,
+                'postContent' => $content,
+                'content' => 'post-single.twig',
+                'url' => Router::siteUrl() . $_SERVER['REQUEST_URI'],
+                'scripts' => array_merge($codeAssistScriptPaths, ...$appScripts),
+                'styles' => array_merge([
+                    ['path' => 'css/post-single.css'],
+                ], $codeAssistStylePaths, ...$appStyles),
+                'ogTags' => [
+                    [
+                        'property' => 'og:url',
+                        'content' => Router::siteUrl() . $_SERVER['REQUEST_URI'],
+                    ],
+                    [
+                        'property' => 'og:type',
+                        'content' => 'article',
+                    ],
+                    [
+                        'property' => 'og:title',
+                        'content' => $post->getTitle(),
+                    ],
+                    [
+                        'property' => 'og:image',
+                        'content' => Router::siteUrl() . '/public/files/md-' . $post->getImgUrl(),
+                    ],
+                    [
+                        'property' => 'og:description',
+                        'content' => $post->getDescription(),
+                    ],
+                    [
+                        'property' => 'fb:app_id',
+                        'content' => '705894336804251',
+                    ],
+                ]
+            ]);
+        };
     }
 }

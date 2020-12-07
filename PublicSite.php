@@ -6,13 +6,14 @@ use Kodbazis\Generated\OperationError;
 use Kodbazis\Generated\Request;
 use mysqli;
 use Twig\Environment;
+use Kodbazis\Mailer\Mailer;
 use Kodbazis\Generated\Paging\Pager;
 use Kodbazis\Generated\Post\Listing\ListController;
 use Kodbazis\Generated\Repository\Post\SqlLister;
-use Kodbazis\Generated\Repository\Course\SqlLister as CourseLister;
 use Kodbazis\Generated\Repository\Embeddable\SqlByIdGetter;
+use Kodbazis\Generated\Repository\Course\SqlLister as CourseLister;
 use Kodbazis\Generated\Repository\Episode\SqlLister as EpisodeLister;
-use Kodbazis\Mailer\Mailer;
+use Kodbazis\Episodes;
 
 class PublicSite
 {
@@ -147,43 +148,12 @@ class PublicSite
             ]);
         });
 
-
-        $r->get('/kurzus/{slug}/{episode-slug}', function (Request $request) use ($conn, $twig) {
-
-            $courseBySlug = (new CourseLister($conn))->list(Router::where('slug', 'eq', $request->vars['slug']));
-            $course = $courseBySlug->getEntities()[0];
-            if (!$course) {
-                return;
-            }
-            $episodesByCourseId = (new EpisodeLister($conn))->list(Router::where('courseId', 'eq', $course->getId()))->getEntities();
-
-            $filtered = array_filter($episodesByCourseId, fn ($ep) => $ep->getSlug() === $request->vars['episode-slug']);
-
-            $currentEpisode = $filtered[0];
-            if (!$currentEpisode) {
-                return;
-            }
-            // getCourse({course-slug})
-            // getEpisodes({course.id})
-            // getEpisode({episode-slug})
-
-            // render course title
-            // render episodes breadcrumbs
-            // render epsiode title
-            // render epsiode player
-            // render episode content
+        // $r->get('/react-kurzus', function (Request $request) use ($conn, $twig) {
+        //     echo 'React kurzus';
+        // });
 
 
-
-            header('Content-Type: text/html; charset=UTF-8');
-            echo $twig->render('wrapper.twig', [
-                'content' => 'episode.twig',
-                'course' => $course,
-                'episodes' => $episodesByCourseId,
-                'currentEpisode' => $currentEpisode,
-
-            ]);
-        });
+        $r->get('/{slug}-kurzus/{episode-slug}', Episodes::episodeSingleHandler($conn, $twig));
 
 
 
@@ -256,9 +226,6 @@ class PublicSite
             fclose($fp);
             exit;
         }
-
-        $r->get('/kodseged/{course-slug}/{episode-filename}', function (Request $request) use ($conn, $twig) {
-        });
 
         $r->get('/embeddable/gif/{id}/gif', function (Request $request) use ($conn, $twig) {
             header('Access-Control-Allow-Origin: *');
