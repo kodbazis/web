@@ -112,7 +112,7 @@ class SqlLister implements Lister
     
             return new CountedEpisodes(
                 array_map(function ($array) {
-                    return new Episode((int)$array['id'], (string)$array['title'], (string)$array['slug'], (int)$array['courseId'], (string)$array['imgUrl'], (string)$array['videoFileName'], (string)$array['description'], (string)$array['content'], (int)$array['createdAt']);
+                    return new Episode((int)$array['id'], (string)$array['title'], (string)$array['slug'], (int)$array['courseId'], (string)$array['imgUrl'], (string)$array['description'], (string)$array['content'], (int)$array['createdAt']);
                 }, $results),
                 $count
             );

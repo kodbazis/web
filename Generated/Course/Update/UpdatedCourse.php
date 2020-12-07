@@ -10,18 +10,16 @@ class UpdatedCourse implements JsonSerializable
 private $slug;
 private $imgUrl;
 private $description;
-private $videoUrl;
 private $isActive;
 
 
     
-public function __construct($title, $slug, $imgUrl, $description, $videoUrl, $isActive)
+public function __construct($title, $slug, $imgUrl, $description, $isActive)
 {
         $this->title = $title;
 $this->slug = $slug;
 $this->imgUrl = $imgUrl;
 $this->description = $description;
-$this->videoUrl = $videoUrl;
 $this->isActive = $isActive;
 
 }
@@ -42,10 +40,6 @@ $this->isActive = $isActive;
     {
         return $this->description;
     }
-    public function getVideoUrl(): ?string
-    {
-        return $this->videoUrl;
-    }
     public function getIsActive(): ?bool
     {
         return $this->isActive;
@@ -59,7 +53,6 @@ $this->isActive = $isActive;
  'slug' => $this->slug,
  'imgUrl' => $this->imgUrl,
  'description' => $this->description,
- 'videoUrl' => $this->videoUrl,
  'isActive' => $this->isActive,
 
         ];

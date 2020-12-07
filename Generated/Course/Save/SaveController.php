@@ -65,7 +65,7 @@
         }
 
         try {
-          $toSave = new NewCourse((string)($entity['title'] ?? ''), (string)($entity['slug'] ?? ''), (string)($entity['imgUrl'] ?? ''), (string)($entity['description'] ?? ''), (string)($entity['videoUrl'] ?? ''), (int)($entity['createdAt'] ?? 0), (bool)($entity['isActive'] ?? false));
+          $toSave = new NewCourse((string)($entity['title'] ?? ''), (string)($entity['slug'] ?? ''), (string)($entity['imgUrl'] ?? ''), (string)($entity['description'] ?? ''), (int)($entity['createdAt'] ?? 0), (bool)($entity['isActive'] ?? false));
               return $this->saver->Save($toSave);
         } catch (Exception $err) {
                 $this->operationError->addField(Error::getOperationError());
@@ -87,7 +87,6 @@
             'slug' => [$this, 'isString'],
             'imgUrl' => [$this, 'isString'],
             'description' => [$this, 'isString'],
-            'videoUrl' => [$this, 'isString'],
             'createdAt' => [$this, 'isInt'],
             'isActive' => [$this, 'isBool']
 

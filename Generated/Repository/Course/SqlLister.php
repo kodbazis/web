@@ -112,7 +112,7 @@ class SqlLister implements Lister
     
             return new CountedCourses(
                 array_map(function ($array) {
-                    return new Course((int)$array['id'], (string)$array['title'], (string)$array['slug'], (string)$array['imgUrl'], (string)$array['description'], (string)$array['videoUrl'], (int)$array['createdAt'], (bool)$array['isActive']);
+                    return new Course((int)$array['id'], (string)$array['title'], (string)$array['slug'], (string)$array['imgUrl'], (string)$array['description'], (int)$array['createdAt'], (bool)$array['isActive']);
                 }, $results),
                 $count
             );

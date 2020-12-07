@@ -11,20 +11,18 @@ private $title;
 private $slug;
 private $imgUrl;
 private $description;
-private $videoUrl;
 private $createdAt;
 private $isActive;
 
 
     
-public function __construct($id, $title, $slug, $imgUrl, $description, $videoUrl, $createdAt, $isActive)
+public function __construct($id, $title, $slug, $imgUrl, $description, $createdAt, $isActive)
 {
         $this->id = $id;
 $this->title = $title;
 $this->slug = $slug;
 $this->imgUrl = $imgUrl;
 $this->description = $description;
-$this->videoUrl = $videoUrl;
 $this->createdAt = $createdAt;
 $this->isActive = $isActive;
 
@@ -50,10 +48,6 @@ $this->isActive = $isActive;
     {
         return $this->description;
     }
-    public function getVideoUrl(): ?string
-    {
-        return $this->videoUrl;
-    }
     public function getCreatedAt(): ?int
     {
         return $this->createdAt;
@@ -72,7 +66,6 @@ $this->isActive = $isActive;
  'slug' => $this->slug,
  'imgUrl' => $this->imgUrl,
  'description' => $this->description,
- 'videoUrl' => $this->videoUrl,
  'createdAt' => $this->createdAt,
  'isActive' => $this->isActive,
 

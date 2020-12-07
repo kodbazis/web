@@ -25,13 +25,13 @@ class SqlPatcher implements Patcher
           
           $stmt = $this->connection->prepare(
               'UPDATE `episodes` SET 
-                `title` = ?, `slug` = ?, `courseId` = ?, `imgUrl` = ?, `videoFileName` = ?, `description` = ?, `content` = ?
+                `title` = ?, `slug` = ?, `courseId` = ?, `imgUrl` = ?, `description` = ?, `content` = ?
                 WHERE `id` = ?;'
           );
           
           call_user_func(function (...$params) use ($stmt) {
                 $stmt->bind_param(
-                    "ssisssss",
+                    "ssissss",
                     ...$params
                 );
             },
@@ -39,7 +39,6 @@ class SqlPatcher implements Patcher
         $merged->getSlug(),
         $merged->getCourseId(),
         $merged->getImgUrl(),
-        $merged->getVideoFileName(),
         $merged->getDescription(),
         $merged->getContent(), $id);
           
@@ -50,7 +49,7 @@ class SqlPatcher implements Patcher
               throw new OperationError($stmt->error);
           }
           
-          return new Episode($id, $merged->getTitle(),$merged->getSlug(),$merged->getCourseId(),$merged->getImgUrl(),$merged->getVideoFileName(),$merged->getDescription(),$merged->getContent(),$byId->getCreatedAt());
+          return new Episode($id, $merged->getTitle(),$merged->getSlug(),$merged->getCourseId(),$merged->getImgUrl(),$merged->getDescription(),$merged->getContent(),$byId->getCreatedAt());
       
       } catch (\Error $exception) {
             if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {
@@ -70,7 +69,7 @@ class SqlPatcher implements Patcher
     private function merge(Episode $prev, PatchedEpisode $patched): PatchedEpisode
     {
         return new PatchedEpisode(
-            $patched->getTitle() !== null ? $patched->getTitle() : $prev->getTitle(), $patched->getSlug() !== null ? $patched->getSlug() : $prev->getSlug(), $patched->getCourseId() !== null ? $patched->getCourseId() : $prev->getCourseId(), $patched->getImgUrl() !== null ? $patched->getImgUrl() : $prev->getImgUrl(), $patched->getVideoFileName() !== null ? $patched->getVideoFileName() : $prev->getVideoFileName(), $patched->getDescription() !== null ? $patched->getDescription() : $prev->getDescription(), $patched->getContent() !== null ? $patched->getContent() : $prev->getContent()
+            $patched->getTitle() !== null ? $patched->getTitle() : $prev->getTitle(), $patched->getSlug() !== null ? $patched->getSlug() : $prev->getSlug(), $patched->getCourseId() !== null ? $patched->getCourseId() : $prev->getCourseId(), $patched->getImgUrl() !== null ? $patched->getImgUrl() : $prev->getImgUrl(), $patched->getDescription() !== null ? $patched->getDescription() : $prev->getDescription(), $patched->getContent() !== null ? $patched->getContent() : $prev->getContent()
         );
     }
 }

@@ -25,13 +25,13 @@ class SqlPatcher implements Patcher
           
           $stmt = $this->connection->prepare(
               'UPDATE `courses` SET 
-                `title` = ?, `slug` = ?, `imgUrl` = ?, `description` = ?, `videoUrl` = ?, `isActive` = ?
+                `title` = ?, `slug` = ?, `imgUrl` = ?, `description` = ?, `isActive` = ?
                 WHERE `id` = ?;'
           );
           
           call_user_func(function (...$params) use ($stmt) {
                 $stmt->bind_param(
-                    "sssssis",
+                    "ssssis",
                     ...$params
                 );
             },
@@ -39,7 +39,6 @@ class SqlPatcher implements Patcher
         $merged->getSlug(),
         $merged->getImgUrl(),
         $merged->getDescription(),
-        $merged->getVideoUrl(),
         $merged->getIsActive(), $id);
           
           
@@ -49,7 +48,7 @@ class SqlPatcher implements Patcher
               throw new OperationError($stmt->error);
           }
           
-          return new Course($id, $merged->getTitle(),$merged->getSlug(),$merged->getImgUrl(),$merged->getDescription(),$merged->getVideoUrl(),$byId->getCreatedAt(),$merged->getIsActive());
+          return new Course($id, $merged->getTitle(),$merged->getSlug(),$merged->getImgUrl(),$merged->getDescription(),$byId->getCreatedAt(),$merged->getIsActive());
       
       } catch (\Error $exception) {
             if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {
@@ -69,7 +68,7 @@ class SqlPatcher implements Patcher
     private function merge(Course $prev, PatchedCourse $patched): PatchedCourse
     {
         return new PatchedCourse(
-            $patched->getTitle() !== null ? $patched->getTitle() : $prev->getTitle(), $patched->getSlug() !== null ? $patched->getSlug() : $prev->getSlug(), $patched->getImgUrl() !== null ? $patched->getImgUrl() : $prev->getImgUrl(), $patched->getDescription() !== null ? $patched->getDescription() : $prev->getDescription(), $patched->getVideoUrl() !== null ? $patched->getVideoUrl() : $prev->getVideoUrl(), $patched->getIsActive() !== null ? $patched->getIsActive() : $prev->getIsActive()
+            $patched->getTitle() !== null ? $patched->getTitle() : $prev->getTitle(), $patched->getSlug() !== null ? $patched->getSlug() : $prev->getSlug(), $patched->getImgUrl() !== null ? $patched->getImgUrl() : $prev->getImgUrl(), $patched->getDescription() !== null ? $patched->getDescription() : $prev->getDescription(), $patched->getIsActive() !== null ? $patched->getIsActive() : $prev->getIsActive()
         );
     }
 }

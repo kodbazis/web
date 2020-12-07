@@ -22,27 +22,26 @@ class SqlSaver implements Saver
         try {
             $statement = $this->connection->prepare(
                 "INSERT INTO `courses` (
-                `id`, `title`, `slug`, `imgUrl`, `description`, `videoUrl`, `createdAt`, `isActive`
+                `id`, `title`, `slug`, `imgUrl`, `description`, `createdAt`, `isActive`
                 ) 
-                VALUES (NULL, ?,?,?,?,?,?,?);"
+                VALUES (NULL, ?,?,?,?,?,?);"
             );
     
             $title = $new->getTitle();
         $slug = $new->getSlug();
         $imgUrl = $new->getImgUrl();
         $description = $new->getDescription();
-        $videoUrl = $new->getVideoUrl();
         $createdAt = $new->getCreatedAt();
         $isActive = $new->getIsActive();
         
     
             $statement->bind_param(
-                "sssssii",
-                 $title, $slug, $imgUrl, $description, $videoUrl, $createdAt, $isActive        
+                "ssssii",
+                 $title, $slug, $imgUrl, $description, $createdAt, $isActive        
              );
             $statement->execute();
     
-            return new Course((string)$statement->insert_id, $new->getTitle(),$new->getSlug(),$new->getImgUrl(),$new->getDescription(),$new->getVideoUrl(),$new->getCreatedAt(),$new->getIsActive());
+            return new Course((string)$statement->insert_id, $new->getTitle(),$new->getSlug(),$new->getImgUrl(),$new->getDescription(),$new->getCreatedAt(),$new->getIsActive());
         } catch (\Error $exception) {
             if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {
                 var_dump($exception);

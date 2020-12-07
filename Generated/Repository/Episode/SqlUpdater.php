@@ -24,7 +24,7 @@ class SqlUpdater implements Updater
           
           $stmt = $this->connection->prepare(
               'UPDATE `episodes` SET 
-                `title` = ?, `slug` = ?, `courseId` = ?, `imgUrl` = ?, `videoFileName` = ?, `description` = ?, `content` = ?
+                `title` = ?, `slug` = ?, `courseId` = ?, `imgUrl` = ?, `description` = ?, `content` = ?
                 WHERE `id` = ?;'
           );
           
@@ -32,17 +32,16 @@ class SqlUpdater implements Updater
         $slug= $entity->getSlug();
         $courseId= $entity->getCourseId();
         $imgUrl= $entity->getImgUrl();
-        $videoFileName= $entity->getVideoFileName();
         $description= $entity->getDescription();
         $content= $entity->getContent();
          
           $stmt->bind_param(
-              "ssisssss",
-               $title, $slug, $courseId, $imgUrl, $videoFileName, $description, $content, $id        
+              "ssissss",
+               $title, $slug, $courseId, $imgUrl, $description, $content, $id        
           );
           $stmt->execute();
           
-          return new Episode($id, $entity->getTitle(),$entity->getSlug(),$entity->getCourseId(),$entity->getImgUrl(),$entity->getVideoFileName(),$entity->getDescription(),$entity->getContent(),$byId->getCreatedAt());
+          return new Episode($id, $entity->getTitle(),$entity->getSlug(),$entity->getCourseId(),$entity->getImgUrl(),$entity->getDescription(),$entity->getContent(),$byId->getCreatedAt());
       
       } catch (\Error $exception) {
           if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {

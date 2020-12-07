@@ -65,7 +65,7 @@
         }
 
         try {
-          $toSave = new NewEpisode((string)($entity['title'] ?? ''), (string)($entity['slug'] ?? ''), (int)($entity['courseId']), (string)($entity['imgUrl'] ?? ''), (string)($entity['videoFileName'] ?? ''), (string)($entity['description'] ?? ''), (string)($entity['content'] ?? ''), (int)($entity['createdAt'] ?? 0));
+          $toSave = new NewEpisode((string)($entity['title'] ?? ''), (string)($entity['slug'] ?? ''), (int)($entity['courseId']), (string)($entity['imgUrl'] ?? ''), (string)($entity['description'] ?? ''), (string)($entity['content'] ?? ''), (int)($entity['createdAt'] ?? 0));
               return $this->saver->Save($toSave);
         } catch (Exception $err) {
                 $this->operationError->addField(Error::getOperationError());
@@ -87,7 +87,6 @@
             'slug' => [$this, 'isString'],
             'courseId' => [$this, 'isInt'],
             'imgUrl' => [$this, 'isString'],
-            'videoFileName' => [$this, 'isString'],
             'description' => [$this, 'isString'],
             'content' => [$this, 'isString'],
             'createdAt' => [$this, 'isInt']

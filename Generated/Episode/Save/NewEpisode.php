@@ -10,20 +10,18 @@ class NewEpisode implements JsonSerializable
 private $slug;
 private $courseId;
 private $imgUrl;
-private $videoFileName;
 private $description;
 private $content;
 private $createdAt;
 
 
     
-public function __construct($title, $slug, $courseId, $imgUrl, $videoFileName, $description, $content, $createdAt)
+public function __construct($title, $slug, $courseId, $imgUrl, $description, $content, $createdAt)
 {
         $this->title = $title;
 $this->slug = $slug;
 $this->courseId = $courseId;
 $this->imgUrl = $imgUrl;
-$this->videoFileName = $videoFileName;
 $this->description = $description;
 $this->content = $content;
 $this->createdAt = $createdAt;
@@ -46,10 +44,6 @@ $this->createdAt = $createdAt;
     {
         return $this->imgUrl;
     }
-    public function getVideoFileName(): ?string
-    {
-        return $this->videoFileName;
-    }
     public function getDescription(): ?string
     {
         return $this->description;
@@ -71,7 +65,6 @@ $this->createdAt = $createdAt;
  'slug' => $this->slug,
  'courseId' => $this->courseId,
  'imgUrl' => $this->imgUrl,
- 'videoFileName' => $this->videoFileName,
  'description' => $this->description,
  'content' => $this->content,
  'createdAt' => $this->createdAt,
