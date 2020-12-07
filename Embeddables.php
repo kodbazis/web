@@ -87,12 +87,14 @@ class Embeddables
                 $embeddables = Embeddables::getEmbeddables([$request->vars['id']], $conn);
                 $apps = array_filter($embeddables, fn ($em) => $em->getType() === 'application');
                 $appStyles = array_map(function ($app) use ($filterExtension) {
-                    $codeAssistScripts2 = array_filter(scandir('../public/app/' . $app->getName()), $filterExtension('css'));
-                    return array_map(fn ($item) => ['path' => "app/" . $app->getName() . "/$item"], $codeAssistScripts2);
+                    $raw = json_decode($app->getRaw(), true);
+                    $codeAssistScripts2 = array_filter(scandir('../public/app/' . $raw['directoryName']), $filterExtension('css'));
+                    return array_map(fn ($item) => ['path' => "app/" . $raw['directoryName'] . "/$item"], $codeAssistScripts2);
                 }, $apps);
                 $appScripts = array_map(function ($app) use ($filterExtension) {
-                    $codeAssistScripts2 = array_filter(scandir('../public/app/' . $app->getName()), $filterExtension('js'));
-                    return array_map(fn ($item) => ['path' => "app/" . $app->getName() . "/$item"], $codeAssistScripts2);
+                    $raw = json_decode($app->getRaw(), true);
+                    $codeAssistScripts2 = array_filter(scandir('../public/app/' . $raw['directoryName']), $filterExtension('js'));
+                    return array_map(fn ($item) => ['path' => "app/" . $raw['directoryName'] . "/$item"], $codeAssistScripts2);
                 }, $apps);
 
 
