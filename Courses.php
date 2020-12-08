@@ -66,7 +66,7 @@ class Courses
 
 
         $r->get(
-            '/admin/kurzusok/kurzus-szerkesztes/{id:\d+}',
+            '/admin/kurzusok/szerkesztes/{id:\d+}',
             [Router::class, 'setCsrfToken'],
             [Auth::class, 'validate'],
             function (Request $request) use ($conn, $twig) {

@@ -153,7 +153,7 @@ class PublicSite
         // });
 
 
-        $r->get('/{slug}-kurzus/{episode-slug}', Episodes::episodeSingleHandler($conn, $twig));
+        $r->get('/{course-slug}/{episode-slug}', Episodes::episodeSingleHandler($conn, $twig));
 
 
 

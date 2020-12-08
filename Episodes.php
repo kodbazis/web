@@ -93,6 +93,13 @@ class Episodes
             }
         );
 
+        $r->get(
+            '/admin/epizodok/megtekintes/{episode-slug}',
+            [Router::class, 'setCsrfToken'],
+            [Auth::class, 'validate'],
+            Episodes::episodeSingleHandler($conn, $twig),
+        );
+
         $r->post(
             '/admin/epizodok/create',
             [Router::class, 'validateCsrfToken'],
@@ -142,29 +149,17 @@ class Episodes
     {
         return function (Request $request) use ($conn, $twig) {
 
-            $courseBySlug = (new CourseLister($conn))->list(Router::where('slug', 'eq', $request->vars['slug']));
-            $course = $courseBySlug->getEntities()[0];
-            if (!$course) {
-                return;
+
+            $bySlug = (new EpisodeLister($conn))->list(Router::where('slug', 'eq', $request->vars['episode-slug']))->getEntities();
+
+
+            if (!isset($bySlug[0])) {
+                header('Content-Type: text/html; charset=UTF-8');
+                echo $twig->render('wrapper.twig', ['content' => '404.twig']);
+                exit;
             }
-            $episodesByCourseId = (new EpisodeLister($conn))->list(Router::where('courseId', 'eq', $course->getId()))->getEntities();
 
-            $filtered = array_filter($episodesByCourseId, fn ($ep) => $ep->getSlug() === $request->vars['episode-slug']);
-
-            $post = $filtered[0];
-            if (!$post) {
-                return;
-            }
-            // getCourse({course-slug})
-            // getEpisodes({course.id})
-            // getEpisode({episode-slug})
-
-            // render course title
-            // render episodes breadcrumbs
-            // render epsiode title
-            // render epsiode player
-            // render episode content
-
+            $post = $bySlug[0];
 
             header('Content-Type: text/html; charset=UTF-8');
             $getFileExtension = fn ($fileName) => pathinfo($fileName)['extension'];
@@ -191,8 +186,6 @@ class Episodes
             }, $apps);
             $appScripts = array_map(function ($app) use ($filterExtension) {
                 $dirName = json_decode($app->getRaw(), true)['directoryName'];
-                // var_dump($dirName);
-                // exit;
                 $codeAssistScripts2 = array_filter(scandir('../public/app/' . $dirName), $filterExtension('js'));
                 return array_map(fn ($item) => ['path' => "app/" . $dirName . "/$item"], $codeAssistScripts2);
             }, $apps);
