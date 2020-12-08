@@ -153,8 +153,7 @@ class PublicSite
         // });
 
 
-        $r->get('/{course-slug}/{episode-slug}', Episodes::episodeSingleHandler($conn, $twig));
-
+        $r->get('/{course-slug}-kurzus/{episode-slug}', Episodes::episodeSingleHandler($conn, $twig));
 
 
         $r->get('/watch/{course-slug}/{episode-filename}', function (Request $request) use ($conn, $twig) {
