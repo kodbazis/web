@@ -35,6 +35,12 @@
 					Leírás
 					<textarea style="width: 100%; height: 200px;" name="description"></textarea>
 				</label>
+
+				<label class="w-100">
+					Pozíció
+					<input type="number" class="form-control" name="position" value="{{ episode.position }}">
+				</label>
+
 				<label class="w-100">
 					Kép
 					{% if post.imgUrl %}

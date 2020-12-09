@@ -48,6 +48,8 @@ class Episodes
             [Router::class, 'setCsrfToken'],
             [Auth::class, 'validate'],
             function (Request $request) use ($conn, $twig) {
+                // var_dump($request->query);
+                // exit;
                 $list = (new SqlLister($conn))->list(Router::toQuery($request->query));
 
                 header("Content-Type: text/html");
@@ -62,10 +64,10 @@ class Episodes
                     'pagination' => Router::getPagination($request, $list->getCount()),
                     'actions' => Router::getActions('epizodok'),
                     'columns' => [
-                        ['label' => '#', 'key' => 'id'],
                         ['label' => 'Cím', 'key' => 'title'],
                         ['label' => 'Aktív', 'key' => 'isActive', 'type' => 'bool'],
                         ['label' => 'Készült', 'key' => 'createdAt', 'type' => 'timestamp'],
+                        ['label' => 'Pozíció', 'key' => 'position', 'type' => 'number'],
                     ],
                 ]);
             }
@@ -153,13 +155,20 @@ class Episodes
             $bySlug = (new EpisodeLister($conn))->list(Router::where('slug', 'eq', $request->vars['episode-slug']))->getEntities();
 
 
+
             if (!isset($bySlug[0])) {
                 header('Content-Type: text/html; charset=UTF-8');
                 echo $twig->render('wrapper.twig', ['content' => '404.twig']);
                 exit;
             }
 
-            $post = $bySlug[0];
+            $episode = $bySlug[0];
+            $allEpisodesInCourse = (new EpisodeLister($conn))->list(Router::where(
+                'courseId',
+                'eq',
+                $episode->getCourseId(),
+                ['orderByKey' => 'position', 'orderByValue' => 'asc']
+            ))->getEntities();
 
             header('Content-Type: text/html; charset=UTF-8');
             $getFileExtension = fn ($fileName) => pathinfo($fileName)['extension'];
@@ -171,10 +180,10 @@ class Episodes
             $codeAssistScriptPaths = array_map(fn ($item) => ['path' => "kodseged/js/$item"], $codeAssistScripts);
             $codeAssistStylePaths = array_map(fn ($item) => ['path' => "kodseged/css/$item"], $codeAssistStyles);
 
-            $ids = Embeddables::getIds($post->getContent());
+            $ids = Embeddables::getIds($episode->getContent());
             $embeddables = count($ids) ? Embeddables::getEmbeddables($ids, $conn) : [];
             $templates = Embeddables::mapEmbeddablesToTemplates($embeddables, $twig);
-            $content = Embeddables::insertEmbeddablesToContent($templates, $post->getContent());
+            $content = Embeddables::insertEmbeddablesToContent($templates, $episode->getContent());
 
 
 
@@ -191,15 +200,17 @@ class Episodes
             }, $apps);
 
             echo $twig->render('wrapper.twig', [
-                'title' => $post->getTitle(),
-                'description' => $post->getDescription(),
-                'post' => $post,
-                'postContent' => $content,
-                'content' => 'post-single.twig',
+                'title' => $episode->getTitle(),
+                'description' => $episode->getDescription(),
+                'episode' => $episode,
+                'episodeContent' => $content,
+                'allEpisodesInCourse' => $allEpisodesInCourse,
+                'content' => 'episode-single.twig',
                 'url' => Router::siteUrl() . $_SERVER['REQUEST_URI'],
                 'scripts' => array_merge($codeAssistScriptPaths, ...$appScripts),
                 'styles' => array_merge([
                     ['path' => 'css/post-single.css'],
+                    ['path' => 'css/episode-single.css'],
                 ], $codeAssistStylePaths, ...$appStyles),
                 'ogTags' => [
                     [
@@ -212,15 +223,15 @@ class Episodes
                     ],
                     [
                         'property' => 'og:title',
-                        'content' => $post->getTitle(),
+                        'content' => $episode->getTitle(),
                     ],
                     [
                         'property' => 'og:image',
-                        'content' => Router::siteUrl() . '/public/files/md-' . $post->getImgUrl(),
+                        'content' => Router::siteUrl() . '/public/files/md-' . $episode->getImgUrl(),
                     ],
                     [
                         'property' => 'og:description',
-                        'content' => $post->getDescription(),
+                        'content' => $episode->getDescription(),
                     ],
                     [
                         'property' => 'fb:app_id',

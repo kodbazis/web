@@ -14,10 +14,11 @@ private $imgUrl;
 private $description;
 private $content;
 private $createdAt;
+private $position;
 
 
     
-public function __construct($id, $title, $slug, $courseId, $imgUrl, $description, $content, $createdAt)
+public function __construct($id, $title, $slug, $courseId, $imgUrl, $description, $content, $createdAt, $position)
 {
         $this->id = $id;
 $this->title = $title;
@@ -27,6 +28,7 @@ $this->imgUrl = $imgUrl;
 $this->description = $description;
 $this->content = $content;
 $this->createdAt = $createdAt;
+$this->position = $position;
 
 }
     
@@ -62,6 +64,10 @@ $this->createdAt = $createdAt;
     {
         return $this->createdAt;
     }
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
     
     
     public function jsonSerialize()
@@ -75,6 +81,7 @@ $this->createdAt = $createdAt;
  'description' => $this->description,
  'content' => $this->content,
  'createdAt' => $this->createdAt,
+ 'position' => $this->position,
 
         ];
     }

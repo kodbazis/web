@@ -36,7 +36,7 @@
         public function update(array $entity, string $id): Episode
         {    
             try {
-                $toUpdate = new UpdatedEpisode($entity['title'] ?? '', $entity['slug'] ?? '', $entity['courseId'] ?? 0, $entity['imgUrl'] ?? '', $entity['description'] ?? '', $entity['content'] ?? '');
+                $toUpdate = new UpdatedEpisode($entity['title'] ?? '', $entity['slug'] ?? '', $entity['courseId'] ?? 0, $entity['imgUrl'] ?? '', $entity['description'] ?? '', $entity['content'] ?? '', $entity['position'] ?? 0);
                
                 return $this->updater->update($id, $toUpdate);
             } catch (Exception $err) {

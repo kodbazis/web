@@ -82,7 +82,7 @@
 									<a class="nav-link {{ activePath == '/admin/kurzusok' ? 'active' : '' }}" href="/admin/kurzusok">
 										<i class="fa fa-list"></i>Kurzusok
 									</a>
-									<a class="nav-link {{ activePath == '/admin/epizodok' ? 'active' : '' }}" href="/admin/epizodok">
+									<a class="nav-link {{ activePath == '/admin/epizodok' ? 'active' : '' }}" href="/admin/epizodok?filterKey=title&operator=like&filterValue=&orderByKey=position&orderByValue=desc">
 										<i class="fa fa-play"></i>Epizódok
 									</a>
 									<a class="nav-link {{ activePath == '/admin/beagyazhatok' ? 'active' : '' }}" href="/admin/beagyazhatok">
@@ -103,9 +103,9 @@
 				</div>
 			</div>
 		</div>
-			{% if scripts is defined %}
-				{% for script in scripts %}
-					{% if script.isCdn %}<script src="{{ script.path }}"> </script>
+		{% if scripts is defined %}
+			{% for script in scripts %}
+				{% if script.isCdn %}<script src="{{ script.path }}"> </script>
 				{% else %}
 					<script src="/public/{{ script.path }}"></script>
 				{% endif %}

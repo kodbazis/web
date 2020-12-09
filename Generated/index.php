@@ -46,7 +46,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) use ($conn
 
       
 
-     // \Kodbazis\Generated\Route\Auth\Auth::getRoutes($r, $conn);
+     \Kodbazis\Generated\Route\Auth\Auth::getRoutes($r, $conn);
 
     } catch (Error $e) {
         var_dump($e->getMessage());

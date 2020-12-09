@@ -24,15 +24,15 @@
 					</label>
 				</div>
 				{# <div class="form-group">
-													<label class="w-100">
-														Kurzus
-														<select name="courseId" class="form-control">
-															{% for course in courses %}
-																<option value="{{course.id}}">{{course.title}}</option>
-															{% endfor %}
-														</select>
-													</label>
-												</div> #}
+																	<label class="w-100">
+																		Kurzus
+																		<select name="courseId" class="form-control">
+																			{% for course in courses %}
+																				<option value="{{course.id}}">{{course.title}}</option>
+																			{% endfor %}
+																		</select>
+																	</label>
+																</div> #}
 				<label class="w-100">
 					Tartalom
 					<textarea class="cke" name="content">{{ episode.content }}</textarea>
@@ -41,10 +41,16 @@
 					Leírás
 					<textarea style="width: 100%; height: 200px;" name="description">{{ episode.description }}</textarea>
 				</label>
+
 				<label class="w-100">
-                 {% if episode.imgUrl %}
-                    <img src="/src/public/files/{{ episode.imgUrl }}" class="img-fluid">
-                {% endif %}
+					Pozíció
+					<input type="number" class="form-control" name="position" value="{{ episode.position }}">
+				</label>
+
+				<label class="w-100">
+					{% if episode.imgUrl %}
+						<img src="/src/public/files/{{ episode.imgUrl }}" class="img-fluid">
+					{% endif %}
 					Kép
 					<input type="file" name="mainImage">
 				</label>

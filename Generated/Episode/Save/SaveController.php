@@ -65,7 +65,7 @@
         }
 
         try {
-          $toSave = new NewEpisode((string)($entity['title'] ?? ''), (string)($entity['slug'] ?? ''), (int)($entity['courseId']), (string)($entity['imgUrl'] ?? ''), (string)($entity['description'] ?? ''), (string)($entity['content'] ?? ''), (int)($entity['createdAt'] ?? 0));
+          $toSave = new NewEpisode((string)($entity['title'] ?? ''), (string)($entity['slug'] ?? ''), (int)($entity['courseId']), (string)($entity['imgUrl'] ?? ''), (string)($entity['description'] ?? ''), (string)($entity['content'] ?? ''), (int)($entity['createdAt'] ?? 0), (int)($entity['position'] ?? 0));
               return $this->saver->Save($toSave);
         } catch (Exception $err) {
                 $this->operationError->addField(Error::getOperationError());
@@ -89,7 +89,8 @@
             'imgUrl' => [$this, 'isString'],
             'description' => [$this, 'isString'],
             'content' => [$this, 'isString'],
-            'createdAt' => [$this, 'isInt']
+            'createdAt' => [$this, 'isInt'],
+            'position' => [$this, 'isInt']
 
         ];
         if (!array_key_exists($key, $validators)) {
