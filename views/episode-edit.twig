@@ -24,15 +24,15 @@
 					</label>
 				</div>
 				{# <div class="form-group">
-																	<label class="w-100">
-																		Kurzus
-																		<select name="courseId" class="form-control">
-																			{% for course in courses %}
-																				<option value="{{course.id}}">{{course.title}}</option>
-																			{% endfor %}
-																		</select>
-																	</label>
-																</div> #}
+																					<label class="w-100">
+																						Kurzus
+																						<select name="courseId" class="form-control">
+																							{% for course in courses %}
+																								<option value="{{course.id}}">{{course.title}}</option>
+																							{% endfor %}
+																						</select>
+																					</label>
+																				</div> #}
 				<label class="w-100">
 					Tartalom
 					<textarea class="cke" name="content">{{ episode.content }}</textarea>
@@ -46,6 +46,12 @@
 					Pozíció
 					<input type="number" class="form-control" name="position" value="{{ episode.position }}">
 				</label>
+				<div class="form-group">
+					<label class="w-100">
+						Aktív
+						<input type="checkbox" class="form-control" name="isActive" value="1" {{ episode.isActive ? 'checked' : '' }}>
+					</label>
+				</div>
 
 				<label class="w-100">
 					{% if episode.imgUrl %}

@@ -2,6 +2,11 @@
 
 namespace Kodbazis;
 
+use Kodbazis\Generated\Episode\Listing\ListController;
+use Kodbazis\Generated\Listing\Clause;
+use Kodbazis\Generated\Listing\Filter;
+use Kodbazis\Generated\Listing\OrderBy;
+use Kodbazis\Generated\Listing\Query;
 use mysqli;
 use Kodbazis\Generated\Repository\Episode\SqlByIdGetter;
 use Kodbazis\Generated\Repository\Episode\SqlLister;
@@ -48,8 +53,6 @@ class Episodes
             [Router::class, 'setCsrfToken'],
             [Auth::class, 'validate'],
             function (Request $request) use ($conn, $twig) {
-                // var_dump($request->query);
-                // exit;
                 $list = (new SqlLister($conn))->list(Router::toQuery($request->query));
 
                 header("Content-Type: text/html");
@@ -150,25 +153,28 @@ class Episodes
     public static function episodeSingleHandler($conn, $twig)
     {
         return function (Request $request) use ($conn, $twig) {
-
-
             $bySlug = (new EpisodeLister($conn))->list(Router::where('slug', 'eq', $request->vars['episode-slug']))->getEntities();
 
+            $episode = $bySlug[0] ?? null;
 
-
-            if (!isset($bySlug[0])) {
+            if (!$episode) {
                 header('Content-Type: text/html; charset=UTF-8');
                 echo $twig->render('wrapper.twig', ['content' => '404.twig']);
                 exit;
             }
 
-            $episode = $bySlug[0];
-            $allEpisodesInCourse = (new EpisodeLister($conn))->list(Router::where(
-                'courseId',
-                'eq',
-                $episode->getCourseId(),
-                ['orderByKey' => 'position', 'orderByValue' => 'asc']
-            ))->getEntities();
+            $query = new Query(
+                1000,
+                0,
+                new Filter(
+                    'and',
+                    new Clause('eq', 'courseId', $episode->getCourseId()),
+                    new Clause('eq', 'isActive', 1),
+                ),
+                new OrderBy('position', 'asc')
+            );
+
+            $allEpisodesInCourse = (new EpisodeLister($conn))->list($query)->getEntities();
 
             header('Content-Type: text/html; charset=UTF-8');
             $getFileExtension = fn ($fileName) => pathinfo($fileName)['extension'];
@@ -199,6 +205,15 @@ class Episodes
                 return array_map(fn ($item) => ['path' => "app/" . $dirName . "/$item"], $codeAssistScripts2);
             }, $apps);
 
+            $episodeIndex = null;
+            foreach ($allEpisodesInCourse as $i => $ep) {
+                if ($ep->getPosition() !== $episode->getPosition()) {
+                    continue;
+                }
+                $episodeIndex = $i;
+                break;
+            }
+
             echo $twig->render('wrapper.twig', [
                 'title' => $episode->getTitle(),
                 'description' => $episode->getDescription(),
@@ -206,6 +221,8 @@ class Episodes
                 'episodeContent' => $content,
                 'allEpisodesInCourse' => $allEpisodesInCourse,
                 'content' => 'episode-single.twig',
+                'nextEpisode' => $allEpisodesInCourse[$episodeIndex + 1] ?? null,
+                'previousEpisode' => $allEpisodesInCourse[$episodeIndex - 1] ?? null,
                 'url' => Router::siteUrl() . $_SERVER['REQUEST_URI'],
                 'scripts' => array_merge($codeAssistScriptPaths, ...$appScripts),
                 'styles' => array_merge([

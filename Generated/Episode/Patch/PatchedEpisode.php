@@ -13,10 +13,11 @@ private $imgUrl;
 private $description;
 private $content;
 private $position;
+private $isActive;
 
 
     
-public function __construct($title, $slug, $courseId, $imgUrl, $description, $content, $position)
+public function __construct($title, $slug, $courseId, $imgUrl, $description, $content, $position, $isActive)
 {
         $this->title = $title;
 $this->slug = $slug;
@@ -25,6 +26,7 @@ $this->imgUrl = $imgUrl;
 $this->description = $description;
 $this->content = $content;
 $this->position = $position;
+$this->isActive = $isActive;
 
 }
     
@@ -56,6 +58,10 @@ $this->position = $position;
     {
         return $this->position;
     }
+    public function getIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
     
     
     public function jsonSerialize()
@@ -68,6 +74,7 @@ $this->position = $position;
  'description' => $this->description,
  'content' => $this->content,
  'position' => $this->position,
+ 'isActive' => $this->isActive,
 
         ];
     }

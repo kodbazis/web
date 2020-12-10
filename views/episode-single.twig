@@ -9,8 +9,7 @@
 				{{ episodeContent | raw }}
 
 
-				<div class="app">
-
+				<div class="app mb-3">
 					<ul class="hs full" data-currentepisodeindex="{{episode.position}}">
 						{% for episode in allEpisodesInCourse %}
 							<li class="item">
@@ -23,11 +22,34 @@
 								</a>
 							</li>
 						{% endfor %}
-
 					</ul>
-
 				</div>
 
+				<div class="row">
+					<div class="col-sm-6 mb-3">
+						{% if previousEpisode %}
+							<a href="/react-kurzus/{{previousEpisode.slug}}">
+								<button class="btn btn-success w-100">
+									<span class="lead">←</span>
+									{{previousEpisode.title}}
+								</button>
+							</a>
+						{% endif %}
+					</div>
+					<div class="col-sm-6">
+						{% if nextEpisode %}
+							<a class="float-right" href="/react-kurzus/{{nextEpisode.slug}}">
+								<button class="btn btn-success w-100">
+									{{nextEpisode.title}}
+									<span class="lead">→</span>
+								</button>
+							</a>
+						{% else %}
+							<h2>Következő rész hamarosan...</h2>
+						{% endif %}
+					</div>
+
+				</div>
 
 			</div>
 			<div id="fb-root"></div>

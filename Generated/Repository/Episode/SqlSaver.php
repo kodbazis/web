@@ -22,9 +22,9 @@ class SqlSaver implements Saver
         try {
             $statement = $this->connection->prepare(
                 "INSERT INTO `episodes` (
-                `id`, `title`, `slug`, `courseId`, `imgUrl`, `description`, `content`, `createdAt`, `position`
+                `id`, `title`, `slug`, `courseId`, `imgUrl`, `description`, `content`, `createdAt`, `position`, `isActive`
                 ) 
-                VALUES (NULL, ?,?,?,?,?,?,?,?);"
+                VALUES (NULL, ?,?,?,?,?,?,?,?,?);"
             );
     
             $title = $new->getTitle();
@@ -35,15 +35,16 @@ class SqlSaver implements Saver
         $content = $new->getContent();
         $createdAt = $new->getCreatedAt();
         $position = $new->getPosition();
+        $isActive = $new->getIsActive();
         
     
             $statement->bind_param(
-                "ssisssii",
-                 $title, $slug, $courseId, $imgUrl, $description, $content, $createdAt, $position        
+                "ssisssiii",
+                 $title, $slug, $courseId, $imgUrl, $description, $content, $createdAt, $position, $isActive        
              );
             $statement->execute();
     
-            return new Episode((string)$statement->insert_id, $new->getTitle(),$new->getSlug(),$new->getCourseId(),$new->getImgUrl(),$new->getDescription(),$new->getContent(),$new->getCreatedAt(),$new->getPosition());
+            return new Episode((string)$statement->insert_id, $new->getTitle(),$new->getSlug(),$new->getCourseId(),$new->getImgUrl(),$new->getDescription(),$new->getContent(),$new->getCreatedAt(),$new->getPosition(),$new->getIsActive());
         } catch (\Error $exception) {
             if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {
                 var_dump($exception);

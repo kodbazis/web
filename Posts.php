@@ -154,8 +154,8 @@ class Posts
             $bySlug = (new SqlLister($conn))->list(Router::where('slug', 'eq', $request->vars['slug']));
 
             if (!$bySlug->getEntities()[0]) {
-                echo 'not found';
-                exit;
+                header('Content-Type: text/html; charset=UTF-8');
+                echo $twig->render('wrapper.twig', ['content' => '404.twig']);
             }
             $post = $bySlug->getEntities()[0];
 
