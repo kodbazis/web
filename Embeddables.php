@@ -210,7 +210,7 @@ class Embeddables
                         'name' => $request->body['name'],
                         'type' => $request->body['type'],
                         'raw' => json_encode([
-                            'name' => $request->body['name'],
+                            'directoryName' => $request->body['directoryName'],
                         ])
                     ];
                 }
@@ -279,11 +279,9 @@ class Embeddables
                 }
 
                 if ($request->body['type'] === 'application') {
-                    $request->body['raw'] = [
-                        'raw' => json_encode([
-                            'directoryName' => $request->body['directoryName'],
-                        ])
-                    ];
+                    $request->body['raw'] = json_encode([
+                        'directoryName' => $request->body['directoryName'],
+                    ]);
                 }
 
                 (new EmbeddablePatcher())->getRoute($request);
