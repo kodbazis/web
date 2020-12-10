@@ -67,3 +67,12 @@
 .no-scrollbar::-webkit-scrollbar {
   display: block;
 }
+
+.selected-episode {
+  background-color: #e3e3e3 !important;
+  border: 2px solid #a3a3a3 !important;
+}
+
+.item {
+  min-height: 155px;
+}
