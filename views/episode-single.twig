@@ -7,7 +7,7 @@
 				</div>
 				<hr>
 					{{ episodeContent | raw }}
-				<hr class="mb-5">
+				<hr class="mb-3">
 
 				<div class="app mb-3">
 					<ul class="hs full" data-currentepisodeindex="{{episode.position}}">
@@ -58,18 +58,3 @@
 		</div>
 	</div>
 </div>
-
-<script>
-
-
-	var observer = new IntersectionObserver(function (entries) {
-// isIntersecting is true when element and viewport are overlapping
-// isIntersecting is false when element and viewport don't overlap
-if (entries[0].isIntersecting === true) {
-var app = document.querySelector(".hs");
-app.children[app.dataset.currentepisodeindex - 1].scrollIntoView();
-}
-}, {threshold: [0]});
-
-observer.observe(document.querySelector(".app"));
-</script>
