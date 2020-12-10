@@ -9,6 +9,8 @@
 					{{ episodeContent | raw }}
 				<hr class="mb-3">
 
+				<div id="fb-root"></div>
+
 				<div class="app mb-3">
 					<ul class="hs full" data-currentepisodeindex="{{episode.position}}">
 						{% for episode in allEpisodesInCourse %}
@@ -52,7 +54,6 @@
 				</div>
 
 			</div>
-			<div id="fb-root"></div>
 			<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0&appId=705894336804251&autoLogAppEvents=1" nonce="GLaxzOjV"></script>
 			<div class="fb-like" data-href="{{url}}" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
 		</div>
