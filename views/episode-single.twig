@@ -8,7 +8,7 @@
 				<hr>
 				{{ episodeContent | raw }}
 				<hr class="mb-3">
-				<div class="app mb-3">
+				<div class="app mb-3" data-position="{{episode.position}}">
 					<ul class="hs full">
 						{% for ep in allEpisodesInCourse %}
 							<a href="/react-kurzus/{{ep.slug}}">
@@ -56,3 +56,9 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	const pos = parseInt(document.querySelector('.app').dataset.position) - 2;
+	const epWidth = document.querySelector('.item').offsetWidth + 10;
+	document.querySelector('.hs').scrollLeft = epWidth * pos
+</script>
