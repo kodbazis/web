@@ -14,6 +14,10 @@ use Kodbazis\Generated\Repository\Embeddable\SqlByIdGetter;
 use Kodbazis\Generated\Repository\Course\SqlLister as CourseLister;
 use Kodbazis\Generated\Repository\Episode\SqlLister as EpisodeLister;
 use Kodbazis\Episodes;
+use Kodbazis\Generated\Listing\Clause;
+use Kodbazis\Generated\Listing\Filter;
+use Kodbazis\Generated\Listing\OrderBy;
+use Kodbazis\Generated\Listing\Query;
 
 class PublicSite
 {
@@ -121,17 +125,26 @@ class PublicSite
             ]);
         });
 
-        $r->get('/react-kurzus', function (Request $request) use ($conn, $twig) {
-            header('Location: /react-kurzus/a-react-filozofiaja');
-        });
+        $r->get('/{course-slug}-kurzus', function (Request $request) use ($conn, $twig) {
+            $courseBySlug = (new CourseLister($conn))->list(Router::where('slug', 'eq', $request->vars['course-slug']));
+            $course = $courseBySlug->getEntities()[0] ?? null;
 
-        $r->get('/kurzus/{slug}', function (Request $request) use ($conn, $twig) {
-            $courseBySlug = (new CourseLister($conn))->list(Router::where('slug', 'eq', $request->vars['slug']));
-            $course = $courseBySlug->getEntities()[0];
             if (!$course) {
                 return;
             }
-            $episodesByCourseId = (new EpisodeLister($conn))->list(Router::where('courseId', 'eq', $course->getId()))->getEntities();
+
+            $query = new Query(
+                1000,
+                0,
+                new Filter(
+                    'and',
+                    new Clause('eq', 'courseId', $course->getId()),
+                    new Clause('eq', 'isActive', 1),
+                ),
+                new OrderBy('position', 'asc')
+            );
+
+            $allEpisodesInCourse = (new EpisodeLister($conn))->list($query)->getEntities();
 
             // render course description
             // render course img
@@ -148,17 +161,11 @@ class PublicSite
             echo $twig->render('wrapper.twig', [
                 'content' => 'course.twig',
                 'course' => $course,
-                'episodes' => alignToRows($episodesByCourseId, 3),
+                'episodes' => alignToRows($allEpisodesInCourse, 3),
             ]);
         });
 
-        // $r->get('/react-kurzus', function (Request $request) use ($conn, $twig) {
-        //     echo 'React kurzus';
-        // });
-
-
         $r->get('/{course-slug}-kurzus/{episode-slug}', Episodes::episodeSingleHandler($conn, $twig));
-
 
         $r->get('/watch/{course-slug}/{episode-filename}', function (Request $request) use ($conn, $twig) {
 

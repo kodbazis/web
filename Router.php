@@ -138,13 +138,15 @@ class Router
         return new Query($query['limit'] ?? 15, $query['from'] ?? 0, $filter, $orderBy, $columns);
     }
 
-    public static function where($key, $operator, $value, $query = []): Query
+    public static function where($key, $operator, $value): Query
     {
-        $filter = new Clause($operator ?? 'eq', $key ?? 1, $value ?? 1);
-        $orderBy = empty($query['orderByValue']) ?
-            new OrderBy('createdAt', 'desc') :
-            new OrderBy($query['orderByKey'], $query['orderByValue']);
-        return new Query($query['limit'] ?? 15, $query['from'] ?? 0, $filter, $orderBy, null);
+        return new Query(
+            15,
+            0,
+            new Clause($operator ?? 'eq', $key ?? 1, $value ?? 1),
+            new OrderBy('createdAt', 'desc'),
+            []
+        );
     }
 
     public static function getPagination(Request $request, int $total)
