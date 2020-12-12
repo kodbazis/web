@@ -121,6 +121,10 @@ class PublicSite
             ]);
         });
 
+        $r->get('/react-kurzus', function (Request $request) use ($conn, $twig) {
+            header('Location: /react-kurzus/a-react-filozofiaja');
+        });
+
         $r->get('/kurzus/{slug}', function (Request $request) use ($conn, $twig) {
             $courseBySlug = (new CourseLister($conn))->list(Router::where('slug', 'eq', $request->vars['slug']));
             $course = $courseBySlug->getEntities()[0];
