@@ -6,6 +6,7 @@ use Kodbazis\Generated\Route\Post;
 use Kodbazis\Generated\Route\Course;
 use Kodbazis\Generated\Route\Episode;
 use Kodbazis\Generated\Route\Embeddable;
+use Kodbazis\Generated\Route\Feedback;
 
 use Kodbazis\Generated\ValidationError;
 use Kodbazis\Generated\OperationError;
@@ -45,6 +46,11 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) use ($conn
       }
 
       
+      $r->post('/api/feedbacks', [
+          new \Kodbazis\Generated\Route\Feedback\FeedbackSaver,
+          'getRoute'
+      ]);
+  
 
      \Kodbazis\Generated\Route\Auth\Auth::getRoutes($r, $conn);
 

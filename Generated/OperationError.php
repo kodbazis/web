@@ -7,7 +7,7 @@ use JsonSerializable;
 use Throwable;
 
 class OperationError extends Exception implements JsonSerializable, 
-\Kodbazis\Generated\Post\Error\OperationError, \Kodbazis\Generated\Course\Error\OperationError, \Kodbazis\Generated\Episode\Error\OperationError, \Kodbazis\Generated\Embeddable\Error\OperationError
+\Kodbazis\Generated\Post\Error\OperationError, \Kodbazis\Generated\Course\Error\OperationError, \Kodbazis\Generated\Episode\Error\OperationError, \Kodbazis\Generated\Embeddable\Error\OperationError, \Kodbazis\Generated\Feedback\Error\OperationError
 {
     private $fields = [];
 

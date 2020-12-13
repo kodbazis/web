@@ -35,6 +35,7 @@ class Router
             Episodes::class,
             Embeddables::class,
             PublicSite::class,
+            Feedbacks::class,
         ];
 
 
@@ -64,11 +65,6 @@ class Router
             }
             return $ret;
         }
-
-
-
-
-
 
         $r->get('/export/{resourceName}', function (Request $request) use ($conn) {
             $exportWhitelist = [
