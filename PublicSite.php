@@ -167,11 +167,6 @@ class PublicSite
 
         $r->get('/{course-slug}-kurzus/{episode-slug}', Episodes::episodeSingleHandler($conn, $twig));
 
-        // $r->post('/feedback', function (Request $request) use ($conn, $twig) {
-
-        //     var_dump($request->body);
-        // });
-
         $r->get('/watch/{course-slug}/{episode-filename}', function (Request $request) use ($conn, $twig) {
 
             // read session -> userId
