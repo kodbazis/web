@@ -12,7 +12,7 @@ function App() {
 
   return React.createElement(
     "div",
-    { className: "card w-25" },
+    { className: "card w-25 m-auto" },
     "Kattint\xE1sok sz\xE1ma: ",
     clickCount,
     React.createElement(
