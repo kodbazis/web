@@ -7,6 +7,9 @@ function App() {
       setClickCount = _React$useState2[1];
 
   React.useEffect(function () {
+    if(clickCount === 0) {
+      return;
+    }
     document.title = "Kattintások száma: " + clickCount;
   }, [clickCount]);
 
