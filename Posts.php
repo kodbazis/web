@@ -19,7 +19,6 @@ class Posts
 
     public static function getRoutes(Pipeline $r, mysqli $conn, Environment $twig)
     {
-
         $r->get(
             '/admin/cikkek/megtekintes/{slug}',
             [Auth::class, 'validate'],
@@ -188,6 +187,32 @@ class Posts
             echo $twig->render('wrapper.twig', [
                 'title' => $post->getTitle(),
                 'description' => $post->getDescription(),
+                'structuredData' => json_encode([
+                    "@context" => "https://schema.org",
+                    "@type" => "NewsArticle",
+                    "mainEntityOfPage" => [
+                        "@type" => "WebPage",
+                        "@id" => Router::siteUrl() . $_SERVER['REQUEST_URI']
+                    ],
+                    "headline" => $post->getTitle(),
+                    "image" => [
+                        Router::siteUrl() . '/public/files/md-' . $post->getImgUrl(),
+                    ],
+                    "datePublished" => date(\DateTime::ATOM, $post->getCreatedAt()),
+                    "dateModified" => date(\DateTime::ATOM, $post->getCreatedAt() + 100),
+                    "author" => [
+                        "@type" => "Organization",
+                        "name" => "Kódbázis"
+                    ],
+                    "publisher" => [
+                        "@type" => "Organization",
+                        "name" => "Kódbázis",
+                        "logo" => [
+                            "@type" => "ImageObject",
+                            "url" => Router::siteUrl() . "/public/images/logo-dark.png",
+                        ]
+                    ]
+                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
                 'post' => $post,
                 'postContent' => $content,
                 'content' => 'post-single.twig',

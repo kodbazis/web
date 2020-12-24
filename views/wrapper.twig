@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<meta charset="utf-8">
 		<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="shortcut icon" href="/favicon.ico?v=3"/>
@@ -17,13 +18,15 @@
 		<title>
 			{{ title is defined ? title : 'Kódbázis | Programozás egyszerűen, közérthetően elmagyarázva.' }}
 		</title>
+		{% if structuredData is defined %}
+			<script type="application/ld+json">{{structuredData | raw}}</script>
+		{% endif %}
 		<meta property="og:locale" content="hu_HU"/>
 		<meta name="description" content="{{ description is defined ? description : 'Programozás egyszerűen, közérthetően elmagyarázva.' }}"/>
 		{% for ogTag in ogTags %}
 			<meta property="{{ogTag.property}}" content="{{ogTag.content}}"/>
 		{% endfor %}
 	</head>
-
 	<body class="home">
 
 		{% include 'navbar.twig' %}

@@ -21,6 +21,7 @@ use Kodbazis\Generated\Listing\Query;
 
 class PublicSite
 {
+
     public static function getRoutes(Pipeline $r, mysqli $conn, Environment $twig)
     {
         $r->get('/', function (Request $request) use ($conn, $twig) {
@@ -28,6 +29,12 @@ class PublicSite
 
             echo $twig->render('wrapper.twig', [
                 'content' => 'home.twig',
+                'structuredData' => json_encode([
+                    "@context" => "https://schema.org",
+                    "@type" => "Organization",
+                    "url" => Router::siteUrl(),
+                    "logo" => Router::siteUrl() . "/public/images/logo-dark.png"
+                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
                 'scripts' => [
                     ['path' => 'js/jquery.js'],
                     ['path' => 'js/application.js'],
@@ -35,6 +42,9 @@ class PublicSite
 
             ]);
         });
+
+
+
         $r->get('/kodseged-kliens', function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
 
@@ -160,6 +170,17 @@ class PublicSite
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
                 'content' => 'course.twig',
+                'structuredData' => json_encode([
+                    "@context" => "https://schema.org",
+                    "@type" => "Course",
+                    "name" => $course->getTitle() . ' kurzus KEZDŐ FEJLESZTŐKNEK',
+                    "description" => $course->getDescription(),
+                    "provider" => [
+                        "@type" => "Organization",
+                        "name" => "Kódbázis",
+                        "sameAs" => Router::siteUrl()
+                    ]
+                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
                 'course' => $course,
                 'episodes' => alignToRows($allEpisodesInCourse, 3),
             ]);

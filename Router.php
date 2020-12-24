@@ -36,6 +36,9 @@ class Router
     public function registerRoutes(RouteCollector $r, mysqli $conn)
     {
         $twig = $this->twig;
+        if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {
+            $conn->set_charset('utf8');
+        }
 
         $routes = [
             Auth::class,
