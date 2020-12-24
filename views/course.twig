@@ -2,11 +2,10 @@
 	<div class="col-sm-12">
 		<div class="card p-3">
 			<h1>
-				{{course.title}} kurzus
+				{{course.title}}
+				kurzus
 			</h1>
 			<hr/>
-
-			{{course.description | raw}}
 			{% for row in episodes %}
 				<div class="row pb-3">
 					{% for episode in row %}
