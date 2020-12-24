@@ -105,6 +105,24 @@
 						</select>
 					</label>
 				{% endif %}
+				{% if embeddable.type == 'codeAssistantVimeo' %}
+					Kódsegéd Vimeo
+					<label class="w-100">
+						FileChanges Name
+						<input type="text" class="form-control" name="filechangesName" value="{{embeddable.filechangesName}}">
+					</label>
+					<label class="w-100">
+						Video ID
+						<input type="text" class="form-control" name="videoId" value="{{embeddable.videoId}}">
+					</label>
+					<label class="w-100">
+						Layout
+						<select name="layout" class="custom-select">
+							<option {{embeddable.layout == 'block' ? 'selected' : ''}} value="block">Block</option>
+							<option {{embeddable.layout == 'inline' ? 'selected' : ''}} value="inline">Inline</option>
+						</select>
+					</label>
+				{% endif %}
 				{% if embeddable.type == 'application' %}
 					Application
 					<label class="w-100">

@@ -177,6 +177,17 @@ class Embeddables
                         ])
                     ];
                 }
+                if ($request->body['type'] === 'codeAssistantVimeo') {
+                    $request->body = [
+                        'name' => $request->body['name'],
+                        'type' => $request->body['type'],
+                        'raw' => json_encode([
+                            'filechangesName' => $request->body['filechangesName'],
+                            'videoId' => $request->body['videoId'],
+                            'layout' => $request->body['layout'],
+                        ])
+                    ];
+                }
 
                 if ($request->body['type'] === 'youtube') {
                     $request->body = [
@@ -246,6 +257,14 @@ class Embeddables
                     ]);
                 }
                 if ($request->body['type'] === 'codeAssistantYoutube') {
+                    $request->body['raw'] = json_encode([
+                        'filechangesName' => $request->body['filechangesName'],
+                        'videoId' => $request->body['videoId'],
+                        'layout' => $request->body['layout'],
+                    ]);
+                }
+
+                if ($request->body['type'] === 'codeAssistantVimeo') {
                     $request->body['raw'] = json_encode([
                         'filechangesName' => $request->body['filechangesName'],
                         'videoId' => $request->body['videoId'],

@@ -282,6 +282,13 @@ class PublicSite
             $content = file_get_contents('../embeddable/codeAssistantYoutube/' . $raw['filechangesName']);
             echo $content;
         });
+        $r->get('/embeddable/codeAssistantVimeo/{id}/fileChanges', function (Request $request) use ($conn, $twig) {
+            header('Access-Control-Allow-Origin: *');
+            $item = (new SqlByIdGetter($conn))->byId($request->vars['id']);
+            $raw = json_decode($item->getRaw(), true);
+            $content = file_get_contents('../embeddable/codeAssistantVimeo/' . $raw['filechangesName']);
+            echo $content;
+        });
 
         $r->get('/cikkek/{slug}', Posts::postSingleHandler($conn, $twig));
     }
