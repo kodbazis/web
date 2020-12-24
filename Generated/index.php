@@ -72,7 +72,6 @@ function switchRoute(array $routeInfo, mysqli $conn)
     header("Access-Control-Allow-Methods: GET, POST, PATCH, PUT,DELETE");
     switch ($routeInfo[0]) {
         case Dispatcher::NOT_FOUND:
-            echo json_encode(["error" => "not found"]);
             if (method_exists('\Kodbazis\Router', 'registerNotFoundRoute')) {
                 (new \Kodbazis\Router())->registerNotFoundRoute($conn);
             } else {
