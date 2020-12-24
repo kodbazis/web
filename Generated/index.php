@@ -41,7 +41,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) use ($conn
 
     try {
     
-      if (class_exists('\Kodbazis\Router')) {
+      if (method_exists('\Kodbazis\Router', 'registerRoutes')) {
           (new \Kodbazis\Router())->registerRoutes($r, $conn);
       }
 
@@ -73,6 +73,11 @@ function switchRoute(array $routeInfo, mysqli $conn)
     switch ($routeInfo[0]) {
         case Dispatcher::NOT_FOUND:
             echo json_encode(["error" => "not found"]);
+            if (method_exists('\Kodbazis\Router', 'registerNotFoundRoute')) {
+                (new \Kodbazis\Router())->registerNotFoundRoute($conn);
+            } else {
+                echo json_encode(["error" => "not found"]);
+            }
             break;
         case Dispatcher::METHOD_NOT_ALLOWED:
             echo json_encode(["error" => "method not allowed. allowed methods: " . implode(", ", $routeInfo[1])]);

@@ -18,7 +18,9 @@ use Twig\Extension\DebugExtension;
 
 class Router
 {
-    public function registerRoutes(RouteCollector $r, mysqli $conn)
+    private $twig;
+
+    function __construct()
     {
         $twig = new Environment(new FilesystemLoader(__DIR__ . DIRECTORY_SEPARATOR . 'views'), ['debug' => true]);
         $twig->getExtension(CoreExtension::class)->setTimezone('Europe/Budapest');
@@ -27,6 +29,13 @@ class Router
         if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {
             $twig->addExtension(new DebugExtension());
         }
+
+        $this->twig = $twig;
+    }
+
+    public function registerRoutes(RouteCollector $r, mysqli $conn)
+    {
+        $twig = $this->twig;
 
         $routes = [
             Auth::class,
@@ -98,6 +107,12 @@ class Router
                 echo implode("\t", array_values($row)) . "\n";
             }
         });
+    }
+
+    public function registerNotFoundRoute($conn)
+    {
+        header('Content-Type: text/html; charset=UTF-8');
+        echo $this->twig->render('404.twig');
     }
 
     public static function saveImage($image)
