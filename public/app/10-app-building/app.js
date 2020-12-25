@@ -75,7 +75,7 @@ var ListaKomponens = function ListaKomponens(_ref2) {
     elemek.map(function (elem) {
       return React.createElement(
         "li",
-        { key: elem.id, className: "list-group-item" },
+        { key: elem.id, className: "list-group-item border" },
         elem.body
       );
     })
