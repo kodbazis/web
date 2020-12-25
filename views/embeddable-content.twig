@@ -10,6 +10,10 @@
 	<p class='text-center'>
 		<div class="kodseged" data-layout='{{layout}}' data-videoid="{{videoId}}" data-type="youtube"></div>
 	</p>
+{% elseif type == 'vimeo'  %}
+	<p class='text-center'>
+		<div class="kodseged" data-layout='{{layout}}' data-videoid="{{videoId}}" data-type="vimeo"></div>
+	</p>
 {% elseif type == 'gif'  %}
 	<div class='kodseged' data-gifurl='/embeddable/gif/{{id}}/gif' data-type='gif'></div>
 {% elseif type == 'gifImproved'  %}

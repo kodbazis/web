@@ -198,6 +198,15 @@ class Embeddables
                         ])
                     ];
                 }
+                if ($request->body['type'] === 'vimeo') {
+                    $request->body = [
+                        'name' => $request->body['name'],
+                        'type' => $request->body['type'],
+                        'raw' => json_encode([
+                            'videoId' => $request->body['videoId'],
+                        ])
+                    ];
+                }
                 if ($request->body['type'] === 'gif') {
                     $request->body = [
                         'name' => $request->body['name'],
@@ -207,15 +216,7 @@ class Embeddables
                         ])
                     ];
                 }
-                if ($request->body['type'] === 'gifImproved') {
-                    $request->body = [
-                        'name' => $request->body['name'],
-                        'type' => $request->body['type'],
-                        'raw' => json_encode([
-                            'fileName' => $request->body['fileName'],
-                        ])
-                    ];
-                }
+                
                 if ($request->body['type'] === 'application') {
                     $request->body = [
                         'name' => $request->body['name'],
@@ -277,12 +278,12 @@ class Embeddables
                         'videoId' => $request->body['videoId']
                     ]);
                 }
-                if ($request->body['type'] === 'gif') {
+                if ($request->body['type'] === 'vimeo') {
                     $request->body['raw'] = json_encode([
-                        'fileName' => $request->body['fileName'],
+                        'videoId' => $request->body['videoId']
                     ]);
                 }
-                if ($request->body['type'] === 'gifImproved') {
+                if ($request->body['type'] === 'gif') {
                     $request->body['raw'] = json_encode([
                         'fileName' => $request->body['fileName'],
                     ]);

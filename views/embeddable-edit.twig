@@ -44,6 +44,13 @@
 						<input type="text" class="form-control" name="videoId" value="{{embeddable.videoId}}">
 					</label>
 				{% endif %}
+				{% if embeddable.type == 'vimeo' %}
+					Vimeo
+					<label class="w-100">
+						Video ID
+						<input type="text" class="form-control" name="videoId" value="{{embeddable.videoId}}">
+					</label>
+				{% endif %}
 
 				{% if embeddable.type == 'codeAssistant' %}
 					Kódsegéd
