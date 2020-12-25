@@ -55,7 +55,7 @@ class Posts
                 $twig->display('dashboard.twig', [
                     'csrfToken' => $request->params['csrfToken'],
                     'entities' => $list->getEntities(),
-                    'mainLabel' => 'Blogbejegyzések',
+                    'mainLabel' => 'Cikkek',
                     'content' => 'post-list.twig',
                     'activePath' => self::rootPath,
                     'path' => $request->path,
