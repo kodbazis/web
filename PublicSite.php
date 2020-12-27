@@ -10,6 +10,9 @@ use Kodbazis\Mailer\Mailer;
 use Kodbazis\Generated\Paging\Pager;
 use Kodbazis\Generated\Post\Listing\ListController;
 use Kodbazis\Generated\Repository\Post\SqlLister;
+use Kodbazis\Generated\Repository\Subscriber\SqlSaver as SubscriberSaver;
+use Kodbazis\Generated\Repository\Subscriber\SqlLister as SubscriberLister;
+use Kodbazis\Generated\Repository\Subscriber\SqlPatcher as SubscriberPatcher;
 use Kodbazis\Generated\Repository\Embeddable\SqlByIdGetter;
 use Kodbazis\Generated\Repository\Course\SqlLister as CourseLister;
 use Kodbazis\Generated\Repository\Episode\SqlLister as EpisodeLister;
@@ -18,6 +21,8 @@ use Kodbazis\Generated\Listing\Clause;
 use Kodbazis\Generated\Listing\Filter;
 use Kodbazis\Generated\Listing\OrderBy;
 use Kodbazis\Generated\Listing\Query;
+use Kodbazis\Generated\Subscriber\Patch\PatchedSubscriber;
+use Kodbazis\Generated\Subscriber\Save\NewSubscriber;
 
 class PublicSite
 {
@@ -76,17 +81,6 @@ class PublicSite
             echo $twig->render('wrapper.twig', [
                 'content' => 'training.twig',
                 'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.',
-                'styles' => [
-                    ['path' => 'css/bootstrap-datetimepicker.min.css'],
-                    ['path' => 'css/application-form.css'],
-                ],
-                'scripts' => [
-                    ['path' => 'js/jquery.js'],
-                    ['path' => 'js/moment.js'],
-                    ['path' => 'js/moment-timezone.js'],
-                    ['path' => 'js/bootstrap-datetimepicker.min.js'],
-                    ['path' => 'js/application-form.js'],
-                ],
             ]);
         });
 
@@ -99,6 +93,57 @@ class PublicSite
             @(new Mailer())->sendMail('Új jelentkező: ' . $request->body['name'], $msg);
             echo json_encode(['message' => 'success']);
         });
+
+        $r->post('/request-membership', function (Request $request) use ($conn, $twig) {
+            $byEmail = (new SubscriberLister($conn))->list(Router::where('email', 'eq', $request->body['email']));
+
+            if ($byEmail->getCount() !== 0) {
+                http_response_code(400);
+                echo json_encode(['error' => 'user already exists']);
+            }
+
+            $token = uniqid();
+            (new SubscriberSaver($conn))->Save(new NewSubscriber(
+                $request->body['email'],
+                password_hash($request->body['password'], PASSWORD_DEFAULT),
+                0,
+                $token,
+                time()
+            ));
+
+            $msg = $twig->render('verification-email.twig', [
+                'email' => $request->body['email'],
+                'link' => Router::siteUrl() . "/megerosites/" . $token,
+            ]);
+            @(new Mailer())->sendMail('Megerősítés egyetlen kattintással', $msg);
+        });
+
+        $r->get('/megerosites/{token}', function (Request $request) use ($conn, $twig) {
+            $byToken = (new SubscriberLister($conn))->list(Router::where('verificationToken', 'eq', $request->vars['token']));
+
+            if ($byToken->getCount() === 0) {
+                header('Location: /');
+                return;
+            }
+
+            $subscriber = $byToken->getEntities()[0];
+
+            if ($subscriber->getIsVerified()) {
+                header('Location: /');
+                return;
+            }
+
+            $byToken = (new SubscriberPatcher($conn))->patch($subscriber->getId(), new PatchedSubscriber(null, null, 1, ''));
+            header('Location: /megerosites-sikeres');
+        });
+
+        $r->get('/megerosites-sikeres', function (Request $request) use ($conn, $twig) {
+            header('Content-Type: text/html; charset=UTF-8');
+            echo $twig->render('wrapper.twig', [
+                'content' => 'verification-success.html',
+            ]);
+        });
+
 
         $r->get('/cikkek', function (Request $request) use ($conn, $twig) {
 

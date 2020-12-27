@@ -7,7 +7,7 @@ use JsonSerializable;
 use Throwable;
 
 class ValidationError extends Exception implements JsonSerializable, 
-\Kodbazis\Generated\Post\Error\ValidationError, \Kodbazis\Generated\Course\Error\ValidationError, \Kodbazis\Generated\Episode\Error\ValidationError, \Kodbazis\Generated\Embeddable\Error\ValidationError, \Kodbazis\Generated\Feedback\Error\ValidationError
+\Kodbazis\Generated\Post\Error\ValidationError, \Kodbazis\Generated\Course\Error\ValidationError, \Kodbazis\Generated\Episode\Error\ValidationError, \Kodbazis\Generated\Embeddable\Error\ValidationError, \Kodbazis\Generated\Feedback\Error\ValidationError, \Kodbazis\Generated\Subscriber\Error\ValidationError
 {
     private $fields = [];
 

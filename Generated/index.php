@@ -7,6 +7,7 @@ use Kodbazis\Generated\Route\Course;
 use Kodbazis\Generated\Route\Episode;
 use Kodbazis\Generated\Route\Embeddable;
 use Kodbazis\Generated\Route\Feedback;
+use Kodbazis\Generated\Route\Subscriber;
 
 use Kodbazis\Generated\ValidationError;
 use Kodbazis\Generated\OperationError;

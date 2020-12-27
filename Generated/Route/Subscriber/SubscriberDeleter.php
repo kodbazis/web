@@ -1,0 +1,27 @@
+<?php
+
+namespace Kodbazis\Generated\Route\Subscriber;
+
+use Kodbazis\Generated\Subscriber\Delete\DeleteController;
+use Kodbazis\Generated\OperationError;
+use Kodbazis\Generated\Repository\Subscriber\SqlDeleter;
+use Kodbazis\Generated\Route\RouterFn;
+use Kodbazis\Generated\Repository\Auth\JwtTokenVerifier;
+use Kodbazis\Generated\Route\Auth\AuthHeaderParser;
+use Kodbazis\Generated\Request;
+use mysqli;
+
+class SubscriberDeleter implements RouterFn
+{
+    public function getRoute(Request $request): string
+    {
+         
+
+        return json_encode(['id' => (new DeleteController(
+            new OperationError(),
+            new SqlDeleter($request->connection))
+        )
+            ->delete($request->vars['id'])], JSON_UNESCAPED_UNICODE);
+    }
+}
+  
