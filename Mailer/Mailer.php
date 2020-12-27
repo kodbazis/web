@@ -6,13 +6,13 @@ use Exception;
 
 class Mailer
 {
-    public function sendMail($subject, $body)
+    public function sendMail($address, $subject, $body)
     {
         $mail = new \PHPMailer\PHPMailer\PHPMailer();
         $mail->isSMTP();
         // $mail->SMTPDebug = 3;
         $mail->setFrom($_SERVER['SMTP_SENDER_EMAIL'], $_SERVER['SMTP_SENDER_NAME']);
-        $mail->addAddress($_SERVER['SMTP_SENDER_EMAIL']);
+        $mail->addAddress($address);
         $mail->Username = $_SERVER['SMTP_USERNAME'];
         $mail->Password = $_SERVER['SMTP_PASSWORD'];
         $mail->Host = $_SERVER['SMTP_HOST'];

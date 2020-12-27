@@ -84,16 +84,6 @@ class PublicSite
             ]);
         });
 
-        $r->post('/apply-to-training', function (Request $request) use ($conn, $twig) {
-            $msg = "Név: " . $request->body['name'] . "<br/>" .
-                "Email: " . $request->body['email'] . "<br/>" .
-                "Dátum: " . $request->body['date'] . "<br/>" .
-                "Megjegyzések: " . $request->body['remarks'] . "<br/>";
-
-            @(new Mailer())->sendMail('Új jelentkező: ' . $request->body['name'], $msg);
-            echo json_encode(['message' => 'success']);
-        });
-
         $r->post('/request-membership', function (Request $request) use ($conn, $twig) {
             $byEmail = (new SubscriberLister($conn))->list(Router::where('email', 'eq', $request->body['email']));
 
@@ -115,7 +105,7 @@ class PublicSite
                 'email' => $request->body['email'],
                 'link' => Router::siteUrl() . "/megerosites/" . $token,
             ]);
-            @(new Mailer())->sendMail('Megerősítés egyetlen kattintással', $msg);
+            @(new Mailer())->sendMail($request->body['email'], 'Megerősítés egyetlen kattintással', $msg);
         });
 
         $r->get('/megerosites/{token}', function (Request $request) use ($conn, $twig) {
