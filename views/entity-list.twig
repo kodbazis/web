@@ -1,280 +1,261 @@
 <div class="row">
-  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-    <div class="page-header">
-      <h2 class="pageheader-title">{{ mainLabel }}</h2>
-      <div class="page-breadcrumb">
-        <nav aria-label="breadcrumb">
-          {#<ol class="breadcrumb">#}
-          {#<li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a>#}
-          {#</li>#}
-          {#<li class="breadcrumb-item active" aria-current="page">E-Commerce Dashboard#}
-          {#Template#}
-          {#</li>#}
-          {#</ol>#}
-        </nav>
-      </div>
-    </div>
-  </div>
+	<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+		<div class="page-header">
+			<h2 class="pageheader-title">{{ mainLabel }}</h2>
+			<div class="page-breadcrumb">
+				<nav aria-label="breadcrumb">{#<ol class="breadcrumb">#}
+					{#<li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a>#}
+					{#</li>#}
+					{#<li class="breadcrumb-item active" aria-current="page">E-Commerce Dashboard#}
+					{#Template#}
+					{#</li>#}
+					{#</ol>#}
+				</nav>
+			</div>
+		</div>
+	</div>
 </div>
 
 {% if query.isSuccess %}
-  <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Művelet sikeres!</strong>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
+	<div class="alert alert-success alert-dismissible fade show" role="alert">
+		<strong>Művelet sikeres!</strong>
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
 {% endif %}
 
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-  <div class="card">
-    <div class="card-header">
-      <div class="row">
-        <div class="col-8">
-          <nav>
-            <ul class="pagination">
-              {% if pagination.items|length > 1 %}
-                {% for item in pagination.items %}
-                  <li class="page-item {{ item.isActive ? 'active' : '' }}">
-                    <a class="page-link" href="{{ item.url }}">
-                      {{ item.label }}
-                    </a>
-                  </li>
-                {% endfor %}
-              {% endif %}
-            </ul>
-          </nav>
-        </div>
-        <div class="col-4">
-          {% if actions.create is defined %}
-            <a href="{{ actions.create }}" class="btn btn-outline-light btn-xs float-right">
-              <i class="fa fa-plus-circle"></i>
-            </a>
-          {% endif %}
-          <button class="btn btn-outline-light btn-xs float-right mr-2"
-                  type="button"
-                  data-toggle="collapse"
-                  data-target="#searchContainer"
-                  aria-expanded="false"
-                  aria-controls="searchContainer">
-            <i class="fa fa-search"></i>
-          </button>
-          {% if actions.export is defined %}
-            <button class="btn btn-outline-light btn-xs float-right mr-2"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#exportContainer"
-                    aria-expanded="false"
-                    aria-controls="exportContainer">
-              <i class="fa fa-download"></i>
-            </button>
-          {% endif %}
-        </div>
-      </div>
+	<div class="card">
+		<div class="card-header">
+			<div class="row">
+				<div class="col-8">
+					<nav>
+						<ul class="pagination">
+							{% if pagination.items|length > 1 %}
+								{% for item in pagination.items %}
+									<li class="page-item {{ item.isActive ? 'active' : '' }}">
+										<a class="page-link" href="{{ item.url }}">
+											{{ item.label }}
+										</a>
+									</li>
+								{% endfor %}
+							{% endif %}
+						</ul>
+					</nav>
+				</div>
+				<div class="col-4">
+					{% if actions.create is defined %}
+						<a href="{{ actions.create }}" class="btn btn-outline-light btn-xs float-right">
+							<i class="fa fa-plus-circle"></i>
+						</a>
+					{% endif %}
+					<button class="btn btn-outline-light btn-xs float-right mr-2" type="button" data-toggle="collapse" data-target="#searchContainer" aria-expanded="false" aria-controls="searchContainer">
+						<i class="fa fa-search"></i>
+					</button>
+					{% if actions.export is defined %}
+						<button class="btn btn-outline-light btn-xs float-right mr-2" type="button" data-toggle="collapse" data-target="#exportContainer" aria-expanded="false" aria-controls="exportContainer">
+							<i class="fa fa-download"></i>
+						</button>
+					{% endif %}
+				</div>
+			</div>
 
-      <div class="" id="searchContainer">
-        <form>
-          {% if actions.filter is defined %}
-            <div class="form-row">
-              <div class="form-group col-md-2">
-                Szűrés:
-              </div>
-              <div class="form-group col-md-3">
-                <label class="w-100">
-                  Kulcs:
-                  <select name="filterKey" class=" custom-select">
-                    {% for column in columns %}
-                      <option value="{{ column.key }}" {{ query.filterKey == column.key ? 'selected' : '' }}>
-                        {{ column.label }}
-                      </option>
-                    {% endfor %}
-                  </select>
-                </label>
-              </div>
-              <div class="form-group col-md-3">
-                <label class="w-100">
-                  Művelet:
-                  <select name="operator" class="custom-select">
-                    <option value="like" {{ (query.operator == 'like') ? 'selected' : '' }}>
-                      Keresés
-                    </option>
-                    <option value="eq" {{ (query.operator == 'eq') ? 'selected' : '' }}>
-                      Egyenlő
-                    </option>
-                    <option value="lt" {{ (query.operator == 'lt') ? 'selected' : '' }}>
-                      Kisebb mint
-                    </option>
-                    <option value="lte" {{ query.operator == 'lte' ? 'selected' : '' }}>
-                      Kisebb vagy egyenlő mint
-                    </option>
-                    <option value="gt" {{ query.operator == 'gt' ? 'selected' : '' }}>
-                      Nagyobb mint
-                    </option>
-                    <option value="gte" {{ query.operator == 'gte' ? 'selected' : '' }}>
-                      Nagyobb vagy egyenlő mint
-                    </option>
-                  </select>
-                </label>
-              </div>
-              <div class="form-group col-md-3">
-                <label class="w-100">
-                  Érték:
-                  <input type="text" name="filterValue" class="form-control"  placeholder="Érték" value="{{ query.filterValue }}">
-                </label>
-              </div>
-            </div>
-          {% endif %}
-          {% if actions.orderBy is defined %}
-            <div class="form-row">
-              <div class="form-group col-md-2">
-                Rendezés:
-              </div>
-              <div class="form-group col-md-3">
-                <label class="w-100">
-                  Kulcs:
-                  <select name="orderByKey" class="custom-select">
-                    {% for column in columns %}
-                      <option value="{{ column.key }}" {{ query.orderByKey == column.key ? 'selected' : '' }}>
-                        {{ column.label }}
-                      </option>
-                    {% endfor %}
-                  </select>
-                </label>
-              </div>
-              <div class="form-group col-md-3">
-                <label class="w-100">
-                  Sorrend:
-                  <select name="orderByValue" class="custom-select">
-                    <option value="asc" {{ query.orderByValue == 'asc' ? 'selected' : '' }}>Növekvő</option>
-                    <option value="desc" {{ query.orderByValue == 'desc' ? 'selected' : '' }}>Csökkenő</option>
-                  </select>
-                </label>
-              </div>
+			<div class="" id="searchContainer">
+				<form>
+					{% if actions.filter is defined %}
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								Szűrés:
+							</div>
+							<div class="form-group col-md-3">
+								<label class="w-100">
+									Kulcs:
+									<select name="filterKey" class=" custom-select">
+										{% for column in columns %}
+											<option value="{{ column.key }}" {{ query.filterKey == column.key ? 'selected' : '' }}>
+												{{ column.label }}
+											</option>
+										{% endfor %}
+									</select>
+								</label>
+							</div>
+							<div class="form-group col-md-3">
+								<label class="w-100">
+									Művelet:
+									<select name="operator" class="custom-select">
+										<option value="like" {{ (query.operator == 'like') ? 'selected' : '' }}>
+											Keresés
+										</option>
+										<option value="eq" {{ (query.operator == 'eq') ? 'selected' : '' }}>
+											Egyenlő
+										</option>
+										<option value="lt" {{ (query.operator == 'lt') ? 'selected' : '' }}>
+											Kisebb mint
+										</option>
+										<option value="lte" {{ query.operator == 'lte' ? 'selected' : '' }}>
+											Kisebb vagy egyenlő mint
+										</option>
+										<option value="gt" {{ query.operator == 'gt' ? 'selected' : '' }}>
+											Nagyobb mint
+										</option>
+										<option value="gte" {{ query.operator == 'gte' ? 'selected' : '' }}>
+											Nagyobb vagy egyenlő mint
+										</option>
+									</select>
+								</label>
+							</div>
+							<div class="form-group col-md-3">
+								<label class="w-100">
+									Érték:
+									<input type="text" name="filterValue" class="form-control" placeholder="Érték" value="{{ query.filterValue }}">
+								</label>
+							</div>
+						</div>
+					{% endif %}
+					{% if actions.orderBy is defined %}
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								Rendezés:
+							</div>
+							<div class="form-group col-md-3">
+								<label class="w-100">
+									Kulcs:
+									<select name="orderByKey" class="custom-select">
+										{% for column in columns %}
+											<option value="{{ column.key }}" {{ query.orderByKey == column.key ? 'selected' : '' }}>
+												{{ column.label }}
+											</option>
+										{% endfor %}
+									</select>
+								</label>
+							</div>
+							<div class="form-group col-md-3">
+								<label class="w-100">
+									Sorrend:
+									<select name="orderByValue" class="custom-select">
+										<option value="asc" {{ query.orderByValue == 'asc' ? 'selected' : '' }}>Növekvő</option>
+										<option value="desc" {{ query.orderByValue == 'desc' ? 'selected' : '' }}>Csökkenő</option>
+									</select>
+								</label>
+							</div>
 
-            </div>
-          {% endif %}
+						</div>
+					{% endif %}
 
-          <button type="submit" class="btn btn-primary btn-sm">Szűrés</button>
+					<button type="submit" class="btn btn-primary btn-sm">Szűrés</button>
 
-          <a href="{{ path }}">
-            <button type="button" class="btn btn-primary btn-sm float-right">Összes</button>
-          </a>
-        </form>
+					<a href="{{ path }}">
+						<button type="button" class="btn btn-primary btn-sm float-right">Összes</button>
+					</a>
+				</form>
 
-      </div>
-      {% if actions.export is defined %}
-        <div class="collapse" id="exportContainer">
-          <form action="{{ actions.export }}s">
-            <div class="form-row">
-              <div class="form-group col-md-2">
-                Rendezés:
-              </div>
-              <div class="form-group col-md-6">
-                <label class="w-100">
-                  Sorrend:
-                  <select name="orderByValue" class="custom-select">
-                    <option value="asc" {{ query.orderByValue == 'asc' ? 'selected' : '' }}>Növekvő</option>
-                    <option value="desc" {{ query.orderByValue == 'desc' ? 'selected' : '' }}>Csökkenő</option>
-                  </select>
-                </label>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="w-100">
-                  Kulcs:
-                  <select name="orderByKey" class="custom-select">
-                    {% for column in columns %}
-                      <option value="{{ column.key }}" {{ query.orderByKey == column.key ? 'selected' : '' }}>
-                        {{ column.label }}
-                      </option>
-                    {% endfor %}
-                  </select>
-                </label>
-              </div>
-            </div>
+			</div>
+			{% if actions.export is defined %}
+				<div class="collapse" id="exportContainer">
+					<form action="{{ actions.export }}s">
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								Rendezés:
+							</div>
+							<div class="form-group col-md-6">
+								<label class="w-100">
+									Sorrend:
+									<select name="orderByValue" class="custom-select">
+										<option value="asc" {{ query.orderByValue == 'asc' ? 'selected' : '' }}>Növekvő</option>
+										<option value="desc" {{ query.orderByValue == 'desc' ? 'selected' : '' }}>Csökkenő</option>
+									</select>
+								</label>
+							</div>
+							<div class="form-group col-md-4">
+								<label class="w-100">
+									Kulcs:
+									<select name="orderByKey" class="custom-select">
+										{% for column in columns %}
+											<option value="{{ column.key }}" {{ query.orderByKey == column.key ? 'selected' : '' }}>
+												{{ column.label }}
+											</option>
+										{% endfor %}
+									</select>
+								</label>
+							</div>
+						</div>
 
-            Oszlopok:
-            {% for column in columns %}
-              <label>
-                {{ column.label }}
-                <input
-                    type="checkbox"
-                    name="exportColumns[]"
-                    value="{{ column.key }}"
-                    {{ query.orderByKey == column.key ? 'checked' : '' }}>
-              </label>
-              <br>
-            {% endfor %}
+						Oszlopok:
+						{% for column in columns %}
+							<label>
+								{{ column.label }}
+								<input type="checkbox" name="exportColumns[]" value="{{ column.key }}" {{ query.orderByKey == column.key ? 'checked' : '' }}>
+							</label>
+							<br>
+						{% endfor %}
 
-            <button type="submit" class="btn btn-primary btn-sm">Export</button>
-          </form>
-        </div>
-      {% endif %}
+						<button type="submit" class="btn btn-primary btn-sm">Export</button>
+					</form>
+				</div>
+			{% endif %}
 
-    </div>
+		</div>
 
-    <div class="card-body p-0">
-      <div class="tableFixHead">
-        <table class="table">
-          <thead class="bg-light">
-          <tr class="border-0">
-            {% for column in columns %}
-              <th class="border-0">{{ column.label }}</th>
-            {% endfor %}
-            {% if (actions.delete is defined) or (actions.read is defined) or (actions.edit is defined) %}
-              <th class="border-0">Műveletek</th>
-            {% endif %}
-          </tr>
-          </thead>
-          <tbody>
-          {% for entity in entities %}
-            <tr>
-              {% for column in columns %}
-                <td>
-                  {% if column.type == 'timestamp' %}
-                    {{ attribute(entity, column.key) | date("Y/m/d") }}
-                  {% elseif column.type == 'bool' %}
-                    {{ attribute(entity, column.key) ? 'Igen' : 'Nem' }}
-                  {% else %}
-                    {{ attribute(entity, column.key) }}
-                  {% endif %}
-                </td>
-              {% endfor %}
-              <td>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                  {% if actions.read is defined %}
-                    <a target="_blank" href="{{ attribute(actions.read, 'execute', [entity.slug ? entity.slug : entity.id]) }}">
-                      <button type="button" class="btn btn-xs btn-outline-primary mr-2">
-                        <i class="fa fa-eye"></i>
-                      </button>
-                    </a>
-                  {% endif %}
-                  {% if actions.edit is defined %}
-                    <a href="{{ attribute(actions.edit, 'execute', [entity.id]) }}">
-                      <button type="button" class="btn btn-xs btn-outline-primary mr-2">
-                        <i class="fa fa-pencil-alt"></i>
-                      </button>
-                    </a>
-                  {% endif %}
-                  {% if actions.delete is defined %}
-                    <form
-                        action="{{ attribute(actions.delete, 'execute', [entity.id]) }}?from={{ pagination.currentFrom }}&limit={{ pagination.currentLimit }}"
-                        method="post">
-                      <input type="hidden" name="csrfToken" value="{{ csrfToken }}">
-                      <button type="submit" class="btn btn-xs btn-outline-danger">
-                        <i class="fa fa-trash"></i>
-                      </button>
-                    </form>
-                  {% endif %}
-                </div>
-              </td>
-            </tr>
-          {% endfor %}
-          {% if entities is empty %}
-            Nincs megjelenítendő elem
-          {% endif %}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+		<div class="card-body p-0">
+			<table class="table">
+				<thead class="bg-light">
+					<tr class="border-0">
+						{% for column in columns %}
+							<th class="border-0">{{ column.label }}</th>
+						{% endfor %}
+						{% if (actions.delete is defined) or (actions.read is defined) or (actions.edit is defined) %}
+							<th class="border-0">Műveletek</th>
+						{% endif %}
+					</tr>
+				</thead>
+				<tbody>
+					{% for entity in entities %}
+						<tr>
+							{% for column in columns %}
+								<td>
+									{% if column.type == 'timestamp' %}
+										{{ attribute(entity, column.key) | date("Y/m/d") }}
+									{% elseif column.type == 'bool' %}
+										{{ attribute(entity, column.key) ? 'Igen' : 'Nem' }}
+									{% else %}
+										{{ attribute(entity, column.key) }}
+									{% endif %}
+								</td>
+							{% endfor %}
+							<td>
+								<div class="btn-group" role="group" aria-label="Basic example">
+									{% if actions.read is defined %}
+										<a target="_blank" href="{{ attribute(actions.read, 'execute', [entity.slug ? entity.slug : entity.id]) }}">
+											<button type="button" class="btn btn-xs btn-outline-primary mr-2">
+												<i class="fa fa-eye"></i>
+											</button>
+										</a>
+									{% endif %}
+									{% if actions.edit is defined %}
+										<a href="{{ attribute(actions.edit, 'execute', [entity.id]) }}">
+											<button type="button" class="btn btn-xs btn-outline-primary mr-2">
+												<i class="fa fa-pencil-alt"></i>
+											</button>
+										</a>
+									{% endif %}
+									{% if actions.delete is defined %}
+										<form action="{{ attribute(actions.delete, 'execute', [entity.id]) }}?from={{ pagination.currentFrom }}&limit={{ pagination.currentLimit }}" method="post">
+											<input type="hidden" name="csrfToken" value="{{ csrfToken }}">
+											<button type="submit" class="btn btn-xs btn-outline-danger">
+												<i class="fa fa-trash"></i>
+											</button>
+										</form>
+									{% endif %}
+								</div>
+							</td>
+						</tr>
+					{% endfor %}
+					{% if entities is empty %}
+						Nincs megjelenítendő elem
+					{% endif %}
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
