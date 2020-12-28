@@ -1,0 +1,88 @@
+[
+  {
+    "timestamp": 40,
+    "fileName": "package.json",
+    "content": "{\n  \"name\": \"react_course\",\n  \"version\": \"1.0.0\",\n  \"description\": \"\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\",\n    \"dev\": \"npx babel --watch src --out-dir . --presets react-app/prod\"\n  },\n  \"keywords\": [],\n  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"dependencies\": {\n    \"babel-cli\": \"^6.26.0\",\n    \"babel-preset-react-app\": \"^3.1.2\",\n    \"moment\": \"^2.29.1\"\n  }\n}\n"
+  },
+  {
+    "timestamp": 46.759,
+    "fileName": "index.html",
+    "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Document</title>\n</head>\n<body>\n    <div id=\"app-container\"></div>\n    <script src=\"https://unpkg.com/react@16/umd/react.development.js\" crossorigin></script>\n    <script src=\"https://unpkg.com/react-dom@16/umd/react-dom.development.js\" crossorigin></script>\n    <script src=\"./app.js\"></script>\n</body>\n</html>"
+  },
+  { "timestamp": 65.76, "fileName": "app.jsx", "content": "function App() {\n    \n}" },
+  {
+    "timestamp": 69.879,
+    "fileName": "app.jsx",
+    "content": "function App() {\n\n}\n\nReactDOM.render(\n    React.createElement(App), \n    document.getElementById(\"app-container\")\n);\n"
+  },
+  {
+    "timestamp": 91.159,
+    "fileName": "app.jsx",
+    "content": "function App() {\n    const [clickCount, setClickCount] = React.useState(0);\n\n}\n\nReactDOM.render(\n    React.createElement(App), \n    document.getElementById(\"app-container\")\n);\n"
+  },
+  {
+    "timestamp": 98.239,
+    "fileName": "app.jsx",
+    "content": "function App() {\n    const [clickCount, setClickCount] = React.useState(0);\n\n    return <div className=\"card\">\n        \n    </div>\n\n}\n\nReactDOM.render(\n    React.createElement(App), \n    document.getElementById(\"app-container\")\n);\n"
+  },
+  {
+    "timestamp": 110.439,
+    "fileName": "app.jsx",
+    "content": "function App() {\n    const [clickCount, setClickCount] = React.useState(0);\n\n    return <div className=\"card\">\n        Kattintások száma: {clickCount}\n        <button className=\"\"></button>\n    </div>\n\n}\n\nReactDOM.render(\n    React.createElement(App), \n    document.getElementById(\"app-container\")\n);\n"
+  },
+  {
+    "timestamp": 112.079,
+    "fileName": "app.jsx",
+    "content": "function App() {\n    const [clickCount, setClickCount] = React.useState(0);\n\n    return <div className=\"card\">\n        Kattintások száma: {clickCount}\n        <button className=\"btn btn-outline-primary\">Kattints</button>\n    </div>\n\n}\n\nReactDOM.render(\n    React.createElement(App), \n    document.getElementById(\"app-container\")\n);\n"
+  },
+  {
+    "timestamp": 120.599,
+    "fileName": "app.jsx",
+    "content": "function App() {\n  const [clickCount, setClickCount] = React.useState(0);\n\n  return (\n    <div className=\"card\">\n      Kattintások száma: {clickCount}\n      <button className=\"btn btn-outline-primary\" onClick={() => {\n          \n      }}>Kattints</button>\n    </div>\n  );\n}\n\nReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n"
+  },
+  {
+    "timestamp": 132.159,
+    "fileName": "app.jsx",
+    "content": "function App() {\n  const [clickCount, setClickCount] = React.useState(0);\n\n  return (\n    <div className=\"card\">\n      Kattintások száma: {clickCount}\n      <button className=\"btn btn-outline-primary\" onClick={() => {\n          setClickCount(elozo => elozo + 1);\n      }}>Kattints</button>\n    </div>\n  );\n}\n\nReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n"
+  },
+  {
+    "timestamp": 138.36,
+    "fileName": "index.html",
+    "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link\n    rel=\"stylesheet\"\n    href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css\"\n    integrity=\"sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk\"\n    crossorigin=\"anonymous\"\n  />\n    <title>Document</title>\n</head>\n<body>\n    <div id=\"app-container\"></div>\n    <script src=\"https://unpkg.com/react@16/umd/react.development.js\" crossorigin></script>\n    <script src=\"https://unpkg.com/react-dom@16/umd/react-dom.development.js\" crossorigin></script>\n    <script src=\"./app.js\"></script>\n</body>\n</html>"
+  },
+  {
+    "timestamp": 142.879,
+    "fileName": "app.jsx",
+    "content": "function App() {\n  const [clickCount, setClickCount] = React.useState(0);\n\n  return (\n    <div className=\"card w-25\">\n      Kattintások száma: {clickCount}\n      <button className=\"btn btn-outline-primary\" onClick={() => {\n          setClickCount(elozo => elozo + 1);\n      }}>Kattints</button>\n    </div>\n  );\n}\n\nReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n"
+  },
+  {
+    "timestamp": 143.28,
+    "fileName": "index.html",
+    "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link\n    rel=\"stylesheet\"\n    href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css\"\n    integrity=\"sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk\"\n    crossorigin=\"anonymous\"\n  />\n    <title>Document</title>\n</head>\n<body>\n    <div id=\"app-container\"></div>\n    <script src=\"https://unpkg.com/react@16/umd/react.development.js\" crossorigin></script>\n    <script src=\"https://unpkg.com/react-dom@16/umd/react-dom.development.js\" crossorigin></script>\n    <script src=\"./app.js\"></script>\n</body>\n</html>"
+  },
+  {
+    "timestamp": 151,
+    "fileName": "app.jsx",
+    "content": "function App() {\n  const [clickCount, setClickCount] = React.useState(0);\n\n  return (\n    <div className=\"card w-25\">\n      Kattintások száma: {clickCount}\n      <button className=\"btn btn-outline-primary\" onClick={() => {\n          setClickCount(elozo => elozo + 1);\n      }}>Kattints</button>\n    </div>\n  );\n}\n\nReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n"
+  },
+  {
+    "timestamp": 263.319,
+    "fileName": "app.jsx",
+    "content": "function App() {\n  const [clickCount, setClickCount] = React.useState(0);\n\n  React.useEffect(() => {\n      console.log(\"Teszt\");\n  }, []);\n\n  return (\n    <div className=\"card w-25\">\n      Kattintások száma: {clickCount}\n      <button className=\"btn btn-outline-primary\" onClick={() => {\n          setClickCount(elozo => elozo + 1);\n      }}>Kattints</button>\n    </div>\n  );\n}\n\nReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n"
+  },
+  {
+    "timestamp": 283.16,
+    "fileName": "app.jsx",
+    "content": "function App() {\n  const [clickCount, setClickCount] = React.useState(0);\n\n  React.useEffect(() => {\n      console.log(\"Teszt\");\n  }, [clickCount]);\n\n  return (\n    <div className=\"card w-25\">\n      Kattintások száma: {clickCount}\n      <button className=\"btn btn-outline-primary\" onClick={() => {\n          setClickCount(elozo => elozo + 1);\n      }}>Kattints</button>\n    </div>\n  );\n}\n\nReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n"
+  },
+  {
+    "timestamp": 311.92,
+    "fileName": "app.jsx",
+    "content": "function App() {\n  const [clickCount, setClickCount] = React.useState(0);\n\n  React.useEffect(() => {\n      document.title =\n  }, [clickCount]);\n\n  return (\n    <div className=\"card w-25\">\n      Kattintások száma: {clickCount}\n      <button className=\"btn btn-outline-primary\" onClick={() => {\n          setClickCount(elozo => elozo + 1);\n      }}>Kattints</button>\n    </div>\n  );\n}\n\nReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n"
+  },
+  {
+    "timestamp": 314.279,
+    "fileName": "app.jsx",
+    "content": "function App() {\n  const [clickCount, setClickCount] = React.useState(0);\n\n  React.useEffect(() => {\n    document.title = \"Kattintások száma: \" + clickCount;\n  }, [clickCount]);\n\n  return (\n    <div className=\"card w-25\">\n      Kattintások száma: {clickCount}\n      <button\n        className=\"btn btn-outline-primary\"\n        onClick={() => {\n          setClickCount((elozo) => elozo + 1);\n        }}\n      >\n        Kattints\n      </button>\n    </div>\n  );\n}\n\nReactDOM.render(React.createElement(App), document.getElementById(\"app-container\"));\n"
+  }
+]

@@ -10,9 +10,7 @@ use Kodbazis\Generated\Request;
 use Kodbazis\Generated\Route\Embeddable\EmbeddableDeleter;
 use Kodbazis\Generated\Route\Embeddable\EmbeddablePatcher;
 use Kodbazis\Generated\Route\Embeddable\EmbeddableSaver;
-use Kodbazis\Image\ImageSaver;
 use Twig\Environment;
-use Kodbazis\Generated\Repository\Embeddable\SqlByIdGetter as EmbeddableByIdGetter;
 
 class Embeddables
 {

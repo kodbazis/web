@@ -1,0 +1,40 @@
+[
+  { "timestamp": 94, "fileName": "package.json", "content": "{\n  \"name\": \"react_course\",\n  \"version\": \"1.0.0\",\n  \"description\": \"\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\"  \n  },\n  \"keywords\": [],\n  \"author\": \"\",\n  \"license\": \"ISC\"\n}\n" },
+  { "timestamp": 113, "fileName": "package.json", "content": "{\n  \"name\": \"react_course\",\n  \"version\": \"1.0.0\",\n  \"description\": \"\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\"  \n  },\n  \"keywords\": [],\n  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"dependencies\": {\n    \"babel-cli\": \"^6.26.0\",\n    \"babel-preset-react-app\": \"^3.1.2\"\n  }\n}\n" },
+  { "timestamp": 170.68, "fileName": "app.jsx", "content": "function AppComponent() {\n    \n}" },
+  {
+    "timestamp": 183.96,
+    "fileName": "app.jsx",
+    "content": "function AppComponent() {\n    return <h1>Okkkkkk</h1>;\n}"
+  },
+  {
+    "timestamp": 216.84,
+    "fileName": "index.html",
+    "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Document</title>\n</head>\n<body>\n    \n    <script src=\"https://unpkg.com/react@16/umd/react.development.js\" crossorigin></script>\n    <script src=\"https://unpkg.com/react-dom@16/umd/react-dom.development.js\" crossorigin></script>\n</body>\n</html>"
+  },
+  {
+    "timestamp": 220.28,
+    "fileName": "index.html",
+    "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Document</title>\n</head>\n<body>\n    \n    <script src=\"https://unpkg.com/react@16/umd/react.development.js\" crossorigin></script>\n    <script src=\"https://unpkg.com/react-dom@16/umd/react-dom.development.js\" crossorigin></script>\n    <script src=\"./app.js\"></script>\n</body>\n</html>"
+  },
+  {
+    "timestamp": 228.28,
+    "fileName": "index.html",
+    "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Document</title>\n</head>\n<body>\n    <div id=\"app-container\"></div>\n    <script src=\"https://unpkg.com/react@16/umd/react.development.js\" crossorigin></script>\n    <script src=\"https://unpkg.com/react-dom@16/umd/react-dom.development.js\" crossorigin></script>\n    <script src=\"./app.js\"></script>\n</body>\n</html>"
+  },
+  {
+    "timestamp": 236.439,
+    "fileName": "app.jsx",
+    "content": "function AppComponent() {\n    return <h1>Okkkkkk</h1>;\n}\n\nReactDOM.render()"
+  },
+  {
+    "timestamp": 254.599,
+    "fileName": "app.jsx",
+    "content": "function AppComponent() {\n    return <h1>Okkkkkk</h1>;\n}\n\nReactDOM.render(\n    React.createElement(AppComponent), \n    document.getElementById('app-container')\n)\n\n// Egyszerűbben:\n/*\n\nReactDOM.render(\n    <AppComponent />, \n    document.getElementById('app-container')\n)\n\n*/"
+  },
+  {
+    "timestamp": 276.279,
+    "fileName": "app.jsx",
+    "content": "function AppComponent() {\n    return <div>\n        <h1>OKKK</h1>\n        <HeaderComponent></HeaderComponent>\n    </div>;\n}\n\nfunction HeaderComponent() {\n    return <nav>Header</nav>\n}\n\nReactDOM.render(\n    React.createElement(AppComponent),\n    document.getElementById('app-container')\n)\n\n// Egyszerűbben:\n/*\n\nReactDOM.render(\n    <AppComponent />, \n    document.getElementById('app-container')\n)\n\n*/"
+  }
+]
