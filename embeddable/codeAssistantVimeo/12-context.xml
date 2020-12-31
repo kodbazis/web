@@ -1,0 +1,1448 @@
+<?xml version = "1.0"?>
+<root>
+
+    <item>
+    <timestamp>00:01</timestamp>
+    <fileName>package.json</fileName>
+    <content>
+<![CDATA[
+{
+  "name": "react_course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx babel --watch src --out-dir . --presets react-app/prod"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2"
+  }
+}
+
+]]>
+    </content>
+    </item>
+
+
+    <item>
+    <timestamp>00:02</timestamp>
+    <fileName>index.html</fileName>
+    <content>
+<![CDATA[
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css"
+      integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g=="
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app-container"></div>
+    <script src="http://localhost:8097"></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="./app.js"></script>
+  </body>
+</html> 
+
+]]>
+    </content>
+    </item>
+
+    <item>
+    <timestamp>00:03</timestamp>
+    <fileName>app.jsx</fileName>
+    <content>
+<![CDATA[
+
+]]>
+    </content>
+    </item>
+
+
+<item>
+    <timestamp>01:21</timestamp>
+    <fileName>app.jsx</fileName>
+    <content>
+<![CDATA[
+function App() {
+
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>01:34</timestamp>
+    <fileName>app.jsx</fileName>
+    <content>
+<![CDATA[
+function App() {
+  const [nyelv, setNyelv] = React.useState("hun"); // "hun" | "en" | "spa"
+
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>01:45</timestamp>
+    <fileName>app.jsx</fileName>
+    <content>
+<![CDATA[
+function App() {
+  const [nyelv, setNyelv] = React.useState("hun"); // "hun" | "en" | "spa"
+
+  return (
+    <div>
+
+      <Kontener nyelv={nyelv} />
+    </div>
+  );
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>01:49</timestamp>
+    <fileName>app.jsx</fileName>
+    <content>
+<![CDATA[
+function App() {
+  const [nyelv, setNyelv] = React.useState("hun"); // "hun" | "en" | "spa"
+
+  return (
+    <div>
+      <NyelvValaszto nyelv={nyelv} setNyelv={setNyelv} />
+      <Kontener nyelv={nyelv} />
+    </div>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>01:53</timestamp>
+    <fileName>app.jsx</fileName>
+    <content>
+<![CDATA[
+function App() {
+  const [nyelv, setNyelv] = React.useState("hun"); // "hun" | "en" | "spa"
+
+  return (
+    <div>
+      <NyelvValaszto nyelv={nyelv} setNyelv={setNyelv} />
+      <Kontener nyelv={nyelv} />
+    </div>
+  );
+}
+
+function NyelvValaszto({ nyelv, setNyelv }) {
+  return (
+    <nav className="navbar navbar-light bg-light p-0">
+      <label className="w-100 p-3">
+        <h3>{szotar[nyelv].changeLanguage}:</h3>
+        <select
+          className="form-control"
+          defaultValue={nyelv}
+        >
+          <option value="hun">{szotar[nyelv].hungarian}</option>
+          <option value="en"> {szotar[nyelv].english}</option>
+          <option value="spa"> {szotar[nyelv].spanish}</option>
+        </select>
+      </label>
+    </nav>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>02:12</timestamp>
+    <fileName>app.jsx</fileName>
+    <content>
+<![CDATA[
+const szotar = {
+  hun: {
+    greetings: "Üdvözlet",
+    changeLanguage: "Válassz nyelvet",
+    content: "Ebben az epizódban a React context használatáról lesz szó.",
+    goodLuck: "Sok sikert!",
+    hungarian: "Magyar",
+    english: "Angol",
+    spanish: "Spanyol",
+  },
+  en: {
+    greetings: "Greetings",
+    changeLanguage: "Choose language",
+    content: "In this episode we will discuss the use of React context.",
+    goodLuck: "Good Luck!",
+    hungarian: "Hungarian",
+    english: "English",
+    spanish: "Spanish",
+  },
+  spa: {
+    greetings: "Saludos",
+    changeLanguage: "Elige lengua",
+    content: "En este episodio discutiremos el uso del contexto React",
+    goodLuck: "Buena suerte!",
+    hungarian: "Húngaro",
+    english: "Inglés",
+    spanish: "Español",
+  },
+};
+
+function App() {
+  const [nyelv, setNyelv] = React.useState("hun"); // "hun" | "en" | "spa"
+
+  return (
+    <div>
+      <NyelvValaszto nyelv={nyelv} setNyelv={setNyelv} />
+      <Kontener nyelv={nyelv} />
+    </div>
+  );
+}
+
+function NyelvValaszto({ nyelv, setNyelv }) {
+  return (
+    <nav className="navbar navbar-light bg-light p-0">
+      <label className="w-100 p-3">
+        <h3>{szotar[nyelv].changeLanguage}:</h3>
+        <select
+          className="form-control"
+          defaultValue={nyelv}
+        >
+          <option value="hun">{szotar[nyelv].hungarian}</option>
+          <option value="en"> {szotar[nyelv].english}</option>
+          <option value="spa"> {szotar[nyelv].spanish}</option>
+        </select>
+      </label>
+    </nav>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>02:22</timestamp>
+    <fileName>app.jsx</fileName>
+    <content>
+<![CDATA[
+const szotar = {
+  hun: {
+    greetings: "Üdvözlet",
+    changeLanguage: "Válassz nyelvet",
+    content: "Ebben az epizódban a React context használatáról lesz szó.",
+    goodLuck: "Sok sikert!",
+    hungarian: "Magyar",
+    english: "Angol",
+    spanish: "Spanyol",
+  },
+  en: {
+    greetings: "Greetings",
+    changeLanguage: "Choose language",
+    content: "In this episode we will discuss the use of React context.",
+    goodLuck: "Good Luck!",
+    hungarian: "Hungarian",
+    english: "English",
+    spanish: "Spanish",
+  },
+  spa: {
+    greetings: "Saludos",
+    changeLanguage: "Elige lengua",
+    content: "En este episodio discutiremos el uso del contexto React",
+    goodLuck: "Buena suerte!",
+    hungarian: "Húngaro",
+    english: "Inglés",
+    spanish: "Español",
+  },
+};
+
+function App() {
+  const [nyelv, setNyelv] = React.useState("hun"); // "hun" | "en" | "spa"
+
+  return (
+    <div>
+      <NyelvValaszto nyelv={nyelv} setNyelv={setNyelv} />
+      <Kontener nyelv={nyelv} />
+    </div>
+  );
+}
+
+function NyelvValaszto({ nyelv, setNyelv }) {
+  return (
+    <nav className="navbar navbar-light bg-light p-0">
+      <label className="w-100 p-3">
+        <h3>{szotar[nyelv].changeLanguage}:</h3>
+        <select
+          className="form-control"
+          defaultValue={nyelv}
+          onChange={(e) => {
+            setNyelv(e.target.value);
+          }}
+        >
+          <option value="hun">{szotar[nyelv].hungarian}</option>
+          <option value="en"> {szotar[nyelv].english}</option>
+          <option value="spa"> {szotar[nyelv].spanish}</option>
+        </select>
+      </label>
+    </nav>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>02:42</timestamp>
+    <fileName>app.jsx</fileName>
+    <content>
+<![CDATA[
+const szotar = {
+  hun: {
+    greetings: "Üdvözlet",
+    changeLanguage: "Válassz nyelvet",
+    content: "Ebben az epizódban a React context használatáról lesz szó.",
+    goodLuck: "Sok sikert!",
+    hungarian: "Magyar",
+    english: "Angol",
+    spanish: "Spanyol",
+  },
+  en: {
+    greetings: "Greetings",
+    changeLanguage: "Choose language",
+    content: "In this episode we will discuss the use of React context.",
+    goodLuck: "Good Luck!",
+    hungarian: "Hungarian",
+    english: "English",
+    spanish: "Spanish",
+  },
+  spa: {
+    greetings: "Saludos",
+    changeLanguage: "Elige lengua",
+    content: "En este episodio discutiremos el uso del contexto React",
+    goodLuck: "Buena suerte!",
+    hungarian: "Húngaro",
+    english: "Inglés",
+    spanish: "Español",
+  },
+};
+
+function App() {
+  const [nyelv, setNyelv] = React.useState("hun"); // "hun" | "en" | "spa"
+
+  return (
+    <div>
+      <NyelvValaszto nyelv={nyelv} setNyelv={setNyelv} />
+      <Kontener nyelv={nyelv} />
+    </div>
+  );
+}
+
+function Kontener({ nyelv }) {
+  return (
+    <div className="container-fluid">
+      <Keret nyelv={nyelv} />
+    </div>
+  );
+}
+
+function NyelvValaszto({ nyelv, setNyelv }) {
+  return (
+    <nav className="navbar navbar-light bg-light p-0">
+      <label className="w-100 p-3">
+        <h3>{szotar[nyelv].changeLanguage}:</h3>
+        <select
+          className="form-control"
+          defaultValue={nyelv}
+          onChange={(e) => {
+            setNyelv(e.target.value);
+          }}
+        >
+          <option value="hun">{szotar[nyelv].hungarian}</option>
+          <option value="en"> {szotar[nyelv].english}</option>
+          <option value="spa"> {szotar[nyelv].spanish}</option>
+        </select>
+      </label>
+    </nav>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>02:49</timestamp>
+    <fileName>app.jsx</fileName>
+    <content>
+<![CDATA[
+const szotar = {
+  hun: {
+    greetings: "Üdvözlet",
+    changeLanguage: "Válassz nyelvet",
+    content: "Ebben az epizódban a React context használatáról lesz szó.",
+    goodLuck: "Sok sikert!",
+    hungarian: "Magyar",
+    english: "Angol",
+    spanish: "Spanyol",
+  },
+  en: {
+    greetings: "Greetings",
+    changeLanguage: "Choose language",
+    content: "In this episode we will discuss the use of React context.",
+    goodLuck: "Good Luck!",
+    hungarian: "Hungarian",
+    english: "English",
+    spanish: "Spanish",
+  },
+  spa: {
+    greetings: "Saludos",
+    changeLanguage: "Elige lengua",
+    content: "En este episodio discutiremos el uso del contexto React",
+    goodLuck: "Buena suerte!",
+    hungarian: "Húngaro",
+    english: "Inglés",
+    spanish: "Español",
+  },
+};
+
+function App() {
+  const [nyelv, setNyelv] = React.useState("hun"); // "hun" | "en" | "spa"
+
+  return (
+    <div>
+      <NyelvValaszto nyelv={nyelv} setNyelv={setNyelv} />
+      <Kontener nyelv={nyelv} />
+    </div>
+  );
+}
+
+function Kontener({ nyelv }) {
+  return (
+    <div className="container-fluid">
+      <Keret nyelv={nyelv} />
+    </div>
+  );
+}
+
+function Keret({ nyelv }) {
+  return (
+    <div className="border p-5 bg-secondary">
+      <div className="row">
+        <Udvozles nyelv={nyelv} />
+        <Tartalom nyelv={nyelv} />
+      </div>
+      <div className="row">
+        <Footer nyelv={nyelv} />
+      </div>
+    </div>
+  );
+}
+
+function NyelvValaszto({ nyelv, setNyelv }) {
+  return (
+    <nav className="navbar navbar-light bg-light p-0">
+      <label className="w-100 p-3">
+        <h3>{szotar[nyelv].changeLanguage}:</h3>
+        <select
+          className="form-control"
+          defaultValue={nyelv}
+          onChange={(e) => {
+            setNyelv(e.target.value);
+          }}
+        >
+          <option value="hun">{szotar[nyelv].hungarian}</option>
+          <option value="en"> {szotar[nyelv].english}</option>
+          <option value="spa"> {szotar[nyelv].spanish}</option>
+        </select>
+      </label>
+    </nav>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>02:59</timestamp>
+    <fileName>app.jsx</fileName>
+    <content>
+<![CDATA[
+const szotar = {
+  hun: {
+    greetings: "Üdvözlet",
+    changeLanguage: "Válassz nyelvet",
+    content: "Ebben az epizódban a React context használatáról lesz szó.",
+    goodLuck: "Sok sikert!",
+    hungarian: "Magyar",
+    english: "Angol",
+    spanish: "Spanyol",
+  },
+  en: {
+    greetings: "Greetings",
+    changeLanguage: "Choose language",
+    content: "In this episode we will discuss the use of React context.",
+    goodLuck: "Good Luck!",
+    hungarian: "Hungarian",
+    english: "English",
+    spanish: "Spanish",
+  },
+  spa: {
+    greetings: "Saludos",
+    changeLanguage: "Elige lengua",
+    content: "En este episodio discutiremos el uso del contexto React",
+    goodLuck: "Buena suerte!",
+    hungarian: "Húngaro",
+    english: "Inglés",
+    spanish: "Español",
+  },
+};
+
+function App() {
+  const [nyelv, setNyelv] = React.useState("hun"); // "hun" | "en" | "spa"
+
+  return (
+    <div>
+      <NyelvValaszto nyelv={nyelv} setNyelv={setNyelv} />
+      <Kontener nyelv={nyelv} />
+    </div>
+  );
+}
+
+function Kontener({ nyelv }) {
+  return (
+    <div className="container-fluid">
+      <Keret nyelv={nyelv} />
+    </div>
+  );
+}
+
+function Keret({ nyelv }) {
+  return (
+    <div className="border p-5 bg-secondary">
+      <div className="row">
+        <Udvozles nyelv={nyelv} />
+        <Tartalom nyelv={nyelv} />
+      </div>
+      <div className="row">
+        <Footer nyelv={nyelv} />
+      </div>
+    </div>
+  );
+}
+
+function Udvozles({ nyelv }) {
+  return (
+    <div className="col-6 bg-warning jumbotron m-0 rounded-0">
+      <h1>{szotar[nyelv].greetings}!</h1>
+    </div>
+  );
+}
+
+function Tartalom({ nyelv }) {
+  return (
+    <div className="col-6 bg-danger jumbotron m-0 rounded-0">
+      <h1>{szotar[nyelv].content}</h1>
+    </div>
+  );
+}
+
+function Footer({ nyelv }) {
+  return (
+    <div className="col-12 bg-dark jumbotron rounded-0 text-light">
+      <h1>{szotar[nyelv].goodLuck}</h1>
+    </div>
+  );
+}
+
+function NyelvValaszto({ nyelv, setNyelv }) {
+  return (
+    <nav className="navbar navbar-light bg-light p-0">
+      <label className="w-100 p-3">
+        <h3>{szotar[nyelv].changeLanguage}:</h3>
+        <select
+          className="form-control"
+          defaultValue={nyelv}
+          onChange={(e) => {
+            setNyelv(e.target.value);
+          }}
+        >
+          <option value="hun">{szotar[nyelv].hungarian}</option>
+          <option value="en"> {szotar[nyelv].english}</option>
+          <option value="spa"> {szotar[nyelv].spanish}</option>
+        </select>
+      </label>
+    </nav>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>03:08</timestamp>
+    <fileName>app.jsx</fileName>
+    <content>
+<![CDATA[
+const szotar = {
+  hun: {
+    greetings: "Üdvözlet",
+    changeLanguage: "Válassz nyelvet",
+    content: "Ebben az epizódban a React context használatáról lesz szó.",
+    goodLuck: "Sok sikert!",
+    hungarian: "Magyar",
+    english: "Angol",
+    spanish: "Spanyol",
+  },
+  en: {
+    greetings: "Greetings",
+    changeLanguage: "Choose language",
+    content: "In this episode we will discuss the use of React context.",
+    goodLuck: "Good Luck!",
+    hungarian: "Hungarian",
+    english: "English",
+    spanish: "Spanish",
+  },
+  spa: {
+    greetings: "Saludos",
+    changeLanguage: "Elige lengua",
+    content: "En este episodio discutiremos el uso del contexto React",
+    goodLuck: "Buena suerte!",
+    hungarian: "Húngaro",
+    english: "Inglés",
+    spanish: "Español",
+  },
+};
+
+function App() {
+  const [nyelv, setNyelv] = React.useState("hun"); // "hun" | "en" | "spa"
+
+  return (
+    <div>
+      <NyelvValaszto nyelv={nyelv} setNyelv={setNyelv} />
+      <Kontener nyelv={nyelv} />
+    </div>
+  );
+}
+
+function Kontener({ nyelv }) {
+  return (
+    <div className="container-fluid">
+      <Keret nyelv={nyelv} />
+    </div>
+  );
+}
+
+function Keret({ nyelv }) {
+  return (
+    <div className="border p-5 bg-secondary">
+      <div className="row">
+        <Udvozles nyelv={nyelv} />
+        <Tartalom nyelv={nyelv} />
+      </div>
+      <div className="row">
+        <Footer nyelv={nyelv} />
+      </div>
+    </div>
+  );
+}
+
+function Udvozles({ nyelv }) {
+  return (
+    <div className="col-6 bg-warning jumbotron m-0 rounded-0">
+      <h1>{szotar[nyelv].greetings}!</h1>
+    </div>
+  );
+}
+
+function Tartalom({ nyelv }) {
+  return (
+    <div className="col-6 bg-danger jumbotron m-0 rounded-0">
+      <h1>{szotar[nyelv].content}</h1>
+    </div>
+  );
+}
+
+function Footer({ nyelv }) {
+  return (
+    <div className="col-12 bg-dark jumbotron rounded-0 text-light">
+      <h1>{szotar[nyelv].goodLuck}</h1>
+    </div>
+  );
+}
+
+function NyelvValaszto({ nyelv, setNyelv }) {
+  return (
+    <nav className="navbar navbar-light bg-light p-0">
+      <label className="w-100 p-3">
+        <h3>{szotar[nyelv].changeLanguage}:</h3>
+        <select
+          className="form-control"
+          defaultValue={nyelv}
+          onChange={(e) => {
+            setNyelv(e.target.value);
+          }}
+        >
+          <option value="hun">{szotar[nyelv].hungarian}</option>
+          <option value="en"> {szotar[nyelv].english}</option>
+          <option value="spa"> {szotar[nyelv].spanish}</option>
+        </select>
+      </label>
+    </nav>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("app-container"));
+]]>
+    </content>
+</item>
+
+
+
+<item>
+    <timestamp>03:36</timestamp>
+    <fileName>app.jsx</fileName>
+    <content>
+<![CDATA[
+const szotar = {
+  hun: {
+    greetings: "Üdvözlet",
+    changeLanguage: "Válassz nyelvet",
+    content: "Ebben az epizódban a React context használatáról lesz szó.",
+    goodLuck: "Sok sikert!",
+    hungarian: "Magyar",
+    english: "Angol",
+    spanish: "Spanyol",
+  },
+  en: {
+    greetings: "Greetings",
+    changeLanguage: "Choose language",
+    content: "In this episode we will discuss the use of React context.",
+    goodLuck: "Good Luck!",
+    hungarian: "Hungarian",
+    english: "English",
+    spanish: "Spanish",
+  },
+  spa: {
+    greetings: "Saludos",
+    changeLanguage: "Elige lengua",
+    content: "En este episodio discutiremos el uso del contexto React",
+    goodLuck: "Buena suerte!",
+    hungarian: "Húngaro",
+    english: "Inglés",
+    spanish: "Español",
+  },
+};
+
+const NyelvKontextus = React.createContext();
+function App() {
+  const [nyelv, setNyelv] = React.useState("hun"); // "hun" | "en" | "spa"
+
+  return (
+    <div>
+      <NyelvValaszto nyelv={nyelv} setNyelv={setNyelv} />
+      <Kontener nyelv={nyelv} />
+    </div>
+  );
+}
+
+function Kontener({ nyelv }) {
+  return (
+    <div className="container-fluid">
+      <Keret nyelv={nyelv} />
+    </div>
+  );
+}
+
+function Keret({ nyelv }) {
+  return (
+    <div className="border p-5 bg-secondary">
+      <div className="row">
+        <Udvozles nyelv={nyelv} />
+        <Tartalom nyelv={nyelv} />
+      </div>
+      <div className="row">
+        <Footer nyelv={nyelv} />
+      </div>
+    </div>
+  );
+}
+
+function Udvozles({ nyelv }) {
+  return (
+    <div className="col-6 bg-warning jumbotron m-0 rounded-0">
+      <h1>{szotar[nyelv].greetings}!</h1>
+    </div>
+  );
+}
+
+function Tartalom({ nyelv }) {
+  return (
+    <div className="col-6 bg-danger jumbotron m-0 rounded-0">
+      <h1>{szotar[nyelv].content}</h1>
+    </div>
+  );
+}
+
+function Footer({ nyelv }) {
+  return (
+    <div className="col-12 bg-dark jumbotron rounded-0 text-light">
+      <h1>{szotar[nyelv].goodLuck}</h1>
+    </div>
+  );
+}
+
+function NyelvValaszto({ nyelv, setNyelv }) {
+  return (
+    <nav className="navbar navbar-light bg-light p-0">
+      <label className="w-100 p-3">
+        <h3>{szotar[nyelv].changeLanguage}:</h3>
+        <select
+          className="form-control"
+          defaultValue={nyelv}
+          onChange={(e) => {
+            setNyelv(e.target.value);
+          }}
+        >
+          <option value="hun">{szotar[nyelv].hungarian}</option>
+          <option value="en"> {szotar[nyelv].english}</option>
+          <option value="spa"> {szotar[nyelv].spanish}</option>
+        </select>
+      </label>
+    </nav>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("app-container"));
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>03:51</timestamp>
+    <fileName>app.jsx</fileName>
+    <content>
+<![CDATA[
+const szotar = {
+  hun: {
+    greetings: "Üdvözlet",
+    changeLanguage: "Válassz nyelvet",
+    content: "Ebben az epizódban a React context használatáról lesz szó.",
+    goodLuck: "Sok sikert!",
+    hungarian: "Magyar",
+    english: "Angol",
+    spanish: "Spanyol",
+  },
+  en: {
+    greetings: "Greetings",
+    changeLanguage: "Choose language",
+    content: "In this episode we will discuss the use of React context.",
+    goodLuck: "Good Luck!",
+    hungarian: "Hungarian",
+    english: "English",
+    spanish: "Spanish",
+  },
+  spa: {
+    greetings: "Saludos",
+    changeLanguage: "Elige lengua",
+    content: "En este episodio discutiremos el uso del contexto React",
+    goodLuck: "Buena suerte!",
+    hungarian: "Húngaro",
+    english: "Inglés",
+    spanish: "Español",
+  },
+};
+
+const NyelvKontextus = React.createContext();
+function App() {
+  const [nyelv, setNyelv] = React.useState("hun"); // "hun" | "en" | "spa"
+
+  return (
+    <NyelvKontextus.Provider value={nyelv}>
+      <NyelvValaszto nyelv={nyelv} setNyelv={setNyelv} />
+      <Kontener nyelv={nyelv} />
+    </NyelvKontextus.Provider>
+  );
+}
+
+function Kontener({ nyelv }) {
+  return (
+    <div className="container-fluid">
+      <Keret nyelv={nyelv} />
+    </div>
+  );
+}
+
+function Keret({ nyelv }) {
+  return (
+    <div className="border p-5 bg-secondary">
+      <div className="row">
+        <Udvozles nyelv={nyelv} />
+        <Tartalom nyelv={nyelv} />
+      </div>
+      <div className="row">
+        <Footer nyelv={nyelv} />
+      </div>
+    </div>
+  );
+}
+
+function Udvozles({ nyelv }) {
+  return (
+    <div className="col-6 bg-warning jumbotron m-0 rounded-0">
+      <h1>{szotar[nyelv].greetings}!</h1>
+    </div>
+  );
+}
+
+function Tartalom({ nyelv }) {
+  return (
+    <div className="col-6 bg-danger jumbotron m-0 rounded-0">
+      <h1>{szotar[nyelv].content}</h1>
+    </div>
+  );
+}
+
+function Footer({ nyelv }) {
+  return (
+    <div className="col-12 bg-dark jumbotron rounded-0 text-light">
+      <h1>{szotar[nyelv].goodLuck}</h1>
+    </div>
+  );
+}
+
+function NyelvValaszto({ nyelv, setNyelv }) {
+  return (
+    <nav className="navbar navbar-light bg-light p-0">
+      <label className="w-100 p-3">
+        <h3>{szotar[nyelv].changeLanguage}:</h3>
+        <select
+          className="form-control"
+          defaultValue={nyelv}
+          onChange={(e) => {
+            setNyelv(e.target.value);
+          }}
+        >
+          <option value="hun">{szotar[nyelv].hungarian}</option>
+          <option value="en"> {szotar[nyelv].english}</option>
+          <option value="spa"> {szotar[nyelv].spanish}</option>
+        </select>
+      </label>
+    </nav>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("app-container"));
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>04:14</timestamp>
+    <fileName>app.jsx</fileName>
+    <content>
+<![CDATA[
+const szotar = {
+  hun: {
+    greetings: "Üdvözlet",
+    changeLanguage: "Válassz nyelvet",
+    content: "Ebben az epizódban a React context használatáról lesz szó.",
+    goodLuck: "Sok sikert!",
+    hungarian: "Magyar",
+    english: "Angol",
+    spanish: "Spanyol",
+  },
+  en: {
+    greetings: "Greetings",
+    changeLanguage: "Choose language",
+    content: "In this episode we will discuss the use of React context.",
+    goodLuck: "Good Luck!",
+    hungarian: "Hungarian",
+    english: "English",
+    spanish: "Spanish",
+  },
+  spa: {
+    greetings: "Saludos",
+    changeLanguage: "Elige lengua",
+    content: "En este episodio discutiremos el uso del contexto React",
+    goodLuck: "Buena suerte!",
+    hungarian: "Húngaro",
+    english: "Inglés",
+    spanish: "Español",
+  },
+};
+
+const NyelvKontextus = React.createContext();
+function App() {
+  const [nyelv, setNyelv] = React.useState("hun"); // "hun" | "en" | "spa"
+
+  return (
+    <NyelvKontextus.Provider value={nyelv}>
+      <NyelvValaszto setNyelv={setNyelv} />
+      <Kontener />
+    </NyelvKontextus.Provider>
+  );
+}
+
+function Kontener({ nyelv }) {
+  return (
+    <div className="container-fluid">
+      <Keret nyelv={nyelv} />
+    </div>
+  );
+}
+
+function Keret({ nyelv }) {
+  return (
+    <div className="border p-5 bg-secondary">
+      <div className="row">
+        <Udvozles nyelv={nyelv} />
+        <Tartalom nyelv={nyelv} />
+      </div>
+      <div className="row">
+        <Footer nyelv={nyelv} />
+      </div>
+    </div>
+  );
+}
+
+function Udvozles({ nyelv }) {
+  return (
+    <div className="col-6 bg-warning jumbotron m-0 rounded-0">
+      <h1>{szotar[nyelv].greetings}!</h1>
+    </div>
+  );
+}
+
+function Tartalom({ nyelv }) {
+  return (
+    <div className="col-6 bg-danger jumbotron m-0 rounded-0">
+      <h1>{szotar[nyelv].content}</h1>
+    </div>
+  );
+}
+
+function Footer({ nyelv }) {
+  return (
+    <div className="col-12 bg-dark jumbotron rounded-0 text-light">
+      <h1>{szotar[nyelv].goodLuck}</h1>
+    </div>
+  );
+}
+
+function NyelvValaszto({ nyelv, setNyelv }) {
+  return (
+    <nav className="navbar navbar-light bg-light p-0">
+      <label className="w-100 p-3">
+        <h3>{szotar[nyelv].changeLanguage}:</h3>
+        <select
+          className="form-control"
+          defaultValue={nyelv}
+          onChange={(e) => {
+            setNyelv(e.target.value);
+          }}
+        >
+          <option value="hun">{szotar[nyelv].hungarian}</option>
+          <option value="en"> {szotar[nyelv].english}</option>
+          <option value="spa"> {szotar[nyelv].spanish}</option>
+        </select>
+      </label>
+    </nav>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("app-container"));
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>04:25</timestamp>
+    <fileName>app.jsx</fileName>
+    <content>
+<![CDATA[
+const szotar = {
+  hun: {
+    greetings: "Üdvözlet",
+    changeLanguage: "Válassz nyelvet",
+    content: "Ebben az epizódban a React context használatáról lesz szó.",
+    goodLuck: "Sok sikert!",
+    hungarian: "Magyar",
+    english: "Angol",
+    spanish: "Spanyol",
+  },
+  en: {
+    greetings: "Greetings",
+    changeLanguage: "Choose language",
+    content: "In this episode we will discuss the use of React context.",
+    goodLuck: "Good Luck!",
+    hungarian: "Hungarian",
+    english: "English",
+    spanish: "Spanish",
+  },
+  spa: {
+    greetings: "Saludos",
+    changeLanguage: "Elige lengua",
+    content: "En este episodio discutiremos el uso del contexto React",
+    goodLuck: "Buena suerte!",
+    hungarian: "Húngaro",
+    english: "Inglés",
+    spanish: "Español",
+  },
+};
+
+const NyelvKontextus = React.createContext();
+function App() {
+  const [nyelv, setNyelv] = React.useState("hun"); // "hun" | "en" | "spa"
+
+  return (
+    <NyelvKontextus.Provider value={nyelv}>
+      <NyelvValaszto setNyelv={setNyelv} />
+      <Kontener />
+    </NyelvKontextus.Provider>
+  );
+}
+
+function Kontener() {
+  return (
+    <div className="container-fluid">
+      <Keret />
+    </div>
+  );
+}
+
+function Keret() {
+  return (
+    <div className="border p-5 bg-secondary">
+      <div className="row">
+        <Udvozles />
+        <Tartalom />
+      </div>
+      <div className="row">
+        <Footer />
+      </div>
+    </div>
+  );
+}
+
+function Udvozles({ nyelv }) {
+  return (
+    <div className="col-6 bg-warning jumbotron m-0 rounded-0">
+      <h1>{szotar[nyelv].greetings}!</h1>
+    </div>
+  );
+}
+
+function Tartalom({ nyelv }) {
+  return (
+    <div className="col-6 bg-danger jumbotron m-0 rounded-0">
+      <h1>{szotar[nyelv].content}</h1>
+    </div>
+  );
+}
+
+function Footer({ nyelv }) {
+  return (
+    <div className="col-12 bg-dark jumbotron rounded-0 text-light">
+      <h1>{szotar[nyelv].goodLuck}</h1>
+    </div>
+  );
+}
+
+function NyelvValaszto({ nyelv, setNyelv }) {
+  return (
+    <nav className="navbar navbar-light bg-light p-0">
+      <label className="w-100 p-3">
+        <h3>{szotar[nyelv].changeLanguage}:</h3>
+        <select
+          className="form-control"
+          defaultValue={nyelv}
+          onChange={(e) => {
+            setNyelv(e.target.value);
+          }}
+        >
+          <option value="hun">{szotar[nyelv].hungarian}</option>
+          <option value="en"> {szotar[nyelv].english}</option>
+          <option value="spa"> {szotar[nyelv].spanish}</option>
+        </select>
+      </label>
+    </nav>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("app-container"));
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>04:36</timestamp>
+    <fileName>app.jsx</fileName>
+    <content>
+<![CDATA[
+const szotar = {
+  hun: {
+    greetings: "Üdvözlet",
+    changeLanguage: "Válassz nyelvet",
+    content: "Ebben az epizódban a React context használatáról lesz szó.",
+    goodLuck: "Sok sikert!",
+    hungarian: "Magyar",
+    english: "Angol",
+    spanish: "Spanyol",
+  },
+  en: {
+    greetings: "Greetings",
+    changeLanguage: "Choose language",
+    content: "In this episode we will discuss the use of React context.",
+    goodLuck: "Good Luck!",
+    hungarian: "Hungarian",
+    english: "English",
+    spanish: "Spanish",
+  },
+  spa: {
+    greetings: "Saludos",
+    changeLanguage: "Elige lengua",
+    content: "En este episodio discutiremos el uso del contexto React",
+    goodLuck: "Buena suerte!",
+    hungarian: "Húngaro",
+    english: "Inglés",
+    spanish: "Español",
+  },
+};
+
+const NyelvKontextus = React.createContext();
+function App() {
+  const [nyelv, setNyelv] = React.useState("hun"); // "hun" | "en" | "spa"
+
+  return (
+    <NyelvKontextus.Provider value={nyelv}>
+      <NyelvValaszto setNyelv={setNyelv} />
+      <Kontener />
+    </NyelvKontextus.Provider>
+  );
+}
+
+function Kontener() {
+  return (
+    <div className="container-fluid">
+      <Keret />
+    </div>
+  );
+}
+
+function Keret() {
+  return (
+    <div className="border p-5 bg-secondary">
+      <div className="row">
+        <Udvozles />
+        <Tartalom />
+      </div>
+      <div className="row">
+        <Footer />
+      </div>
+    </div>
+  );
+}
+
+function Udvozles() {
+  return (
+    <div className="col-6 bg-warning jumbotron m-0 rounded-0">
+      <h1>{szotar[nyelv].greetings}!</h1>
+    </div>
+  );
+}
+
+function Tartalom() {
+  return (
+    <div className="col-6 bg-danger jumbotron m-0 rounded-0">
+      <h1>{szotar[nyelv].content}</h1>
+    </div>
+  );
+}
+
+function Footer() {
+  return (
+    <div className="col-12 bg-dark jumbotron rounded-0 text-light">
+      <h1>{szotar[nyelv].goodLuck}</h1>
+    </div>
+  );
+}
+
+function NyelvValaszto({ setNyelv }) {
+  return (
+    <nav className="navbar navbar-light bg-light p-0">
+      <label className="w-100 p-3">
+        <h3>{szotar[nyelv].changeLanguage}:</h3>
+        <select
+          className="form-control"
+          defaultValue={nyelv}
+          onChange={(e) => {
+            setNyelv(e.target.value);
+          }}
+        >
+          <option value="hun">{szotar[nyelv].hungarian}</option>
+          <option value="en"> {szotar[nyelv].english}</option>
+          <option value="spa"> {szotar[nyelv].spanish}</option>
+        </select>
+      </label>
+    </nav>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("app-container"));
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>04:49</timestamp>
+    <fileName>app.jsx</fileName>
+    <content>
+<![CDATA[
+const szotar = {
+  hun: {
+    greetings: "Üdvözlet",
+    changeLanguage: "Válassz nyelvet",
+    content: "Ebben az epizódban a React context használatáról lesz szó.",
+    goodLuck: "Sok sikert!",
+    hungarian: "Magyar",
+    english: "Angol",
+    spanish: "Spanyol",
+  },
+  en: {
+    greetings: "Greetings",
+    changeLanguage: "Choose language",
+    content: "In this episode we will discuss the use of React context.",
+    goodLuck: "Good Luck!",
+    hungarian: "Hungarian",
+    english: "English",
+    spanish: "Spanish",
+  },
+  spa: {
+    greetings: "Saludos",
+    changeLanguage: "Elige lengua",
+    content: "En este episodio discutiremos el uso del contexto React",
+    goodLuck: "Buena suerte!",
+    hungarian: "Húngaro",
+    english: "Inglés",
+    spanish: "Español",
+  },
+};
+
+const NyelvKontextus = React.createContext();
+function App() {
+  const [nyelv, setNyelv] = React.useState("hun"); // "hun" | "en" | "spa"
+
+  return (
+    <NyelvKontextus.Provider value={nyelv}>
+      <NyelvValaszto setNyelv={setNyelv} />
+      <Kontener />
+    </NyelvKontextus.Provider>
+  );
+}
+
+function Kontener() {
+  return (
+    <div className="container-fluid">
+      <Keret />
+    </div>
+  );
+}
+
+function Keret() {
+  return (
+    <div className="border p-5 bg-secondary">
+      <div className="row">
+        <Udvozles />
+        <Tartalom />
+      </div>
+      <div className="row">
+        <Footer />
+      </div>
+    </div>
+  );
+}
+
+function Udvozles() {
+  const nyelv = React.useContext(NyelvKontextus);
+  return (
+    <div className="col-6 bg-warning jumbotron m-0 rounded-0">
+      <h1>{szotar[nyelv].greetings}!</h1>
+    </div>
+  );
+}
+
+function Tartalom() {
+  const nyelv = React.useContext(NyelvKontextus);
+  return (
+    <div className="col-6 bg-danger jumbotron m-0 rounded-0">
+      <h1>{szotar[nyelv].content}</h1>
+    </div>
+  );
+}
+
+function Footer() {
+  const nyelv = React.useContext(NyelvKontextus);
+  return (
+    <div className="col-12 bg-dark jumbotron rounded-0 text-light">
+      <h1>{szotar[nyelv].goodLuck}</h1>
+    </div>
+  );
+}
+
+function NyelvValaszto({ setNyelv }) {
+  const nyelv = React.useContext(NyelvKontextus);
+  return (
+    <nav className="navbar navbar-light bg-light p-0">
+      <label className="w-100 p-3">
+        <h3>{szotar[nyelv].changeLanguage}:</h3>
+        <select
+          className="form-control"
+          defaultValue={nyelv}
+          onChange={(e) => {
+            setNyelv(e.target.value);
+          }}
+        >
+          <option value="hun">{szotar[nyelv].hungarian}</option>
+          <option value="en"> {szotar[nyelv].english}</option>
+          <option value="spa"> {szotar[nyelv].spanish}</option>
+        </select>
+      </label>
+    </nav>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("app-container"));
+]]>
+    </content>
+</item>
+
+</root>

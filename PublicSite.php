@@ -342,7 +342,10 @@ class PublicSite
             header('Access-Control-Allow-Origin: *');
             $item = (new SqlByIdGetter($conn))->byId($request->vars['id']);
             $raw = json_decode($item->getRaw(), true);
-            $content = file_get_contents('../embeddable/codeAssistantVimeo/' . $raw['filechangesName']);
+            $path = '../embeddable/codeAssistantVimeo/' . $raw['filechangesName'];
+            $ext = pathinfo($path)['extension'];
+            header("Content-type: " . ($ext === 'json' ? 'application/json' : 'application/xml'));
+            $content = file_get_contents($path);
             echo $content;
         });
 
