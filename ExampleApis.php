@@ -46,6 +46,12 @@ class ExampleApis
         });
 
         $r->post('/api/prune-instruments', function (Request $request) use ($folder) {
+            header('Content-Type: application/json');
+            if (($request->query['key'] ?? 0) !== ($_SERVER['MASTER_PW'] ?? 1)) {
+                http_response_code(401);
+                echo json_encode(['error' => 'unauthorized']);
+                return;
+            }
             array_map('unlink', glob("$folder/*.*"));
             rmdir($folder);
             echo json_encode(['success' => true]);
