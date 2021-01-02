@@ -26,6 +26,15 @@ class Pipeline
         $this->r->post($path, $this->compose(...$fns));
     }
 
+    public function put($path, ...$fns)
+    {
+        $this->r->put($path, $this->compose(...$fns));
+    }
+    public function delete($path, ...$fns)
+    {
+        $this->r->delete($path, $this->compose(...$fns));
+    }
+
     private function compose()
     {
         $callbacks = func_get_args();

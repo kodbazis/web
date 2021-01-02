@@ -342,6 +342,9 @@ class PublicSite
             header('Access-Control-Allow-Origin: *');
             $item = (new SqlByIdGetter($conn))->byId($request->vars['id']);
             $raw = json_decode($item->getRaw(), true);
+            if(!isset($raw['filechangesName'])) {
+                return;
+            }
             $path = '../embeddable/codeAssistantVimeo/' . $raw['filechangesName'];
             $ext = pathinfo($path)['extension'];
             header("Content-type: " . ($ext === 'json' ? 'application/json' : 'application/xml'));

@@ -47,6 +47,7 @@ class Router
             Episodes::class,
             Embeddables::class,
             PublicSite::class,
+            ExampleApis::class,
             Feedbacks::class,
         ];
 

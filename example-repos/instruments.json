@@ -1,0 +1,51 @@
+[
+  {
+    "id": "5fef84f891012",
+    "name": "American Original '50s Telecaster®",
+    "brand": "Fender",
+    "price": 649900,
+    "quantity": 1,
+    "imageURL": "https://www.fmicassets.com/Damroot/GuitarVertDesktopJpg/10002/0110132850_gtr_frt_001_rr.jpg"
+  },
+  {
+    "id": "5fef84f891013",
+    "name": "Troublemaker Telecaster®",
+    "brand": "Fender",
+    "price": 469990,
+    "quantity": 3,
+    "imageURL": "https://www.fmicassets.com/Damroot/GuitarVertDesktopJpg/10001/5300100338_gtr_frt_001_rr.jpg"
+  },
+  {
+    "id": "5fef84f891014",
+    "name": "PM-2 Standard Parlor, Natural",
+    "brand": "Fender",
+    "price": 217500,
+    "quantity": 8,
+    "imageURL": "https://www.fmicassets.com/Damroot/GuitarVertDesktopJpg/10001/0970322321_gtr_frt_001_rr.jpg"
+  },
+  {
+    "id": "5fef84f891015",
+    "name": "Steve Vai Signature JEM77 - Blue Floral Pattern",
+    "brand": "Ibanez",
+    "price": 474775,
+    "quantity": 2,
+    "imageURL": "https://media.sweetwater.com/api/i/f-webp__q-85__ha-9a297ded42d50889__hmac-ea43dca50b7d9e5be6ad93b62b85d8379d251d3d/images/closeup/xl/1600-JEM77PBFP_front.jpg.auto.webp"
+  },
+  {
+    "id": "5fef84f891016",
+    "name": "J Custom RG8560 Electric Guitar - Sapphire Blue",
+    "brand": "Ibanez",
+    "price": 892800,
+    "quantity": 1,
+    "imageURL": "https://media.sweetwater.com/api/i/f-webp__q-85__ha-1cb1a1e8e849a5e6__hmac-14b419389201af735d5ce748bef35941eb3d1147/images/guitars/RG8560SPB/210001F2030089/210001F2030089-front-xlarge.jpg.auto.webp"
+  },
+  {
+    "id": "5fef84f891017",
+    "name": "Viper-1000 - See Thru Black Cherry Satin",
+    "brand": "ESP LTD",
+    "price": 329000,
+    "quantity": 4,
+    "imageURL": "https://media.sweetwater.com/api/i/f-webp__q-85__ha-455c5516f6bf9bcc__hmac-e9c6b7a53445aeae7ba7d9ad59b4c0c842b09213/images/guitars/LVP1000ETQSBCS/IW20020954/IW20020954-front-xlarge.jpg.auto.webp"
+  }
+  
+]

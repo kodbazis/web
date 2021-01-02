@@ -177,7 +177,10 @@ class Episodes
             $allEpisodesInCourse = (new EpisodeLister($conn))->list($query)->getEntities();
 
             header('Content-Type: text/html; charset=UTF-8');
-            $getFileExtension = fn ($fileName) => pathinfo($fileName)['extension'];
+            $getFileExtension = function ($fileName) {
+                $info = pathinfo($fileName);
+                return $info['extension'] ?? '';
+            };
 
             $filterExtension = fn ($ext) => fn ($item) => $getFileExtension($item) === $ext;
             $codeAssistScripts = array_filter(scandir('../public/kodseged/js'), $filterExtension('js'));
