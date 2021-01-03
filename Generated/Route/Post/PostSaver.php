@@ -20,6 +20,7 @@ class PostSaver implements RouterFn
     {
        
 
+        header("Content-Type: application/json");
         return json_encode((new SaveController(
             new SqlSaver($request->connection),
             new SqlLister($request->connection),

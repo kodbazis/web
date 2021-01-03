@@ -17,6 +17,7 @@ class FeedbackDeleter implements RouterFn
     {
          
 
+        header("Content-Type: application/json");
         return json_encode(['id' => (new DeleteController(
             new OperationError(),
             new SqlDeleter($request->connection))

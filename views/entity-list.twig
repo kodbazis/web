@@ -50,7 +50,7 @@
 							<i class="fa fa-plus-circle"></i>
 						</a>
 					{% endif %}
-					<button class="btn btn-outline-light btn-xs float-right mr-2" type="button" data-toggle="collapse" data-target="#searchContainer" aria-expanded="false" aria-controls="searchContainer">
+					<button class="btn btn-outline-light btn-xs float-right mr-2" id="search-toggle">
 						<i class="fa fa-search"></i>
 					</button>
 					{% if actions.export is defined %}
@@ -61,7 +61,7 @@
 				</div>
 			</div>
 
-			<div class="" id="searchContainer">
+			<div class="d-none" id="searchContainer">
 				<form>
 					{% if actions.filter is defined %}
 						<div class="form-row">
@@ -259,3 +259,23 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	let isSearchContainerVisible = false;
+
+document.onload = renderSearchContainer;
+
+document.getElementById('search-toggle').onclick = function () {
+isSearchContainerVisible = ! isSearchContainerVisible;
+renderSearchContainer();
+}
+
+function renderSearchContainer() {
+const container = document.getElementById('searchContainer');
+if (isSearchContainerVisible) {
+container.classList.remove('d-none');
+} else {
+container.classList.add('d-none');
+}
+}
+</script>

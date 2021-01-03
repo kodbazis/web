@@ -30,6 +30,7 @@ class PostLister implements RouterFn
             $query['orderBy'] = (array)json_decode(($query['orderBy'] ?? ''), true);
         }
 
+        header("Content-Type: application/json");
         return json_encode((new ListController(
             new OperationError(),
             new SqlLister($request->connection),

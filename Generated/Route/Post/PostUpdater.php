@@ -18,6 +18,7 @@ class PostUpdater implements RouterFn
     {
         
     
+        header("Content-Type: application/json");
         return json_encode((new UpdateController(
             new SqlUpdater($request->connection),
             new OperationError(),

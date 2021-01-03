@@ -18,6 +18,7 @@ class PostPatcher implements RouterFn
     {
        
 
+        header("Content-Type: application/json");
         return json_encode((new PatchController(
             new SqlPatcher($request->connection),
             new OperationError(),

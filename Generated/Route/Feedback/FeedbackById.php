@@ -17,6 +17,7 @@ class FeedbackById implements RouterFn
     {
         
 
+        header("Content-Type: application/json");
         return json_encode((new ByIdController(
             new SqlByIdGetter($request->connection),
             new OperationError())
