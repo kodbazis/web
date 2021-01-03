@@ -23,7 +23,12 @@ class ExampleApis
             }
 
             $id = uniqid();
-            setcookie('instrumentAPIID', $id, time() + 60 * 60 * 24);
+
+            setcookie('instrumentAPIID', $id, [
+                'expires' => time() + 60 * 60 * 24,
+                'secure' => true,
+                'samesite' => 'None',
+            ]);
             $fileName = $id . '.json';
             copy($imagefileName,  $folder . '/' .  $fileName);
             return $fileName;
