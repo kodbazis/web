@@ -1,0 +1,1264 @@
+<?xml version = "1.0"?>
+<root>
+<item>
+    <timestamp>02:01</timestamp>
+    <fileName>/public/index.html</fileName>
+    <content>
+<![CDATA[
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
+
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>02:15</timestamp>
+    <fileName>/src/index.js</fileName>
+    <content>
+<![CDATA[
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>02:41</timestamp>
+    <fileName>/src/index.js</fileName>
+    <content>
+<![CDATA[
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.css';
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+‏‏‎ ‎
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>02:44</timestamp>
+    <fileName>/src/App.js</fileName>
+    <content>
+<![CDATA[
+import logo from './logo.svg';
+import './App.css';
+
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
+}
+
+export default App;
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>02:47</timestamp>
+    <fileName>/src/App.js</fileName>
+    <content>
+<![CDATA[
+import './App.css';
+
+function App() {
+  return (
+   
+  );
+}
+
+export default App;
+‏‏‎ ‎
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>02:53</timestamp>
+    <fileName>/src/App.js</fileName>
+    <content>
+<![CDATA[
+import './App.css';
+
+function App() {
+  return (
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+                <span className="nav-link">Hangszerek</span>
+            </li>
+            <li className="nav-item">
+                <span className="nav-link">Új hangszer</span>
+            </li>
+          </ul>
+        </div>
+      </nav>
+  );
+}
+
+export default App;
+‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>03:07</timestamp>
+    <fileName>/src/App.js</fileName>
+    <content>
+<![CDATA[
+import { BrowserRouter } from "react-router-dom";
+import './App.css';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+                <span className="nav-link">Hangszerek</span>
+            </li>
+            <li className="nav-item">
+                <span className="nav-link">Új hangszer</span>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+‏‏‎ ‎‏‏‎ ‎
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>03:21</timestamp>
+    <fileName>/src/App.js</fileName>
+    <content>
+<![CDATA[
+import { BrowserRouter, NavLink, Redirect, Route, Switch } from "react-router-dom";
+import './App.css';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <NavLink to={`/`} activeClassName="active" exact>
+                <span className="nav-link">Hangszerek</span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to={`/uj-hangszer`} activeClassName="active">
+                <span className="nav-link">Új hangszer</span>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+‏‏‎ ‎
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>04:02</timestamp>
+    <fileName>/src/App.js</fileName>
+    <content>
+<![CDATA[
+import { BrowserRouter, NavLink, Redirect, Route, Switch } from "react-router-dom";
+import './App.css';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <NavLink to={`/`} activeClassName="active" exact>
+                <span className="nav-link">Hangszerek</span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to={`/uj-hangszer`} activeClassName="active">
+                <span className="nav-link">Új hangszer</span>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <Switch>
+        <Route path="/" exact>
+
+        </Route>
+        <Route path="/hangszer/:hangszerId">
+          
+        </Route>
+        <Route path="/uj-hangszer">
+
+        </Route>
+        <Redirect to={"/"} />
+      </Switch>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+‏‏‎ ‎‏‏‎ ‎
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>04:21</timestamp>
+    <fileName>/src/App.js</fileName>
+    <content>
+<![CDATA[
+import { BrowserRouter, NavLink, Redirect, Route, Switch } from "react-router-dom";
+import './App.css';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <NavLink to={`/`} activeClassName="active" exact>
+                <span className="nav-link">Hangszerek</span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to={`/uj-hangszer`} activeClassName="active">
+                <span className="nav-link">Új hangszer</span>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <Switch>
+        <Route path="/" exact>
+          Hangszer listaoldal
+        </Route>
+        <Route path="/hangszer/:hangszerId">
+          Hangszer aloldal
+        </Route>
+        <Route path="/uj-hangszer">
+          Új hangszer létrehozó oldal
+        </Route>
+        <Redirect to={"/"} />
+      </Switch>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎  ‏‏‎ ‎‏‏‎  
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>04:38</timestamp>
+    <fileName>/src/App.js</fileName>
+    <content>
+<![CDATA[
+import { BrowserRouter, NavLink, Redirect, Route, Switch } from "react-router-dom";
+import './App.css';
+import { InstrumentListPage } from "./InstrumentListPage";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <NavLink to={`/`} activeClassName="active" exact>
+                <span className="nav-link">Hangszerek</span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to={`/uj-hangszer`} activeClassName="active">
+                <span className="nav-link">Új hangszer</span>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <Switch>
+        <Route path="/" exact component={InstrumentListPage} />
+
+        <Route path="/hangszer/:hangszerId">
+          Hangszer aloldal
+        </Route>
+        <Route path="/uj-hangszer">
+          Új hangszer létrehozó oldal
+        </Route>
+        <Redirect to={"/"} />
+      </Switch>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+‏‏‎ ‎‏‏‎  ‎‎
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>04:50</timestamp>
+    <fileName>/src/InstrumentListPage.js</fileName>
+    <content>
+<![CDATA[
+export function InstrumentListPage() {
+
+  return "instrument list";
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>04:59</timestamp>
+    <fileName>/src/InstrumentListPage.js</fileName>
+    <content>
+<![CDATA[
+import { useState } from "react";
+
+export function InstrumentListPage() {
+  const [instruments, setInstruments] = useState([]);
+  const [isFetchPending, setFetchPending] = useState(false);
+  
+  return "instrument list";
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>05:23</timestamp>
+    <fileName>/src/InstrumentListPage.js</fileName>
+    <content>
+<![CDATA[
+import { useEffect, useState } from "react";
+
+export function InstrumentListPage() {
+  const [instruments, setInstruments] = useState([]);
+  const [isFetchPending, setFetchPending] = useState(false);
+
+  useEffect(() => {
+    setFetchPending(true);
+    fetch("https://kodbazis.hu/api/instruments", { credentials: "include" })
+      .then((res) => res.json())
+      .then((hangszerek) => setInstruments(hangszerek))
+      .catch(console.log)
+      .finally(() => {
+        setFetchPending(false);
+      });
+  }, []);
+
+  return "instrument list";
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>05:38</timestamp>
+    <fileName>/src/InstrumentListPage.js</fileName>
+    <content>
+<![CDATA[
+import { useEffect, useState } from "react";
+
+export function InstrumentListPage() {
+  const [instruments, setInstruments] = useState([]);
+  const [isFetchPending, setFetchPending] = useState(false);
+
+  useEffect(() => {
+    setFetchPending(true);
+    fetch("https://kodbazis.hu/api/instruments", { credentials: "include" })
+      .then((res) => res.json())
+      .then((hangszerek) => setInstruments(hangszerek))
+      .catch(console.log)
+      .finally(() => {
+        setFetchPending(false);
+      });
+  }, []);
+
+  return (
+    <div className="p-5  m-auto text-center content bg-ivory">
+      {isFetchPending ? (
+        <div className="spinner-border"></div>
+      ) : (
+        <div>
+          <h2>Hangszerek:</h2>
+          {instruments.map((instrument) => (
+            
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>05:53</timestamp>
+    <fileName>/src/InstrumentListPage.js</fileName>
+    <content>
+<![CDATA[
+import { useEffect, useState } from "react";
+
+export function InstrumentListPage() {
+  const [instruments, setInstruments] = useState([]);
+  const [isFetchPending, setFetchPending] = useState(false);
+
+  useEffect(() => {
+    setFetchPending(true);
+    fetch("https://kodbazis.hu/api/instruments", { credentials: "include" })
+      .then((res) => res.json())
+      .then((hangszerek) => setInstruments(hangszerek))
+      .catch(console.log)
+      .finally(() => {
+        setFetchPending(false);
+      });
+  }, []);
+
+  return (
+    <div className="p-5  m-auto text-center content bg-ivory">
+      {isFetchPending ? (
+        <div className="spinner-border"></div>
+      ) : (
+        <div>
+          <h2>Hangszerek:</h2>
+          {instruments.map((instrument) => (
+              <div className="card col-sm-3 d-inline-block m-1 p-2">
+                <h6 className="text-muted">{instrument.brand}</h6>
+                <h5 className="text-dark">{instrument.name}</h5>
+                <div>{instrument.price} ft -</div>
+                <div className="small">Készleten: {instrument.quantity} db</div>
+                <div className="card-body">
+                  <img
+                    className="img-fluid"
+                    style={{ maxHeight: 200 }}
+                    src={instrument.imageURL ? instrument.imageURL : "https://via.placeholder.com/400x800"}
+                  />
+                </div>
+              </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>06:10</timestamp>
+    <fileName>/src/InstrumentListPage.js</fileName>
+    <content>
+<![CDATA[
+import { useEffect, useState } from "react";
+
+export function InstrumentListPage() {
+  const [instruments, setInstruments] = useState([]);
+  const [isFetchPending, setFetchPending] = useState(false);
+
+  useEffect(() => {
+    setFetchPending(true);
+    fetch("https://kodbazis.hu/api/instruments", { credentials: "include" })
+      .then((res) => res.json())
+      .then((hangszerek) => setInstruments(hangszerek))
+      .catch(console.log)
+      .finally(() => {
+        setFetchPending(false);
+      });
+  }, []);
+
+  return (
+    <div className="p-5  m-auto text-center content bg-ivory">
+      {isFetchPending ? (
+        <div className="spinner-border"></div>
+      ) : (
+        <div>
+          <h2>Hangszerek:</h2>
+          {instruments.map((instrument) => (
+            <NavLink key={instrument.id} to={"/hangszer/" + instrument.id}>
+              <div className="card col-sm-3 d-inline-block m-1 p-2">
+                <h6 className="text-muted">{instrument.brand}</h6>
+                <h5 className="text-dark">{instrument.name}</h5>
+                <div>{instrument.price} ft -</div>
+                <div className="small">Készleten: {instrument.quantity} db</div>
+                <div className="card-body">
+                  <img
+                    className="img-fluid"
+                    style={{ maxHeight: 200 }}
+                    src={instrument.imageURL ? instrument.imageURL : "https://via.placeholder.com/400x800"}
+                  />
+                </div>
+              </div>
+            </NavLink>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>06:32</timestamp>
+    <fileName>/src/InstrumentListPage.js</fileName>
+    <content>
+<![CDATA[
+import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+
+export function InstrumentListPage() {
+  const [instruments, setInstruments] = useState([]);
+  const [isFetchPending, setFetchPending] = useState(false);
+
+  useEffect(() => {
+    setFetchPending(true);
+    fetch("https://kodbazis.hu/api/instruments", { credentials: "include" })
+      .then((res) => res.json())
+      .then((hangszerek) => setInstruments(hangszerek))
+      .catch(console.log)
+      .finally(() => {
+        setFetchPending(false);
+      });
+  }, []);
+
+  return (
+    <div className="p-5  m-auto text-center content bg-ivory">
+      {isFetchPending ? (
+        <div className="spinner-border"></div>
+      ) : (
+        <div>
+          <h2>Hangszerek:</h2>
+          {instruments.map((instrument) => (
+            <NavLink key={instrument.id} to={"/hangszer/" + instrument.id}>
+              <div className="card col-sm-3 d-inline-block m-1 p-2">
+                <h6 className="text-muted">{instrument.brand}</h6>
+                <h5 className="text-dark">{instrument.name}</h5>
+                <div>{instrument.price} ft -</div>
+                <div className="small">Készleten: {instrument.quantity} db</div>
+                <div className="card-body">
+                  <img
+                    className="img-fluid"
+                    style={{ maxHeight: 200 }}
+                    src={instrument.imageURL ? instrument.imageURL : "https://via.placeholder.com/400x800"}
+                  />
+                </div>
+              </div>
+            </NavLink>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+‏‏‎ ‎
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>06:45</timestamp>
+    <fileName>/src/App.js</fileName>
+    <content>
+<![CDATA[
+import { BrowserRouter, NavLink, Redirect, Route, Switch } from "react-router-dom";
+import './App.css';
+import { InstrumentListPage } from "./InstrumentListPage";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <NavLink to={`/`} activeClassName="active" exact>
+                <span className="nav-link">Hangszerek</span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to={`/uj-hangszer`} activeClassName="active">
+                <span className="nav-link">Új hangszer</span>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <Switch>
+        <Route path="/" exact component={InstrumentListPage} />
+
+        <Route path="/hangszer/:hangszerId">
+          Hangszer aloldal
+        </Route>
+        <Route path="/uj-hangszer">
+          Új hangszer létrehozó oldal
+        </Route>
+        <Redirect to={"/"} />
+      </Switch>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+‏‏‎ ‎‏‏‎  ‎‎
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>06:51</timestamp>
+    <fileName>/src/App.js</fileName>
+    <content>
+<![CDATA[
+import { BrowserRouter, NavLink, Redirect, Route, Switch } from "react-router-dom";
+import './App.css';
+import { InstrumentListPage } from "./InstrumentListPage";
+import { InstrumentSinglePage } from "./InstrumentSinglePage";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <NavLink to={`/`} activeClassName="active" exact>
+                <span className="nav-link">Hangszerek</span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to={`/uj-hangszer`} activeClassName="active">
+                <span className="nav-link">Új hangszer</span>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <Switch>
+        <Route path="/" exact component={InstrumentListPage} />
+
+        <Route path="/hangszer/:hangszerId" component={InstrumentSinglePage} />
+
+        <Route path="/uj-hangszer">
+          Új hangszer létrehozó oldal
+        </Route>
+        <Redirect to={"/"} />
+      </Switch>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+‏‏‎ ‎‏‏‎  ‎‎
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>07:01</timestamp>
+    <fileName>/src/InstrumentSinglePage.js</fileName>
+    <content>
+<![CDATA[
+export function InstrumentSinglePage(props) {
+
+  return "instrument single";
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>07:05</timestamp>
+    <fileName>/src/InstrumentSinglePage.js</fileName>
+    <content>
+<![CDATA[
+export function InstrumentSinglePage(props) {
+  const id = props.match.params.hangszerId;
+
+  return "instrument single";
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>07:17</timestamp>
+    <fileName>/src/InstrumentSinglePage.js</fileName>
+    <content>
+<![CDATA[
+import { useState } from "react";
+
+export function InstrumentSinglePage(props) {
+  const id = props.match.params.hangszerId;
+  const [instrument, setInstrument] = useState({});
+  const [isPending, setPending] = useState(false);
+
+  return "instrument single";
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>07:21</timestamp>
+    <fileName>/src/InstrumentSinglePage.js</fileName>
+    <content>
+<![CDATA[
+import { useEffect, useState } from "react";
+
+export function InstrumentSinglePage(props) {
+  const id = props.match.params.hangszerId;
+  const [instrument, setInstrument] = useState({});
+  const [isPending, setPending] = useState(false);
+
+  useEffect(() => {
+    setPending(true);
+    fetch(`https://kodbazis.hu/api/instruments/${id}`, { credentials: "include" })
+      .then((res) => res.json())
+      .then(setInstrument)
+      .catch(console.log)
+      .finally(() => {
+        setPending(false);
+      });
+  }, []);
+
+  return "instrument single";
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>07:28</timestamp>
+    <fileName>/src/InstrumentSinglePage.js</fileName>
+    <content>
+<![CDATA[
+import { useEffect, useState } from "react";
+
+export function InstrumentSinglePage(props) {
+  const id = props.match.params.hangszerId;
+  const [instrument, setInstrument] = useState({});
+  const [isPending, setPending] = useState(false);
+
+  useEffect(() => {
+    setPending(true);
+      (async () => {
+        
+      })();
+  }, []);
+
+  return "instrument single";
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>07:44</timestamp>
+    <fileName>/src/InstrumentSinglePage.js</fileName>
+    <content>
+<![CDATA[
+import { useEffect, useState } from "react";
+
+export function InstrumentSinglePage(props) {
+  const id = props.match.params.hangszerId;
+  const [instrument, setInstrument] = useState({});
+  const [isPending, setPending] = useState(false);
+
+  useEffect(() => {
+    setPending(true);
+      (async () => {
+        try {
+          const res = await fetch(`https://kodbazis.hu/api/instruments/${id}`, { credentials: "include" });
+          const hangszer = await res.json();
+          setInstrument(hangszer);
+        } catch (err) {
+          console.log(err);
+        } finally {
+          setPending(false);
+        }
+      })();
+  }, []);
+
+  return "instrument single";
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>07:48</timestamp>
+    <fileName>/src/InstrumentSinglePage.js</fileName>
+    <content>
+<![CDATA[
+import { useEffect, useState } from "react";
+
+export function InstrumentSinglePage(props) {
+  const id = props.match.params.hangszerId;
+  const [instrument, setInstrument] = useState({});
+  const [isPending, setPending] = useState(false);
+
+  useEffect(() => {
+    setPending(true);
+      (async () => {
+        try {
+          const res = await fetch(`https://kodbazis.hu/api/instruments/${id}`, { credentials: "include" });
+          const hangszer = await res.json();
+          setInstrument(hangszer);
+        } catch (err) {
+          console.log(err);
+        } finally {
+          setPending(false);
+        }
+      })();
+  }, []);
+
+  return (
+    <div className="p-5  m-auto text-center content bg-lavender">
+      {isPending || !instrument.id ? (
+        <div className="spinner-border"></div>
+      ) : (
+        <div className="card p-3">
+          <div className="card-body">
+            <h4>{instrument.brand}</h4>
+            <h5 className="card-title">{instrument.name}</h5>
+            <div className="lead">{instrument.price} ft</div>
+            <p>Készleten: {instrument.quantity} db</p>
+            <img
+              className="img-fluid rounded"
+              style={{ maxHeight: "500px" }}
+              src={instrument.imageURL ? instrument.imageURL : "https://via.placeholder.com/400x800"}
+            />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>08:06</timestamp>
+    <fileName>/src/App.js</fileName>
+    <content>
+<![CDATA[
+import { BrowserRouter, NavLink, Redirect, Route, Switch } from "react-router-dom";
+import './App.css';
+import { InstrumentListPage } from "./InstrumentListPage";
+import { InstrumentSinglePage } from "./InstrumentSinglePage";
+
+...
+
+<Switch>
+  <Route path="/" exact component={InstrumentListPage} />
+
+  <Route path="/hangszer/:hangszerId" component={InstrumentSinglePage} />
+
+  <Route path="/uj-hangszer">
+    Új hangszer létrehozó oldal
+  </Route>
+  <Redirect to={"/"} />
+</Switch>
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>08:10</timestamp>
+    <fileName>/src/App.js</fileName>
+    <content>
+<![CDATA[
+import { BrowserRouter, NavLink, Redirect, Route, Switch } from "react-router-dom";
+import './App.css';
+import { InstrumentListPage } from "./InstrumentListPage";
+import { InstrumentSinglePage } from "./InstrumentSinglePage";
+import { InstrumentCreatePage } from "./InstrumentCreatePage";
+
+...
+
+<Switch>
+  <Route path="/" exact component={InstrumentListPage} />
+
+  <Route path="/hangszer/:hangszerId" component={InstrumentSinglePage} />
+
+  <Route path="/uj-hangszer" component={InstrumentCreatePage} />
+  <Redirect to={"/"} />
+</Switch>
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>08:14</timestamp>
+    <fileName>/src/InstrumentCreatePage.js</fileName>
+    <content>
+<![CDATA[
+export function InstrumentCreatePage() {
+
+  return "instrument create";
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>08:17</timestamp>
+    <fileName>/src/InstrumentCreatePage.js</fileName>
+    <content>
+<![CDATA[
+export function InstrumentCreatePage() {
+
+  return (
+    <div className="p-5 content bg-whitesmoke text-center">
+      <h2>Új hangszer</h2>
+      <form>
+        <div className="form-group row pb-3">
+          <label className="col-sm-3 col-form-label">Név:</label>
+          <div className="col-sm-9">
+            <input type="text" name="name" className="form-control" />
+          </div>
+        </div>
+        <div className="form-group row pb-3">
+          <label className="col-sm-3 col-form-label">Ár:</label>
+          <div className="col-sm-9">
+            <input type="number" name="price" className="form-control" />
+          </div>
+        </div>
+        <div className="form-group row pb-3">
+          <label className="col-sm-3 col-form-label">Darabszám:</label>
+          <div className="col-sm-9">
+            <input type="number" name="quantity" className="form-control" />
+          </div>
+        </div>
+        <div className="form-group row pb-3">
+          <label className="col-sm-3 col-form-label">Kép URL:</label>
+          <div className="col-sm-9">
+            <input type="text" name="imageURL" className="form-control" />
+          </div>
+        </div>
+        <button type="submit" className="btn btn-success">
+          Küldés
+        </button>
+      </form>
+    </div>
+  );
+}
+
+
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>08:20</timestamp>
+    <fileName>/src/InstrumentCreatePage.js</fileName>
+    <content>
+<![CDATA[
+import { useHistory } from "react-router-dom";
+‏‏‎ ‎
+export function InstrumentCreatePage() {
+  const history = useHistory();
+
+  return (
+    <div className="p-5 content bg-whitesmoke text-center">
+      <h2>Új hangszer</h2>
+      <form>
+        <div className="form-group row pb-3">
+          <label className="col-sm-3 col-form-label">Név:</label>
+          <div className="col-sm-9">
+            <input type="text" name="name" className="form-control" />
+          </div>
+        </div>
+        <div className="form-group row pb-3">
+          <label className="col-sm-3 col-form-label">Ár:</label>
+          <div className="col-sm-9">
+            <input type="number" name="price" className="form-control" />
+          </div>
+        </div>
+        <div className="form-group row pb-3">
+          <label className="col-sm-3 col-form-label">Darabszám:</label>
+          <div className="col-sm-9">
+            <input type="number" name="quantity" className="form-control" />
+          </div>
+        </div>
+        <div className="form-group row pb-3">
+          <label className="col-sm-3 col-form-label">Kép URL:</label>
+          <div className="col-sm-9">
+            <input type="text" name="imageURL" className="form-control" />
+          </div>
+        </div>
+        <button type="submit" className="btn btn-success">
+          Küldés
+        </button>
+      </form>
+    </div>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>08:35</timestamp>
+    <fileName>/src/InstrumentCreatePage.js</fileName>
+    <content>
+<![CDATA[
+import { useHistory } from "react-router-dom";
+‏‏‎ ‎
+export function InstrumentCreatePage() {
+  const history = useHistory();
+
+  return (
+    <div className="p-5 content bg-whitesmoke text-center">
+      <h2>Új hangszer</h2>
+      <form 
+        onSubmit={(e) => {
+          e.persist();
+          e.preventDefault();
+         
+        }}
+      >
+        <div className="form-group row pb-3">
+          <label className="col-sm-3 col-form-label">Név:</label>
+          <div className="col-sm-9">
+            <input type="text" name="name" className="form-control" />
+          </div>
+        </div>
+        <div className="form-group row pb-3">
+          <label className="col-sm-3 col-form-label">Ár:</label>
+          <div className="col-sm-9">
+            <input type="number" name="price" className="form-control" />
+          </div>
+        </div>
+        <div className="form-group row pb-3">
+          <label className="col-sm-3 col-form-label">Darabszám:</label>
+          <div className="col-sm-9">
+            <input type="number" name="quantity" className="form-control" />
+          </div>
+        </div>
+        <div className="form-group row pb-3">
+          <label className="col-sm-3 col-form-label">Kép URL:</label>
+          <div className="col-sm-9">
+            <input type="text" name="imageURL" className="form-control" />
+          </div>
+        </div>
+        <button type="submit" className="btn btn-success">
+          Küldés
+        </button>
+      </form>
+    </div>
+  );
+}
+
+]]>
+    </content>
+</item>
+<item>
+    <timestamp>08:56</timestamp>
+    <fileName>/src/InstrumentCreatePage.js</fileName>
+    <content>
+<![CDATA[
+import { useHistory } from "react-router-dom";
+‏‏‎ ‎
+export function InstrumentCreatePage() {
+  const history = useHistory();
+
+  return (
+    <div className="p-5 content bg-whitesmoke text-center">
+      <h2>Új hangszer</h2>
+      <form 
+        onSubmit={(e) => {
+          e.persist();
+          e.preventDefault();
+          fetch("https://kodbazis.hu/api/instruments", {
+            method: "POST",
+            credentials: "include",
+            body: JSON.stringify({
+              name: e.target.elements.name.value,
+              price: e.target.elements.price.value,
+              quantity: e.target.elements.quantity.value,
+              imageURL: e.target.elements.imageURL.value,
+            }),
+          })
+            .then(() => {
+              history.push("/");
+            })
+            .catch(console.log);
+        }}
+      >
+        <div className="form-group row pb-3">
+          <label className="col-sm-3 col-form-label">Név:</label>
+          <div className="col-sm-9">
+            <input type="text" name="name" className="form-control" />
+          </div>
+        </div>
+        <div className="form-group row pb-3">
+          <label className="col-sm-3 col-form-label">Ár:</label>
+          <div className="col-sm-9">
+            <input type="number" name="price" className="form-control" />
+          </div>
+        </div>
+        <div className="form-group row pb-3">
+          <label className="col-sm-3 col-form-label">Darabszám:</label>
+          <div className="col-sm-9">
+            <input type="number" name="quantity" className="form-control" />
+          </div>
+        </div>
+        <div className="form-group row pb-3">
+          <label className="col-sm-3 col-form-label">Kép URL:</label>
+          <div className="col-sm-9">
+            <input type="text" name="imageURL" className="form-control" />
+          </div>
+        </div>
+        <button type="submit" className="btn btn-success">
+          Küldés
+        </button>
+      </form>
+    </div>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+</root>
