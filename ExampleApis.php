@@ -5,13 +5,176 @@ namespace Kodbazis;
 use Kodbazis\Generated\Request;
 use mysqli;
 use Twig\Environment;
+use Firebase\JWT\JWT;
+use Firebase\JWT\ExpiredException;
+use Kodbazis\Generated\Auth\AccessToken;
+use Kodbazis\Generated\Auth\AuthException;
+use Kodbazis\Generated\Auth\RefreshToken;
+use Kodbazis\Generated\Auth\Token;
+use UnexpectedValueException;
 
 class ExampleApis
 {
 
     public static function getRoutes(Pipeline $r, mysqli $conn, Environment $twig)
     {
+        self::registerInstrumentRoutes($r);
+        self::registerAuthRoutes($r);
+    }
 
+    public static function  initLoginFile()
+    {
+        createPath(__DIR__ . '/example-repos/loggedInUsers');
+        $path = __DIR__ . '/example-repos/loggedInUsers/loggedInUsers.json';
+        if (file_exists($path)) {
+            return;
+        }
+
+        file_put_contents($path, '{}');
+    }
+
+
+    public static function registerAuthRoutes($r)
+    {
+
+
+
+        $secret = "tokenSecret";
+        $r->post('/api/login-user', function (Request $request) use ($secret) {
+            header('Content-type: application/json');
+
+            if ((($request->body['email'] ?? '') !== 'user@kodbazis.hu') || (($request->body['password'] ?? '') !== "teszt")) {
+                http_response_code(401);
+                throw new AuthException('missing token');
+            }
+
+            $id = uniqid();
+            $access =  new AccessToken(JWT::encode([
+                "sub" => $id,
+                "iat" => time(),
+                "exp" => time() + 10,
+            ], $secret));
+
+            $refresh = new RefreshToken(JWT::encode([
+                "iat" => time(),
+                'expires' => time() + 60 * 60 * 24 * 365,
+            ], $secret));
+
+            self::initLoginFile();
+            $content = file_get_contents(__DIR__ . '/example-repos/loggedInUsers/loggedInUsers.json');
+            $loggedInUsers = json_decode($content, true);
+            $loggedInUsers[$id] = $refresh->getValue();
+            file_put_contents(__DIR__ . '/example-repos/loggedInUsers/loggedInUsers.json', json_encode($loggedInUsers));
+            echo json_encode(new Token($access, $refresh));
+        });
+        $r->post('/api/logout-user', function () use ($secret) {
+            $headers = getallheaders();
+            self::initLoginFile();
+            $content = file_get_contents(__DIR__ . '/example-repos/loggedInUsers/loggedInUsers.json');
+            $loggedInUsers = json_decode($content, true);
+
+            try {
+                $headers = getallheaders();
+                if (!preg_match('/Bearer\s(\S+)/', $headers['Authorization'] ?? '', $matches)) {
+                    throw new AuthException('missing token');
+                }
+                $decoded = JWT::decode($matches[1], $secret, ['HS256']);
+                $id = $decoded->sub;
+                if (!isset($loggedInUsers[$id])) {
+                    http_response_code(401);
+                    throw new AuthException();
+                    return;
+                }
+
+                unset($loggedInUsers[$id]);
+                file_put_contents(__DIR__ . '/example-repos/loggedInUsers/loggedInUsers.json', json_encode($loggedInUsers));
+            } catch (\Firebase\JWT\ExpiredException $err) {
+                http_response_code(403);
+                echo json_encode(['error' => 'token expired']);
+            } catch (UnexpectedValueException $err) {
+                http_response_code(403);
+                echo json_encode(['error' => 'invalid token']);
+            } catch (Exception $exception) {
+                http_response_code(401);
+                throw new AuthException();
+            }
+        });
+        $r->post('/api/get-new-access-token', function (Request $request) use ($secret) {
+
+            self::initLoginFile();
+            $content = file_get_contents(__DIR__ . '/example-repos/loggedInUsers/loggedInUsers.json');
+            $loggedInUsers = json_decode($content, true);
+            $key = findIndex($loggedInUsers, fn ($token) => $token === $request->body['refreshToken']);
+
+            if ($key === -1) {
+                http_response_code(404);
+                return json_encode(['error' => 'not found']);
+            }
+
+            header('Content-type: application/json');
+            $access =  new AccessToken(JWT::encode([
+                "sub" => $key,
+                "iat" => time(),
+                "exp" => time() + 10,
+            ], $secret));
+            echo json_encode($access);
+        });
+
+
+        $r->get('/api/szallasok', function (Request $request) use ($secret) {
+            header('Content-type: application/json');
+            try {
+                $headers = getallheaders();
+                if (!preg_match('/Bearer\s(\S+)/', $headers['Authorization'] ?? '', $matches)) {
+                    throw new AuthException('missing token');
+                }
+                $decoded = JWT::decode($matches[1], $secret, ['HS256']);
+                echo file_get_contents(__DIR__ . '/example-repos/airbnb.json');
+            } catch (\Firebase\JWT\ExpiredException $err) {
+                http_response_code(403);
+                echo json_encode(['error' => 'token expired']);
+            } catch (UnexpectedValueException $err) {
+                http_response_code(403);
+                echo json_encode(['error' => 'invalid token']);
+            } catch (Exception $exception) {
+                http_response_code(401);
+                throw new AuthException();
+            }
+        });
+        $r->get('/api/szallasok/{id}', function (Request $request) use ($secret) {
+            header('Content-type: application/json');
+            try {
+                $headers = getallheaders();
+                if (!preg_match('/Bearer\s(\S+)/', $headers['Authorization'] ?? '', $matches)) {
+                    throw new AuthException('missing token');
+                }
+                $decoded = JWT::decode($matches[1], $secret, ['HS256']);
+                $content =  file_get_contents(__DIR__ . '/example-repos/airbnb.json');
+                $items  = json_decode($content, true);
+
+                $filtered = array_values(array_filter($items, fn ($item) => $item['id'] == $request->vars['id']));
+
+                if (!count($filtered)) {
+                    http_response_code(403);
+                    echo json_encode(['error' => 'not found']);
+                }
+
+                echo json_encode($filtered[0]);
+            } catch (\Firebase\JWT\ExpiredException $err) {
+                http_response_code(403);
+                echo json_encode(['error' => 'token expired']);
+            } catch (UnexpectedValueException $err) {
+                http_response_code(403);
+                echo json_encode(['error' => 'invalid token']);
+            } catch (Exception $exception) {
+                http_response_code(401);
+                throw new AuthException();
+            }
+        });
+    }
+
+    public static function registerInstrumentRoutes($r)
+    {
         header("Access-Control-Allow-Origin:" . ($_SERVER['HTTP_ORIGIN'] ?? '*'));
         header("Access-Control-Allow-Credentials: true");
         $folder = __DIR__ . "/example-repos/instruments";
