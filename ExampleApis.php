@@ -80,8 +80,10 @@ class ExampleApis
         $r->post('/api/logout-user', function () use ($secret) {
             header('Content-type: application/json');
             try {
-                setcookie('kodbazisRefreshToken', null, -1, '/');
-                return true;
+                setcookie('kodbazisRefreshToken', '', [
+                    'expires' => time() - 60 * 60 * 24,
+                    'httponly' => true
+                ]);;
             } catch (\Firebase\JWT\ExpiredException $err) {
                 http_response_code(403);
                 echo json_encode(['error' => 'token expired']);
