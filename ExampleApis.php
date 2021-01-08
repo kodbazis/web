@@ -102,7 +102,7 @@ class ExampleApis
                 $headers = getallheaders();
                 if (!preg_match('/Bearer\s(\S+)/', $headers['Authorization'] ?? '', $matches)) {
                     http_response_code(403);
-                    echo json_encode(['error' => 'invalid token']);
+                    echo json_encode(['error' => 'invalid token 0']);
                     return;
                 }
                 $decoded = JWT::decode($matches[1], $secret, ['HS256']);
@@ -112,10 +112,12 @@ class ExampleApis
                 echo json_encode(['error' => 'token expired']);
             } catch (UnexpectedValueException $err) {
                 http_response_code(403);
-                echo json_encode(['error' => 'invalid token']);
+                var_dump($err);
+                echo json_encode(['error' => 'invalid token 1']);
             } catch (Exception $exception) {
                 http_response_code(403);
-                echo json_encode(['error' => 'invalid token']);
+                var_dump($exception);
+                echo json_encode(['error' => 'invalid token 2']);
             }
         });
         $r->get('/api/szallasok/{id}', function (Request $request) use ($secret) {
