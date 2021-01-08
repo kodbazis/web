@@ -27,7 +27,7 @@ class ExampleApis
 
 
             header("Access-Control-Allow-Credentials: true");
-            if ((($request->body['email'] ?? '') !== 'teszt@kodbazis.hu') || (($request->body['password'] ?? '') !== "teszt")) {
+            if ((($request->body['email'] ?? '') !== 'user@kodbazis.hu') || (($request->body['password'] ?? '') !== "teszt")) {
                 http_response_code(401);
                 throw new AuthException('missing token');
             }
