@@ -85,8 +85,6 @@ class ExampleApis
                 setcookie('kodbazisRefreshToken', '', [
                     'expires' => time() - 60 * 60 * 24,
                     'httponly' => true,
-                    'secure' => true,
-                    'samesite' => 'None',
                 ]);;
             } catch (\Firebase\JWT\ExpiredException $err) {
                 http_response_code(403);
