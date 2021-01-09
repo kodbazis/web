@@ -114,10 +114,10 @@ class ExampleApis
                 echo json_encode(['error' => 'token expired']);
             } catch (UnexpectedValueException $err) {
                 http_response_code(403);
-                echo json_encode(['error' => 'invalid token 1']);
+                echo json_encode(['error' => 'invalid token']);
             } catch (\Exception $exception) {
                 http_response_code(403);
-                echo json_encode(['error' => 'invalid token 2']);
+                echo json_encode(['error' => 'invalid token']);
             }
         });
         $r->get('/api/szallasok/{id}', function (Request $request) use ($secret) {
