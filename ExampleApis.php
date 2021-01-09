@@ -116,7 +116,7 @@ class ExampleApis
                 http_response_code(403);
                 var_dump($err);
                 echo json_encode(['error' => 'invalid token 1']);
-            } catch (Exception $exception) {
+            } catch (\Exception $exception) {
                 http_response_code(403);
                 var_dump($exception);
                 echo json_encode(['error' => 'invalid token 2']);
@@ -149,7 +149,7 @@ class ExampleApis
             } catch (UnexpectedValueException $err) {
                 http_response_code(403);
                 echo json_encode(['error' => 'invalid token']);
-            } catch (Exception $exception) {
+            } catch (\Exception $exception) {
                 http_response_code(403);
                 throw new AuthException();
             }
