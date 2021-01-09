@@ -39,11 +39,11 @@ class ExampleApis
 
             $refresh = new RefreshToken(JWT::encode([
                 "iat" => time(),
-                'expires' => time() + 60 * 60 * 24 * 365,
+                'expires' => time() + 60 * 60 * 24 * 29,
             ], $secret));
 
             setcookie('kodbazisRefreshToken', $refresh->getValue(), [
-                'expires' => time() + 60 * 60 * 24,
+                'expires' => time() + 60 * 60 * 24 * 30,
                 'httponly' => true,
                 'secure' => true,
                 'samesite' => 'None',
