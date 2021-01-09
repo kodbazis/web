@@ -114,11 +114,9 @@ class ExampleApis
                 echo json_encode(['error' => 'token expired']);
             } catch (UnexpectedValueException $err) {
                 http_response_code(403);
-                var_dump($err);
                 echo json_encode(['error' => 'invalid token 1']);
             } catch (\Exception $exception) {
                 http_response_code(403);
-                var_dump($exception);
                 echo json_encode(['error' => 'invalid token 2']);
             }
         });
