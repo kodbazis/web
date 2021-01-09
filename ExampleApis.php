@@ -123,6 +123,7 @@ class ExampleApis
             }
         });
         $r->get('/api/szallasok/{id}', function (Request $request) use ($secret) {
+            header('Content-type: application/json');
             try {
                 $headers = getallheaders();
                 if (!preg_match('/Bearer\s(\S+)/', $headers['Authorization'] ?? '', $matches)) {
