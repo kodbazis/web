@@ -104,7 +104,7 @@ class ExampleApis
                 $headers = getallheaders();
                 if (!preg_match('/Bearer\s(\S+)/', $headers['Authorization'] ?? '', $matches)) {
                     http_response_code(403);
-                    echo json_encode(['error' => 'invalid token 0']);
+                    echo json_encode(['error' => 'invalid token']);
                     return;
                 }
                 $decoded = JWT::decode($matches[1], $secret, ['HS256']);
