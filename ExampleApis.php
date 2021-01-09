@@ -24,7 +24,7 @@ class ExampleApis
     {
         $secret = "tokenSecret";
         $r->post('/api/login-user', function (Request $request) use ($secret) {
-
+            header('Content-type: application/json');
             if ((($request->body['email'] ?? '') !== 'user@kodbazis.hu') || (($request->body['password'] ?? '') !== "teszt")) {
                 http_response_code(401);
                 throw new AuthException('missing token');
