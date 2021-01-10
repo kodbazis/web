@@ -34,7 +34,7 @@ class ExampleApis
             $access =  new AccessToken(JWT::encode([
                 "sub" => $id,
                 "iat" => time(),
-                "exp" => time() + 10,
+                "exp" => time() + 15,
             ], $secret));
 
             $refresh = new RefreshToken(JWT::encode([
@@ -58,7 +58,7 @@ class ExampleApis
                 $access =  new AccessToken(JWT::encode([
                     "sub" => '',
                     "iat" => time(),
-                    "exp" => time() + 10,
+                    "exp" => time() + 15,
                 ], $secret));
                 header('Content-type: application/json');
                 echo json_encode($access);
