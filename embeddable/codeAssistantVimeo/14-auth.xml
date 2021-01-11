@@ -846,7 +846,7 @@ fetchHitelesitessel.interceptors.response.use(
     <timestamp>09:20</timestamp>
     <fileName>AuthService.js</fileName>
     <content>
-<![CDATA[22,37 title="./src/AuthService.js"
+<![CDATA[
    
 import axios from "axios";
 
@@ -1075,7 +1075,7 @@ fetchHitelesitessel.interceptors.response.use(
     <timestamp>10:59</timestamp>
     <fileName>AuthService.js</fileName>
     <content>
-<![CDATA[40:64 title="./src/AuthService.js"
+<![CDATA[
    
 import axios from "axios";
 
@@ -1227,7 +1227,7 @@ export function SzallasLista() {
     <timestamp>12:22</timestamp>
     <fileName>SzallasLista.js</fileName>
     <content>
-<![CDATA[25:51 title="./src/SzallasLista.js"
+<![CDATA[
   ‎‎
 import { useEffect, useState } from "react";
 import { useHistory, NavLink } from "react-router-dom";
@@ -1287,7 +1287,7 @@ export function SzallasLista() {
     <timestamp>12:28</timestamp>
     <fileName>SzallasLista.js</fileName>
     <content>
-<![CDATA[30:63 title="./src/SzallasLista.js"
+<![CDATA[
   ‎‎
 import { useEffect, useState } from "react";
 import { useHistory, NavLink } from "react-router-dom";
