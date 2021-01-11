@@ -1,0 +1,1655 @@
+<?xml version = "1.0"?>
+<root>
+<item>
+    <timestamp>03:34</timestamp>
+    <fileName>App.js</fileName>
+    <content>
+<![CDATA[
+import "./App.css";
+
+export function App() {
+  
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>03:39</timestamp>
+    <fileName>App.js</fileName>
+    <content>
+<![CDATA[
+import "./App.css";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+
+
+export function App() {
+  return (
+    <BrowserRouter>
+      <Switch>
+        
+      </Switch>
+    </BrowserRouter>
+  );
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>03:43</timestamp>
+    <fileName>App.js</fileName>
+    <content>
+<![CDATA[
+import "./App.css";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { Bejelentkezes } from "./Bejelentkezes";
+
+
+export function App() {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route path="/bejelentkezes" exact component={Bejelentkezes} />
+      </Switch>
+    </BrowserRouter>
+  );
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>03:47</timestamp>
+    <fileName>App.js</fileName>
+    <content>
+<![CDATA[
+import "./App.css";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { Bejelentkezes } from "./Bejelentkezes";
+import { SzallasLista } from "./SzallasLista";
+
+
+export function App() {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route path="/bejelentkezes" exact component={Bejelentkezes} />
+
+        <Route path="/osszes-szallas" component={SzallasLista} />
+      </Switch>
+    </BrowserRouter>
+  );
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>03:54</timestamp>
+    <fileName>App.js</fileName>
+    <content>
+<![CDATA[
+import "./App.css";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { Bejelentkezes } from "./Bejelentkezes";
+import { SzallasLista } from "./SzallasLista";
+import { SzallasSingle } from "./SzallasSingle";
+
+
+export function App() {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route path="/bejelentkezes" exact component={Bejelentkezes} />
+
+        <Route path="/osszes-szallas" component={SzallasLista} />
+
+        <Route path="/szallas-:szallasId">
+          {(props) => <SzallasSingle id={props.match.params.szallasId} />}
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  );
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>04:19</timestamp>
+    <fileName>App.js</fileName>
+    <content>
+<![CDATA[
+import "./App.css";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { Bejelentkezes } from "./Bejelentkezes";
+import { SzallasLista } from "./SzallasLista";
+import { SzallasSingle } from "./SzallasSingle";
+
+
+export function App() {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route path="/bejelentkezes" exact component={Bejelentkezes} />
+
+        <Route path="/osszes-szallas" component={SzallasLista} />
+
+        <Route path="/szallas-:szallasId">
+          {(props) => <SzallasSingle id={props.match.params.szallasId} />}
+        </Route>
+
+        <Redirect to={"/bejelentkezes"} />
+      </Switch>
+    </BrowserRouter>
+  );
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>04:23</timestamp>
+    <fileName>App.js</fileName>
+    <content>
+<![CDATA[
+export function Bejelentkezes() {
+
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>04:32</timestamp>
+    <fileName>Bejelentkezes.js</fileName>
+    <content>
+<![CDATA[
+import { useState } from "react";
+
+export function Bejelentkezes() {
+  const [isLoginPending, setLoginPending] = useState(false);
+
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>04:37</timestamp>
+    <fileName>Bejelentkezes.js</fileName>
+    <content>
+<![CDATA[
+import { useState } from "react";
+
+export function Bejelentkezes() {
+  const [isLoginPending, setLoginPending] = useState(false);
+
+  if (isLoginPending) {
+    return (
+      <div className="center-item">
+        <div className="spinner-border text-danger"></div>
+      </div>
+    );
+  }
+
+  return 'login form';
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>04:45</timestamp>
+    <fileName>Bejelentkezes.js</fileName>
+    <content>
+<![CDATA[
+import { useState } from "react";
+
+export function Bejelentkezes() {
+  const [isLoginPending, setLoginPending] = useState(false);
+
+  if (isLoginPending) {
+    return (
+      <div className="center-item">
+        <div className="spinner-border text-danger"></div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="container-fluid d-flex justify-content-center h-100 login-container">
+      <div className="card login-card">
+        <div className="card-header login-card-header">
+          <h3>Bejelentkezés</h3>
+        </div>
+        <div className="card-body">
+          <form>
+            <div className="input-group form-group">
+              <input type="email" name="email" className="form-control" placeholder="Email" />
+            </div>
+            <div className="input-group form-group">
+              <input type="password" name="password" className="form-control" placeholder="Jelszó" />
+            </div>
+            <div className="form-group">
+              <button type="submit" className="btn float-right btn-warning">
+                Küldés
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>04:51</timestamp>
+    <fileName>Bejelentkezes.js</fileName>
+    <content>
+<![CDATA[
+import { useState } from "react";
+
+export function Bejelentkezes() {
+  const [isLoginPending, setLoginPending] = useState(false);
+
+  if (isLoginPending) {
+    return (
+      <div className="center-item">
+        <div className="spinner-border text-danger"></div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="container-fluid d-flex justify-content-center h-100 login-container">
+      <div className="card login-card">
+        <div className="card-header login-card-header">
+          <h3>Bejelentkezés</h3>
+        </div>
+        <div className="card-body">
+          <form onSubmit={loginFormSubmit}>
+            <div className="input-group form-group">
+              <input type="email" name="email" className="form-control" placeholder="Email" />
+            </div>
+            <div className="input-group form-group">
+              <input type="password" name="password" className="form-control" placeholder="Jelszó" />
+            </div>
+            <div className="form-group">
+              <button type="submit" className="btn float-right btn-warning">
+                Küldés
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>04:57</timestamp>
+    <fileName>Bejelentkezes.js</fileName>
+    <content>
+<![CDATA[
+import { useState } from "react";
+
+export function Bejelentkezes() {
+  const [isLoginPending, setLoginPending] = useState(false);
+
+  function loginFormSubmit(e) {
+    
+  }
+
+  if (isLoginPending) {
+    return (
+      <div className="center-item">
+        <div className="spinner-border text-danger"></div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="container-fluid d-flex justify-content-center h-100 login-container">
+      <div className="card login-card">
+        <div className="card-header login-card-header">
+          <h3>Bejelentkezés</h3>
+        </div>
+        <div className="card-body">
+          <form onSubmit={loginFormSubmit}>
+            <div className="input-group form-group">
+              <input type="email" name="email" className="form-control" placeholder="Email" />
+            </div>
+            <div className="input-group form-group">
+              <input type="password" name="password" className="form-control" placeholder="Jelszó" />
+            </div>
+            <div className="form-group">
+              <button type="submit" className="btn float-right btn-warning">
+                Küldés
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>04:59</timestamp>
+    <fileName>Bejelentkezes.js</fileName>
+    <content>
+<![CDATA[
+import { useState } from "react";
+import { login } from "./AuthService";
+
+export function Bejelentkezes() {
+  const [isLoginPending, setLoginPending] = useState(false);
+
+  function loginFormSubmit(e) {
+    e.preventDefault();
+    setLoginPending(true);
+    login(e.target.elements.email.value, e.target.elements.password.value)
+  }
+
+  if (isLoginPending) {
+    return (
+      <div className="center-item">
+        <div className="spinner-border text-danger"></div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="container-fluid d-flex justify-content-center h-100 login-container">
+      <div className="card login-card">
+        <div className="card-header login-card-header">
+          <h3>Bejelentkezés</h3>
+        </div>
+        <div className="card-body">
+          <form onSubmit={loginFormSubmit}>
+            <div className="input-group form-group">
+              <input type="email" name="email" className="form-control" placeholder="Email" />
+            </div>
+            <div className="input-group form-group">
+              <input type="password" name="password" className="form-control" placeholder="Jelszó" />
+            </div>
+            <div className="form-group">
+              <button type="submit" className="btn float-right btn-warning">
+                Küldés
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>05:28</timestamp>
+    <fileName>Bejelentkezes.js</fileName>
+    <content>
+<![CDATA[
+import { useState } from "react";
+import { login } from "./AuthService";
+
+export function Bejelentkezes() {
+  const [isLoginPending, setLoginPending] = useState(false);
+
+  function loginFormSubmit(e) {
+    e.preventDefault();
+    setLoginPending(true);
+    login(e.target.elements.email.value, e.target.elements.password.value)
+      .then(() => {
+        setLoginPending(false);
+      })
+      .catch((err) => {
+        alert("Helytelen bejelentkezési adatok, kérjük próbáld újra!");
+        setLoginPending(false);
+      });
+  }
+
+  if (isLoginPending) {
+    return (
+      <div className="center-item">
+        <div className="spinner-border text-danger"></div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="container-fluid d-flex justify-content-center h-100 login-container">
+      <div className="card login-card">
+        <div className="card-header login-card-header">
+          <h3>Bejelentkezés</h3>
+        </div>
+        <div className="card-body">
+          <form onSubmit={loginFormSubmit}>
+            <div className="input-group form-group">
+              <input type="email" name="email" className="form-control" placeholder="Email" />
+            </div>
+            <div className="input-group form-group">
+              <input type="password" name="password" className="form-control" placeholder="Jelszó" />
+            </div>
+            <div className="form-group">
+              <button type="submit" className="btn float-right btn-warning">
+                Küldés
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}‏‎ 
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>05:37</timestamp>
+    <fileName>Bejelentkezes.js</fileName>
+    <content>
+<![CDATA[
+import { useState } from "react";
+import { login } from "./AuthService";
+import { useHistory } from "react-router-dom";
+
+export function Bejelentkezes() {
+  const [isLoginPending, setLoginPending] = useState(false);
+  const history = useHistory();
+
+  function loginFormSubmit(e) {
+    e.preventDefault();
+    setLoginPending(true);
+    login(e.target.elements.email.value, e.target.elements.password.value)
+      .then(() => {
+        setLoginPending(false);
+        history.push("/osszes-szallas");
+      })
+      .catch((err) => {
+        alert("Helytelen bejelentkezési adatok, kérjük próbáld újra!");
+        setLoginPending(false);
+      });
+  }
+
+  if (isLoginPending) {
+    return (
+      <div className="center-item">
+        <div className="spinner-border text-danger"></div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="container-fluid d-flex justify-content-center h-100 login-container">
+      <div className="card login-card">
+        <div className="card-header login-card-header">
+          <h3>Bejelentkezés</h3>
+        </div>
+        <div className="card-body">
+          <form onSubmit={loginFormSubmit}>
+            <div className="input-group form-group">
+              <input type="email" name="email" className="form-control" placeholder="Email" />
+            </div>
+            <div className="input-group form-group">
+              <input type="password" name="password" className="form-control" placeholder="Jelszó" />
+            </div>
+            <div className="form-group">
+              <button type="submit" className="btn float-right btn-warning">
+                Küldés
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>05:51</timestamp>
+    <fileName>AuthService.js</fileName>
+    <content>
+<![CDATA[
+import axios from "axios";
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>05:57</timestamp>
+    <fileName>AuthService.js</fileName>
+    <content>
+<![CDATA[
+import axios from "axios";
+
+let accessToken = "";
+
+export function login(email, password) {
+  return axios
+    .post("https://kodbazis.hu/api/login-user", { email, password }, { withCredentials: true })
+    .then((res) => {
+      accessToken = res.data.accessToken;
+    });
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>06:45</timestamp>
+    <fileName>AuthService.js</fileName>
+    <content>
+<![CDATA[
+import axios from "axios";
+
+let accessToken = "";
+
+export function login(email, password) {
+  return axios
+    .post("https://kodbazis.hu/api/login-user", { email, password }, { withCredentials: true })
+    .then((res) => {
+      accessToken = res.data.accessToken;
+    });
+}
+
+export function logout() {
+  return axios.post("https://kodbazis.hu/api/logout-user", {}, { withCredentials: true })
+    .then((res) => {
+      accessToken = "";
+    });
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>07:17</timestamp>
+    <fileName>SzallasLista.js</fileName>
+    <content>
+<![CDATA[
+export function SzallasLista() {
+  return "szállás lista";
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>07:21</timestamp>
+    <fileName>SzallasLista.js</fileName>
+    <content>
+<![CDATA[
+import { useEffect, useState } from "react";
+import { useHistory, NavLink } from "react-router-dom";
+
+export function SzallasLista() {
+  const [szallasok, setSzallasok] = useState([]);
+  const [isPending, setPending] = useState(false);
+  const history = useHistory();
+
+  return "szállás lista";
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>07:32</timestamp>
+    <fileName>SzallasLista.js</fileName>
+    <content>
+<![CDATA[
+import { useEffect, useState } from "react";
+import { useHistory, NavLink } from "react-router-dom";
+
+export function SzallasLista() {
+  const [szallasok, setSzallasok] = useState([]);
+  const [isPending, setPending] = useState(false);
+  const history = useHistory();
+
+  useEffect(() => {
+    setPending(true);
+    fetch("https://kodbazis.hu/api/szallasok")
+      .then((res) => res.json())
+      .then((tartalom) => {
+        setPending(false);
+        setSzallasok(tartalom);
+      })
+      .catch(() => {
+        setPending(false);
+        history.push("/");
+      });
+  }, []);
+
+  return "szállás lista";
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>07:56</timestamp>
+    <fileName>SzallasLista.js</fileName>
+    <content>
+<![CDATA[
+import { useEffect, useState } from "react";
+import { useHistory, NavLink } from "react-router-dom";
+import { fetchHitelesitessel } from "./AuthService";
+
+export function SzallasLista() {
+  const [szallasok, setSzallasok] = useState([]);
+  const [isPending, setPending] = useState(false);
+  const history = useHistory();
+
+  useEffect(() => {
+    setPending(true);
+    fetchHitelesitessel
+      .get("https://kodbazis.hu/api/szallasok")
+      .then((res) => res.data)
+      .then((tartalom) => {
+        setPending(false);
+        setSzallasok(tartalom);
+      })
+      .catch(() => {
+        setPending(false);
+        history.push("/");
+      });
+  }, []);
+
+  return "szállás lista";
+}
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>08:04</timestamp>
+    <fileName>AuthService.js</fileName>
+    <content>
+<![CDATA[
+import axios from "axios";
+
+let accessToken = "";
+
+export function login(email, password) {
+  return axios
+    .post("https://kodbazis.hu/api/login-user", { email, password }, { withCredentials: true })
+    .then((res) => {
+      accessToken = res.data.accessToken;
+    });
+}
+
+export function logout() {
+  return axios.post("https://kodbazis.hu/api/logout-user", {}, { withCredentials: true })
+    .then((res) => {
+      accessToken = "";
+    });
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>08:06</timestamp>
+    <fileName>AuthService.js</fileName>
+    <content>
+<![CDATA[
+import axios from "axios";
+
+let accessToken = "";
+
+export function login(email, password) {
+  return axios
+    .post("https://kodbazis.hu/api/login-user", { email, password }, { withCredentials: true })
+    .then((res) => {
+      accessToken = res.data.accessToken;
+    });
+}
+
+export function logout() {
+  return axios.post("https://kodbazis.hu/api/logout-user", {}, { withCredentials: true })
+    .then((res) => {
+      accessToken = "";
+    });
+}
+
+export const fetchHitelesitessel = axios.create();
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>08:14</timestamp>
+    <fileName>AuthService.js</fileName>
+    <content>
+<![CDATA[
+import axios from "axios";
+
+let accessToken = "";
+
+export function login(email, password) {
+  return axios
+    .post("https://kodbazis.hu/api/login-user", { email, password }, { withCredentials: true })
+    .then((res) => {
+      accessToken = res.data.accessToken;
+    });
+}
+
+export function logout() {
+  return axios.post("https://kodbazis.hu/api/logout-user", {}, { withCredentials: true })
+    .then((res) => {
+      accessToken = "";
+    });
+}
+
+export const fetchHitelesitessel = axios.create();
+
+fetchHitelesitessel.interceptors.request.use(
+  (config) => {
+    
+  },
+  (error) => {
+    
+  }
+);
+
+fetchHitelesitessel.interceptors.response.use(
+  (response) => {
+
+  },
+  (error) => {
+    
+  }
+);
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>08:55</timestamp>
+    <fileName>AuthService.js</fileName>
+    <content>
+<![CDATA[
+import axios from "axios";
+
+let accessToken = "";
+
+export function login(email, password) {
+  return axios
+    .post("https://kodbazis.hu/api/login-user", { email, password }, { withCredentials: true })
+    .then((res) => {
+      accessToken = res.data.accessToken;
+    });
+}
+
+export function logout() {
+  return axios.post("https://kodbazis.hu/api/logout-user", {}, { withCredentials: true })
+    .then((res) => {
+      accessToken = "";
+    });
+}
+
+export const fetchHitelesitessel = axios.create();
+
+fetchHitelesitessel.interceptors.request.use(
+  (config) => {
+    if (!accessToken) {
+      return config;
+    }
+
+    return {
+      ...config,
+      headers: {
+        ...config.headers,
+        Authorization: `Bearer ${accessToken}`,
+      }
+    };
+  },
+  (error) => {
+    
+  }
+);
+
+fetchHitelesitessel.interceptors.response.use(
+  (response) => {
+
+  },
+  (error) => {
+    
+  }
+);
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>09:20</timestamp>
+    <fileName>AuthService.js</fileName>
+    <content>
+<![CDATA[22,37 title="./src/AuthService.js"
+   
+import axios from "axios";
+
+let accessToken = "";
+
+export function login(email, password) {
+  return axios
+    .post("https://kodbazis.hu/api/login-user", { email, password }, { withCredentials: true })
+    .then((res) => {
+      accessToken = res.data.accessToken;
+    });
+}
+
+export function logout() {
+  return axios.post("https://kodbazis.hu/api/logout-user", {}, { withCredentials: true })
+    .then((res) => {
+      accessToken = "";
+    });
+}
+
+export const fetchHitelesitessel = axios.create();
+
+fetchHitelesitessel.interceptors.request.use(
+  (config) => {
+    if (!accessToken) {
+      return config;
+    }
+
+    return {
+      ...config,
+      headers: {
+        ...config.headers,
+        Authorization: `Bearer ${accessToken}`,
+      }
+    };
+  },
+  (error) => Promise.reject(error)
+);
+
+fetchHitelesitessel.interceptors.response.use(
+  (response) => {
+
+  },
+  (error) => {
+    
+  }
+);
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>09:39</timestamp>
+    <fileName>AuthService.js</fileName>
+    <content>
+<![CDATA[
+import axios from "axios";
+
+let accessToken = "";
+
+export function login(email, password) {
+  return axios
+    .post("https://kodbazis.hu/api/login-user", { email, password }, { withCredentials: true })
+    .then((res) => {
+      accessToken = res.data.accessToken;
+    });
+}
+
+export function logout() {
+  return axios.post("https://kodbazis.hu/api/logout-user", {}, { withCredentials: true })
+    .then((res) => {
+      accessToken = "";
+    });
+}
+
+export const fetchHitelesitessel = axios.create();
+
+fetchHitelesitessel.interceptors.request.use(
+  (config) => {
+    if (!accessToken) {
+      return config;
+    }
+
+    return {
+      ...config,
+      headers: {
+        ...config.headers,
+        Authorization: `Bearer ${accessToken}`,
+      }
+    };
+  },
+  (error) => Promise.reject(error)
+);
+
+fetchHitelesitessel.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    
+  }
+);
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>10:00</timestamp>
+    <fileName>AuthService.js</fileName>
+    <content>
+<![CDATA[
+import axios from "axios";
+
+let accessToken = "";
+
+export function login(email, password) {
+  return axios
+    .post("https://kodbazis.hu/api/login-user", { email, password }, { withCredentials: true })
+    .then((res) => {
+      accessToken = res.data.accessToken;
+    });
+}
+
+export function logout() {
+  return axios.post("https://kodbazis.hu/api/logout-user", {}, { withCredentials: true })
+    .then((res) => {
+      accessToken = "";
+    });
+}
+
+export const fetchHitelesitessel = axios.create();
+
+fetchHitelesitessel.interceptors.request.use(
+  (config) => {
+    if (!accessToken) {
+      return config;
+    }
+
+    return {
+      ...config,
+      headers: {
+        ...config.headers,
+        Authorization: `Bearer ${accessToken}`,
+      }
+    };
+  },
+  (error) => Promise.reject(error)
+);
+
+fetchHitelesitessel.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response.status !== 403) {
+      return Promise.reject(error);
+    }
+    
+  }
+);
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>10:19</timestamp>
+    <fileName>AuthService.js</fileName>
+    <content>
+<![CDATA[
+import axios from "axios";
+
+let accessToken = "";
+
+export function login(email, password) {
+  return axios
+    .post("https://kodbazis.hu/api/login-user", { email, password }, { withCredentials: true })
+    .then((res) => {
+      accessToken = res.data.accessToken;
+    });
+}
+
+export function logout() {
+  return axios.post("https://kodbazis.hu/api/logout-user", {}, { withCredentials: true })
+    .then((res) => {
+      accessToken = "";
+    });
+}
+
+export const fetchHitelesitessel = axios.create();
+
+fetchHitelesitessel.interceptors.request.use(
+  (config) => {
+    if (!accessToken) {
+      return config;
+    }
+
+    return {
+      ...config,
+      headers: {
+        ...config.headers,
+        Authorization: `Bearer ${accessToken}`,
+      }
+    };
+  },
+  (error) => Promise.reject(error)
+);
+
+fetchHitelesitessel.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response.status !== 403) {
+      return Promise.reject(error);
+    }
+
+    const originalRequest = error.config;
+
+    if (originalRequest.isRetry) {
+      return Promise.reject(error);
+    }
+
+    originalRequest.isRetry = true;
+  }
+);
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>10:59</timestamp>
+    <fileName>AuthService.js</fileName>
+    <content>
+<![CDATA[40:64 title="./src/AuthService.js"
+   
+import axios from "axios";
+
+let accessToken = "";
+
+export function login(email, password) {
+  return axios
+    .post("https://kodbazis.hu/api/login-user", { email, password }, { withCredentials: true })
+    .then((res) => {
+      accessToken = res.data.accessToken;
+    });
+}
+
+export function logout() {
+  return axios.post("https://kodbazis.hu/api/logout-user", {}, { withCredentials: true })
+    .then((res) => {
+      accessToken = "";
+    });
+}
+
+export const fetchHitelesitessel = axios.create();
+
+fetchHitelesitessel.interceptors.request.use(
+  (config) => {
+    if (!accessToken) {
+      return config;
+    }
+
+    return {
+      ...config,
+      headers: {
+        ...config.headers,
+        Authorization: `Bearer ${accessToken}`,
+      }
+    };
+  },
+  (error) => Promise.reject(error)
+);
+
+fetchHitelesitessel.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response.status !== 403) {
+      return Promise.reject(error);
+    }
+
+    const originalRequest = error.config;
+
+    if (originalRequest.isRetry) {
+      return Promise.reject(error);
+    }
+
+    originalRequest.isRetry = true;
+
+    return axios
+      .get("https://kodbazis.hu/api/get-new-access-token", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        accessToken = res.data.accessToken;
+      })
+      .then(() => fetchHitelesitessel(originalRequest));
+  }
+);
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>12:03</timestamp>
+    <fileName>SzallasLista.js</fileName>
+    <content>
+<![CDATA[
+import { useEffect, useState } from "react";
+import { useHistory, NavLink } from "react-router-dom";
+import { fetchHitelesitessel } from "./AuthService";
+
+export function SzallasLista() {
+  const [szallasok, setSzallasok] = useState([]);
+  const [isPending, setPending] = useState(false);
+  const history = useHistory();
+
+  useEffect(() => {
+    setPending(true);
+    fetchHitelesitessel
+      .get("https://kodbazis.hu/api/szallasok")
+      .then((res) => res.data)
+      .then((tartalom) => {
+        setPending(false);
+        setSzallasok(tartalom);
+      })
+      .catch(() => {
+        setPending(false);
+        history.push("/");
+      });
+  }, []);
+
+  return "szállás lista";
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>12:16</timestamp>
+    <fileName>SzallasLista.js</fileName>
+    <content>
+<![CDATA[
+import { useEffect, useState } from "react";
+import { useHistory, NavLink } from "react-router-dom";
+import { fetchHitelesitessel } from "./AuthService";
+
+export function SzallasLista() {
+  const [szallasok, setSzallasok] = useState([]);
+  const [isPending, setPending] = useState(false);
+  const history = useHistory();
+
+  useEffect(() => {
+    setPending(true);
+    fetchHitelesitessel
+      .get("https://kodbazis.hu/api/szallasok")
+      .then((res) => res.data)
+      .then((tartalom) => {
+        setPending(false);
+        setSzallasok(tartalom);
+      })
+      .catch(() => {
+        setPending(false);
+        history.push("/");
+      });
+  }, []);
+
+  if (isPending || !szallasok.length) {
+    return (
+      <div className="center-item">
+        <div className="spinner-border text-danger"></div>
+      </div>
+    );
+  }
+  
+  return "szállás lista";
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>12:22</timestamp>
+    <fileName>SzallasLista.js</fileName>
+    <content>
+<![CDATA[25:51 title="./src/SzallasLista.js"
+  ‎‎
+import { useEffect, useState } from "react";
+import { useHistory, NavLink } from "react-router-dom";
+import { fetchHitelesitessel } from "./AuthService";
+
+export function SzallasLista() {
+  const [szallasok, setSzallasok] = useState([]);
+  const [isPending, setPending] = useState(false);
+  const history = useHistory();
+
+  useEffect(() => {
+    setPending(true);
+    fetchHitelesitessel
+      .get("https://kodbazis.hu/api/szallasok")
+      .then((res) => res.data)
+      .then((tartalom) => {
+        setPending(false);
+        setSzallasok(tartalom);
+      })
+      .catch(() => {
+        setPending(false);
+        history.push("/");
+      });
+  }, []);
+
+  if (isPending || !szallasok.length) {
+    return (
+      <div className="center-item">
+        <div className="spinner-border text-danger"></div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <ul className="list-group w-100">
+        <div className="row border-bottom p-2 text-dark">
+          <div className="col-xs-12 col-sm-4">
+            <h5 className="visible-xs">Megnevezés</h5>
+          </div>
+          <h5 className="col-xs-4 col-sm-2 right">Helyszín</h5>
+          <h5 className="col-xs-8 col-sm-3">Minimum éjszakák száma</h5>
+          <h5 className="col-xs-10 col-sm-2">Ár</h5>
+        </div>
+        {szallasok.map((szallas) => (
+          
+        ))}
+      </ul>
+    </div>
+  );
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>12:28</timestamp>
+    <fileName>SzallasLista.js</fileName>
+    <content>
+<![CDATA[30:63 title="./src/SzallasLista.js"
+  ‎‎
+import { useEffect, useState } from "react";
+import { useHistory, NavLink } from "react-router-dom";
+import { fetchHitelesitessel } from "./AuthService";
+
+export function SzallasLista() {
+  const [szallasok, setSzallasok] = useState([]);
+  const [isPending, setPending] = useState(false);
+  const history = useHistory();
+
+  useEffect(() => {
+    setPending(true);
+    fetchHitelesitessel
+      .get("https://kodbazis.hu/api/szallasok")
+      .then((res) => res.data)
+      .then((tartalom) => {
+        setPending(false);
+        setSzallasok(tartalom);
+      })
+      .catch(() => {
+        setPending(false);
+        history.push("/");
+      });
+  }, []);
+
+  if (isPending || !szallasok.length) {
+    return (
+      <div className="center-item">
+        <div className="spinner-border text-danger"></div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <ul className="list-group w-100">
+        <div className="row border-bottom p-2 text-dark">
+          <div className="col-xs-12 col-sm-4">
+            <h5 className="visible-xs">Megnevezés</h5>
+          </div>
+          <h5 className="col-xs-4 col-sm-2 right">Helyszín</h5>
+          <h5 className="col-xs-8 col-sm-3">Minimum éjszakák száma</h5>
+          <h5 className="col-xs-10 col-sm-2">Ár</h5>
+        </div>
+        {szallasok.map((szallas) => (
+          <NavLink key={szallas.id} to={"/szallas-" + szallas.id}>
+            <div className="row border-bottom p-2 text-dark">
+              <div className="col-xs-12 col-sm-4">
+                <h4 className="visible-xs">{szallas.name}</h4>
+                <span className="hidden-xs">{szallas.host_name}</span>
+              </div>
+              <div className="col-xs-4 col-sm-2 right">
+                {szallas.neighbourhood} {szallas.neighbourhood_group}
+              </div>
+              <div className="col-xs-8 col-sm-3">{szallas.minimum_nights}</div>
+              <div className="col-xs-10 col-sm-2">{szallas.price}$</div>
+            </div>
+          </NavLink>
+        ))}
+      </ul>
+    </div>
+  );
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>12:35</timestamp>
+    <fileName>SzallasLista.js</fileName>
+    <content>
+<![CDATA[
+import { useEffect, useState } from "react";
+import { useHistory, NavLink } from "react-router-dom";
+import { fetchHitelesitessel } from "./AuthService";
+import { Kijelentkezes } from "./Kijelentkezes";
+
+export function SzallasLista() {
+  const [szallasok, setSzallasok] = useState([]);
+  const [isPending, setPending] = useState(false);
+  const history = useHistory();
+
+  useEffect(() => {
+    setPending(true);
+    fetchHitelesitessel
+      .get("https://kodbazis.hu/api/szallasok")
+      .then((res) => res.data)
+      .then((tartalom) => {
+        setPending(false);
+        setSzallasok(tartalom);
+      })
+      .catch(() => {
+        setPending(false);
+        history.push("/");
+      });
+  }, []);
+
+  if (isPending || !szallasok.length) {
+    return (
+      <div className="center-item">
+        <div className="spinner-border text-danger"></div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <Kijelentkezes />
+      <ul className="list-group w-100">
+        <div className="row border-bottom p-2 text-dark">
+          <div className="col-xs-12 col-sm-4">
+            <h5 className="visible-xs">Megnevezés</h5>
+          </div>
+          <h5 className="col-xs-4 col-sm-2 right">Helyszín</h5>
+          <h5 className="col-xs-8 col-sm-3">Minimum éjszakák száma</h5>
+          <h5 className="col-xs-10 col-sm-2">Ár</h5>
+        </div>
+        {szallasok.map((szallas) => (
+          <NavLink key={szallas.id} to={"/szallas-" + szallas.id}>
+            <div className="row border-bottom p-2 text-dark">
+              <div className="col-xs-12 col-sm-4">
+                <h4 className="visible-xs">{szallas.name}</h4>
+                <span className="hidden-xs">{szallas.host_name}</span>
+              </div>
+              <div className="col-xs-4 col-sm-2 right">
+                {szallas.neighbourhood} {szallas.neighbourhood_group}
+              </div>
+              <div className="col-xs-8 col-sm-3">{szallas.minimum_nights}</div>
+              <div className="col-xs-10 col-sm-2">{szallas.price}$</div>
+            </div>
+          </NavLink>
+        ))}
+      </ul>
+    </div>
+  );
+}
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>12:38</timestamp>
+    <fileName>Kijelentkezes.js</fileName>
+    <content>
+<![CDATA[
+export function Kijelentkezes() {
+
+  return 'kijelentkezés gomb';
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>12:39</timestamp>
+    <fileName>Kijelentkezes.js</fileName>
+    <content>
+<![CDATA[
+import { useHistory } from "react-router-dom";
+
+export function Kijelentkezes() {
+  const history = useHistory();
+
+  return 'kijelentkezés gomb';
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>12:40</timestamp>
+    <fileName>Kijelentkezes.js</fileName>
+    <content>
+<![CDATA[
+import { useHistory } from "react-router-dom";
+import { logout } from "./AuthService";
+
+export function Kijelentkezes() {
+  const history = useHistory();
+
+  return (
+    <button
+      className="btn btn-danger m-3 float-right"
+      onClick={() => {
+        logout().finally(() => {
+          history.push("/");
+        });
+      }}
+    >
+      Kijelentkezés
+    </button>
+  );
+}
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>12:54</timestamp>
+    <fileName>SzallasSingle.js</fileName>
+    <content>
+<![CDATA[
+export function SzallasSingle({ id }) {
+
+  return "szállás single";
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>12:56</timestamp>
+    <fileName>SzallasSingle.js</fileName>
+    <content>
+<![CDATA[
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { fetchHitelesitessel } from "./AuthService";
+import { Kijelentkezes } from "./Kijelentkezes";
+
+export function SzallasSingle({ id }) {
+  const [szallas, setSzallas] = useState({});
+  const [isPending, setPending] = useState(false);
+  const history = useHistory();
+
+  return "szállás single";
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>13:01</timestamp>
+    <fileName>SzallasSingle.js</fileName>
+    <content>
+<![CDATA[
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { fetchHitelesitessel } from "./AuthService";
+import { Kijelentkezes } from "./Kijelentkezes";
+
+export function SzallasSingle({ id }) {
+  const [szallas, setSzallas] = useState({});
+  const [isPending, setPending] = useState(false);
+  const history = useHistory();
+
+  useEffect(() => {
+    setPending(true);
+    fetchHitelesitessel
+      .get("https://kodbazis.hu/api/szallasok/" + id)
+      .then((res) => res.data)
+      .then((tartalom) => {
+        setSzallas(tartalom);
+        setPending(false);
+      })
+      .catch(() => {
+        setPending(false);
+        history.push("/");
+      });
+  }, []);
+
+  return "szállás single";
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>13:20</timestamp>
+    <fileName>SzallasSingle.js</fileName>
+    <content>
+<![CDATA[
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { fetchHitelesitessel } from "./AuthService";
+import { Kijelentkezes } from "./Kijelentkezes";
+
+export function SzallasSingle({ id }) {
+  const [szallas, setSzallas] = useState({});
+  const [isPending, setPending] = useState(false);
+  const history = useHistory();
+
+  useEffect(() => {
+    setPending(true);
+    fetchHitelesitessel
+      .get("https://kodbazis.hu/api/szallasok/" + id)
+      .then((res) => res.data)
+      .then((tartalom) => {
+        setSzallas(tartalom);
+        setPending(false);
+      })
+      .catch(() => {
+        setPending(false);
+        history.push("/");
+      });
+  }, []);
+
+  if (isPending || !szallas.id) {
+    return (
+      <div className="center-item">
+        <div className="spinner-border text-danger"></div>
+      </div>
+    );
+  }
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>13:24</timestamp>
+    <fileName>SzallasSingle.js</fileName>
+    <content>
+<![CDATA[
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { fetchHitelesitessel } from "./AuthService";
+import { Kijelentkezes } from "./Kijelentkezes";
+
+export function SzallasSingle({ id }) {
+  const [szallas, setSzallas] = useState({});
+  const [isPending, setPending] = useState(false);
+  const history = useHistory();
+
+  useEffect(() => {
+    setPending(true);
+    fetchHitelesitessel
+      .get("https://kodbazis.hu/api/szallasok/" + id)
+      .then((res) => res.data)
+      .then((tartalom) => {
+        setSzallas(tartalom);
+        setPending(false);
+      })
+      .catch(() => {
+        setPending(false);
+        history.push("/");
+      });
+  }, []);
+
+  if (isPending || !szallas.id) {
+    return (
+      <div className="center-item">
+        <div className="spinner-border text-danger"></div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="card w-100 m-auto p-3">
+      <h1>{szallas.name}</h1>
+      <h3>{szallas.host_name}</h3>
+      <h3>
+        {szallas.neighbourhood} {szallas.neighbourhood_group}
+      </h3>
+      <h3>{szallas.minimum_nights}</h3>
+      <Kijelentkezes />
+    </div>
+  );
+}
+]]>
+    </content>
+</item>
+</root>
