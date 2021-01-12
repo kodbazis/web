@@ -48,7 +48,10 @@ class PublicSite
             ]);
         });
 
-
+        $r->post('/api/subscriber-login', function (Request $request) use ($conn, $twig) {
+            $byEmail = (new SubscriberLister($conn))->list(Router::where('email', 'eq', $request->body['email']));
+            var_dump(password_verify($request->body['password'], $byEmail->getEntities()[0]->getPassword()));
+        });
 
         $r->get('/kodseged-kliens', function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
@@ -343,7 +346,7 @@ class PublicSite
             header('Access-Control-Allow-Origin: *');
             $item = (new SqlByIdGetter($conn))->byId($request->vars['id']);
             $raw = json_decode($item->getRaw(), true);
-            if(!isset($raw['filechangesName'])) {
+            if (!isset($raw['filechangesName'])) {
                 return;
             }
             $path = '../embeddable/codeAssistantVimeo/' . $raw['filechangesName'];
