@@ -1,31 +1,75 @@
-<nav class="navbar fixed-top bg m-auto">
-	<a class="navbar-brand" href="#">
-		<a href="/" class="m-auto"><img src="public/images/logo.png" alt="Kódbázis" class="logo"/></a>
-	</a>
-	<button id="navbar-toggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		<i class="fa fa-bars text-light">☰</i>
-	</button>
-	<div id="navbar-items" class="d-none w-100">
-		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active border-bottom">
-				<a class="nav-link text-light p-3" href="/cikkek">
-					Cikkek
+<nav class="navbar fixed-top bg m-auto p-0 pt-2 pb-2">
+	<div class="row w-100 m-auto pb-1 pt-1">
+		<div class="col-4 m-auto text-center p-0">
+			<button id="main-navbar-toggler" class="navbar-toggler" type="button">
+				<i class="fa fa-bars text-light">
+					<svg style="fill:#FFFFFF;width:24px;height:24px" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+						<path d="M0 0h24v24H0z" fill="none"></path>
+						<path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+					</svg>
+				</i>
+			</button>
+		</div>
+		<div class="col-4 m-auto">
+			<a href="/" class="m-auto">
+				<img src="public/images/logo.png" alt="Kódbázis" class="logo"/>
+			</a>
+		</div>
+		<div class="col-4 m-auto text-center p-0">
+			{% if subscriberLabel != '' %}
+				<button id="subscriber-navbar-toggler" class="btn btn-sm text-light" style="border: none">
+					{{subscriberLabel}}
+					▾
+				</button>
+			{% else %}
+				<a href="/bejelentkezes">
+					<button class="btn btn-sm btn-outline-success">
+						Bejelentkezés
+					</button>
 				</a>
-			</li>
-			<li class="nav-item active border-bottom">
-				<a class="nav-link text-light p-3" href="/react-kurzus">
-					React kurzus
-				</a>
-			</li>
-			<li class="nav-item border-bottom">
-				<a class="nav-link text-light p-3" href="/trening">
-					Tréning
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link text-light p-3" href="/elerhetoseg">Elérhetőség</a>
-			</li>
-		</ul>
+			{% endif %}
+		</div>
+
+	</div>
+	<div class="row w-100">
+		<div class="col-lg-3 p-0" style="position: absolute;right: 0;background: rgb(34 34 34);">
+			<div id="subscriber-navbar-items" class="d-none w-100 border-dark border-left border-right border-bottom">
+				<ul class="navbar-nav mr-auto text-center">
+					<li class="navbar-item nav-item border-bottom border-dark">
+						<a class="nav-link text-light p-3" href="#">
+							<form action="/api/subscriber-logout" method="post">
+								<button type="submit" class="btn btn-sm btn-outline-danger">Kijelentkezés</button>
+							</form>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-lg-6"></div>
+		<div class="col-lg-3 p-0" style="position: absolute;left: 0;background: rgb(34 34 34);">
+			<div id="main-navbar-items" class="d-none w-100 border-dark border-left border-right border-bottom">
+				<ul class="navbar-nav mr-auto text-center">
+					<li class="navbar-item nav-item border-bottom border-dark">
+						<a class="nav-link text-light p-3" href="/cikkek">
+							Cikkek
+						</a>
+					</li>
+					<li class="navbar-item nav-item border-bottom border-dark">
+						<a class="nav-link text-light p-3" href="/react-kurzus">
+							React kurzus
+						</a>
+					</li>
+					<li class="navbar-item nav-item border-bottom border-dark">
+						<a class="nav-link text-light p-3" href="/trening">
+							Tréning
+						</a>
+					</li>
+					<li class="navbar-item nav-item">
+						<a class="nav-link text-light p-3" href="/elerhetoseg">Elérhetőség</a>
+					</li>
+				</ul>
+			</div>
+		</div>
 	</div>
 </nav>
 <script defer src="./public/js/navbar.js"></script>

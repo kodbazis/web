@@ -7,6 +7,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="shortcut icon" href="/favicon.ico?v=3"/>
 		<link rel="stylesheet" href="/public/css/bootstrap/bootstrap.min.css">
+		<link rel="stylesheet" href="/public/css/cookiealert.css">
+
 		{% for style in styles %}
 			{% if style.isCdn %}
 				<link rel="stylesheet" href="{{ style.path }}">
@@ -29,13 +31,25 @@
 	</head>
 	<body class="home">
 
-		{% include 'navbar.twig' %}
 
-		{% include content %}
+		{% include 'navbar.twig' with {'subscriberLabel' : subscriberLabel is defined ? subscriberLabel : ''} %}
+
+		{{ content | raw }}
+
+		<div class="alert text-center cookiealert d-none" role="alert">
+			A weboldalunkon cookie-kat használunk, hogy a legjobb felhasználói élményt nyújthassuk.
+			<a href="/sutik-kezelese" target="_blank">Részletes leírás »</a>
+
+			<button type="button" class="btn btn-primary btn-sm acceptcookies">
+				Rendben
+			</button>
+		</div>
 
 		{% include 'footer.twig' %}
 
+
 		{% include 'fb-chat.twig' %}
+
 
 		{% if scripts is defined %}
 			{% for script in scripts %}
@@ -47,5 +61,7 @@
 			{% endfor %}
 		{% endif %}
 		<script defer src="./public/js/navbar.js"></script>
+		<script src="./public/js/cookiealert.js"></script>
+
 	</body>
 </html>

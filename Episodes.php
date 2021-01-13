@@ -19,7 +19,7 @@ use Kodbazis\Image\ImageSaver;
 use Twig\Environment;
 use Kodbazis\Generated\Repository\Course\SqlLister as CourseLister;
 use Kodbazis\Generated\Repository\Episode\SqlLister as EpisodeLister;
-
+use Kodbazis\Generated\Repository\Subscriber\SqlLister as SubscriberLister;
 
 class Episodes
 {
@@ -220,13 +220,18 @@ class Episodes
             echo $twig->render('wrapper.twig', [
                 'title' => $episode->getTitle(),
                 'description' => $episode->getDescription(),
-                'episode' => $episode,
-                'episodeContent' => $content,
-                'allEpisodesInCourse' => $allEpisodesInCourse,
-                'content' => 'episode-single.twig',
-                'nextEpisode' => $allEpisodesInCourse[$episodeIndex + 1] ?? null,
-                'previousEpisode' => $allEpisodesInCourse[$episodeIndex - 1] ?? null,
-                'url' => Router::siteUrl() . $_SERVER['REQUEST_URI'],
+                'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                'email' => $_GET['email'] ?? '',
+                'content' => $twig->render('episode-single.twig', [
+                    'isLoggedIn' => isset($_SESSION['subscriberId']),
+                    'loginError' => $_GET['loginError'] ?? '0',
+                    'episode' => $episode,
+                    'episodeContent' => $content,
+                    'allEpisodesInCourse' => $allEpisodesInCourse,
+                    'nextEpisode' => $allEpisodesInCourse[$episodeIndex + 1] ?? null,
+                    'previousEpisode' => $allEpisodesInCourse[$episodeIndex - 1] ?? null,
+                    'url' => Router::siteUrl() . $_SERVER['REQUEST_URI'],
+                ]),
                 'scripts' => array_merge($codeAssistScriptPaths, ...$appScripts),
                 'styles' => array_merge([
                     ['path' => 'css/post-single.css'],

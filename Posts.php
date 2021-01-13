@@ -213,10 +213,12 @@ class Posts
                         ]
                     ]
                 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-                'post' => $post,
-                'postContent' => $content,
-                'content' => 'post-single.twig',
-                'url' => Router::siteUrl() . $_SERVER['REQUEST_URI'],
+                'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                'content' => $twig->render('post-single.twig', [
+                    'post' => $post,
+                    'postContent' => $content,
+                    'url' => Router::siteUrl() . $_SERVER['REQUEST_URI'],
+                ]),
                 'scripts' => array_merge($codeAssistScriptPaths, ...$appScripts),
                 'styles' => array_merge([
                     ['path' => 'css/post-single.css'],

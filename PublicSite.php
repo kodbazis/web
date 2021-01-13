@@ -29,11 +29,30 @@ class PublicSite
 
     public static function getRoutes(Pipeline $r, mysqli $conn, Environment $twig)
     {
-        $r->get('/', function (Request $request) use ($conn, $twig) {
+
+        $initSubscriberSession = function (Request $request) use ($conn, $twig) {
+            session_start();
+            $subscriberEmail = '';
+            if (isset($_SESSION['subscriberId'])) {
+                $byId = (new SubscriberLister($conn))->list(Router::where('id', 'eq', $_SESSION['subscriberId']));
+                if ($byId->getCount() > 0) {
+                    $em = $byId->getEntities()[0]->getEmail();
+                    $subscriberEmail = explode('@', $em)[0];
+                }
+            }
+            $request->vars['subscriberLabel'] = $subscriberEmail;
+            return $request;
+        };
+
+
+
+
+        $r->get('/', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
 
             echo $twig->render('wrapper.twig', [
-                'content' => 'home.twig',
+                'content' => $twig->render('home.twig', []),
+                'subscriberLabel' =>  $request->vars['subscriberLabel'],
                 'structuredData' => json_encode([
                     "@context" => "https://schema.org",
                     "@type" => "Organization",
@@ -43,14 +62,170 @@ class PublicSite
                 'scripts' => [
                     ['path' => 'js/jquery.js'],
                     ['path' => 'js/application.js'],
-                ],
-
+                ]
             ]);
+        });
+
+        $r->get('/elfelejtett-jelszo', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+            header('Content-Type: text/html; charset=UTF-8');
+
+            if ($request->vars['subscriberLabel']) {
+                header('Location: /');
+                return;
+            }
+
+            echo $twig->render('wrapper.twig', [
+                'content' => $twig->render('forgot-password.twig', [
+                    'isError' => isset($_GET['isError']),
+                    'emailSent' => isset($_GET['emailSent']),
+                ]),
+                'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                'styles' => [
+                    ['path' => 'css/login.css']
+                ],
+            ]);
+        });
+
+        $r->post('/api/forgot-password', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+            header('Content-Type: text/html; charset=UTF-8');
+
+            if ($request->vars['subscriberLabel']) {
+                header('Location: /');
+                return;
+            }
+
+            $byEmail = (new SubscriberLister($conn))->list(Router::where('email', 'eq', $request->body['email']));
+
+            if ($byEmail->getCount() === 0) {
+                header('Location: /elfelejtett-jelszo?isError=1');
+                return;
+            }
+
+            $subscriber = $byEmail->getEntities()[0];
+            $token = uniqid();
+
+            (new SubscriberPatcher($conn))->patch(
+                $subscriber->getId(),
+                new PatchedSubscriber(null, null, 1, $token)
+            );
+
+            $msg = $twig->render('forgot-password-email.twig', [
+                'email' => $subscriber->getEmail(),
+                'link' => Router::siteUrl() . "/jelszo-megvaltoztatasa/" . $token,
+            ]);
+
+            @(new Mailer())->sendMail($subscriber->getEmail(), 'Jelszó megváltoztatása', $msg);
+
+            header('Location: /elfelejtett-jelszo?emailSent=1');
+        });
+
+        $r->get('/jelszo-megvaltoztatasa/{token}', function (Request $request) use ($conn, $twig) {
+            echo $twig->render('wrapper.twig', [
+                'content' => $twig->render('create-new-password.twig', [
+                    'token' => $request->vars['token'],
+                ]),
+                'styles' => [
+                    ['path' => 'css/login.css']
+                ],
+            ]);
+        });
+
+        $r->post('/api/patch-subscriber-password', function (Request $request) use ($conn) {
+            $byToken = (new SubscriberLister($conn))->list(Router::where('verificationToken', 'eq', $request->body['token']));
+
+            if ($byToken->getCount() === 0) {
+                header('Location: /');
+                return;
+            }
+
+            $subscriber = $byToken->getEntities()[0];
+
+            if (!$subscriber->getIsVerified()) {
+                header('Location: /');
+                return;
+            }
+
+            $password = password_hash($request->body['password'], PASSWORD_DEFAULT);
+            $byToken = (new SubscriberPatcher($conn))->patch($subscriber->getId(), new PatchedSubscriber(null, $password, 1, ''));
+            header('Location: /bejelentkezes?isPasswordModificationSuccess=1');
+        });
+
+        $r->get('/jelszo-modositasa-sikeres', function (Request $request) use ($conn, $twig) {
+            header('Content-Type: text/html; charset=UTF-8');
+            echo $twig->render('wrapper.twig', [
+                'content' => $twig->render('subscriber-password-modification-success.twig', []),
+            ]);
+        });
+
+        $r->get('/bejelentkezes', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+            header('Content-Type: text/html; charset=UTF-8');
+            echo $twig->render('wrapper.twig', [
+                'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                'content' => $twig->render('subscriber-login.twig', [
+                    'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                    'isLoggedIn' => isset($_SESSION['subscriberId']),
+                    'isError' => isset($_GET['isError']),
+                    'loginSuccess' => isset($_GET['loginSuccess']),
+                    'isPasswordModificationSuccess' => isset($_GET['isPasswordModificationSuccess']),
+                    'email' => $_GET['email'] ?? '',
+                ]),
+                'styles' => [
+                    ['path' => 'css/login.css']
+                ],
+            ]);
+        });
+
+        $r->get('/feliratkozas', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+            header('Content-Type: text/html; charset=UTF-8');
+            echo $twig->render('wrapper.twig', [
+                'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                'content' => $twig->render('subscriber-registration.twig', [
+                    'isLoggedIn' => isset($_SESSION['subscriberId']),
+                    'isSuccess' => isset($_GET['isSuccess']),
+                    'isError' => $_GET['isError'] ?? '0',
+                    'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                    'email' => $_GET['email'] ?? '',
+                ]),
+                'styles' => [
+                    ['path' => 'css/login.css']
+                ],
+            ]);
+        });
+
+        $r->get('/sutik-kezelese', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+            header('Content-Type: text/html; charset=UTF-8');
+            echo $twig->render('wrapper.twig', [
+                'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                'content' => $twig->render('cookie-policy.html', []),
+            ]);
+        });
+
+        $r->post('/api/subscriber-logout', function (Request $request) use ($conn, $twig) {
+            session_start();
+            session_destroy();
+            $requestUri = parse_url($_SERVER['HTTP_REFERER'])['path'];
+            header('Location: ' . $requestUri);
         });
 
         $r->post('/api/subscriber-login', function (Request $request) use ($conn, $twig) {
             $byEmail = (new SubscriberLister($conn))->list(Router::where('email', 'eq', $request->body['email']));
-            var_dump(password_verify($request->body['password'], $byEmail->getEntities()[0]->getPassword()));
+
+            $requestUri = parse_url($_SERVER['HTTP_REFERER'])['path'];
+
+            if ($byEmail->getCount() === 0) {
+                header('Location: ' .  $requestUri . "?isError=1&email=" . $request->body['email'] . "#subscriber-login");
+                return;
+            }
+
+            $subscriber = $byEmail->getEntities()[0];
+            if (!password_verify($request->body['password'], $subscriber->getPassword())) {
+                header('Location: ' .  $requestUri . "?isError=1&email=" . $request->body['email'] . "#subscriber-login");
+                return;
+            }
+
+            session_start();
+            $_SESSION['subscriberId'] = $subscriber->getId();
+            header('Location: /react-kurzus');
         });
 
         $r->get('/kodseged-kliens', function (Request $request) use ($conn, $twig) {
@@ -71,28 +246,35 @@ class PublicSite
             ]);
         });
 
-        $r->get('/elerhetoseg', function (Request $request) use ($conn, $twig) {
+        $r->get('/elerhetoseg', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
 
             echo $twig->render('wrapper.twig', [
-                'content' => 'contact.twig',
+                'content' => $twig->render('contact.twig', []),
+                'subscriberLabel' =>  $request->vars['subscriberLabel'],
                 'description' => 'Elérhetőség'
             ]);
         });
-        $r->get('/trening', function (Request $request) use ($conn, $twig) {
+        $r->get('/trening', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
-                'content' => 'training.twig',
+                'content' => $twig->render('training.twig', []),
+                'subscriberLabel' =>  $request->vars['subscriberLabel'],
                 'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.',
             ]);
         });
 
-        $r->post('/request-membership', function (Request $request) use ($conn, $twig) {
+        $r->post('/api/request-membership', function (Request $request) use ($conn, $twig) {
+
             $byEmail = (new SubscriberLister($conn))->list(Router::where('email', 'eq', $request->body['email']));
 
             if ($byEmail->getCount() !== 0) {
-                http_response_code(400);
-                echo json_encode(['error' => 'user already exists']);
+                header('Location: /feliratkozas?isError=1');
+                return;
+            }
+
+            if (!filter_var($request->body['email'], FILTER_VALIDATE_EMAIL)) {
+                header('Location: /feliratkozas?isError=2');
                 return;
             }
 
@@ -110,6 +292,8 @@ class PublicSite
                 'link' => Router::siteUrl() . "/megerosites/" . $token,
             ]);
             @(new Mailer())->sendMail($request->body['email'], 'Megerősítés egyetlen kattintással', $msg);
+
+            header('Location: /feliratkozas?isSuccess=1');
         });
 
         $r->get('/megerosites/{token}', function (Request $request) use ($conn, $twig) {
@@ -128,18 +312,12 @@ class PublicSite
             }
 
             $byToken = (new SubscriberPatcher($conn))->patch($subscriber->getId(), new PatchedSubscriber(null, null, 1, ''));
-            header('Location: /megerosites-sikeres');
+            session_start();
+            $_SESSION['subscriberId'] = $subscriber->getId();
+            header('Location: /react-kurzus?isSuccess=1');
         });
 
-        $r->get('/megerosites-sikeres', function (Request $request) use ($conn, $twig) {
-            header('Content-Type: text/html; charset=UTF-8');
-            echo $twig->render('wrapper.twig', [
-                'content' => 'verification-success.html',
-            ]);
-        });
-
-
-        $r->get('/cikkek', function (Request $request) use ($conn, $twig) {
+        $r->get('/cikkek', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
 
             header('Content-Type: text/html; charset=UTF-8');
             $posts = (new ListController(
@@ -161,20 +339,23 @@ class PublicSite
             ]);
 
             echo $twig->render('wrapper.twig', [
-                'posts' => alignToRows($posts->getResults(), 3),
-                'content' => 'posts.twig',
+                'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                'content' => $twig->render('posts.twig', [
+                    'posts' => alignToRows($posts->getResults(), 3),
+                ]),
             ]);
         });
 
-        $r->get('/adatvedelmi-szabalyzat', function (Request $request) use ($conn, $twig) {
+        $r->get('/adatvedelmi-szabalyzat', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
-                'content' => 'privacy-policy.html',
+                'content' => $twig->render('privacy-policy.html', []),
+                'subscriberLabel' =>  $request->vars['subscriberLabel'],
                 'description' => 'A Kódbázis adatvédelmi szabályzata'
             ]);
         });
 
-        $r->get('/{course-slug}-kurzus', function (Request $request) use ($conn, $twig) {
+        $r->get('/{course-slug}-kurzus', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             $courseBySlug = (new CourseLister($conn))->list(Router::where('slug', 'eq', $request->vars['course-slug']));
             $course = $courseBySlug->getEntities()[0] ?? null;
 
@@ -208,7 +389,7 @@ class PublicSite
 
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
-                'content' => 'course.twig',
+                'subscriberLabel' =>  $request->vars['subscriberLabel'],
                 'structuredData' => json_encode([
                     "@context" => "https://schema.org",
                     "@type" => "Course",
@@ -220,82 +401,19 @@ class PublicSite
                         "sameAs" => Router::siteUrl()
                     ]
                 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-                'course' => $course,
-                'episodes' => alignToRows($allEpisodesInCourse, 3),
+                'content' => $twig->render('course.twig', [
+                    'course' => $course,
+                    'episodes' => alignToRows($allEpisodesInCourse, 3),
+                ]),
             ]);
         });
 
-        $r->get('/{course-slug}-kurzus/{episode-slug}', Episodes::episodeSingleHandler($conn, $twig));
+        $r->get(
+            '/{course-slug}-kurzus/{episode-slug}',
+            $initSubscriberSession,
+            Episodes::episodeSingleHandler($conn, $twig)
+        );
 
-        $r->get('/watch/{course-slug}/{episode-filename}', function (Request $request) use ($conn, $twig) {
-
-            // read session -> userId
-            // getUser(userId)
-            // getCourse({course-slug})
-            //if user.courses doesn't contain course.id
-            // err
-
-            // serve file
-            $path = "../courses" . DIRECTORY_SEPARATOR . $request->vars['course-slug'] . DIRECTORY_SEPARATOR . $request->vars['episode-filename'];
-            serveVideo($path);
-        });
-
-        function serveVideo($path)
-        {
-            $fp = fopen($path, "rb");
-
-            if (!$fp) {
-                return;
-            }
-
-            $size = filesize($path);
-            $length = $size;
-            $start = 0;
-            $end = $size - 1;
-            header('Content-type: video/mp4');
-            header("Accept-Ranges: 0-$length");
-            if (isset($_SERVER['HTTP_RANGE'])) {
-                $c_start = $start;
-                $c_end = $end;
-                list(, $range) = explode('=', $_SERVER['HTTP_RANGE'], 2);
-                if (strpos($range, ',') !== false) {
-                    header('HTTP/1.1 416 Requested Range Not Satisfiable');
-                    header("Content-Range: bytes $start-$end/$size");
-                    exit;
-                }
-                if ($range == '-') {
-                    $c_start = $size - substr($range, 1);
-                } else {
-                    $range = explode('-', $range);
-                    $c_start = $range[0];
-                    $c_end = (isset($range[1]) && is_numeric($range[1])) ? $range[1] : $size;
-                }
-                $c_end = ($c_end > $end) ? $end : $c_end;
-                if ($c_start > $c_end || $c_start > $size - 1 || $c_end >= $size) {
-                    header('HTTP/1.1 416 Requested Range Not Satisfiable');
-                    header("Content-Range: bytes $start-$end/$size");
-                    exit;
-                }
-                $start = $c_start;
-                $end = $c_end;
-                $length = $end - $start + 1;
-                fseek($fp, $start);
-                header('HTTP/1.1 206 Partial Content');
-            }
-            header("Content-Range: bytes $start-$end/$size");
-            header("Content-Length: " . $length);
-            $buffer = 1024 * 8;
-            while (!feof($fp) && ($p = ftell($fp)) <= $end) {
-                if ($p + $buffer > $end) {
-                    $buffer = $end - $p + 1;
-                }
-                set_time_limit(0);
-                echo fread($fp, $buffer);
-                flush();
-            }
-            fclose($fp);
-            exit;
-        }
 
         $r->get('/embeddable/gif/{id}/gif', function (Request $request) use ($conn, $twig) {
             header('Access-Control-Allow-Origin: *');
@@ -312,13 +430,7 @@ class PublicSite
             $content = file_get_contents('../embeddable/codeAssistant/' . $raw['filechangesName']);
             echo $content;
         });
-        $r->get('/embeddable/codeAssistant/{id}/video', function (Request $request) use ($conn, $twig) {
-            header('Access-Control-Allow-Origin: *');
-            $item = (new SqlByIdGetter($conn))->byId($request->vars['id']);
-            $raw = json_decode($item->getRaw(), true);
-            $path = "../embeddable/codeAssistant/" . $raw['videoFileName'];
-            serveVideo($path);
-        });
+
         $r->get('/embeddable/codeAssistantGif/{id}/fileChanges', function (Request $request) use ($conn, $twig) {
             header('Access-Control-Allow-Origin: *');
             $item = (new SqlByIdGetter($conn))->byId($request->vars['id']);
@@ -356,6 +468,6 @@ class PublicSite
             echo $content;
         });
 
-        $r->get('/cikkek/{slug}', Posts::postSingleHandler($conn, $twig));
+        $r->get('/cikkek/{slug}', $initSubscriberSession, Posts::postSingleHandler($conn, $twig));
     }
 }

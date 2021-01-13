@@ -2,8 +2,6 @@
 	<div class="col-sm-12">
 		<div class="card">
 			<div class="card-body w-100 p-0" id="hero-spot2">
-
-
 				{% if isLoggedIn %}
 					<div class="card-title">
 						<h1 class="mb-4 mt-5 text-success">
@@ -39,16 +37,10 @@
 					<div style="margin-bottom:60px"></div>
 
 					<div class="row">
-						<div class="col-sm-6">
-							{% if isPasswordModificationSuccess %}
-								<h1 class="mb-4 mt-5 text-success">
-									Jelszó módosítása sikeres!
-								</h1>
-							{% endif %}
-						</div>
+						<div class="col-sm-6"></div>
 						<div class="col-sm-6">
 							<div class="p-3">
-								{% include 'subscriber-login-form.twig' with {'loginError': loginError, 'email': email}  %}
+								{% include 'subscriber-registration-form.twig' with {'isSuccess': isSuccess, 'isError': isError}  %}
 							</div>
 						</div>
 					</div>
