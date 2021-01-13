@@ -35,33 +35,31 @@
 								<span class="lead mr-1">
 									❮
 								</span>
-								{{previousEpisode.title}}</a>
-						</div>
-						<div class="col-sm-6">
+								{{previousEpisode.title}}
+							</a>
+						{% endif %}
+					</div>
+					<div class="col-sm-6">
+						{% if nextEpisode %}
 							<a class="float-right" href="/react-kurzus/{{nextEpisode.slug}}">
 								{{nextEpisode.title}}
 								<span class="lead ml-1">
 									❯
 								</span>
 							</a>
+						{% else %}
+							<h2>Következő rész hamarosan...</h2>
 						{% endif %}
-						{% if nextEpisode %}
-						</span>
-					</a>
-				{% else %}
-					<h2>Következő rész hamarosan...</h2>
-				{% endif %}
-			</div>
-		</div>
+					</div>
+				</div>
 
-		<div id="fb-root"></div>
-	</div>
-	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0&appId=705894336804251&autoLogAppEvents=1" nonce="GLaxzOjV"></script>
-	<div class="fb-like" data-href="{{url}}" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
+				<div id="fb-root"></div>
+			</div>
+			<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0&appId=705894336804251&autoLogAppEvents=1" nonce="GLaxzOjV"></script>
+			<div class="fb-like" data-href="{{url}}" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
 		</div>
 	</div>
 </div>
-
 <script>
 	const pos = parseInt(document.querySelector('.app').dataset.position) - 2;
 const epWidth = document.querySelector('.item').offsetWidth + 10;
