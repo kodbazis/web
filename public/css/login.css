@@ -899,8 +899,9 @@ body {
   color: #b3bfc8;
 }
 ._2lU9f._1Bymy {
-  height: 1.75rem;
-  padding: 0.25rem 0.5rem 0.5rem;
+  height: 2.2rem;
+  padding-left: 3px;
+  padding-right: 3px;
   opacity: 1;
   transition: height 0.1s ease, padding 0.1s ease, opacity 0.2s ease 150ms;
 }
