@@ -15,6 +15,10 @@ use Kodbazis\Generated\Repository\Subscriber\SqlLister as SubscriberLister;
 use Kodbazis\Generated\Repository\Subscriber\SqlPatcher as SubscriberPatcher;
 use Kodbazis\Generated\Repository\Embeddable\SqlByIdGetter;
 use Kodbazis\Generated\Repository\Course\SqlLister as CourseLister;
+use Kodbazis\Generated\Repository\SubscriberCourse\SqlLister as SubscriberCourseLister;
+use Kodbazis\Generated\Repository\SubscriberCourse\SqlSaver as SubscriberCourseSaver;
+use Kodbazis\Generated\Repository\SubscriberCourse\SqlDeleter as SubscriberCourseDeleter;
+use Kodbazis\Generated\Repository\SubscriberCourse\SqlByIdGetter as SubscriberCourseById;
 use Kodbazis\Generated\Repository\Episode\SqlLister as EpisodeLister;
 use Kodbazis\Episodes;
 use Kodbazis\Generated\Listing\Clause;
@@ -23,36 +27,39 @@ use Kodbazis\Generated\Listing\OrderBy;
 use Kodbazis\Generated\Listing\Query;
 use Kodbazis\Generated\Subscriber\Patch\PatchedSubscriber;
 use Kodbazis\Generated\Subscriber\Save\NewSubscriber;
+use Kodbazis\Generated\SubscriberCourse\Save\NewSubscriberCourse;
+use SzamlaAgent\Document\Receipt\Receipt;
 
 class PublicSite
 {
 
-    public static function getRoutes(Pipeline $r, mysqli $conn, Environment $twig)
+    public static function initSubscriberSession($conn)
     {
-
-        $initSubscriberSession = function (Request $request) use ($conn, $twig) {
+        return function (Request $request) use ($conn) {
             session_start();
-            $subscriberEmail = '';
+            $subscriber = null;
             if (isset($_SESSION['subscriberId'])) {
                 $byId = (new SubscriberLister($conn))->list(Router::where('id', 'eq', $_SESSION['subscriberId']));
                 if ($byId->getCount() > 0) {
-                    $em = $byId->getEntities()[0]->getEmail();
-                    $subscriberEmail = explode('@', $em)[0];
+                    $subscriber = $byId->getEntities()[0];
                 }
             }
-            $request->vars['subscriberLabel'] = $subscriberEmail;
+            $request->vars['subscriber'] = $subscriber;
             return $request;
         };
+    }
 
+    public static function getRoutes(Pipeline $r, mysqli $conn, Environment $twig)
+    {
 
+        $initSubscriberSession = self::initSubscriberSession($conn);
 
-
-        $r->get('/', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+        $r->get('/', self::initSubscriberSession($conn), function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
 
             echo $twig->render('wrapper.twig', [
                 'content' => $twig->render('home.twig', []),
-                'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                'subscriberLabel' =>  getNick($request->vars),
                 'structuredData' => json_encode([
                     "@context" => "https://schema.org",
                     "@type" => "Organization",
@@ -69,7 +76,7 @@ class PublicSite
         $r->get('/elfelejtett-jelszo', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
 
-            if ($request->vars['subscriberLabel']) {
+            if ($request->vars['subscriber']) {
                 header('Location: /');
                 return;
             }
@@ -79,7 +86,7 @@ class PublicSite
                     'isError' => isset($_GET['isError']),
                     'emailSent' => isset($_GET['emailSent']),
                 ]),
-                'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                'subscriberLabel' =>  getNick($request->vars),
                 'styles' => [
                     ['path' => 'css/login.css']
                 ],
@@ -89,7 +96,7 @@ class PublicSite
         $r->post('/api/forgot-password', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
 
-            if ($request->vars['subscriberLabel']) {
+            if ($request->vars['subscriber']) {
                 header('Location: /');
                 return;
             }
@@ -120,6 +127,12 @@ class PublicSite
         });
 
         $r->get('/jelszo-megvaltoztatasa/{token}', function (Request $request) use ($conn, $twig) {
+            $byToken = (new SubscriberLister($conn))->list(Router::where('verificationToken', 'eq', $request->vars['token']));
+
+            if ($byToken->getCount() === 0) {
+                header('Location: /');
+                return;
+            }
             echo $twig->render('wrapper.twig', [
                 'content' => $twig->render('create-new-password.twig', [
                     'token' => $request->vars['token'],
@@ -147,7 +160,7 @@ class PublicSite
 
             $password = password_hash($request->body['password'], PASSWORD_DEFAULT);
             $byToken = (new SubscriberPatcher($conn))->patch($subscriber->getId(), new PatchedSubscriber(null, $password, 1, ''));
-            header('Location: /bejelentkezes?isPasswordModificationSuccess=1');
+            header('Location: /react-kurzus?isPasswordModificationSuccess=1');
         });
 
         $r->get('/jelszo-modositasa-sikeres', function (Request $request) use ($conn, $twig) {
@@ -160,11 +173,11 @@ class PublicSite
         $r->get('/bejelentkezes', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
-                'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                'subscriberLabel' =>  getNick($request->vars),
                 'content' => $twig->render('subscriber-login.twig', [
-                    'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                    'subscriberLabel' =>  getNick($request->vars),
                     'isLoggedIn' => isset($_SESSION['subscriberId']),
-                    'isError' => isset($_GET['isError']),
+                    'error' => $_GET['error'] ?? '',
                     'loginSuccess' => isset($_GET['loginSuccess']),
                     'isPasswordModificationSuccess' => isset($_GET['isPasswordModificationSuccess']),
                     'email' => $_GET['email'] ?? '',
@@ -178,12 +191,13 @@ class PublicSite
         $r->get('/feliratkozas', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
-                'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                'subscriberLabel' =>  getNick($request->vars),
                 'content' => $twig->render('subscriber-registration.twig', [
                     'isLoggedIn' => isset($_SESSION['subscriberId']),
-                    'isSuccess' => isset($_GET['isSuccess']),
-                    'isError' => $_GET['isError'] ?? '0',
-                    'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                    'registrationSuccessful' => isset($_GET['registrationSuccessful']),
+                    'registrationEmailSent' => isset($_GET['registrationEmailSent']),
+                    'error' => $_GET['error'] ?? '',
+                    'subscriberLabel' =>  getNick($request->vars),
                     'email' => $_GET['email'] ?? '',
                 ]),
                 'styles' => [
@@ -195,7 +209,7 @@ class PublicSite
         $r->get('/sutik-kezelese', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
-                'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                'subscriberLabel' =>  getNick($request->vars),
                 'content' => $twig->render('cookie-policy.html', []),
             ]);
         });
@@ -210,39 +224,46 @@ class PublicSite
         $r->post('/api/subscriber-login', function (Request $request) use ($conn, $twig) {
             $byEmail = (new SubscriberLister($conn))->list(Router::where('email', 'eq', $request->body['email']));
 
-            $requestUri = parse_url($_SERVER['HTTP_REFERER'])['path'];
+            $parsed = parse_url($_SERVER['HTTP_REFERER']);
+            $requestUri = $parsed['path'];
+
 
             if ($byEmail->getCount() === 0) {
-                header('Location: ' .  $requestUri . "?isError=1&email=" . $request->body['email'] . "#subscriber-login");
+                $params = [
+                    'error=invalidCredentials',
+                    'email=' . $request->body['email'],
+                ];
+                header('Location: ' .  $requestUri . Router::mergeQueries($_SERVER['HTTP_REFERER'], $params));
                 return;
             }
 
+
+
+
             $subscriber = $byEmail->getEntities()[0];
             if (!password_verify($request->body['password'], $subscriber->getPassword())) {
-                header('Location: ' .  $requestUri . "?isError=1&email=" . $request->body['email'] . "#subscriber-login");
+                $params = [
+                    'error=invalidCredentials',
+                    'email=' . $request->body['email'],
+                ];
+
+                header('Location: ' .  $requestUri . Router::mergeQueries($_SERVER['HTTP_REFERER'], $params));
                 return;
             }
 
             session_start();
             $_SESSION['subscriberId'] = $subscriber->getId();
-            header('Location: /react-kurzus');
+            $params = [
+                'loginSuccess=1',
+            ];
+            header('Location: ' .  $requestUri . Router::mergeQueries($_SERVER['HTTP_REFERER'], $params));
         });
 
         $r->get('/kodseged-kliens', function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
-
-            $getFileExtension = fn ($fileName) => pathinfo($fileName)['extension'];
-
-            $filterExtension = fn ($ext) => fn ($item) => $getFileExtension($item) === $ext;
-            $codeAssistScripts = array_filter(scandir('../public/kodseged/js'), $filterExtension('js'));
-            $codeAssistStyles = array_filter(scandir('../public/kodseged/css'), $filterExtension('css'));
-
-            $codeAssistScriptPaths = array_map(fn ($item) => ['path' => "kodseged/js/$item"], $codeAssistScripts);
-            $codeAssistStylePaths = array_map(fn ($item) => ['path' => "kodseged/css/$item"], $codeAssistStyles);
-
             echo $twig->render('code-assistant-client.twig', [
-                'scripts' => $codeAssistScriptPaths,
-                'styles' => $codeAssistStylePaths,
+                'scripts' => Embeddables::getKodsegedScripts(),
+                'styles' => Embeddables::getKodsegedStyles(),
             ]);
         });
 
@@ -251,7 +272,7 @@ class PublicSite
 
             echo $twig->render('wrapper.twig', [
                 'content' => $twig->render('contact.twig', []),
-                'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                'subscriberLabel' =>  getNick($request->vars),
                 'description' => 'Elérhetőség'
             ]);
         });
@@ -259,7 +280,7 @@ class PublicSite
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
                 'content' => $twig->render('training.twig', []),
-                'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                'subscriberLabel' =>  getNick($request->vars),
                 'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.',
             ]);
         });
@@ -269,12 +290,15 @@ class PublicSite
             $byEmail = (new SubscriberLister($conn))->list(Router::where('email', 'eq', $request->body['email']));
 
             if ($byEmail->getCount() !== 0) {
-                header('Location: /feliratkozas?isError=1');
+                $params = ['error=emailTaken'];
+                header('Location: ' .  $_SERVER['HTTP_REFERER']  . Router::mergeQueries($_SERVER['HTTP_REFERER'], $params));
+
                 return;
             }
 
             if (!filter_var($request->body['email'], FILTER_VALIDATE_EMAIL)) {
-                header('Location: /feliratkozas?isError=2');
+                $params = ['error=invalidEmail'];
+                header('Location: ' .  $_SERVER['HTTP_REFERER']  . Router::mergeQueries($_SERVER['HTTP_REFERER'], $params));
                 return;
             }
 
@@ -289,11 +313,12 @@ class PublicSite
 
             $msg = $twig->render('verification-email.twig', [
                 'email' => $request->body['email'],
-                'link' => Router::siteUrl() . "/megerosites/" . $token,
+                'link' => Router::siteUrl() . "/megerosites/" . $token . "?referer=" . $_SERVER['HTTP_REFERER'],
             ]);
             @(new Mailer())->sendMail($request->body['email'], 'Megerősítés egyetlen kattintással', $msg);
 
-            header('Location: /feliratkozas?isSuccess=1');
+            $params = ['registrationEmailSent=1'];
+            header('Location: ' .  $_SERVER['HTTP_REFERER']  . Router::mergeQueries($_SERVER['HTTP_REFERER'], $params));
         });
 
         $r->get('/megerosites/{token}', function (Request $request) use ($conn, $twig) {
@@ -314,7 +339,9 @@ class PublicSite
             $byToken = (new SubscriberPatcher($conn))->patch($subscriber->getId(), new PatchedSubscriber(null, null, 1, ''));
             session_start();
             $_SESSION['subscriberId'] = $subscriber->getId();
-            header('Location: /react-kurzus?isSuccess=1');
+            $requestUri = parse_url($_GET['referer'])['path'];
+            $params = ['registrationSuccessful=1'];
+            header('Location: ' .  $requestUri . Router::mergeQueries($_GET['referer'], $params));
         });
 
         $r->get('/cikkek', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
@@ -339,7 +366,7 @@ class PublicSite
             ]);
 
             echo $twig->render('wrapper.twig', [
-                'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                'subscriberLabel' =>  getNick($request->vars),
                 'content' => $twig->render('posts.twig', [
                     'posts' => alignToRows($posts->getResults(), 3),
                 ]),
@@ -350,70 +377,117 @@ class PublicSite
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
                 'content' => $twig->render('privacy-policy.html', []),
-                'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                'subscriberLabel' =>  getNick($request->vars),
                 'description' => 'A Kódbázis adatvédelmi szabályzata'
             ]);
         });
 
-        $r->get('/{course-slug}-kurzus', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
-            $courseBySlug = (new CourseLister($conn))->list(Router::where('slug', 'eq', $request->vars['course-slug']));
-            $course = $courseBySlug->getEntities()[0] ?? null;
+        $r->get('/adattovabbitasi-nyilatkozat', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+            header('Content-Type: text/html; charset=UTF-8');
+            echo $twig->render('wrapper.twig', [
+                'content' => $twig->render('simplepay-legal.html', []),
+                'subscriberLabel' =>  getNick($request->vars),
+                'description' => 'A Kódbázis adatvédelmi szabályzata'
+            ]);
+        });
+        $r->get('/aszf', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+            header('Content-Type: text/html; charset=UTF-8');
+            echo $twig->render('wrapper.twig', [
+                'content' => $twig->render('aszf.html', []),
+                'subscriberLabel' =>  getNick($request->vars),
+                'description' => 'A Kódbázis általános szerződési feltételei'
+            ]);
+        });
 
-            if (!$course) {
+
+        $r->post('/api/order-course/{courseId}', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+
+
+            $courseById = (new CourseLister($conn))->list(Router::where('id', 'eq', $request->vars['courseId']));
+
+            if (!$courseById->getCount()) {
+                header('Location: /' . $courseById->getEntities()[0]->getSlug());
                 return;
             }
 
-            $query = new Query(
+            $subscriberCourses = (new SubscriberCourseLister($conn))->list(new Query(
                 1000,
                 0,
                 new Filter(
                     'and',
-                    new Clause('eq', 'courseId', $course->getId()),
-                    new Clause('eq', 'isActive', 1),
+                    new Clause('eq', 'subscriberId', $_SESSION['subscriberId']),
+                    new Clause('eq', 'courseId', $request->vars['courseId']),
                 ),
-                new OrderBy('position', 'asc')
+                new OrderBy('id', 'asc')
+            ));
+
+            if ($subscriberCourses->getCount()) {
+                header('Location: /' . $courseById->getEntities()[0]->getSlug());
+                return;
+            }
+
+            if ($request->body['purchaseType'] === 'invoice') {
+                $fields = ['name', 'taxNumber', 'zip', 'city', 'address'];
+                $isValid = true;
+                foreach ($fields as $field) {
+                    if (!isset($request->body[$field]) || !$request->body[$field]) {
+                        $isValid = false;
+                        break;
+                    }
+                }
+                if (!$isValid) {
+                    $params = ['error=requiredFieldMissing'];
+                    header('Location: ' .  $_SERVER['HTTP_REFERER']  . Router::mergeQueries($_SERVER['HTTP_REFERER'], $params));
+                    return;
+                }
+            }
+
+            (new SubscriberCourseSaver($conn))->Save(
+                new NewSubscriberCourse(
+                    $_SESSION['subscriberId'],
+                    $request->vars['courseId'],
+                    $request->body['name'] ?? '',
+                    $request->body['taxNumber'] ?? '',
+                    $request->body['zip'] ?? 0,
+                    $request->body['city'] ?? '',
+                    $request->body['address'] ?? '',
+                    $request->body['purchaseType'],
+                    '',
+                    false,
+                    false,
+                    false,
+                    time(),
+                )
             );
-
-            $allEpisodesInCourse = (new EpisodeLister($conn))->list($query)->getEntities();
-
-            // render course description
-            // render course img
-            // render course episodes
-            // render course intro video
-
-
-            // is user subscribed
-            // render more episodes
-            // else
-            // render subscription form
-
-            header('Content-Type: text/html; charset=UTF-8');
-            echo $twig->render('wrapper.twig', [
-                'subscriberLabel' =>  $request->vars['subscriberLabel'],
-                'structuredData' => json_encode([
-                    "@context" => "https://schema.org",
-                    "@type" => "Course",
-                    "name" => $course->getTitle() . ' kurzus KEZDŐ FEJLESZTŐKNEK',
-                    "description" => $course->getDescription(),
-                    "provider" => [
-                        "@type" => "Organization",
-                        "name" => "Kódbázis",
-                        "sameAs" => Router::siteUrl()
-                    ]
-                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-                'content' => $twig->render('course.twig', [
-                    'course' => $course,
-                    'episodes' => alignToRows($allEpisodesInCourse, 3),
-                ]),
-            ]);
+            header('Location: /' . $courseById->getEntities()[0]->getSlug() . '#paymentPhase');
         });
 
-        $r->get(
-            '/{course-slug}-kurzus/{episode-slug}',
-            $initSubscriberSession,
-            Episodes::episodeSingleHandler($conn, $twig)
-        );
+        $r->post('/api/delete-course-order/{subscriberCourseId}', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+            if (!isset($_SESSION['subscriberId'])) {
+                header('Location: /react-kurzus');
+                return;
+            }
 
+
+            (new SubscriberCourseDeleter($conn))->delete($request->vars['subscriberCourseId']);
+            header('Location: /react-kurzus');
+        });
+
+        $r->get('/api/isPaymentVerified/{subscriberCourseId}', $initSubscriberSession, function (Request $request) use ($conn) {
+            header('Content-Type: application/json');
+            if (!isset($_SESSION['subscriberId'])) {
+                http_response_code(401);
+                json_encode(['error', 'unauthorized']);
+                return;
+            }
+            $byId = (new SubscriberCourseById($conn))->byId($request->vars['subscriberCourseId']);
+            if ($byId->getSubscriberId() !== $_SESSION['subscriberId']) {
+                http_response_code(401);
+                json_encode(['error', 'unauthorized']);
+                return;
+            }
+            echo json_encode(['isVerified' => (bool)$byId->getIsVerified()]);
+        });
 
         $r->get('/embeddable/gif/{id}/gif', function (Request $request) use ($conn, $twig) {
             header('Access-Control-Allow-Origin: *');
@@ -469,5 +543,189 @@ class PublicSite
         });
 
         $r->get('/cikkek/{slug}', $initSubscriberSession, Posts::postSingleHandler($conn, $twig));
+
+        $r->get('/{course-slug}', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+            header('Content-Type: text/html; charset=UTF-8');
+            $courseBySlug = (new CourseLister($conn))->list(Router::where('slug', 'eq', $request->vars['course-slug']));
+            $course = $courseBySlug->getEntities()[0] ?? null;
+
+            if (!$course) {
+                echo $twig->render('404.twig');
+                return;
+            }
+
+            if (!isset($_SESSION['subscriberId'])) {
+                // TODO render promo
+                echo $twig->render('wrapper.twig', [
+                    'content' => $twig->render('react-paywall.twig', [
+                        'content' => $twig->render('sub-reg-panel.twig', [
+                            'isLogin' => isset($_GET['isLogin']),
+                            'isLoggedIn' => isset($_SESSION['subscriberId']),
+                            'loginSuccess' => isset($_GET['loginSuccess']),
+                            'registrationEmailSent' => isset($_GET['registrationEmailSent']),
+                            'isPasswordModificationSuccess' => isset($_GET['isPasswordModificationSuccess']),
+                            'error' => $_GET['error'] ?? '',
+                            'email' => $_GET['email'] ?? '',
+                        ]),
+                    ]),
+                    'subscriberLabel' =>  getNick($request->vars),
+                    'styles' => [
+                        ['path' => 'css/login.css'],
+                        ['path' => 'css/promo.css'],
+                        ...Embeddables::getKodsegedStyles(),
+                    ],
+                    'scripts' => [
+                        ...Embeddables::getKodsegedScripts(),
+                    ],
+                ]);
+                return;
+            }
+
+
+            $subscriberCourses = (new SubscriberCourseLister($conn))->list(new Query(
+                1000,
+                0,
+                new Filter(
+                    'and',
+                    new Clause('eq', 'subscriberId', $_SESSION['subscriberId']),
+                    new Clause('eq', 'courseId', $course->getId()),
+                ),
+                new OrderBy('id', 'asc')
+            ));
+
+            // not ordered
+            if (!$subscriberCourses->getCount()) {
+                echo $twig->render('wrapper.twig', [
+                    'content' => $twig->render('react-paywall.twig', [
+                        'content' => $twig->render('paywall-form.twig', [
+                            'course' => $course,
+                            'isInvoice' => isset($_GET['isInvoice']),
+                            'error' => $_GET['error'] ?? '',
+                            'registrationSuccessful' => isset($_GET['registrationSuccessful']),
+                        ])
+                    ]),
+                    'subscriberLabel' =>  getNick($request->vars),
+                    'styles' => [
+                        ...Embeddables::getKodsegedStyles(),
+                        ['path' => 'css/login.css'],
+                        ['path' => 'css/promo.css'],
+                    ],
+                    'scripts' => [
+                        ...Embeddables::getKodsegedScripts(),
+                    ],
+                ]);
+                return;
+            }
+
+            // not payed            
+            $subscriberCourse = $subscriberCourses->getEntities()[0];
+
+            if (!$subscriberCourse->getIsPayed()) {
+                echo $twig->render('wrapper.twig', [
+                    'content' => $twig->render('react-paywall.twig', [
+                        'content' => $twig->render('paywall-form.twig', [
+                            'subscriberCourse' => $subscriberCourse,
+                            'course' => $course,
+                            'isInvoice' => $subscriberCourse->getPurchaseType() === 'invoice',
+                            'error' => $_GET['error'] ?? '',
+                            'transactionId' => $_GET['transactionId'] ?? '',
+                            'paymentUrl' => PaymentRoutes::getPaymentUrl($course, $subscriberCourse, $request->vars['subscriber'], $conn),
+                        ])
+                    ]),
+                    'subscriberLabel' =>  getNick($request->vars),
+                    'styles' => [
+                        ['path' => 'css/login.css'],
+                        ['path' => 'css/promo.css'],
+                        ...Embeddables::getKodsegedStyles(),
+                    ],
+                    'scripts' => [
+                        ...Embeddables::getKodsegedScripts(),
+                    ],
+                ]);
+                return;
+            }
+
+            if (!$subscriberCourse->getIsVerified()) {
+
+                echo $twig->render('wrapper.twig', [
+                    'content' => $twig->render('react-paywall.twig', [
+                        'content' => $twig->render('paywall-form.twig', [
+                            'subscriberCourse' => $subscriberCourse,
+                            'course' => $course,
+                            'isInvoice' => $subscriberCourse->getPurchaseType() === 'invoice',
+                            'error' => $_GET['error'] ?? '',
+                            'transactionSuccessful' => $_GET['transactionSuccessful'] ?? '',
+                            'transactionId' => $_GET['transactionId'] ?? '',
+                            'paymentUrl' => '',
+                            'subscriber' => $request->vars['subscriber'],
+                        ]),
+                    ]),
+                    'subscriberLabel' =>  getNick($request->vars),
+                    'styles' => [
+                        ['path' => 'css/login.css'],
+                        ['path' => 'css/promo.css'],
+                        ...Embeddables::getKodsegedStyles(),
+                    ],
+                    'scripts' => [
+                        ...Embeddables::getKodsegedScripts(),
+                    ],
+                ]);
+                return;
+            }
+
+            $query = new Query(
+                1000,
+                0,
+                new Filter(
+                    'and',
+                    new Clause('eq', 'courseId', $course->getId()),
+                    new Clause('eq', 'isActive', 1),
+                ),
+                new OrderBy('position', 'asc')
+            );
+
+            $allEpisodesInCourse = (new EpisodeLister($conn))->list($query)->getEntities();
+
+            // render course description
+            // render course img
+            // render course episodes
+            // render course intro video
+
+
+            echo $twig->render('wrapper.twig', [
+                'subscriberLabel' =>  getNick($request->vars),
+                'structuredData' => json_encode([
+                    "@context" => "https://schema.org",
+                    "@type" => "Course",
+                    "name" => $course->getTitle() . ' kurzus KEZDŐ FEJLESZTŐKNEK',
+                    "description" => $course->getDescription(),
+                    "provider" => [
+                        "@type" => "Organization",
+                        "name" => "Kódbázis",
+                        "sameAs" => Router::siteUrl()
+                    ]
+                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'content' => $twig->render('course.twig', [
+                    'course' => $course,
+                    'episodes' => alignToRows($allEpisodesInCourse, 3),
+                    'isSuccess' => $_GET['isSuccess'] ?? '',
+                ]),
+            ]);
+        });
+
+        $r->get(
+            '/{course-slug}/{episode-slug}',
+            $initSubscriberSession,
+            Episodes::episodeSingleHandler($conn, $twig)
+        );
     }
+}
+
+
+function getNick($vars)
+{
+    if (!isset($vars['subscriber'])) {
+        return '';
+    }
+    return explode('@', $vars['subscriber']->getEmail())[0] ?? '';
 }

@@ -46,9 +46,10 @@ class Router
             Courses::class,
             Episodes::class,
             Embeddables::class,
-            PublicSite::class,
+            PaymentRoutes::class,
             ExampleApis::class,
             Feedbacks::class,
+            PublicSite::class,
         ];
 
 
@@ -137,6 +138,21 @@ class Router
         return file_put_contents(__DIR__ . '/public/images/' . $fullName, file_get_contents($image['tmp_name'])) ?
             $fullName :
             '';
+    }
+
+    public static function mergeQueries($url, $params)
+    {
+        $qs = '?' . implode('&', $params);
+        $url_parsed = parse_url($url);
+        $qs_parsed = parse_url($qs);
+
+        $args = array(
+            $url_parsed['query'] ?? '',
+            $qs_parsed['query'] ?? '',
+        );
+
+        $res =  array_values(array_unique(explode('&', implode('&', $args))));
+        return '?' . implode('&', $res);
     }
 
 

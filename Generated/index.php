@@ -8,6 +8,7 @@ use Kodbazis\Generated\Route\Episode;
 use Kodbazis\Generated\Route\Embeddable;
 use Kodbazis\Generated\Route\Feedback;
 use Kodbazis\Generated\Route\Subscriber;
+use Kodbazis\Generated\Route\SubscriberCourse;
 
 use Kodbazis\Generated\ValidationError;
 use Kodbazis\Generated\OperationError;
@@ -43,10 +44,6 @@ $conn = new mysqli(
 $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) use ($conn) {
 
     try {
-    
-      if (method_exists('\Kodbazis\Router', 'registerRoutes')) {
-          (new \Kodbazis\Router())->registerRoutes($r, $conn);
-      }
 
       
       $r->post('/api/feedbacks', [
@@ -56,6 +53,10 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) use ($conn
   
 
      \Kodbazis\Generated\Route\Auth\Auth::getRoutes($r, $conn);
+
+     if (method_exists('\Kodbazis\Router', 'registerRoutes')) {
+        (new \Kodbazis\Router())->registerRoutes($r, $conn);
+    }
 
     } catch (Error $e) {
         var_dump($e->getMessage());

@@ -24,7 +24,7 @@ class SqlUpdater implements Updater
           
           $stmt = $this->connection->prepare(
               'UPDATE `courses` SET 
-                `title` = ?, `slug` = ?, `imgUrl` = ?, `description` = ?, `isActive` = ?
+                `title` = ?, `slug` = ?, `imgUrl` = ?, `description` = ?, `isActive` = ?, `price` = ?
                 WHERE `id` = ?;'
           );
           
@@ -33,14 +33,15 @@ class SqlUpdater implements Updater
         $imgUrl= $entity->getImgUrl();
         $description= $entity->getDescription();
         $isActive= $entity->getIsActive();
+        $price= $entity->getPrice();
          
           $stmt->bind_param(
-              "ssssis",
-               $title, $slug, $imgUrl, $description, $isActive, $id        
+              "ssssiis",
+               $title, $slug, $imgUrl, $description, $isActive, $price, $id        
           );
           $stmt->execute();
           
-          return new Course($id, $entity->getTitle(),$entity->getSlug(),$entity->getImgUrl(),$entity->getDescription(),$byId->getCreatedAt(),$entity->getIsActive());
+          return new Course($id, $entity->getTitle(),$entity->getSlug(),$entity->getImgUrl(),$entity->getDescription(),$byId->getCreatedAt(),$entity->getIsActive(),$entity->getPrice());
       
       } catch (\Error $exception) {
           if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {

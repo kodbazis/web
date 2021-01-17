@@ -65,50 +65,28 @@ class Embeddables
                 ]);
             }
         );
+
         $r->get(
             '/admin/beagyazhatok/megtekintes/{id}',
             [Router::class, 'setCsrfToken'],
             [Auth::class, 'validate'],
             function (Request $request) use ($conn, $twig) {
-
-                $getFileExtension = function ($fileName) {
-                    $info = pathinfo($fileName);
-                    return $info['extension'] ?? '';
-                };
-
-                $filterExtension = fn ($ext) => fn ($item) => $getFileExtension($item) === $ext;
-                $codeAssistScripts = array_filter(scandir('../public/kodseged/js'), $filterExtension('js'));
-                $codeAssistStyles = array_filter(scandir('../public/kodseged/css'), $filterExtension('css'));
-
-                $codeAssistScriptPaths = array_map(fn ($item) => ['path' => "kodseged/js/$item"], $codeAssistScripts);
-                $codeAssistStylePaths = array_map(fn ($item) => ['path' => "kodseged/css/$item"], $codeAssistStyles);
+                header("Content-Type: text/html");
 
 
                 $embeddables = Embeddables::getEmbeddables([$request->vars['id']], $conn);
-                $apps = array_filter($embeddables, fn ($em) => $em->getType() === 'application');
-                $appStyles = array_map(function ($app) use ($filterExtension) {
-                    $raw = json_decode($app->getRaw(), true);
-                    $codeAssistScripts2 = array_filter(scandir('../public/app/' . $raw['directoryName']), $filterExtension('css'));
-                    return array_map(fn ($item) => ['path' => "app/" . $raw['directoryName'] . "/$item"], $codeAssistScripts2);
-                }, $apps);
-                $appScripts = array_map(function ($app) use ($filterExtension) {
-                    $raw = json_decode($app->getRaw(), true);
-                    $codeAssistScripts2 = array_filter(scandir('../public/app/' . $raw['directoryName']), $filterExtension('js'));
-                    return array_map(fn ($item) => ['path' => "app/" . $raw['directoryName'] . "/$item"], $codeAssistScripts2);
-                }, $apps);
-
-
                 $templates = Embeddables::mapEmbeddablesToTemplates($embeddables, $twig);
 
-                header("Content-Type: text/html");
+                $apps = array_filter($embeddables, fn ($em) => $em->getType() === 'application');
+              
                 $twig->display('dashboard.twig', [
                     'csrfToken' => $request->params['csrfToken'],
                     'mainLabel' => 'Beágyazható',
                     'content' => "embeddable-single.twig",
                     'embeddable' => $templates[0]['content'],
                     'activePath' => '/admin/beagyazhatok',
-                    'scripts' => array_merge($codeAssistScriptPaths, ...$appScripts),
-                    'styles' => array_merge($codeAssistStylePaths, ...$appStyles),
+                    'scripts' => [...self::getKodsegedScripts(), ...self::getAppScripts($apps)],
+                    'styles' => [...self::getKodsegedStyles(), ...self::getAppStyles($apps)],
                 ]);
             }
         );
@@ -216,7 +194,7 @@ class Embeddables
                         ])
                     ];
                 }
-                
+
                 if ($request->body['type'] === 'application') {
                     $request->body = [
                         'name' => $request->body['name'],
@@ -309,6 +287,46 @@ class Embeddables
             }
         );
     }
+
+    public static function getFileExtension($fileName)
+    {
+        $info = pathinfo($fileName);
+        return $info['extension'] ?? '';
+    }
+
+    public static function filterExtension($ext)
+    {
+        return function ($item) use ($ext) {
+            return self::getFileExtension($item) === $ext;
+        };
+    }
+    public static function getKodsegedScripts()
+    {
+        $codeAssistScripts = array_filter(scandir('../public/kodseged/js'), self::filterExtension('js'));
+        return array_values(array_map(fn ($item) => ['path' => "kodseged/js/$item"], $codeAssistScripts));
+    }
+    public static function getKodsegedStyles()
+    {
+        $codeAssistStyles = array_filter(scandir('../public/kodseged/css'), self::filterExtension('css'));
+        return array_values(array_map(fn ($item) => ['path' => "kodseged/css/$item"], $codeAssistStyles));
+    }
+    public static function getAppStyles($apps)
+    {
+        return array_values(array_map(function ($app) {
+            $dirName = json_decode($app->getRaw(), true)['directoryName'];
+            $codeAssistScripts2 = array_filter(scandir('../public/app/' . $dirName), self::filterExtension('css'));
+            return array_map(fn ($item) => ['path' => "app/" . $dirName . "/$item"], $codeAssistScripts2);
+        }, $apps));
+    }
+    public static function getAppScripts($apps)
+    {
+        return array_values(array_map(function ($app) {
+            $dirName = json_decode($app->getRaw(), true)['directoryName'];
+            $codeAssistScripts2 = array_filter(scandir('../public/app/' . $dirName), self::filterExtension('js'));
+            return array_map(fn ($item) => ['path' => "app/" . $dirName . "/$item"], $codeAssistScripts2);
+        }, $apps));
+    }
+
 
     public static function getIds($content)
     {

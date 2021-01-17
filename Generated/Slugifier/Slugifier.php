@@ -4,7 +4,7 @@ namespace Kodbazis\Generated\Slugifier;
 
 class Slugifier implements 
 
- \Kodbazis\Generated\Post\Save\Slugifier, \Kodbazis\Generated\Course\Save\Slugifier, \Kodbazis\Generated\Episode\Save\Slugifier, \Kodbazis\Generated\Embeddable\Save\Slugifier, \Kodbazis\Generated\Feedback\Save\Slugifier, \Kodbazis\Generated\Subscriber\Save\Slugifier
+ \Kodbazis\Generated\Post\Save\Slugifier, \Kodbazis\Generated\Course\Save\Slugifier, \Kodbazis\Generated\Episode\Save\Slugifier, \Kodbazis\Generated\Embeddable\Save\Slugifier, \Kodbazis\Generated\Feedback\Save\Slugifier, \Kodbazis\Generated\Subscriber\Save\Slugifier, \Kodbazis\Generated\SubscriberCourse\Save\Slugifier
 {
     const CHAR_MAP = [
         // Latin

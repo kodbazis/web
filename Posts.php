@@ -213,7 +213,7 @@ class Posts
                         ]
                     ]
                 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-                'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                'subscriberLabel' =>  getNick($request->vars),
                 'content' => $twig->render('post-single.twig', [
                     'post' => $post,
                     'postContent' => $content,

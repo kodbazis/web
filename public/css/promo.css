@@ -1,0 +1,68 @@
+.content-body {
+  width: 1200px !important;
+}
+
+@media screen and (max-width: 1200px) {
+  .content-body {
+    width: 100% !important;
+  }
+}
+
+.active {
+  background-color: rgb(0, 173, 239) !important;
+}
+
+.quotation {
+  font-size: 18px;
+  margin: 0 auto;
+  quotes: "\201C""\201D""\2018""\2019";
+  padding: 10px 20px;
+  line-height: 1.4;
+}
+
+.quotation:before {
+  content: open-quote;
+  display: inline;
+  height: 0;
+  line-height: 0;
+  left: -10px;
+  position: relative;
+  top: 30px;
+  color: rgb(0, 173, 239);
+  font-size: 3em;
+}
+.quotation::after {
+  content: close-quote;
+  display: inline;
+  height: 0;
+  line-height: 0;
+  left: 10px;
+  position: relative;
+  top: 35px;
+  color: rgb(0, 173, 239);
+  font-size: 3em;
+}
+.quotation-footer {
+  margin: 10px;
+  font-size: 16px !important;
+  font-style: italic;
+  color: black !important;
+}
+
+span.step {
+  background: #cccccc;
+  border-radius: 0.8em;
+  -moz-border-radius: 0.8em;
+  -webkit-border-radius: 0.8em;
+  color: #ffffff;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 1.6em;
+  margin-right: 5px;
+  text-align: center;
+  width: 1.6em;
+}
+
+.color-blue {
+  background-color: rgb(0, 173, 239) !important;
+}

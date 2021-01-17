@@ -37,10 +37,28 @@
 					<div style="margin-bottom:60px"></div>
 
 					<div class="row">
-						<div class="col-sm-6"></div>
+						<div class="col-sm-6">
+							<h1 class="m-auto text-center pt-5 pb-5">
+								Légy tagja a Kódbázis közösségének
+							</h1>
+						</div>
 						<div class="col-sm-6">
 							<div class="p-3">
-								{% include 'subscriber-registration-form.twig' with {'isSuccess': isSuccess, 'isError': isError}  %}
+								{% if registrationEmailSent %}
+									<div class="alert alert-success p-1 pr-2 pl-2">
+										<p style="font-size:24px">
+											A megadott email címre kiküldtünk egy visszaigazoló üzenetet. Kérjük kattints az üzenetben lévő megerősítés gombra!
+										</p>
+									</div>
+								{% endif %}
+								{% if registrationSuccessful %}
+									<div class="alert alert-success p-1 pr-2 pl-2">
+										<p style="font-size:24px">
+											Regisztráció sikeres!
+										</p>
+									</div>
+								{% endif %}
+								{% include 'subscriber-registration-form.twig' with {'registrationSuccessful': registrationSuccessful, 'isError': isError, loginPath: '/bejelentkezes'}  %}
 							</div>
 						</div>
 					</div>

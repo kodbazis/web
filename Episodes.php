@@ -2,7 +2,7 @@
 
 namespace Kodbazis;
 
-use Kodbazis\Generated\Episode\Listing\ListController;
+
 use Kodbazis\Generated\Listing\Clause;
 use Kodbazis\Generated\Listing\Filter;
 use Kodbazis\Generated\Listing\OrderBy;
@@ -17,9 +17,8 @@ use Kodbazis\Generated\Route\Episode\EpisodePatcher;
 use Kodbazis\Generated\Route\Episode\EpisodeSaver;
 use Kodbazis\Image\ImageSaver;
 use Twig\Environment;
-use Kodbazis\Generated\Repository\Course\SqlLister as CourseLister;
 use Kodbazis\Generated\Repository\Episode\SqlLister as EpisodeLister;
-use Kodbazis\Generated\Repository\Subscriber\SqlLister as SubscriberLister;
+
 
 class Episodes
 {
@@ -150,15 +149,21 @@ class Episodes
         );
     }
 
+
     public static function episodeSingleHandler($conn, $twig)
     {
         return function (Request $request) use ($conn, $twig) {
+            header('Content-Type: text/html; charset=UTF-8');
+            // if (!isset($_SESSION['subscriberId'])) {
+            //     header('Location: /react-kurzus');
+            //     return;
+            // }
+
             $bySlug = (new EpisodeLister($conn))->list(Router::where('slug', 'eq', $request->vars['episode-slug']))->getEntities();
 
             $episode = $bySlug[0] ?? null;
 
             if (!$episode) {
-                header('Content-Type: text/html; charset=UTF-8');
                 echo $twig->render('wrapper.twig', ['content' => '404.twig']);
                 exit;
             }
@@ -176,37 +181,10 @@ class Episodes
 
             $allEpisodesInCourse = (new EpisodeLister($conn))->list($query)->getEntities();
 
-            header('Content-Type: text/html; charset=UTF-8');
-            $getFileExtension = function ($fileName) {
-                $info = pathinfo($fileName);
-                return $info['extension'] ?? '';
-            };
-
-            $filterExtension = fn ($ext) => fn ($item) => $getFileExtension($item) === $ext;
-            $codeAssistScripts = array_filter(scandir('../public/kodseged/js'), $filterExtension('js'));
-            $codeAssistStyles = array_filter(scandir('../public/kodseged/css'), $filterExtension('css'));
-
-            $codeAssistScriptPaths = array_map(fn ($item) => ['path' => "kodseged/js/$item"], $codeAssistScripts);
-            $codeAssistStylePaths = array_map(fn ($item) => ['path' => "kodseged/css/$item"], $codeAssistStyles);
-
             $ids = Embeddables::getIds($episode->getContent());
             $embeddables = count($ids) ? Embeddables::getEmbeddables($ids, $conn) : [];
             $templates = Embeddables::mapEmbeddablesToTemplates($embeddables, $twig);
             $content = Embeddables::insertEmbeddablesToContent($templates, $episode->getContent());
-
-
-
-            $apps = array_filter($embeddables, fn ($em) => $em->getType() === 'application');
-            $appStyles = array_map(function ($app) use ($filterExtension) {
-                $dirName = json_decode($app->getRaw(), true)['directoryName'];
-                $codeAssistScripts2 = array_filter(scandir('../public/app/' . $dirName), $filterExtension('css'));
-                return array_map(fn ($item) => ['path' => "app/" . $dirName . "/$item"], $codeAssistScripts2);
-            }, $apps);
-            $appScripts = array_map(function ($app) use ($filterExtension) {
-                $dirName = json_decode($app->getRaw(), true)['directoryName'];
-                $codeAssistScripts2 = array_filter(scandir('../public/app/' . $dirName), $filterExtension('js'));
-                return array_map(fn ($item) => ['path' => "app/" . $dirName . "/$item"], $codeAssistScripts2);
-            }, $apps);
 
             $episodeIndex = null;
             foreach ($allEpisodesInCourse as $i => $ep) {
@@ -217,10 +195,11 @@ class Episodes
                 break;
             }
 
+            $apps = array_filter($embeddables, fn ($em) => $em->getType() === 'application');
             echo $twig->render('wrapper.twig', [
                 'title' => $episode->getTitle(),
                 'description' => $episode->getDescription(),
-                'subscriberLabel' =>  $request->vars['subscriberLabel'],
+                'subscriberLabel' =>  getNick($request->vars),
                 'email' => $_GET['email'] ?? '',
                 'content' => $twig->render('episode-single.twig', [
                     'isLoggedIn' => isset($_SESSION['subscriberId']),
@@ -232,11 +211,16 @@ class Episodes
                     'previousEpisode' => $allEpisodesInCourse[$episodeIndex - 1] ?? null,
                     'url' => Router::siteUrl() . $_SERVER['REQUEST_URI'],
                 ]),
-                'scripts' => array_merge($codeAssistScriptPaths, ...$appScripts),
-                'styles' => array_merge([
+                'scripts' => [
+                    ...Embeddables::getKodsegedScripts(),
+                    ...Embeddables::getAppScripts($apps),
+                ],
+                'styles' => [
                     ['path' => 'css/post-single.css'],
                     ['path' => 'css/episode-single.css'],
-                ], $codeAssistStylePaths, ...$appStyles),
+                    ...Embeddables::getKodsegedStyles(),
+                    ...Embeddables::getAppStyles($apps),
+                ],
                 'ogTags' => [
                     [
                         'property' => 'og:url',

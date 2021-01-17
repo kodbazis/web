@@ -12,10 +12,11 @@ private $imgUrl;
 private $description;
 private $createdAt;
 private $isActive;
+private $price;
 
 
     
-public function __construct($title, $slug, $imgUrl, $description, $createdAt, $isActive)
+public function __construct($title, $slug, $imgUrl, $description, $createdAt, $isActive, $price)
 {
         $this->title = $title;
 $this->slug = $slug;
@@ -23,6 +24,7 @@ $this->imgUrl = $imgUrl;
 $this->description = $description;
 $this->createdAt = $createdAt;
 $this->isActive = $isActive;
+$this->price = $price;
 
 }
     
@@ -50,6 +52,10 @@ $this->isActive = $isActive;
     {
         return $this->isActive;
     }
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
     
     
     public function jsonSerialize()
@@ -61,6 +67,7 @@ $this->isActive = $isActive;
  'description' => $this->description,
  'createdAt' => $this->createdAt,
  'isActive' => $this->isActive,
+ 'price' => $this->price,
 
         ];
     }

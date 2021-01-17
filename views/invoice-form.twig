@@ -1,0 +1,39 @@
+<div class="_1QAbw">
+	<div class="_2xvqr">
+		<div class="_1PqEM">
+			<h2 class="sc-bdVaJa iPHfVO" format="dark">Számlázási adatok:</h2>
+		</div>
+		<form class="_2bCMA p-2" method="post" action="/api/order-course/{{courseId}}">
+			<div class="I9NYm _3z-_p db1GS {{isPaymentPhase ? 'bg-light' : ''}}">
+				<label class="_3Xmck _1Bymy">Név/Cégnév:</label>
+				<input type="text" required name="name" value="{{subscriberCourse.name}}" {{isPaymentPhase ? 'disabled' : ''}} maxlength="128" tabindex="2" class="_2lU9f db1GS _1Bymy {{isPaymentPhase ? 'text-muted' : ''}}">
+			</div>
+			<div class="I9NYm _3z-_p db1GS {{isPaymentPhase ? 'bg-light' : ''}}">
+				<label class="_3Xmck _1Bymy">Adószám:</label>
+				<input type="text" required name="taxNumber" value="{{subscriberCourse.taxNumber}}" {{isPaymentPhase ? 'disabled' : ''}} maxlength="128" tabindex="2" class="_2lU9f db1GS _1Bymy {{isPaymentPhase ? 'text-muted' : ''}}">
+			</div>
+			<div class="I9NYm _3z-_p db1GS {{isPaymentPhase ? 'bg-light' : ''}}">
+				<label class="_3Xmck _1Bymy">Irányítószám:</label>
+				<input type="number" required name="zip" value="{{subscriberCourse.zip}}" {{isPaymentPhase ? 'disabled' : ''}} maxlength="128" tabindex="2" class="_2lU9f db1GS _1Bymy {{isPaymentPhase ? 'text-muted' : ''}}">
+			</div>
+			<div class="I9NYm _3z-_p db1GS {{isPaymentPhase ? 'bg-light' : ''}}">
+				<label class="_3Xmck _1Bymy">Város:</label>
+				<input type="text" required name="city" value="{{subscriberCourse.city}}" {{isPaymentPhase ? 'disabled' : ''}} maxlength="128" tabindex="2" class="_2lU9f db1GS _1Bymy {{isPaymentPhase ? 'text-muted' : ''}}">
+			</div>
+			<div class="I9NYm _3z-_p db1GS {{isPaymentPhase ? 'bg-light' : ''}}">
+				<label class="_3Xmck _1Bymy">Utca, házszám:</label>
+				<input type="text" required name="address" value="{{subscriberCourse.address}}" {{isPaymentPhase ? 'disabled' : ''}} maxlength="128" tabindex="2" class="_2lU9f db1GS _1Bymy {{isPaymentPhase ? 'text-muted' : ''}}">
+			</div>
+
+			<input type="hidden" name="purchaseType" value="invoice">
+
+			{% if not isPaymentPhase %}
+
+				<button class="_3jJ8O sc-htpNat fMQhWV" format="primary" type="submit" tabindex="5">
+					<span class="sc-bxivhb jrbrfM">Megveszem</span>
+				</button>
+
+			{% endif %}
+		</form>
+	</div>
+</div>

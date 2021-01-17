@@ -1,85 +1,70 @@
-{% if isSuccess %}
-	<div class="alert alert-success p-1 pr-2 pl-2">
-		<p style="font-size:24px">
-			A megadott email címre kiküldtünk egy visszaigazoló üzenetet. Kérjük kattints az üzenetben lévő megerősítés gombra!
+<h2 class="sc-bdVaJa iPHfVO" format="dark">Csatlakozz</h2>
+<p class="sc-bdVaJa gqURud text-center" format="dark">Van már felhasználói fiókod?
+	<a href="{{loginPath}}" class="_2uWfz _16h3z CtrL7">Jelentkezz be</a>
+</p>
+{% if error == 'emailTaken' %}
+	<div class="alert alert-danger p-1 pr-2 pl-2 w-100">
+		<p style="font-size:14px">
+			Ezzel az email címmel már létezik felhasználói fiók.
 		</p>
 	</div>
-
-{% else %}
-	<div class="_1QAbw">
-		<div class="_2xvqr">
-			<div class="_1PqEM">
-				<h2 class="sc-bdVaJa iPHfVO" format="dark">Csatlakozz</h2>
-				<p class="sc-bdVaJa gqURud" format="dark">Van már felhasználói fiókod?
-					<a href="/bejelentkezes" class="_2uWfz _16h3z CtrL7">Jelentkezz be</a>
-				</p>
-				{% if isError == 1 %}
-					<div class="alert alert-danger p-1 pr-2 pl-2 w-100">
-						<p style="font-size:14px">
-							Ezzel az email címmel már létezik felhasználói fiók.
-						</p>
-					</div>
-				{% endif %}
-				{% if isError == 2 %}
-					<div class="alert alert-danger p-1 pr-2 pl-2 w-100">
-						<p style="font-size:14px">
-							Hibás email cím.
-						</p>
-					</div>
-				{% endif %}
-			</div>
-			<form class="_2bCMA" method="post" action="/api/request-membership">
-				<div class="_30AVd ">
-					<div class="sc-gzVnrw geGmQK">
-						<div class="sc-dnqmqq djVjby">
-							<div class="sc-iwsKbI jFkMBx">
-								<div class="I9NYm _3z-_p db1GS">
-									<label class="_3Xmck _1Bymy" for="login_email">Email</label>
-									<input type="email" name="email" autocomplete="email" value="{{email}}" required="" maxlength="128" tabindex="2" class="_2lU9f db1GS _1Bymy" id="login_email">
-								</div>
-							</div>
-							<div class=""><!-- react-empty: 64 --><div class="sc-EHOje WoJQA" data-animation-wrapper="true" style="max-height: 0rem;">
-									<span class="_18vKK EDGQF sc-bdVaJa bhhGJv" format="dark" role="alert"></span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="_30AVd ">
-					<div class="sc-gzVnrw geGmQK">
-						<div class="sc-dnqmqq djVjby">
-							<div class="sc-iwsKbI jFkMBx">
-								<div class="I9NYm _3z-_p db1GS">
-									<label class="_3Xmck _1h-CP _1Bymy" for="login_password">Jelszó</label><input type="password" name="password" autocomplete="current-password" required="" tabindex="3" class="_2lU9f db1GS _1h-CP _1Bymy" id="login_password">
-								</div>
-							</div>
-							<div class="">
-								<div class="sc-EHOje WoJQA" data-animation-wrapper="true" style="max-height: 0rem;">
-									<span class="_18vKK EDGQF sc-bdVaJa bhhGJv" format="dark" role="alert"></span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="form-check mb-2 text-sm p-0" style="font-size: 15px">
-					<label class="form-check-label">
-						<input required type="checkbox" name="privacy1" value="1"/>
-						Elolvastam és megértettem az
-						<a href="/adatvedelmi-szabalyzat" target="_blank">adatvédelmi szabályzatot</a>.
-					</label>
-				</div>
-				<div class="form-check mb-2 p-0" style="font-size: 15px">
-					<label class="form-check-label">
-						<input required type="checkbox" name="privacy2" value="1"/>
-						Hozzájárulok, hogy a kodbazis.hu adataimat kezelje.
-					</label>
-				</div>
-				<div>
-					<button class="_3jJ8O sc-htpNat fMQhWV" format="primary" id="login_signup_button" type="submit" tabindex="5">
-						<span class="sc-bxivhb jrbrfM">Tovább</span>
-					</button>
-				</div>
-			</form>
-		</div>
+{% endif %}
+{% if error == 'invalidEmail' %}
+	<div class="alert alert-danger p-1 pr-2 pl-2 w-100">
+		<p style="font-size:14px">
+			Hibás email cím.
+		</p>
 	</div>
 {% endif %}
+<form class="_2bCMA p-3" method="post" action="/api/request-membership">
+
+	<div class="sc-gzVnrw geGmQK">
+		<div class="sc-dnqmqq djVjby">
+			<div class="sc-iwsKbI jFkMBx">
+				<div class="I9NYm _3z-_p db1GS">
+					<label class="_3Xmck _1Bymy" for="login_email">Email</label>
+					<input type="email" name="email" autocomplete="email" value="{{email}}" required="" maxlength="128" tabindex="2" class="_2lU9f db1GS _1Bymy" id="login_email">
+				</div>
+			</div>
+			<div class=""><!-- react-empty: 64 --><div class="sc-EHOje WoJQA" data-animation-wrapper="true" style="max-height: 0rem;">
+					<span class="_18vKK EDGQF sc-bdVaJa bhhGJv" format="dark" role="alert"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="sc-gzVnrw geGmQK">
+		<div class="sc-dnqmqq djVjby">
+			<div class="sc-iwsKbI jFkMBx">
+				<div class="I9NYm _3z-_p db1GS">
+					<label class="_3Xmck _1h-CP _1Bymy" for="login_password">Jelszó</label><input type="password" name="password" autocomplete="current-password" required="" tabindex="3" class="_2lU9f db1GS _1h-CP _1Bymy" id="login_password">
+				</div>
+			</div>
+			<div class="">
+				<div class="sc-EHOje WoJQA" data-animation-wrapper="true" style="max-height: 0rem;">
+					<span class="_18vKK EDGQF sc-bdVaJa bhhGJv" format="dark" role="alert"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-check mb-2 text-sm p-0" style="font-size: 15px">
+		<label class="form-check-label">
+			<input required type="checkbox" name="privacy1" value="1"/>
+			Elolvastam és megértettem az
+			<a href="/adatvedelmi-szabalyzat" target="_blank">adatvédelmi szabályzatot</a>.
+		</label>
+	</div>
+	<div class="form-check mb-2 p-0" style="font-size: 15px">
+		<label class="form-check-label">
+			<input required type="checkbox" name="privacy2" value="1"/>
+			Hozzájárulok, hogy a kodbazis.hu adataimat kezelje.
+		</label>
+	</div>
+	<div>
+		<button class="_3jJ8O sc-htpNat fMQhWV" format="primary" id="login_signup_button" type="submit" tabindex="5">
+			<span class="sc-bxivhb jrbrfM">Tovább</span>
+		</button>
+	</div>
+</form>

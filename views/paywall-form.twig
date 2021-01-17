@@ -1,0 +1,132 @@
+<div class="card">
+	<div class="card-body w-100 p-0">
+		{% if registrationSuccessful %}
+			<div class="alert alert-success p-1 pr-2 pl-2">
+				<p style="font-size:24px">
+					Regisztráció sikeres!
+				</p>
+			</div>
+		{% endif %}
+		<div class="border-bottom {{paymentUrl is defined ? 'text-muted bg-light' : ''}}">
+			<nav class="nav nav-pills flex-column flex-sm-row">
+				{% if  paymentUrl is not defined %}
+					<a class="flex-sm-fill text-sm-center nav-link bg-muted {{ not isInvoice ? 'active': 'text-muted bg-light'}}" href="?">Nyugta kiállítása</a>
+					<a class="flex-sm-fill text-sm-center nav-link bg-muted {{ isInvoice ? 'active': 'text-muted bg-light'}}" href="?isInvoice=1">Számlát kérek</a>
+				{% else %}
+					<p class="flex-sm-fill text-sm-center nav-link bg-muted {{ not isInvoice ? 'active': 'text-muted bg-light'}}">Nyugta kiállítása</p>
+					<p class="flex-sm-fill text-sm-center nav-link bg-muted {{ isInvoice ? 'active': 'text-muted bg-light'}}">Számlát kérek</p>
+				{% endif %}
+			</nav>
+
+			<span class="step ml-2 mt-2 {{paymentUrl is not defined ? 'color-blue' : ''}}">1</span>
+			<h1 class="p-3">{{course.price}}
+				ft -</h1>
+			{% if isInvoice %}
+				{% if error == 'requiredFieldMissing' %}
+					<div class="alert alert-danger p-1 pr-2 pl-2 w-100">
+						<p style="font-size:14px">
+							Az összes mező kitöltése kötelező.
+						</p>
+					</div>
+				{% endif %}
+				{% include 'invoice-form.twig' with {'isPaymentPhase': paymentUrl is defined, 'courseId': course.id} %}
+			{% else %}
+				{% include 'receipt-form.twig' with {'isPaymentPhase': paymentUrl is defined, 'courseId': course.id} %}
+			{% endif %}
+		</div>
+
+		{% set isVerificationPhase = subscriberCourse.isPayed and not subscriberCourse.isVerified %}
+		<div id="paymentPhase" class="border-bottom {{paymentUrl is not defined or subscriberCourse.isPayed ? 'text-muted bg-light' : ''}}">
+
+			<span class="step ml-2 mt-2 {{paymentUrl is defined  and not subscriberCourse.isPayed ? 'color-blue' : ''}}">2</span>
+			<div class="row">
+				<div class="col-sm-6 m-auto text-center p-0">
+					<p class="p-2">Fizess kártyával az
+						<br><b>OTP simplepay</b><br>
+						felületén</p>
+					{% if paymentUrl is defined and not subscriberCourse.isPayed %}
+						<a href="{{paymentUrl}}">
+							<button class="btn btn-success" type='submit'>
+								Fizetés
+							</button>
+						</a>
+					{% else %}
+						{% if isVerificationPhase %}
+							<span class="ml-2 mt-2 text-success">Fizetve ✓</span>
+						{% else %}
+							<button class="btn btn-outline-dark" disabled type='submit'>
+								Fizetés
+							</button>
+						{% endif %}
+					{% endif %}
+				</div>
+				<div class="col-sm-6 m-auto text-center">
+					<a {{paymentUrl is not defined or subscriberCourse.isPayed ? 'style="filter: grayscale(1);'}} href="http://simplepartner.hu/PaymentService/Fizetesi_tajekoztato.pdf" target="_blank">
+						<img class="img-fluid" src="/public/images/simplepay_logo.png" title="SimplePay - Online bankkártyás fizetés" alt="SimplePay vásárlói tájékoztató">
+					</a>
+				</div>
+			</div>
+			<div class="col-12">
+				{% if error == 'transactionFailed' %}
+					<div class="alert alert-danger p-1 pr-2 pl-2 w-100">
+						<p style="font-size:14px">
+							Sikertelen tranzakció.
+							SimplePay tranzakció azonosító:
+							{{transactionId}}
+							Kérjük, ellenőrizze a tranzakció során megadott adatok helyességét. 
+							Amennyiben minden adatot helyesen adott meg, a visszautasítás okának kivizsgálása érdekében kérjük, szíveskedjen kapcsolatba lépni kártyakibocsátó bankjával.
+						</p>
+					</div>
+				{% endif %}
+				{% if error == 'transactionCancelled' %}
+					<div class="alert alert-danger p-1 pr-2 pl-2 w-100">
+						<p style="font-size:14px">
+							Megszakított fizetés
+						</p>
+					</div>
+				{% endif %}
+				{% if error == 'transactionTimeout' %}
+					<div class="alert alert-danger p-1 pr-2 pl-2 w-100">
+						<p style="font-size:14px">
+							Ön túllépte a tranzakció elindításának lehetséges maximális idejét.
+						</p>
+					</div>
+				{% endif %}
+				{% if transactionSuccessful is defined %}
+					<div class="alert alert-success p-1 pr-2 pl-2 w-100">
+						<p style="font-size:14px">
+							Tranzakció sikeres!
+						</p>
+					</div>
+				{% endif %}
+			</div>
+
+
+		</div>
+
+
+		<div id="verificationPhase" class="{{not isVerificationPhase ? 'text-muted bg-light' : ''}}" style="min-height: 150px">
+			<span class="step ml-2 mt-2 {{isVerificationPhase ? 'color-blue' : ''}}">3</span>
+
+			<h2 class="p-1 pr-2 pl-2 mb-3" style="font-size: 18px">
+				Befejezés
+			</h2>
+			<div class="w-100 text-center m-auto m-2 pb-3">
+
+				<a href="/react-kurzus" disabled>
+					<button id="navigate-to-course" class="btn btn-outline-dark" disabled>
+						Tovább a kurzusra ⇨
+					</button>
+				</a>
+
+			</div>
+			{% if isVerificationPhase %}
+				<div id="verification-app" data-subscribercourseid="{{subscriberCourse.id}}" data-purchasetype="{{subscriberCourse.purchaseType}}" data-email="{{subscriber.email}}"></div>
+				<script src="/public/js/verification-app.js"></script>
+			{% endif %}
+
+		</div>
+
+
+	</div>
+</div>

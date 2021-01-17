@@ -1,0 +1,16 @@
+<form class="_2bCMA p-3" method="post" action="/api/order-course/{{courseId}}">
+	<div class="form-check mb-2 p-0" style="font-size: 15px">
+		<label class="form-check-label">
+			<input required type="checkbox" {{ isPaymentPhase ? 'checked disabled': ''}} name="privacy2" value="1"/>
+			Elfogadom az <a href="/adattovabbitasi-nyilatkozat" target="_blank">Adattovábbítási nyilatkozatot</a>
+		</label>
+	</div>
+
+	{% if not isPaymentPhase %}
+		<button class="_3jJ8O sc-htpNat fMQhWV" format="primary" type="submit" tabindex="5">
+			<span class="sc-bxivhb jrbrfM">Megveszem</span>
+		</button>
+	{% endif %}
+
+	<input type="hidden" name="purchaseType" value="receipt">
+</form>
