@@ -163,8 +163,9 @@ class PaymentRoutes
     public static function getRoutes(Pipeline $r, mysqli $conn, Environment $twig)
     {
         $r->post('/api/ipn', function (Request $request) use ($conn) {
-
             header('Content-Type: application/json; charset=utf-8');
+            error_reporting(E_ALL);
+            ini_set('display_errors', '1');
 
             // $input = ['orderRef' => '19216816316108365192451'];
             $subscriberCourses = (new SubscriberCourseLister($conn))->list(new Query(
