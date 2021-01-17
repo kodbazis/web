@@ -378,7 +378,9 @@ class PublicSite
             echo $twig->render('wrapper.twig', [
                 'content' => $twig->render('privacy-policy.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
-                'description' => 'A Kódbázis adatvédelmi szabályzata'
+                'description' => 'A Kódbázis adatvédelmi szabályzata',
+                'title' => 'Adatvédelmi szabályzat',
+                'noIndex' => true,
             ]);
         });
 
@@ -387,7 +389,9 @@ class PublicSite
             echo $twig->render('wrapper.twig', [
                 'content' => $twig->render('simplepay-legal.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
-                'description' => 'A Kódbázis adatvédelmi szabályzata'
+                'description' => 'Az OTP simplepay adattovábbítási nyilatkozata',
+                'title' => 'Adattovábbítási nyilatkozat',
+                'noIndex' => true,
             ]);
         });
         $r->get('/aszf', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
@@ -395,7 +399,9 @@ class PublicSite
             echo $twig->render('wrapper.twig', [
                 'content' => $twig->render('aszf.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
-                'description' => 'A Kódbázis általános szerződési feltételei'
+                'description' => 'A Kódbázis általános szerződési feltételei',
+                'title' => 'Általános szerződési feltételei',
+                'noIndex' => true,
             ]);
         });
 
@@ -557,125 +563,6 @@ class PublicSite
                 return;
             }
 
-            if (!isset($_SESSION['subscriberId'])) {
-                // TODO render promo
-                echo $twig->render('wrapper.twig', [
-                    'content' => $twig->render('react-paywall.twig', [
-                        'content' => $twig->render('sub-reg-panel.twig', [
-                            'isLogin' => isset($_GET['isLogin']),
-                            'isLoggedIn' => isset($_SESSION['subscriberId']),
-                            'loginSuccess' => isset($_GET['loginSuccess']),
-                            'registrationEmailSent' => isset($_GET['registrationEmailSent']),
-                            'isPasswordModificationSuccess' => isset($_GET['isPasswordModificationSuccess']),
-                            'error' => $_GET['error'] ?? '',
-                            'email' => $_GET['email'] ?? '',
-                        ]),
-                    ]),
-                    'subscriberLabel' =>  getNick($request->vars),
-                    'styles' => [
-                        ['path' => 'css/login.css'],
-                        ['path' => 'css/promo.css'],
-                        ...Embeddables::getKodsegedStyles(),
-                    ],
-                    'scripts' => [
-                        ...Embeddables::getKodsegedScripts(),
-                    ],
-                ]);
-                return;
-            }
-
-
-            $subscriberCourses = (new SubscriberCourseLister($conn))->list(new Query(
-                1000,
-                0,
-                new Filter(
-                    'and',
-                    new Clause('eq', 'subscriberId', $_SESSION['subscriberId']),
-                    new Clause('eq', 'courseId', $course->getId()),
-                ),
-                new OrderBy('id', 'asc')
-            ));
-
-            // not ordered
-            if (!$subscriberCourses->getCount()) {
-                echo $twig->render('wrapper.twig', [
-                    'content' => $twig->render('react-paywall.twig', [
-                        'content' => $twig->render('paywall-form.twig', [
-                            'course' => $course,
-                            'isInvoice' => isset($_GET['isInvoice']),
-                            'error' => $_GET['error'] ?? '',
-                            'registrationSuccessful' => isset($_GET['registrationSuccessful']),
-                        ])
-                    ]),
-                    'subscriberLabel' =>  getNick($request->vars),
-                    'styles' => [
-                        ...Embeddables::getKodsegedStyles(),
-                        ['path' => 'css/login.css'],
-                        ['path' => 'css/promo.css'],
-                    ],
-                    'scripts' => [
-                        ...Embeddables::getKodsegedScripts(),
-                    ],
-                ]);
-                return;
-            }
-
-            // not payed            
-            $subscriberCourse = $subscriberCourses->getEntities()[0];
-
-            if (!$subscriberCourse->getIsPayed()) {
-                echo $twig->render('wrapper.twig', [
-                    'content' => $twig->render('react-paywall.twig', [
-                        'content' => $twig->render('paywall-form.twig', [
-                            'subscriberCourse' => $subscriberCourse,
-                            'course' => $course,
-                            'isInvoice' => $subscriberCourse->getPurchaseType() === 'invoice',
-                            'error' => $_GET['error'] ?? '',
-                            'transactionId' => $_GET['transactionId'] ?? '',
-                            'paymentUrl' => PaymentRoutes::getPaymentUrl($course, $subscriberCourse, $request->vars['subscriber'], $conn),
-                        ])
-                    ]),
-                    'subscriberLabel' =>  getNick($request->vars),
-                    'styles' => [
-                        ['path' => 'css/login.css'],
-                        ['path' => 'css/promo.css'],
-                        ...Embeddables::getKodsegedStyles(),
-                    ],
-                    'scripts' => [
-                        ...Embeddables::getKodsegedScripts(),
-                    ],
-                ]);
-                return;
-            }
-
-            if (!$subscriberCourse->getIsVerified()) {
-
-                echo $twig->render('wrapper.twig', [
-                    'content' => $twig->render('react-paywall.twig', [
-                        'content' => $twig->render('paywall-form.twig', [
-                            'subscriberCourse' => $subscriberCourse,
-                            'course' => $course,
-                            'isInvoice' => $subscriberCourse->getPurchaseType() === 'invoice',
-                            'error' => $_GET['error'] ?? '',
-                            'transactionSuccessful' => $_GET['transactionSuccessful'] ?? '',
-                            'transactionId' => $_GET['transactionId'] ?? '',
-                            'paymentUrl' => '',
-                            'subscriber' => $request->vars['subscriber'],
-                        ]),
-                    ]),
-                    'subscriberLabel' =>  getNick($request->vars),
-                    'styles' => [
-                        ['path' => 'css/login.css'],
-                        ['path' => 'css/promo.css'],
-                        ...Embeddables::getKodsegedStyles(),
-                    ],
-                    'scripts' => [
-                        ...Embeddables::getKodsegedScripts(),
-                    ],
-                ]);
-                return;
-            }
-
             $query = new Query(
                 1000,
                 0,
@@ -695,24 +582,144 @@ class PublicSite
             // render course intro video
 
 
+            if (!isset($_SESSION['subscriberId'])) {
+                // TODO render promo
+                echo $twig->render('wrapper.twig', [
+                    'structuredData' => courseToStructuredData($course),
+                    'content' => $twig->render('react-paywall.twig', [
+                        'paywallForm' => $twig->render('sub-reg-panel.twig', [
+                            'isLogin' => isset($_GET['isLogin']),
+                            'isLoggedIn' => isset($_SESSION['subscriberId']),
+                            'loginSuccess' => isset($_GET['loginSuccess']),
+                            'registrationEmailSent' => isset($_GET['registrationEmailSent']),
+                            'isPasswordModificationSuccess' => isset($_GET['isPasswordModificationSuccess']),
+                            'error' => $_GET['error'] ?? '',
+                            'email' => $_GET['email'] ?? '',
+                        ]),
+                        'episodeList' => renderEpisodeList($twig, $course, $allEpisodesInCourse),
+                    ]),
+                    'subscriberLabel' =>  getNick($request->vars),
+                    'styles' => [
+                        ['path' => 'css/login.css'],
+                        ['path' => 'css/promo.css'],
+                        ...Embeddables::getKodsegedStyles(),
+                    ],
+                    'scripts' => [
+                        ...Embeddables::getKodsegedScripts(),
+                    ],
+                ]);
+                return;
+            }
+
+            $subscriberCourses = (new SubscriberCourseLister($conn))->list(new Query(
+                1000,
+                0,
+                new Filter(
+                    'and',
+                    new Clause('eq', 'subscriberId', $_SESSION['subscriberId']),
+                    new Clause('eq', 'courseId', $course->getId()),
+                ),
+                new OrderBy('id', 'asc')
+            ));
+
+            // not ordered
+            if (!$subscriberCourses->getCount()) {
+                echo $twig->render('wrapper.twig', [
+                    'structuredData' => courseToStructuredData($course),
+                    'content' => $twig->render('react-paywall.twig', [
+                        'paywallForm' => $twig->render('paywall-form.twig', [
+                            'course' => $course,
+                            'isInvoice' => isset($_GET['isInvoice']),
+                            'error' => $_GET['error'] ?? '',
+                        ]),
+                        'episodeList' => renderEpisodeList($twig, $course, $allEpisodesInCourse),
+                        'registrationSuccessful' => isset($_GET['registrationSuccessful']),
+                    ]),
+                    'subscriberLabel' =>  getNick($request->vars),
+                    'styles' => [
+                        ...Embeddables::getKodsegedStyles(),
+                        ['path' => 'css/login.css'],
+                        ['path' => 'css/promo.css'],
+                    ],
+                    'scripts' => [
+                        ...Embeddables::getKodsegedScripts(),
+                    ],
+                ]);
+                return;
+            }
+
+            // not payed            
+            $subscriberCourse = $subscriberCourses->getEntities()[0];
+
+            if (!$subscriberCourse->getIsPayed()) {
+                echo $twig->render('wrapper.twig', [
+                    'structuredData' => courseToStructuredData($course),
+                    'content' => $twig->render('react-paywall.twig', [
+                        'paywallForm' => $twig->render('paywall-form.twig', [
+                            'subscriberCourse' => $subscriberCourse,
+                            'course' => $course,
+                            'isInvoice' => $subscriberCourse->getPurchaseType() === 'invoice',
+                            'error' => $_GET['error'] ?? '',
+                            'transactionId' => $_GET['transactionId'] ?? '',
+                            'paymentUrl' => PaymentRoutes::getPaymentUrl($course, $subscriberCourse, $request->vars['subscriber'], $conn),
+                        ]),
+                        'episodeList' => renderEpisodeList($twig, $course, $allEpisodesInCourse),
+                    ]),
+                    'subscriberLabel' =>  getNick($request->vars),
+                    'styles' => [
+                        ['path' => 'css/login.css'],
+                        ['path' => 'css/promo.css'],
+                        ...Embeddables::getKodsegedStyles(),
+                    ],
+                    'scripts' => [
+                        ...Embeddables::getKodsegedScripts(),
+                    ],
+                ]);
+                return;
+            }
+
+            if (!$subscriberCourse->getIsVerified()) {
+
+                echo $twig->render('wrapper.twig', [
+                    'structuredData' => courseToStructuredData($course),
+                    'content' => $twig->render('react-paywall.twig', [
+                        'paywallForm' => $twig->render('paywall-form.twig', [
+                            'subscriberCourse' => $subscriberCourse,
+                            'course' => $course,
+                            'isInvoice' => $subscriberCourse->getPurchaseType() === 'invoice',
+                            'error' => $_GET['error'] ?? '',
+                            'transactionSuccessful' => $_GET['transactionSuccessful'] ?? '',
+                            'transactionId' => $_GET['transactionId'] ?? '',
+                            'paymentUrl' => '',
+                            'subscriber' => $request->vars['subscriber'],
+                        ]),
+                        'episodeList' => renderEpisodeList($twig, $course, $allEpisodesInCourse),
+                    ]),
+                    'subscriberLabel' =>  getNick($request->vars),
+                    'styles' => [
+                        ['path' => 'css/login.css'],
+                        ['path' => 'css/promo.css'],
+                        ...Embeddables::getKodsegedStyles(),
+                    ],
+                    'scripts' => [
+                        ...Embeddables::getKodsegedScripts(),
+                    ],
+                ]);
+                return;
+            }
+
             echo $twig->render('wrapper.twig', [
                 'subscriberLabel' =>  getNick($request->vars),
-                'structuredData' => json_encode([
-                    "@context" => "https://schema.org",
-                    "@type" => "Course",
-                    "name" => $course->getTitle() . ' kurzus KEZDŐ FEJLESZTŐKNEK',
-                    "description" => $course->getDescription(),
-                    "provider" => [
-                        "@type" => "Organization",
-                        "name" => "Kódbázis",
-                        "sameAs" => Router::siteUrl()
-                    ]
-                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'structuredData' => courseToStructuredData($course),
                 'content' => $twig->render('course.twig', [
                     'course' => $course,
+                    'paddingTop' => true,
                     'episodes' => alignToRows($allEpisodesInCourse, 3),
                     'isSuccess' => $_GET['isSuccess'] ?? '',
                 ]),
+                'styles' => [
+                    ['path' => 'css/promo.css'],
+                ],
             ]);
         });
 
@@ -724,6 +731,30 @@ class PublicSite
     }
 }
 
+function courseToStructuredData($course)
+{
+    return json_encode([
+        "@context" => "https://schema.org",
+        "@type" => "Course",
+        "name" => $course->getTitle() . ' kurzus KEZDŐ FEJLESZTŐKNEK',
+        "description" => $course->getDescription(),
+        "provider" => [
+            "@type" => "Organization",
+            "name" => "Kódbázis",
+            "sameAs" => Router::siteUrl()
+        ]
+    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+}
+
+function renderEpisodeList($twig, $course, $allEpisodesInCourse)
+{
+    return $twig->render('course.twig', [
+        'mainTitle' => 'Epizódok:',
+        'isPromo' => true,
+        'course' => $course,
+        'episodes' => alignToRows($allEpisodesInCourse, 3),
+    ]);
+}
 
 function getNick($vars)
 {

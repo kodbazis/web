@@ -16,13 +16,21 @@
 				<label class="_3Xmck _1Bymy">Irányítószám:</label>
 				<input type="number" required name="zip" value="{{subscriberCourse.zip}}" {{isPaymentPhase ? 'disabled' : ''}} maxlength="128" tabindex="2" class="_2lU9f db1GS _1Bymy {{isPaymentPhase ? 'text-muted' : ''}}">
 			</div>
-			<div class="I9NYm _3z-_p db1GS {{isPaymentPhase ? 'bg-light' : ''}}">
+			<div id="paymentPhase" class="I9NYm _3z-_p db1GS {{isPaymentPhase ? 'bg-light' : ''}}">
 				<label class="_3Xmck _1Bymy">Város:</label>
 				<input type="text" required name="city" value="{{subscriberCourse.city}}" {{isPaymentPhase ? 'disabled' : ''}} maxlength="128" tabindex="2" class="_2lU9f db1GS _1Bymy {{isPaymentPhase ? 'text-muted' : ''}}">
 			</div>
 			<div class="I9NYm _3z-_p db1GS {{isPaymentPhase ? 'bg-light' : ''}}">
 				<label class="_3Xmck _1Bymy">Utca, házszám:</label>
 				<input type="text" required name="address" value="{{subscriberCourse.address}}" {{isPaymentPhase ? 'disabled' : ''}} maxlength="128" tabindex="2" class="_2lU9f db1GS _1Bymy {{isPaymentPhase ? 'text-muted' : ''}}">
+			</div>
+
+			<div class="form-check mb-2 p-2" style="font-size: 15px">
+				<label class="form-check-label">
+					<input required type="checkbox" {{ isPaymentPhase ? 'checked disabled': ''}} name="privacy2" value="1"/>
+					Elfogadom az
+					<a href="/adattovabbitasi-nyilatkozat" target="_blank">Adattovábbítási nyilatkozatot</a>
+				</label>
 			</div>
 
 			<input type="hidden" name="purchaseType" value="invoice">

@@ -2,15 +2,29 @@
 <p class="sc-bdVaJa gqURud text-center" format="dark">Van már felhasználói fiókod?
 	<a href="{{loginPath}}" class="_2uWfz _16h3z CtrL7">Jelentkezz be</a>
 </p>
+{% if registrationEmailSent %}
+	<div class="alert alert-success p-2 m-2">
+		<p style="font-size:14px">
+			A megadott email címre kiküldtünk egy visszaigazoló üzenetet. Kérjük kattints az üzenetben lévő megerősítés gombra!
+		</p>
+	</div>
+{% endif %}
+{% if registrationSuccessful is defined and registrationSuccessful %}
+	<div class="alert alert-success p-2 m-2">
+		<p style="font-size:14px">
+			Regisztráció sikeres!
+		</p>
+	</div>
+{% endif %}
 {% if error == 'emailTaken' %}
-	<div class="alert alert-danger p-1 pr-2 pl-2 w-100">
+	<div class="alert alert-danger p-2 m-2">
 		<p style="font-size:14px">
 			Ezzel az email címmel már létezik felhasználói fiók.
 		</p>
 	</div>
 {% endif %}
 {% if error == 'invalidEmail' %}
-	<div class="alert alert-danger p-1 pr-2 pl-2 w-100">
+	<div class="alert alert-danger p-2 m-2">
 		<p style="font-size:14px">
 			Hibás email cím.
 		</p>

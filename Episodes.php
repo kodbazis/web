@@ -159,13 +159,14 @@ class Episodes
             //     return;
             // }
 
+
             $bySlug = (new EpisodeLister($conn))->list(Router::where('slug', 'eq', $request->vars['episode-slug']))->getEntities();
 
             $episode = $bySlug[0] ?? null;
 
             if (!$episode) {
-                echo $twig->render('wrapper.twig', ['content' => '404.twig']);
-                exit;
+                echo $twig->render('404.twig');
+                return;
             }
 
             $query = new Query(

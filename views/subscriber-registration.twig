@@ -4,32 +4,14 @@
 			<div class="card-body w-100 p-0" id="hero-spot2">
 				{% if isLoggedIn %}
 					<div class="card-title">
-						<h1 class="mb-4 mt-5 text-success">
-							Bejelentkezett felhasználó:
-							{{subscriberLabel}}
-						</h1>
+						{% if registrationSuccessful is defined and registrationSuccessful %}
+							<h1 class="mb-4 mt-5 text-success">
+								Regisztráció sikeres
+							</h1>
+						{% endif %}
 
 						<div class="row">
-							<div class="col-sm-3">
-								<h2 class="mt-5 mb-5">
-									<a href="/cikkek">Cikkek</a>
-								</h2>
-							</div>
-							<div class="col-sm-3">
-								<h2 class="mt-5 mb-5">
-									<a href="/react-kurzus">React Kurzus</a>
-								</h2>
-							</div>
-							<div class="col-sm-3">
-								<h2 class="mt-5 mb-5">
-									<a href="/trening">Tréning</a>
-								</h2>
-							</div>
-							<div class="col-sm-3">
-								<h2 class="mt-5 mb-5">
-									<a href="/elerhetoseg">Elérhetőség</a>
-								</h2>
-							</div>
+							{% include 'home-links.twig' %}
 						</div>
 
 					</div>
@@ -44,21 +26,12 @@
 						</div>
 						<div class="col-sm-6">
 							<div class="p-3">
-								{% if registrationEmailSent %}
-									<div class="alert alert-success p-1 pr-2 pl-2">
-										<p style="font-size:24px">
-											A megadott email címre kiküldtünk egy visszaigazoló üzenetet. Kérjük kattints az üzenetben lévő megerősítés gombra!
-										</p>
-									</div>
-								{% endif %}
-								{% if registrationSuccessful %}
-									<div class="alert alert-success p-1 pr-2 pl-2">
-										<p style="font-size:24px">
-											Regisztráció sikeres!
-										</p>
-									</div>
-								{% endif %}
-								{% include 'subscriber-registration-form.twig' with {'registrationSuccessful': registrationSuccessful, 'isError': isError, loginPath: '/bejelentkezes'}  %}
+								{% include 'subscriber-registration-form.twig' with {
+									'registrationSuccessful': registrationSuccessful, 
+									'error': error, 
+									'loginPath': '/bejelentkezes', 
+									'registrationEmailSent' : registrationEmailSent
+								}  %}
 							</div>
 						</div>
 					</div>

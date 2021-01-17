@@ -2,20 +2,11 @@
 	{% if isLogin or isPasswordModificationSuccess %}
 		{% include 'subscriber-login-form.twig' with {'error': error, 'email': email, registrationPath: '?', 'isPasswordModificationSuccess' : isPasswordModificationSuccess}  %}
 	{% else %}
-		{% if registrationEmailSent %}
-			<div class="alert alert-success p-1 pr-2 pl-2">
-				<p style="font-size:24px">
-					A megadott email címre kiküldtünk egy visszaigazoló üzenetet. Kérjük kattints az üzenetben lévő megerősítés gombra!
-				</p>
-			</div>
-		{% endif %}
-		{% if registrationSuccessful %}
-			<div class="alert alert-success p-1 pr-2 pl-2">
-				<p style="font-size:24px">
-					Regisztráció sikeres!
-				</p>
-			</div>
-		{% endif %}
-		{% include 'subscriber-registration-form.twig' with {'error': error, 'loginPath': '?isLogin=1' }  %}
+		{% include 'subscriber-registration-form.twig' with {
+			'registrationSuccessful': registrationSuccessful, 
+			'error': error, 
+			'loginPath': '?isLogin=1', 
+			'registrationEmailSent' : registrationEmailSent
+		}  %}
 	{% endif %}
 </div>

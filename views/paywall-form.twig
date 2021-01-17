@@ -1,12 +1,5 @@
 <div class="card">
 	<div class="card-body w-100 p-0">
-		{% if registrationSuccessful %}
-			<div class="alert alert-success p-1 pr-2 pl-2">
-				<p style="font-size:24px">
-					Regisztráció sikeres!
-				</p>
-			</div>
-		{% endif %}
 		<div class="border-bottom {{paymentUrl is defined ? 'text-muted bg-light' : ''}}">
 			<nav class="nav nav-pills flex-column flex-sm-row">
 				{% if  paymentUrl is not defined %}
@@ -36,7 +29,7 @@
 		</div>
 
 		{% set isVerificationPhase = subscriberCourse.isPayed and not subscriberCourse.isVerified %}
-		<div id="paymentPhase" class="border-bottom {{paymentUrl is not defined or subscriberCourse.isPayed ? 'text-muted bg-light' : ''}}">
+		<div id="verificationPhase" class="border-bottom {{paymentUrl is not defined or subscriberCourse.isPayed ? 'text-muted bg-light' : ''}}">
 
 			<span class="step ml-2 mt-2 {{paymentUrl is defined  and not subscriberCourse.isPayed ? 'color-blue' : ''}}">2</span>
 			<div class="row">
@@ -71,10 +64,10 @@
 					<div class="alert alert-danger p-1 pr-2 pl-2 w-100">
 						<p style="font-size:14px">
 							Sikertelen tranzakció.
-							SimplePay tranzakció azonosító:
+														SimplePay tranzakció azonosító:
 							{{transactionId}}
 							Kérjük, ellenőrizze a tranzakció során megadott adatok helyességét. 
-							Amennyiben minden adatot helyesen adott meg, a visszautasítás okának kivizsgálása érdekében kérjük, szíveskedjen kapcsolatba lépni kártyakibocsátó bankjával.
+														Amennyiben minden adatot helyesen adott meg, a visszautasítás okának kivizsgálása érdekében kérjük, szíveskedjen kapcsolatba lépni kártyakibocsátó bankjával.
 						</p>
 					</div>
 				{% endif %}
@@ -105,7 +98,7 @@
 		</div>
 
 
-		<div id="verificationPhase" class="{{not isVerificationPhase ? 'text-muted bg-light' : ''}}" style="min-height: 150px">
+		<div class="{{not isVerificationPhase ? 'text-muted bg-light' : ''}}" style="min-height: 150px">
 			<span class="step ml-2 mt-2 {{isVerificationPhase ? 'color-blue' : ''}}">3</span>
 
 			<h2 class="p-1 pr-2 pl-2 mb-3" style="font-size: 18px">

@@ -4,6 +4,7 @@
 	<h1 style="font-weight: 300 !important">
 		React kurzus
 	</h1>
+
 	<div class="text-danger text-center">
 		Ez a funkcionalitás fejlesztés/tesztelés alatt van. Kérjük látogass vissza később!
 	</div>
@@ -11,14 +12,22 @@
 
 	<div class="row m-auto">
 		<div class="col-md-8 mb-3 p-2">
+			{% if registrationSuccessful %}
+				<div class="alert text-center alert-success p-1 pr-2 pl-2">
+					<p style="font-size:15px">
+						Regisztráció sikeres!
+					</p>
+				</div>
+			{% endif %}
 			<p class='text-center' class="w-100" style="background-color: #151515">
 				<div id="video-panel" class="kodseged" data-videoid="87110435" data-type="vimeo"></div>
 			</p>
 
-			{# {% include 'react-quotes.twig'  %} #}
+			{% include 'react-quotes.twig'  %}
 		</div>
 		<div class="col-md-4">
-			{{content | raw}}
+			{{paywallForm | raw}}
 		</div>
 	</div>
+	{{episodeList | raw}}
 </div>

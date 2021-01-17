@@ -25,8 +25,10 @@
       app.innerHTML = `
         <p class="w-100 m-auto text-center m-2 pb-3" style="font-size:16px">
             <p class="text-center text-success">
-              Megerősítés sikeres!
-              A ${dataset.purchasetype == "invoice" ? "számlát" : "nyugtát"} kiküldtük a <b class="text-dark">${dataset.email}</b> email címre!
+              <b>Megerősítés sikeres!</b> <br>
+              <b class="text-dark">
+                A ${dataset.purchasetype == "invoice" ? "számlát" : "nyugtát"} kiküldtük a ${dataset.email} email címre!
+              </b>
               <br />
               <b>Köszönjük a vásárlást!</b>
             </p>

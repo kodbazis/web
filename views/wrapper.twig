@@ -28,6 +28,10 @@
 		{% for ogTag in ogTags %}
 			<meta property="{{ogTag.property}}" content="{{ogTag.content}}"/>
 		{% endfor %}
+
+		{% if noIndex is defined and noIndex %}
+			<meta name="robots" content="noindex"/>
+		{% endif %}
 	</head>
 	<body class="home">
 
