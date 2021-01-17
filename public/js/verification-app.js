@@ -23,9 +23,13 @@
       btn.classList.add("btn-success");
       btn.disabled = false;
       app.innerHTML = `
-        <p class="text-center mb-2 text-dark" style="font-size:16px">
-            A ${dataset.purchasetype == "invoice" ? "számlát" : "nyugtát"} kiküldtük a ${dataset.email} email címre!
-            Köszönjük a vásárlást!
+        <p class="w-100 m-auto text-center m-2 pb-3" style="font-size:16px">
+            <p class="text-center text-success">
+              Megerősítés sikeres!
+              A ${dataset.purchasetype == "invoice" ? "számlát" : "nyugtát"} kiküldtük a <b class="text-dark">${dataset.email}</b> email címre!
+              <br />
+              <b>Köszönjük a vásárlást!</b>
+            </p>
         </p>
         `;
     } else {
@@ -33,7 +37,10 @@
         <div class="w-100 m-auto text-center m-2 pb-3">
             <div class="spinner-border text-success m-auto text-center">
             </div>
-            <p class="text-center text-success">Feldolgozás folyamatban...</p>
+            <p class="text-center text-dark">
+              Várakozás az <b>OTP simplepay</b> megerősítő üzenetére... <br> 
+              (Ez akár 30 másodpercig is eltarthat)
+            </p>
         </div>
         `;
     }
