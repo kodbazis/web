@@ -164,7 +164,7 @@ class PaymentRoutes
     {
         $r->post('/api/ipn', function (Request $request) use ($conn) {
             header('Content-Type: application/json; charset=utf-8');
-           
+
             $subscriberCourses = (new SubscriberCourseLister($conn))->list(new Query(
                 1000,
                 0,
@@ -190,7 +190,9 @@ class PaymentRoutes
                 return;
             }
 
-            $trx->runIpnConfirm();
+            if (!$trx->runIpnConfirm()) {
+                return;
+            }
 
 
             $subscriberCourse = $subscriberCourses->getEntities()[0];
