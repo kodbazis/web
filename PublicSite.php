@@ -399,6 +399,9 @@ class PublicSite
             ]);
         });
 
+        // $r->get('/api/test', function () {
+        //     Invoice::sendReceipt('shop@kodbazis.hu', 'Teszt', 1000);
+        // });
 
         $r->post('/api/order-course/{courseId}', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
 

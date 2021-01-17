@@ -17,7 +17,6 @@ class Invoice
              */
             $agent = \SzamlaAgent\SzamlaAgentAPI::create($_SERVER['SZAMLAAGENT_API_KEY']);
             $agent->setLogEmail($_SERVER['SZAMLAAGENT_LOG_EMAIL']);
-            $agent->setDownloadPdf(false);
 
             /**
              * Új papír alapú számla létrehozása
