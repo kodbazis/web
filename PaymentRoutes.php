@@ -192,9 +192,8 @@ class PaymentRoutes
                 return;
             }
 
-            if (!$trx->runIpnConfirm()) {
-                return;
-            }
+            $trx->runIpnConfirm();
+
 
             $subscriberCourse = $subscriberCourses->getEntities()[0];
 
