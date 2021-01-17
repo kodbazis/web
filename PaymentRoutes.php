@@ -164,12 +164,7 @@ class PaymentRoutes
     {
         $r->post('/api/ipn', function (Request $request) use ($conn) {
             header('Content-Type: application/json; charset=utf-8');
-            error_reporting(E_ALL);
-            ini_set('display_errors', '1');
-
-            var_dump($request->body['orderRef']);
-
-            // $input = ['orderRef' => '19216816316108365192451'];
+           
             $subscriberCourses = (new SubscriberCourseLister($conn))->list(new Query(
                 1000,
                 0,
@@ -191,7 +186,7 @@ class PaymentRoutes
 
             $trx->addConfig($config);
 
-            if (!$trx->isIpnSignatureCheck($json)) {
+            if (!$trx->isIpnSignatureCheck(json_encode($request->body))) {
                 return;
             }
 
