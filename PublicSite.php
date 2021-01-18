@@ -246,7 +246,7 @@ class PublicSite
 
             $subscriber = $byEmail->getEntities()[0];
 
-            if ($subscriber->getIsVerified()) {
+            if (!$subscriber->getIsVerified()) {
                 $params = [
                     'error=notVerified',
                     'email=' . $request->body['email'],
@@ -778,8 +778,6 @@ function getNick($vars)
     if (!isset($vars['subscriber'])) {
         return '';
     }
-    if (!$vars['subscriber']->getIsVerified()) {
-        return '';
-    }
+
     return explode('@', $vars['subscriber']->getEmail())[0] ?? '';
 }
