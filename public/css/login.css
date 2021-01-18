@@ -1311,8 +1311,8 @@ p:first-child {
   -webkit-box-pack: center;
   justify-content: center;
   -webkit-font-smoothing: antialiased;
-  background-color: rgb(0, 173, 239);
-  border-color: rgb(0, 173, 239);
+  background-color: rgb(15, 174, 241);
+  border-color: rgb(15, 174, 241);
   color: rgb(255, 255, 255);
   min-width: 7rem;
   min-height: 3rem;

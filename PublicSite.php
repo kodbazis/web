@@ -601,6 +601,8 @@ class PublicSite
                 echo $twig->render('wrapper.twig', [
                     'structuredData' => courseToStructuredData($course),
                     'content' => $twig->render('react-paywall.twig', [
+                        'course' => $course,
+                        'numberOfEpisodes' => count($allEpisodesInCourse),
                         'paywallForm' => $twig->render('sub-reg-panel.twig', [
                             'isLogin' => isset($_GET['isLogin']),
                             'isLoggedIn' => isset($_SESSION['subscriberId']),
@@ -641,6 +643,8 @@ class PublicSite
                 echo $twig->render('wrapper.twig', [
                     'structuredData' => courseToStructuredData($course),
                     'content' => $twig->render('react-paywall.twig', [
+                        'course' => $course,
+                        'numberOfEpisodes' => count($allEpisodesInCourse),
                         'paywallForm' => $twig->render('paywall-form.twig', [
                             'course' => $course,
                             'isInvoice' => isset($_GET['isInvoice']),
@@ -669,6 +673,8 @@ class PublicSite
                 echo $twig->render('wrapper.twig', [
                     'structuredData' => courseToStructuredData($course),
                     'content' => $twig->render('react-paywall.twig', [
+                        'course' => $course,
+                        'numberOfEpisodes' => count($allEpisodesInCourse),
                         'paywallForm' => $twig->render('paywall-form.twig', [
                             'subscriberCourse' => $subscriberCourse,
                             'course' => $course,
@@ -698,6 +704,8 @@ class PublicSite
                 echo $twig->render('wrapper.twig', [
                     'structuredData' => courseToStructuredData($course),
                     'content' => $twig->render('react-paywall.twig', [
+                        'course' => $course,
+                        'numberOfEpisodes' => count($allEpisodesInCourse),
                         'paywallForm' => $twig->render('paywall-form.twig', [
                             'subscriberCourse' => $subscriberCourse,
                             'course' => $course,

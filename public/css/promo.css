@@ -9,7 +9,7 @@
 }
 
 .active {
-  background-color: rgb(0, 173, 239) !important;
+  background-color: rgb(15, 174, 241) !important;
 }
 
 .quotation {
@@ -29,7 +29,7 @@
   left: -10px;
   position: relative;
   top: 30px;
-  color: rgb(0, 173, 239);
+  color: rgb(15, 174, 241);
   font-size: 3em;
 }
 .quotation::after {
@@ -40,7 +40,7 @@
   left: 10px;
   position: relative;
   top: 35px;
-  color: rgb(0, 173, 239);
+  color: rgb(15, 174, 241);
   font-size: 3em;
 }
 .quotation-footer {
@@ -65,7 +65,7 @@ span.step {
 }
 
 .color-blue {
-  background-color: rgb(0, 173, 239) !important;
+  background-color: rgb(15, 174, 241) !important;
 }
 
 /* Opacity #1 */
@@ -86,4 +86,20 @@ span.step {
 }
 .hover11 figure:hover img {
 	opacity: .8;
+}
+
+.checkmark-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.checkmark-list-item {
+  padding-left: 1em; 
+  text-indent: -.7em;
+}
+
+.checkmark-list-item::before {
+  content: "✓ ";
+  color: rgb(15, 174, 241); /* or whatever color you prefer */
 }

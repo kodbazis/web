@@ -19,8 +19,6 @@
 			</nav>
 
 			<span class="step ml-2 mt-2 {{paymentUrl is not defined ? 'color-blue' : ''}}">1</span>
-			<h1 class="p-3">{{course.price}}
-				ft -</h1>
 			{% if isInvoice %}
 				{% if error == 'requiredFieldMissing' %}
 					<div class="alert alert-danger p-1 pr-2 pl-2 w-100">

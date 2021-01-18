@@ -2,7 +2,7 @@
 	<div style="margin-bottom: 120px"></div>
 
 	<h1 style="font-weight: 300 !important">
-		React kurzus
+		{{course.title}}
 	</h1>
 
 	<div class="text-danger text-center">
@@ -25,7 +25,41 @@
 			{% include 'react-quotes.twig'  %}
 		</div>
 		<div class="col-md-4">
-			{{paywallForm | raw}}
+			<div class="row">
+				<div class="col-md-12 border-bottom">
+					<p class="text-center" style="font-size: 1.5em">Bruttó ár:
+					</p>
+					<h1 class="pb-2" style="font-size: 3em">
+						<b>{{course.price}}
+							ft</b>
+					</h1>
+				</div>
+
+
+			</div>
+			<div class="row p-2 mb-2 border-bottom">
+				{{paywallForm | raw}}
+			</div>
+
+			<div class="col-md-12">
+				<h1 class="text-center mb-2">Mit kapsz?</h1>
+				<ul class="lead checkmark-list">
+					<li class="checkmark-list-item">
+						<b>{{numberOfEpisodes}}
+							oktatóvideót</b>
+					</li>
+					<li class="checkmark-list-item">
+						<b>7 kipróbálható alkalmazást</b>
+					</li>
+					<li class="checkmark-list-item">
+						<b>Back-end API-t gyakorláshoz</b>
+					</li>
+					<li class="checkmark-list-item">
+						<b>Élő kódsegédet</b>
+					</li>
+				</ul>
+
+			</div>
 		</div>
 	</div>
 	{{episodeList | raw}}

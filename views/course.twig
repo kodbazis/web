@@ -13,9 +13,9 @@
 			</h1>
 			<hr/>
 			{% for row in episodes %}
-				<div class="row pb-3">
+				<div class="row">
 					{% for episode in row %}
-						<div class="col-sm-4">
+						<div class="col-sm-4 mb-2 pl-2 pr-2">
 							{% if isPromo is defined and isPromo %}
 								<div class="card" class="w-100">
 									<img class="card-img-top" src="/public/files/md-{{ episode.imgUrl }}" alt=""/>
