@@ -235,7 +235,7 @@ class PublicSite
             $requestUri = $parsed['path'];
 
 
-            if ($byEmail->getCount() === 0) {
+            if (!$byEmail->getCount()) {
                 $params = [
                     'error=invalidCredentials',
                     'email=' . $request->body['email'],
@@ -252,6 +252,7 @@ class PublicSite
                     'email=' . $request->body['email'],
                 ];
                 header('Location: ' .  $requestUri . Router::mergeQueries($_SERVER['HTTP_REFERER'], $params));
+                return;
             }
 
             if (!password_verify($request->body['password'], $subscriber->getPassword())) {
