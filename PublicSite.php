@@ -245,6 +245,15 @@ class PublicSite
             }
 
             $subscriber = $byEmail->getEntities()[0];
+
+            if ($subscriber->getIsVerified()) {
+                $params = [
+                    'error=notVerified',
+                    'email=' . $request->body['email'],
+                ];
+                header('Location: ' .  $requestUri . Router::mergeQueries($_SERVER['HTTP_REFERER'], $params));
+            }
+
             if (!password_verify($request->body['password'], $subscriber->getPassword())) {
                 $params = [
                     'error=invalidCredentials',

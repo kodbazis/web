@@ -10,6 +10,13 @@
 			</p>
 		</div>
 	{% endif %}
+	{% if error == 'notVerified' %}
+		<div class="alert alert-danger p-1 pr-2 pl-2 w-100">
+			<p style="font-size:14px">
+				Kérjük erősítsd meg az email címed!
+			</p>
+		</div>
+	{% endif %}
 	{% if isPasswordModificationSuccess %}
 		<div class="alert alert-success p-1 pr-2 pl-2 w-100">
 			<p style="font-size:14px">
