@@ -713,7 +713,6 @@ class PublicSite
                             'error' => $_GET['error'] ?? '',
                             'transactionSuccessful' => $_GET['transactionSuccessful'] ?? '',
                             'transactionId' => $_GET['transactionId'] ?? '',
-                            'merchant' => $_GET['merchant'] ?? '',
                             'orderRef' => $_GET['orderRef'] ?? '',
                             'paymentUrl' => '',
                             'subscriber' => $request->vars['subscriber'],

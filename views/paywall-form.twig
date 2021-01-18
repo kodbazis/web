@@ -93,19 +93,11 @@
 				{% if transactionSuccessful is defined %}
 					<div class="alert alert-success p-1 pr-2 pl-2 w-100">
 						<p style="font-size:14px">
-							<b>Tranzakció sikeres!</b>
+							<b>Sikeres tranzakció.</b>
 						</p>
 						<p style="font-size:14px">
-							Tranzakció azonosító:
+							SimplePay tranzakció azonosító:
 							{{transactionId}}
-						</p>
-						<p style="font-size:14px">
-							Kereskedői azonosító:
-							{{merchant}}
-						</p>
-						<p style="font-size:14px">
-							Rendelésszám:
-							{{orderRef}}
 						</p>
 					</div>
 				{% endif %}

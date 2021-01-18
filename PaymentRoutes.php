@@ -36,7 +36,7 @@ class PaymentRoutes
 
         //ORDER PRICE/TOTAL
         //-----------------------------------------------------------------------------------------
-        $trx->addData('total', 25);
+        $trx->addData('total', $course->getPrice());
 
         $trx->addItems(
             array(
@@ -265,7 +265,7 @@ class PaymentRoutes
                         new PatchedSubscriberCourse(null, null, null, null, null, null, null, true, null, null)
                     );
 
-                    header('Location: /react-kurzus?transactionSuccessful=1&orderRef=' . $result['o'] . '&transactionId=' . $result['t'] . '&merchant=' . $result['m'] . '#verificationPhase');
+                    header('Location: /react-kurzus?transactionSuccessful=1&orderRef=' . $result['o'] . '&transactionId=' . $result['t'] . '#verificationPhase');
                     return;
                     break;
                 case 'FAIL':
