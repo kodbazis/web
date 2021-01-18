@@ -49,7 +49,6 @@
 .hs > li,
 .item {
   scroll-snap-align: center;
-  padding: calc(var(--gutter) / 2 * 1.5);
   display: flex;
   flex-direction: column;
   justify-content: center;

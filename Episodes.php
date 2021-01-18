@@ -217,6 +217,7 @@ class Episodes
                     ...Embeddables::getAppScripts($apps),
                 ],
                 'styles' => [
+                    ['path' => 'css/promo.css'],
                     ['path' => 'css/post-single.css'],
                     ['path' => 'css/episode-single.css'],
                     ...Embeddables::getKodsegedStyles(),

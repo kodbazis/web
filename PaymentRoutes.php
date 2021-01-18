@@ -12,6 +12,7 @@ use mysqli;
 use Twig\Environment;
 use Kodbazis\Generated\Repository\SubscriberCourse\SqlPatcher as SubscriberCoursePatcher;
 use Kodbazis\Generated\Repository\SubscriberCourse\SqlLister as SubscriberCourseLister;
+use Kodbazis\Generated\Repository\SubscriberCourse\SqlDeleter as SubscriberCourseDeleter;
 use Kodbazis\Generated\Repository\Course\SqlByIdGetter as CourseById;
 use Kodbazis\Generated\Repository\Subscriber\SqlByIdGetter as SubscriberById;
 use Kodbazis\Generated\Request;
@@ -162,6 +163,13 @@ class PaymentRoutes
 
     public static function getRoutes(Pipeline $r, mysqli $conn, Environment $twig)
     {
+
+        $r->get('/api/reset/{id}', function (Request $request) use ($conn) {
+            $id = $request->vars['id'];
+            (new SubscriberCourseDeleter($conn))->delete($id);
+            header('Location: /react-kurzus');
+        });
+
         $r->post('/api/ipn', function (Request $request) use ($conn) {
             header('Content-Type: application/json; charset=utf-8');
 
@@ -250,7 +258,6 @@ class PaymentRoutes
                 }
             }
 
-
             switch ($result['e']) {
                 case 'SUCCESS':
                     (new SubscriberCoursePatcher($conn))->patch(
@@ -258,7 +265,7 @@ class PaymentRoutes
                         new PatchedSubscriberCourse(null, null, null, null, null, null, null, true, null, null)
                     );
 
-                    header('Location: /react-kurzus?transactionSuccessful=1#verificationPhase');
+                    header('Location: /react-kurzus?transactionSuccessful=1&orderRef=' . $result['o'] . '&transactionId=' . $result['t'] . '&merchant=' . $result['m'] . '#verificationPhase');
                     return;
                     break;
                 case 'FAIL':

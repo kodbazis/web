@@ -3,6 +3,11 @@
 		<div class="card p-3">
 			<h1>
 				{{ mainTitle is defined ? mainTitle : course.title }}
+				{% if subscriberCourse.id is defined %}
+					<a href="/api/reset/{{subscriberCourse.id}}">
+						<button class="btn btn-sm btn-danger w-100">Reset (OTP simplepay teszteléshez)</button>
+					</a>
+				{% endif %}
 			</h1>
 			<hr/>
 			{% for row in episodes %}
@@ -12,17 +17,13 @@
 							{% if isPromo is defined and isPromo %}
 								<div class="card" class="w-100">
 									<img class="card-img-top" src="/public/files/md-{{ episode.imgUrl }}" alt=""/>
-									<div class="card-body">
-										<h3 class="card-title text-center">{{ episode.title }}</h3>
-									</div>
 								</div>
 							{% else %}
 								<a href="{{course.slug}}/{{episode.slug}}">
-									<div class="card" class="w-100">
-										<img class="card-img-top" src="/public/files/md-{{ episode.imgUrl }}" alt=""/>
-										<div class="card-body">
-											<h3 class="card-title text-center">{{ episode.title }}</h3>
-										</div>
+									<div class="card hover11" class="w-100">
+										<figure>
+											<img class="card-img-top" src="/public/files/md-{{ episode.imgUrl }}" alt=""/>
+										</figure>
 									</div>
 								</a>
 							{% endif %}

@@ -15,13 +15,15 @@
 				<div class="app mb-3 bg-light" data-position="{{episode.position}}">
 					<ul class="hs full">
 						{% for ep in allEpisodesInCourse %}
-							<a href="/react-kurzus/{{ep.slug}}">
+							<a class="hover11" href="/react-kurzus/{{ep.slug}}">
 								<li class="item {{ep.id == episode.id ? 'selected-episode' : ''}}">
-									{% if ep.imgUrl %}
-										<img class="img-thumbnail" src="/public/files/sm-{{ep.imgUrl}}"/>
-									{% else %}
-										<p class="text-center">{{ ep.title }}</p>
-									{% endif %}
+									<figure>
+										{% if ep.imgUrl %}
+											<img class="img-thumbnail p-0" src="/public/files/sm-{{ep.imgUrl}}"/>
+										{% else %}
+											<p class="text-center">{{ ep.title }}</p>
+										{% endif %}
+									</figure>
 								</li>
 							</a>
 						{% endfor %}

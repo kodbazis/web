@@ -582,8 +582,8 @@ class PublicSite
             // render course intro video
 
 
+            // not logged in
             if (!isset($_SESSION['subscriberId'])) {
-                // TODO render promo
                 echo $twig->render('wrapper.twig', [
                     'structuredData' => courseToStructuredData($course),
                     'content' => $twig->render('react-paywall.twig', [
@@ -678,6 +678,7 @@ class PublicSite
                 return;
             }
 
+            // waiting for ipn
             if (!$subscriberCourse->getIsVerified()) {
 
                 echo $twig->render('wrapper.twig', [
@@ -690,6 +691,8 @@ class PublicSite
                             'error' => $_GET['error'] ?? '',
                             'transactionSuccessful' => $_GET['transactionSuccessful'] ?? '',
                             'transactionId' => $_GET['transactionId'] ?? '',
+                            'merchant' => $_GET['merchant'] ?? '',
+                            'orderRef' => $_GET['orderRef'] ?? '',
                             'paymentUrl' => '',
                             'subscriber' => $request->vars['subscriber'],
                         ]),
@@ -713,6 +716,7 @@ class PublicSite
                 'structuredData' => courseToStructuredData($course),
                 'content' => $twig->render('course.twig', [
                     'course' => $course,
+                    'subscriberCourse' => $subscriberCourse,
                     'paddingTop' => true,
                     'episodes' => alignToRows($allEpisodesInCourse, 3),
                     'isSuccess' => $_GET['isSuccess'] ?? '',

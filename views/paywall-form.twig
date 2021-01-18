@@ -1,5 +1,10 @@
 <div class="card">
 	<div class="card-body w-100 p-0">
+		{% if subscriberCourse.id is defined %}
+			<a href="/api/reset/{{subscriberCourse.id}}">
+				<button class="btn btn-sm btn-danger w-100">Reset (OTP simplepay teszteléshez)</button>
+			</a>
+		{% endif %}
 		<div class="border-bottom {{paymentUrl is defined ? 'text-muted bg-light' : ''}}">
 			<nav class="nav nav-pills flex-column flex-sm-row">
 				{% if  paymentUrl is not defined %}
@@ -54,7 +59,7 @@
 					{% endif %}
 				</div>
 				<div class="col-sm-6 m-auto text-center">
-					<a {{paymentUrl is not defined or subscriberCourse.isPayed ? 'style="filter: grayscale(1);'}} href="http://simplepartner.hu/PaymentService/Fizetesi_tajekoztato.pdf" target="_blank">
+					<a {{paymentUrl is not defined or subscriberCourse.isPayed ? 'style="filter: grayscale(1);"'}} href="http://simplepartner.hu/PaymentService/Fizetesi_tajekoztato.pdf" target="_blank">
 						<img class="img-fluid" src="/public/images/simplepay_logo.png" title="SimplePay - Online bankkártyás fizetés" alt="SimplePay vásárlói tájékoztató">
 					</a>
 				</div>
@@ -64,10 +69,10 @@
 					<div class="alert alert-danger p-1 pr-2 pl-2 w-100">
 						<p style="font-size:14px">
 							Sikertelen tranzakció.
-														SimplePay tranzakció azonosító:
+																					SimplePay tranzakció azonosító:
 							{{transactionId}}
 							Kérjük, ellenőrizze a tranzakció során megadott adatok helyességét. 
-														Amennyiben minden adatot helyesen adott meg, a visszautasítás okának kivizsgálása érdekében kérjük, szíveskedjen kapcsolatba lépni kártyakibocsátó bankjával.
+																					Amennyiben minden adatot helyesen adott meg, a visszautasítás okának kivizsgálása érdekében kérjük, szíveskedjen kapcsolatba lépni kártyakibocsátó bankjával.
 						</p>
 					</div>
 				{% endif %}
@@ -88,7 +93,19 @@
 				{% if transactionSuccessful is defined %}
 					<div class="alert alert-success p-1 pr-2 pl-2 w-100">
 						<p style="font-size:14px">
-							Tranzakció sikeres!
+							<b>Tranzakció sikeres!</b>
+						</p>
+						<p style="font-size:14px">
+							Tranzakció azonosító:
+							{{transactionId}}
+						</p>
+						<p style="font-size:14px">
+							Kereskedői azonosító:
+							{{merchant}}
+						</p>
+						<p style="font-size:14px">
+							Rendelésszám:
+							{{orderRef}}
 						</p>
 					</div>
 				{% endif %}
