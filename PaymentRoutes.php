@@ -269,15 +269,15 @@ class PaymentRoutes
                     return;
                     break;
                 case 'FAIL':
-                    header('Location: /react-kurzus?error=transactionFailed&transactionId=' . $result["t"] . '#paymentPhase');
+                    header('Location: /react-kurzus?error=transactionFailed&transactionId=' . $result["t"]);
                     return;
                     break;
                 case 'CANCEL':
-                    header('Location: /react-kurzus?error=transactionCancelled' . '#paymentPhase');
+                    header('Location: /react-kurzus?error=transactionCancelled');
                     return;
                     break;
                 case 'TIMEOUT':
-                    header('Location: /react-kurzus?error=transactionTimeout' . '#paymentPhase');
+                    header('Location: /react-kurzus?error=transactionTimeout');
                     return;
                     break;
             }

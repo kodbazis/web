@@ -482,7 +482,7 @@ class PublicSite
                     time(),
                 )
             );
-            header('Location: /' . $courseById->getEntities()[0]->getSlug() . '#paymentPhase');
+            header('Location: /' . $courseById->getEntities()[0]->getSlug());
         });
 
         $r->post('/api/delete-course-order/{subscriberCourseId}', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
