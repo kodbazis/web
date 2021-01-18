@@ -244,9 +244,6 @@ class PublicSite
                 return;
             }
 
-
-
-
             $subscriber = $byEmail->getEntities()[0];
             if (!password_verify($request->body['password'], $subscriber->getPassword())) {
                 $params = [
@@ -770,6 +767,9 @@ function renderEpisodeList($twig, $course, $allEpisodesInCourse)
 function getNick($vars)
 {
     if (!isset($vars['subscriber'])) {
+        return '';
+    }
+    if (!$vars['subscriber']->getIsVerified()) {
         return '';
     }
     return explode('@', $vars['subscriber']->getEmail())[0] ?? '';
