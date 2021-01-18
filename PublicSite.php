@@ -38,11 +38,18 @@ class PublicSite
         return function (Request $request) use ($conn) {
             session_start();
             $subscriber = null;
-            if (isset($_SESSION['subscriberId'])) {
-                $byId = (new SubscriberLister($conn))->list(Router::where('id', 'eq', $_SESSION['subscriberId']));
-                if ($byId->getCount() > 0) {
-                    $subscriber = $byId->getEntities()[0];
-                }
+            if (!isset($_SESSION['subscriberId'])) {
+                return $request;
+            }
+
+            $byId = (new SubscriberLister($conn))->list(Router::where('id', 'eq', $_SESSION['subscriberId']));
+            if (!$byId->getCount()) {
+                return $request;
+            }
+
+            $subscriber = $byId->getEntities()[0];
+            if (!$subscriber->getIsVerified()) {
+                return $request;
             }
             $request->vars['subscriber'] = $subscriber;
             return $request;
