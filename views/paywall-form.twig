@@ -2,7 +2,9 @@
 	<div class="card-body w-100 p-0">
 		{% if subscriberCourse.id is defined %}
 			<a href="/api/reset/{{subscriberCourse.id}}">
-				<button class="btn btn-sm btn-danger w-100">Reset <small>(OTP simplepay teszteléshez)</small></button>
+				<button class="btn btn-sm btn-danger w-100">Reset
+					<small style="font-size: 10px">(OTP simplepay teszteléshez)</small>
+				</button>
 			</a>
 		{% endif %}
 		<div class="border-bottom {{paymentUrl is defined ? 'text-muted bg-light' : ''}}">
@@ -69,10 +71,10 @@
 					<div class="alert alert-danger p-1 pr-2 pl-2 w-100">
 						<p style="font-size:14px">
 							Sikertelen tranzakció.
-																					SimplePay tranzakció azonosító:
+																												SimplePay tranzakció azonosító:
 							{{transactionId}}
 							Kérjük, ellenőrizze a tranzakció során megadott adatok helyességét. 
-																					Amennyiben minden adatot helyesen adott meg, a visszautasítás okának kivizsgálása érdekében kérjük, szíveskedjen kapcsolatba lépni kártyakibocsátó bankjával.
+																												Amennyiben minden adatot helyesen adott meg, a visszautasítás okának kivizsgálása érdekében kérjük, szíveskedjen kapcsolatba lépni kártyakibocsátó bankjával.
 						</p>
 					</div>
 				{% endif %}
