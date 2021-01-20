@@ -10,11 +10,11 @@
 		<div class="border-bottom {{paymentUrl is defined ? 'text-muted bg-light' : ''}}">
 			<nav class="nav nav-pills flex-column flex-sm-row">
 				{% if  paymentUrl is not defined %}
-					<a class="flex-sm-fill text-sm-center nav-link bg-muted {{ not isInvoice ? 'active': 'text-muted bg-light'}}" href="?">Nyugta kiállítása</a>
-					<a class="flex-sm-fill text-sm-center nav-link bg-muted {{ isInvoice ? 'active': 'text-muted bg-light'}}" href="?isInvoice=1">Számlát kérek</a>
+					<a class="flex-sm-fill text-sm-center nav-link bg-muted {{ not isInvoice ? 'active-purchaseType': 'text-muted bg-light'}}" href="?">Nyugta kiállítása</a>
+					<a class="flex-sm-fill text-sm-center nav-link bg-muted {{ isInvoice ? 'active-purchaseType': 'text-muted bg-light'}}" href="?isInvoice=1">Számlát kérek</a>
 				{% else %}
-					<p class="flex-sm-fill text-sm-center nav-link bg-muted {{ not isInvoice ? 'active': 'text-muted bg-light'}}">Nyugta kiállítása</p>
-					<p class="flex-sm-fill text-sm-center nav-link bg-muted {{ isInvoice ? 'active': 'text-muted bg-light'}}">Számlát kérek</p>
+					<p class="flex-sm-fill text-sm-center nav-link bg-muted {{ not isInvoice ? 'active-purchaseType': 'text-muted bg-light'}}">Nyugta kiállítása</p>
+					<p class="flex-sm-fill text-sm-center nav-link bg-muted {{ isInvoice ? 'active-purchaseType': 'text-muted bg-light'}}">Számlát kérek</p>
 				{% endif %}
 			</nav>
 
