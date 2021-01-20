@@ -3,7 +3,7 @@
 		{% if subscriberCourse.id is defined %}
 			<a href="/api/reset/{{subscriberCourse.id}}">
 				<button class="btn btn-sm btn-danger w-100">Reset
-					<small style="font-size: 12px">(OTP simplepay teszteléshez)</small>
+					<small style="font-size: 12px">(OTP SimplePay teszteléshez)</small>
 				</button>
 			</a>
 		{% endif %}
@@ -40,7 +40,7 @@
 			<div class="row">
 				<div class="col-sm-6 m-auto text-center p-0">
 					<p class="p-2">Fizess kártyával az
-						<br><b>OTP simplepay</b><br>
+						<br><b>OTP SimplePay</b><br>
 						felületén</p>
 					{% if paymentUrl is defined and not subscriberCourse.isPayed %}
 						<a href="{{paymentUrl}}">
