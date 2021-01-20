@@ -10,6 +10,7 @@ class Course implements JsonSerializable
 private $title;
 private $slug;
 private $imgUrl;
+private $videoId;
 private $description;
 private $createdAt;
 private $isActive;
@@ -17,12 +18,13 @@ private $price;
 
 
     
-public function __construct($id, $title, $slug, $imgUrl, $description, $createdAt, $isActive, $price)
+public function __construct($id, $title, $slug, $imgUrl, $videoId, $description, $createdAt, $isActive, $price)
 {
         $this->id = $id;
 $this->title = $title;
 $this->slug = $slug;
 $this->imgUrl = $imgUrl;
+$this->videoId = $videoId;
 $this->description = $description;
 $this->createdAt = $createdAt;
 $this->isActive = $isActive;
@@ -45,6 +47,10 @@ $this->price = $price;
     public function getImgUrl(): ?string
     {
         return $this->imgUrl;
+    }
+    public function getVideoId(): ?string
+    {
+        return $this->videoId;
     }
     public function getDescription(): ?string
     {
@@ -71,6 +77,7 @@ $this->price = $price;
  'title' => $this->title,
  'slug' => $this->slug,
  'imgUrl' => $this->imgUrl,
+ 'videoId' => $this->videoId,
  'description' => $this->description,
  'createdAt' => $this->createdAt,
  'isActive' => $this->isActive,

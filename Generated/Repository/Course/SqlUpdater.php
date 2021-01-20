@@ -24,24 +24,25 @@ class SqlUpdater implements Updater
           
           $stmt = $this->connection->prepare(
               'UPDATE `courses` SET 
-                `title` = ?, `slug` = ?, `imgUrl` = ?, `description` = ?, `isActive` = ?, `price` = ?
+                `title` = ?, `slug` = ?, `imgUrl` = ?, `videoId` = ?, `description` = ?, `isActive` = ?, `price` = ?
                 WHERE `id` = ?;'
           );
           
           $title= $entity->getTitle();
         $slug= $entity->getSlug();
         $imgUrl= $entity->getImgUrl();
+        $videoId= $entity->getVideoId();
         $description= $entity->getDescription();
         $isActive= $entity->getIsActive();
         $price= $entity->getPrice();
          
           $stmt->bind_param(
-              "ssssiis",
-               $title, $slug, $imgUrl, $description, $isActive, $price, $id        
+              "sssssiis",
+               $title, $slug, $imgUrl, $videoId, $description, $isActive, $price, $id        
           );
           $stmt->execute();
           
-          return new Course($id, $entity->getTitle(),$entity->getSlug(),$entity->getImgUrl(),$entity->getDescription(),$byId->getCreatedAt(),$entity->getIsActive(),$entity->getPrice());
+          return new Course($id, $entity->getTitle(),$entity->getSlug(),$entity->getImgUrl(),$entity->getVideoId(),$entity->getDescription(),$byId->getCreatedAt(),$entity->getIsActive(),$entity->getPrice());
       
       } catch (\Error $exception) {
           if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {
