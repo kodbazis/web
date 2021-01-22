@@ -103,7 +103,7 @@ class PublicSite
         $r->post('/api/forgot-password', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
 
-            if ($request->vars['subscriber']) {
+            if (isset($request->vars['subscriber'])) {
                 header('Location: /');
                 return;
             }
