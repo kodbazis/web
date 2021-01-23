@@ -168,7 +168,7 @@ class Episodes
             }
 
 
-            if (!isset($_SESSION['subscriberId'])) {
+            if (!isset($_SESSION['subscriberId']) && !$episode->getIsPreview()) {
                 echo self::denyEpisode($twig, $episode, $request, $twig->render('denied-episode.twig', [
                     'episode' => $episode,
                     'isLogin' => isset($_GET['isLogin']),
@@ -179,40 +179,42 @@ class Episodes
                 return;
             }
 
+            if (!$episode->getIsPreview()) {
+                $subscriberCourses = (new SubscriberCourseLister($conn))->list(new Query(
+                    1000,
+                    0,
+                    new Filter(
+                        'and',
+                        new Clause('eq', 'subscriberId', $_SESSION['subscriberId'] ?? ''),
+                        new Clause('eq', 'courseId', $episode->getCourseId()),
+                    ),
+                    new OrderBy('id', 'asc')
+                ));
 
-            $subscriberCourses = (new SubscriberCourseLister($conn))->list(new Query(
-                1000,
-                0,
-                new Filter(
-                    'and',
-                    new Clause('eq', 'subscriberId', $_SESSION['subscriberId']),
-                    new Clause('eq', 'courseId', $episode->getCourseId()),
-                ),
-                new OrderBy('id', 'asc')
-            ));
+                if (!$subscriberCourses->getCount()) {
+                    $courseBySlug = (new CourseLister($conn))->list(Router::where('slug', 'eq', $request->vars['course-slug']));
+                    $course = $courseBySlug->getEntities()[0] ?? null;
+                    echo self::denyEpisode($twig, $episode, $request, $twig->render('denied-episode-not-bought.twig', [
+                        'episode' => $episode,
+                        'course' => $course,
+                        'registrationSuccessful' => isset($_GET['registrationSuccessful']),
+                    ]));
+                    return;
+                }
+                $subscriberCourse = $subscriberCourses->getEntities()[0];
 
-            if (!$subscriberCourses->getCount() && !$episode->getIsPreview()) {
-                $courseBySlug = (new CourseLister($conn))->list(Router::where('slug', 'eq', $request->vars['course-slug']));
-                $course = $courseBySlug->getEntities()[0] ?? null;
-                echo self::denyEpisode($twig, $episode, $request, $twig->render('denied-episode-not-bought.twig', [
-                    'episode' => $episode,
-                    'course' => $course,
-                    'registrationSuccessful' => isset($_GET['registrationSuccessful']),
-                ]));
-                return;
+                if (!$subscriberCourse->getIsVerified()) {
+                    $courseBySlug = (new CourseLister($conn))->list(Router::where('slug', 'eq', $request->vars['course-slug']));
+                    $course = $courseBySlug->getEntities()[0] ?? null;
+                    echo self::denyEpisode($twig, $episode, $request, $twig->render('denied-episode-not-bought.twig', [
+                        'episode' => $episode,
+                        'course' => $course,
+                        'registrationSuccessful' => isset($_GET['registrationSuccessful']),
+                    ]));
+                    return;
+                }
             }
-            $subscriberCourse = $subscriberCourses->getEntities()[0];
 
-            if (!$subscriberCourse->getIsVerified() && !$episode->getIsPreview()) {
-                $courseBySlug = (new CourseLister($conn))->list(Router::where('slug', 'eq', $request->vars['course-slug']));
-                $course = $courseBySlug->getEntities()[0] ?? null;
-                echo self::denyEpisode($twig, $episode, $request, $twig->render('denied-episode-not-bought.twig', [
-                    'episode' => $episode,
-                    'course' => $course,
-                    'registrationSuccessful' => isset($_GET['registrationSuccessful']),
-                ]));
-                return;
-            }
 
 
             $query = new Query(
@@ -242,6 +244,22 @@ class Episodes
                 break;
             }
 
+
+            $subscriberCourses = (new SubscriberCourseLister($conn))->list(new Query(
+                1000,
+                0,
+                new Filter(
+                    'and',
+                    new Filter(
+                        'and',
+                        new Clause('eq', 'subscriberId', $_SESSION['subscriberId'] ?? ''),
+                        new Clause('eq', 'courseId', $episode->getCourseId()),
+                    ),
+                    new Clause('eq', 'isVerified', '1'),
+                ),
+                new OrderBy('id', 'asc')
+            ));
+
             $apps = array_filter($embeddables, fn ($em) => $em->getType() === 'application');
             echo $twig->render('wrapper.twig', [
                 'title' => $episode->getTitle(),
@@ -249,6 +267,7 @@ class Episodes
                 'subscriberLabel' =>  getNick($request->vars),
                 'email' => $_GET['email'] ?? '',
                 'content' => $twig->render('episode-single.twig', [
+                    'isVerified' => (bool)$subscriberCourses->getCount(),
                     'isLoggedIn' => isset($_SESSION['subscriberId']),
                     'loginError' => $_GET['loginError'] ?? '0',
                     'episode' => $episode,

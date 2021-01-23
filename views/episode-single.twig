@@ -25,12 +25,12 @@
 					<ul class="hs full">
 						{% for ep in allEpisodesInCourse %}
 							<a class="hover11" href="/react-kurzus/{{ep.slug}}">
-								<li class="item {{ep.id == episode.id ? 'selected-episode' : ''}} {{ep.isPreview ? '' : 'lock-container'}}">
-									<figure {{ep.isPreview ? '' : 'style="opacity: 0.4"'}}>
+								<li class="overlay-container item {{ep.id == episode.id ? 'selected-episode' : ''}} {{ep.isPreview ? 'preview' : 'lock'}}">
+									<figure {{ep.isPreview or isVerified? '' : 'style="opacity: 0.4"'}}>
 
 										{% if ep.imgUrl %}
 											<img class="img-thumbnail p-0" src="/public/files/sm-{{ep.imgUrl}}"/>
-											{% if not ep.isPreview %}
+											{% if not isVerified %}
 												<div class="after"></div>
 											{% endif %}
 										{% else %}
