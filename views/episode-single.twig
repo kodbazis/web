@@ -47,7 +47,7 @@
 					<div class="col-sm-6 mb-3">
 						{% if previousEpisode %}
 							<a href="/react-kurzus/{{previousEpisode.slug}}">
-								<span class="lead mr-1" style="font-weight: 400">
+								<span class="lead mr-1 {{ not isVerified and not previousEpisode.isPreview ? 'text-muted': '' }}" style="font-weight: 400">
 									❮
 									{{previousEpisode.title}}
 								</span>
@@ -58,19 +58,19 @@
 					<div class="col-sm-6">
 						{% if nextEpisode %}
 							<a class="float-right" href="/react-kurzus/{{nextEpisode.slug}}">
-								<span class="lead ml-1" style="font-weight: 400">
+								<span class="lead ml-1 {{ not isVerified and not nextEpisode.isPreview ? 'text-muted': '' }}" style="font-weight: 400">
 									{{nextEpisode.title}}
 									❯
 								</span>
 							</a>
 						{% else %}
-							<h2 class="text-center">
-								<span class="text-dark">
-									Sikeresen elvégezted a kurzust.
-								</span>
-								<span class="text-success">
-									Gratulálok!
-								</span>
+							<h2
+								class="text-center">{# <span class="text-dark">
+																		Sikeresen elvégezted a kurzust.
+																	</span>
+																	<span class="text-success">
+																		Gratulálok!
+																	</span> #}
 							</h2>
 						{% endif %}
 					</div>
