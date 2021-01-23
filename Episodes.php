@@ -289,6 +289,9 @@ class Episodes
             'content' => $twig->render($content, [
                 'episode' => $episode,
                 'isLogin' => isset($_GET['isLogin']),
+                'loginError' => $_GET['loginError'] ?? '0',
+                'registrationEmailSent' => isset($_GET['registrationEmailSent']),
+                'isPasswordModificationSuccess' => isset($_GET['isPasswordModificationSuccess']),
             ]),
             'styles' => [
                 ['path' => 'css/login.css'],

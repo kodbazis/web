@@ -10,7 +10,12 @@
 					<div class="row">
 						<div class="col-md-4"></div>
 						<div class="col-md-4">
-							{% include 'sub-reg-panel.twig' with {'isLogin': isLogin} %}
+							{% include 'sub-reg-panel.twig' with {
+                                'isLogin': isLogin, 
+                                'loginError': loginError, 
+                                'registrationEmailSent': registrationEmailSent, 
+                                'isPasswordModificationSuccess':isPasswordModificationSuccess
+                            } %}
 						</div>
 						<div class="col-md-4"></div>
 					</div>
