@@ -25,10 +25,14 @@
 					<ul class="hs full">
 						{% for ep in allEpisodesInCourse %}
 							<a class="hover11" href="/react-kurzus/{{ep.slug}}">
-								<li class="item {{ep.id == episode.id ? 'selected-episode' : ''}}">
-									<figure>
+								<li class="item {{ep.id == episode.id ? 'selected-episode' : ''}} {{ep.isPreview ? '' : 'lock-container'}}">
+									<figure {{ep.isPreview ? '' : 'style="opacity: 0.4"'}}>
+
 										{% if ep.imgUrl %}
 											<img class="img-thumbnail p-0" src="/public/files/sm-{{ep.imgUrl}}"/>
+											{% if not ep.isPreview %}
+												<div class="after"></div>
+											{% endif %}
 										{% else %}
 											<p class="text-center">{{ ep.title }}</p>
 										{% endif %}

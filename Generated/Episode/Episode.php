@@ -16,10 +16,11 @@ private $content;
 private $createdAt;
 private $position;
 private $isActive;
+private $isPreview;
 
 
     
-public function __construct($id, $title, $slug, $courseId, $imgUrl, $description, $content, $createdAt, $position, $isActive)
+public function __construct($id, $title, $slug, $courseId, $imgUrl, $description, $content, $createdAt, $position, $isActive, $isPreview)
 {
         $this->id = $id;
 $this->title = $title;
@@ -31,6 +32,7 @@ $this->content = $content;
 $this->createdAt = $createdAt;
 $this->position = $position;
 $this->isActive = $isActive;
+$this->isPreview = $isPreview;
 
 }
     
@@ -74,6 +76,10 @@ $this->isActive = $isActive;
     {
         return $this->isActive;
     }
+    public function getIsPreview(): ?bool
+    {
+        return $this->isPreview;
+    }
     
     
     public function jsonSerialize()
@@ -89,6 +95,7 @@ $this->isActive = $isActive;
  'createdAt' => $this->createdAt,
  'position' => $this->position,
  'isActive' => $this->isActive,
+ 'isPreview' => $this->isPreview,
 
         ];
     }

@@ -70,6 +70,7 @@ class Episodes
                     'columns' => [
                         ['label' => 'Cím', 'key' => 'title'],
                         ['label' => 'Aktív', 'key' => 'isActive', 'type' => 'bool'],
+                        ['label' => 'Bemutató', 'key' => 'isPreview', 'type' => 'bool'],
                         ['label' => 'Készült', 'key' => 'createdAt', 'type' => 'timestamp'],
                         ['label' => 'Pozíció', 'key' => 'position', 'type' => 'number'],
                     ],
@@ -190,7 +191,7 @@ class Episodes
                 new OrderBy('id', 'asc')
             ));
 
-            if (!$subscriberCourses->getCount()) {
+            if (!$subscriberCourses->getCount() && !$episode->getIsPreview()) {
                 $courseBySlug = (new CourseLister($conn))->list(Router::where('slug', 'eq', $request->vars['course-slug']));
                 $course = $courseBySlug->getEntities()[0] ?? null;
                 echo self::denyEpisode($twig, $episode, $request, $twig->render('denied-episode-not-bought.twig', [
@@ -202,7 +203,7 @@ class Episodes
             }
             $subscriberCourse = $subscriberCourses->getEntities()[0];
 
-            if (!$subscriberCourse->getIsPayed() || !$subscriberCourse->getIsVerified()) {
+            if (!$subscriberCourse->getIsVerified() && !$episode->getIsPreview()) {
                 $courseBySlug = (new CourseLister($conn))->list(Router::where('slug', 'eq', $request->vars['course-slug']));
                 $course = $courseBySlug->getEntities()[0] ?? null;
                 echo self::denyEpisode($twig, $episode, $request, $twig->render('denied-episode-not-bought.twig', [

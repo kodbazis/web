@@ -75,6 +75,7 @@ span.step {
 	-webkit-transition: .3s ease-in-out;
 	transition: .3s ease-in-out;
 }
+
 .hover11 figure:hover img {
 	opacity: .5;
 }
@@ -103,4 +104,24 @@ span.step {
 .checkmark-list-item::before {
   content: "✓ ";
   color: rgb(15, 174, 241); /* or whatever color you prefer */
+}
+
+.lock-container {
+  position: relative;
+  width: 100%;
+  height: 100%
+}
+.lock-container .after {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 100%;
+  height: 100%;
+  display: none;
+  color: #FFF;
+}
+.lock-container .after {
+  display: block;
+  background-image: url('/public/images/lock-small.png');
+  background-repeat: no-repeat;
 }

@@ -52,6 +52,12 @@
 						<input type="checkbox" class="form-control" name="isActive" value="1" {{ episode.isActive ? 'checked' : '' }}>
 					</label>
 				</div>
+				<div class="form-group">
+					<label class="w-100">
+						Bemutató
+						<input type="checkbox" class="form-control" name="isPreview" value="1" {{ episode.isPreview ? 'checked' : '' }}>
+					</label>
+				</div>
 
 				<label class="w-100">
 					{% if episode.imgUrl %}
