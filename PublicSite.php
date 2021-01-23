@@ -582,7 +582,8 @@ class PublicSite
                 return;
             }
 
-            $query = new Query(
+
+            $allEpisodesInCourse = (new EpisodeLister($conn))->list(new Query(
                 1000,
                 0,
                 new Filter(
@@ -591,9 +592,7 @@ class PublicSite
                     new Clause('eq', 'isActive', 1),
                 ),
                 new OrderBy('position', 'asc')
-            );
-
-            $allEpisodesInCourse = (new EpisodeLister($conn))->list($query)->getEntities();
+            ))->getEntities();
 
             // render course description
             // render course img
