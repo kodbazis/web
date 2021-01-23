@@ -155,10 +155,6 @@ class Episodes
     {
         return function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
-            if (!isset($_SESSION['subscriberId'])) {
-                header('Location: /react-kurzus');
-                return;
-            }
 
             $bySlug = (new EpisodeLister($conn))->list(Router::where('slug', 'eq', $request->vars['episode-slug']))->getEntities();
 
@@ -168,6 +164,13 @@ class Episodes
                 echo $twig->render('404.twig');
                 return;
             }
+
+
+            if (!isset($_SESSION['subscriberId'])) {
+                echo self::denyEpisode($twig, $episode, $request, 'denied-episode.twig');
+                return;
+            }
+
 
             $subscriberCourses = (new SubscriberCourseLister($conn))->list(new Query(
                 1000,
@@ -181,13 +184,13 @@ class Episodes
             ));
 
             if (!$subscriberCourses->getCount()) {
-                header('Location: /react-kurzus');
+                echo self::denyEpisode($twig, $episode, $request, 'denied-episode-not-bought.twig');
                 return;
             }
             $subscriberCourse = $subscriberCourses->getEntities()[0];
 
             if (!$subscriberCourse->getIsPayed() || !$subscriberCourse->getIsVerified()) {
-                header('Location: /react-kurzus');
+                echo self::denyEpisode($twig, $episode, $request, 'denied-episode-not-bought.twig');
                 return;
             }
 
@@ -274,5 +277,52 @@ class Episodes
                 ]
             ]);
         };
+    }
+
+    private static function denyEpisode($twig, $episode, $request, $content)
+    {
+        return $twig->render('wrapper.twig', [
+            'title' => $episode->getTitle(),
+            'description' => $episode->getDescription(),
+            'subscriberLabel' =>  getNick($request->vars),
+            'email' => $_GET['email'] ?? '',
+            'content' => $twig->render($content, [
+                'episode' => $episode,
+                'isLogin' => isset($_GET['isLogin']),
+            ]),
+            'styles' => [
+                ['path' => 'css/login.css'],
+                ['path' => 'css/promo.css'],
+                ['path' => 'css/post-single.css'],
+                ['path' => 'css/episode-single.css'],
+            ],
+            'ogTags' => [
+                [
+                    'property' => 'og:url',
+                    'content' => Router::siteUrl() . $_SERVER['REQUEST_URI'],
+                ],
+                [
+                    'property' => 'og:type',
+                    'content' => 'article',
+                ],
+                [
+                    'property' => 'og:title',
+                    'content' => $episode->getTitle(),
+                ],
+                [
+                    'property' => 'og:image',
+                    'content' => Router::siteUrl() . '/public/files/md-' . $episode->getImgUrl(),
+                ],
+                [
+                    'property' => 'og:description',
+                    'content' => $episode->getDescription(),
+                ],
+                [
+                    'property' => 'fb:app_id',
+                    'content' => '705894336804251',
+                ],
+            ]
+        ]);
+        return;
     }
 }
