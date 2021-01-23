@@ -83,8 +83,7 @@ class PublicSite
 
         $r->get('/elfelejtett-jelszo', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
-
-            if ($request->vars['subscriber']) {
+            if (isset($request->vars['subscriber'])) {
                 header('Location: /');
                 return;
             }
@@ -93,6 +92,7 @@ class PublicSite
                 'content' => $twig->render('forgot-password.twig', [
                     'isError' => isset($_GET['isError']),
                     'emailSent' => isset($_GET['emailSent']),
+                    'referer' => $_SERVER['HTTP_REFERER'],
                 ]),
                 'subscriberLabel' =>  getNick($request->vars),
                 'styles' => [
@@ -126,7 +126,7 @@ class PublicSite
 
             $msg = $twig->render('forgot-password-email.twig', [
                 'email' => $subscriber->getEmail(),
-                'link' => Router::siteUrl() . "/jelszo-megvaltoztatasa/" . $token,
+                'link' => Router::siteUrl() . "/jelszo-megvaltoztatasa/" . $token . "?referer=" . $_GET['referer'],
             ]);
 
             @(new Mailer())->sendMail($subscriber->getEmail(), 'Jelszó megváltoztatása', $msg);
@@ -144,6 +144,7 @@ class PublicSite
             echo $twig->render('wrapper.twig', [
                 'content' => $twig->render('create-new-password.twig', [
                     'token' => $request->vars['token'],
+                    'referer' => $_GET['referer'] ?? '',
                 ]),
                 'styles' => [
                     ['path' => 'css/login.css']
@@ -168,7 +169,13 @@ class PublicSite
 
             $password = password_hash($request->body['password'], PASSWORD_DEFAULT);
             $byToken = (new SubscriberPatcher($conn))->patch($subscriber->getId(), new PatchedSubscriber(null, $password, 1, ''));
-            header('Location: /react-kurzus?isPasswordModificationSuccess=1');
+            if ($_GET['referer']) {
+                $parsedUrl = parse_url($_GET['referer']);
+                $params = ['isPasswordModificationSuccess=1'];
+                header('Location: ' .  $parsedUrl['path'] . Router::mergeQueries($_GET['referer'], $params));
+                return;
+            }
+            header('Location: /bejelentkezes?isPasswordModificationSuccess=1');
         });
 
         $r->get('/jelszo-modositasa-sikeres', function (Request $request) use ($conn, $twig) {
