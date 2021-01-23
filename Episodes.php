@@ -192,6 +192,7 @@ class Episodes
             if (!$subscriberCourses->getCount()) {
                 echo self::denyEpisode($twig, $episode, $request, $twig->render('denied-episode-not-bought.twig', [
                     'episode' => $episode,
+                    'registrationSuccessful' => isset($_GET['registrationSuccessful']),
                 ]));
                 return;
             }
@@ -200,6 +201,7 @@ class Episodes
             if (!$subscriberCourse->getIsPayed() || !$subscriberCourse->getIsVerified()) {
                 echo self::denyEpisode($twig, $episode, $request, $twig->render('denied-episode-not-bought.twig', [
                     'episode' => $episode,
+                    'registrationSuccessful' => isset($_GET['registrationSuccessful']),
                 ]));
                 return;
             }
