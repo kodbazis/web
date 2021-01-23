@@ -7,6 +7,11 @@
 				</div>
 				<hr>
 				<div class="row">
+					<div class="col-sm-8">
+						<p class='text-center' class="w-100" style="background-color: #151515">
+							<div id="video-panel" class="kodseged" data-videoid="{{course.videoId}}" data-type="vimeo"></div>
+						</p>
+					</div>
 					<div class="col-sm-4  m-auto">
 						{% if registrationSuccessful %}
 							<div class="alert text-center alert-success p-1 pr-2 pl-2">
@@ -19,11 +24,6 @@
 							Az epizód megtekintéséhez
 							<a href="/react-kurzus">vedd meg a kurzust</a>!
 						</h1>
-					</div>
-					<div class="col-sm-8">
-						<p class='text-center' class="w-100" style="background-color: #151515">
-							<div id="video-panel" class="kodseged" data-videoid="{{course.videoId}}" data-type="vimeo"></div>
-						</p>
 					</div>
 				</div>
 

@@ -194,11 +194,7 @@ class Episodes
                 if (!$subscriberCourses->getCount()) {
                     $courseBySlug = (new CourseLister($conn))->list(Router::where('slug', 'eq', $request->vars['course-slug']));
                     $course = $courseBySlug->getEntities()[0] ?? null;
-                    echo self::denyEpisode($twig, $episode, $request, $twig->render('denied-episode-not-bought.twig', [
-                        'episode' => $episode,
-                        'course' => $course,
-                        'registrationSuccessful' => isset($_GET['registrationSuccessful']),
-                    ]));
+                    header('Location: /' . $course->getSlug());
                     return;
                 }
                 $subscriberCourse = $subscriberCourses->getEntities()[0];
@@ -206,16 +202,10 @@ class Episodes
                 if (!$subscriberCourse->getIsVerified()) {
                     $courseBySlug = (new CourseLister($conn))->list(Router::where('slug', 'eq', $request->vars['course-slug']));
                     $course = $courseBySlug->getEntities()[0] ?? null;
-                    echo self::denyEpisode($twig, $episode, $request, $twig->render('denied-episode-not-bought.twig', [
-                        'episode' => $episode,
-                        'course' => $course,
-                        'registrationSuccessful' => isset($_GET['registrationSuccessful']),
-                    ]));
+                    header('Location: /' . $course->getSlug());
                     return;
                 }
             }
-
-
 
             $query = new Query(
                 1000,
