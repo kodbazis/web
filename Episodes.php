@@ -261,32 +261,7 @@ class Episodes
                     ...Embeddables::getKodsegedStyles(),
                     ...Embeddables::getAppStyles($apps),
                 ],
-                'ogTags' => [
-                    [
-                        'property' => 'og:url',
-                        'content' => Router::siteUrl() . parse_url(Router::siteUrl() . $_SERVER['REQUEST_URI'])['path'],
-                    ],
-                    [
-                        'property' => 'og:type',
-                        'content' => 'article',
-                    ],
-                    [
-                        'property' => 'og:title',
-                        'content' => $episode->getTitle(),
-                    ],
-                    [
-                        'property' => 'og:image',
-                        'content' => Router::siteUrl() . '/public/files/md-' . $episode->getImgUrl(),
-                    ],
-                    [
-                        'property' => 'og:description',
-                        'content' => $episode->getDescription(),
-                    ],
-                    [
-                        'property' => 'fb:app_id',
-                        'content' => '705894336804251',
-                    ],
-                ]
+                'ogTags' => getEpisodeOgTags($episode),
             ]);
         };
     }
@@ -305,33 +280,38 @@ class Episodes
                 ['path' => 'css/post-single.css'],
                 ['path' => 'css/episode-single.css'],
             ],
-            'ogTags' => [
-                [
-                    'property' => 'og:url',
-                    'content' => Router::siteUrl() . $_SERVER['REQUEST_URI'],
-                ],
-                [
-                    'property' => 'og:type',
-                    'content' => 'article',
-                ],
-                [
-                    'property' => 'og:title',
-                    'content' => $episode->getTitle(),
-                ],
-                [
-                    'property' => 'og:image',
-                    'content' => Router::siteUrl() . '/public/files/md-' . $episode->getImgUrl(),
-                ],
-                [
-                    'property' => 'og:description',
-                    'content' => $episode->getDescription(),
-                ],
-                [
-                    'property' => 'fb:app_id',
-                    'content' => '705894336804251',
-                ],
-            ]
+            'ogTags' => getEpisodeOgTags($episode),
         ]);
         return;
     }
+}
+
+function getEpisodeOgTags($episode)
+{
+    return [
+        [
+            'property' => 'og:url',
+            'content' => Router::siteUrl() . parse_url(Router::siteUrl() . $_SERVER['REQUEST_URI'])['path'],
+        ],
+        [
+            'property' => 'og:type',
+            'content' => 'article',
+        ],
+        [
+            'property' => 'og:title',
+            'content' => $episode->getTitle(),
+        ],
+        [
+            'property' => 'og:image',
+            'content' => Router::siteUrl() . '/public/files/md-' . $episode->getImgUrl(),
+        ],
+        [
+            'property' => 'og:description',
+            'content' => $episode->getDescription(),
+        ],
+        [
+            'property' => 'fb:app_id',
+            'content' => '705894336804251',
+        ],
+    ];
 }

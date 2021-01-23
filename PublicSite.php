@@ -636,6 +636,7 @@ class PublicSite
                     'scripts' => [
                         ...Embeddables::getKodsegedScripts(),
                     ],
+                    'ogTags' => getCourseOgTags($course),
                 ]);
                 return;
             }
@@ -677,6 +678,7 @@ class PublicSite
                     'scripts' => [
                         ...Embeddables::getKodsegedScripts(),
                     ],
+                    'ogTags' => getCourseOgTags($course),
                 ]);
                 return;
             }
@@ -711,6 +713,7 @@ class PublicSite
                     'scripts' => [
                         ...Embeddables::getKodsegedScripts(),
                     ],
+                    'ogTags' => getCourseOgTags($course),
                 ]);
                 return;
             }
@@ -747,6 +750,7 @@ class PublicSite
                     'scripts' => [
                         ...Embeddables::getKodsegedScripts(),
                     ],
+                    'ogTags' => getCourseOgTags($course),
                 ]);
                 return;
             }
@@ -766,6 +770,7 @@ class PublicSite
                 'styles' => [
                     ['path' => 'css/promo.css'],
                 ],
+                'ogTags' => getCourseOgTags($course),
             ]);
         });
 
@@ -809,4 +814,34 @@ function getNick($vars)
     }
 
     return explode('@', $vars['subscriber']->getEmail())[0] ?? '';
+}
+
+function getCourseOgTags($course)
+{
+    return [
+        [
+            'property' => 'og:url',
+            'content' => Router::siteUrl() . parse_url(Router::siteUrl() . $_SERVER['REQUEST_URI'])['path'],
+        ],
+        [
+            'property' => 'og:type',
+            'content' => 'article',
+        ],
+        [
+            'property' => 'og:title',
+            'content' => $course->getTitle(),
+        ],
+        [
+            'property' => 'og:image',
+            'content' => Router::siteUrl() . '/public/files/md-' . $course->getImgUrl(),
+        ],
+        [
+            'property' => 'og:description',
+            'content' => $course->getDescription(),
+        ],
+        [
+            'property' => 'fb:app_id',
+            'content' => '705894336804251',
+        ],
+    ];
 }
