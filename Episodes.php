@@ -167,7 +167,13 @@ class Episodes
 
 
             if (!isset($_SESSION['subscriberId'])) {
-                echo self::denyEpisode($twig, $episode, $request, 'denied-episode.twig');
+                echo self::denyEpisode($twig, $episode, $request, $twig->render('denied-episode.twig', [
+                    'episode' => $episode,
+                    'isLogin' => isset($_GET['isLogin']),
+                    'error' => $_GET['error'] ?? '0',
+                    'registrationEmailSent' => isset($_GET['registrationEmailSent']),
+                    'isPasswordModificationSuccess' => isset($_GET['isPasswordModificationSuccess']),
+                ]));
                 return;
             }
 
@@ -184,13 +190,17 @@ class Episodes
             ));
 
             if (!$subscriberCourses->getCount()) {
-                echo self::denyEpisode($twig, $episode, $request, 'denied-episode-not-bought.twig');
+                echo self::denyEpisode($twig, $episode, $request, $twig->render('denied-episode-not-bought.twig', [
+                    'episode' => $episode,
+                ]));
                 return;
             }
             $subscriberCourse = $subscriberCourses->getEntities()[0];
 
             if (!$subscriberCourse->getIsPayed() || !$subscriberCourse->getIsVerified()) {
-                echo self::denyEpisode($twig, $episode, $request, 'denied-episode-not-bought.twig');
+                echo self::denyEpisode($twig, $episode, $request, $twig->render('denied-episode-not-bought.twig', [
+                    'episode' => $episode,
+                ]));
                 return;
             }
 
@@ -286,13 +296,7 @@ class Episodes
             'description' => $episode->getDescription(),
             'subscriberLabel' =>  getNick($request->vars),
             'email' => $_GET['email'] ?? '',
-            'content' => $twig->render($content, [
-                'episode' => $episode,
-                'isLogin' => isset($_GET['isLogin']),
-                'loginError' => $_GET['loginError'] ?? '0',
-                'registrationEmailSent' => isset($_GET['registrationEmailSent']),
-                'isPasswordModificationSuccess' => isset($_GET['isPasswordModificationSuccess']),
-            ]),
+            'content' => $content,
             'styles' => [
                 ['path' => 'css/login.css'],
                 ['path' => 'css/promo.css'],
