@@ -236,7 +236,7 @@ class Episodes
                     'allEpisodesInCourse' => $allEpisodesInCourse,
                     'nextEpisode' => $allEpisodesInCourse[$episodeIndex + 1] ?? null,
                     'previousEpisode' => $allEpisodesInCourse[$episodeIndex - 1] ?? null,
-                    'url' => Router::siteUrl() . $_SERVER['REQUEST_URI'],
+                    'url' => parse_url(Router::siteUrl() . $_SERVER['REQUEST_URI'])['path'],
                 ]),
                 'scripts' => [
                     ...Embeddables::getKodsegedScripts(),
@@ -252,7 +252,7 @@ class Episodes
                 'ogTags' => [
                     [
                         'property' => 'og:url',
-                        'content' => Router::siteUrl() . $_SERVER['REQUEST_URI'],
+                        'content' => parse_url(Router::siteUrl() . $_SERVER['REQUEST_URI'])['path'],
                     ],
                     [
                         'property' => 'og:type',
