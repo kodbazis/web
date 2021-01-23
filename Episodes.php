@@ -19,6 +19,7 @@ use Kodbazis\Image\ImageSaver;
 use Twig\Environment;
 use Kodbazis\Generated\Repository\Episode\SqlLister as EpisodeLister;
 use Kodbazis\Generated\Repository\SubscriberCourse\SqlLister as SubscriberCourseLister;
+use Kodbazis\Generated\Repository\Course\SqlLister as CourseLister;
 
 
 class Episodes
@@ -190,8 +191,11 @@ class Episodes
             ));
 
             if (!$subscriberCourses->getCount()) {
+                $courseBySlug = (new CourseLister($conn))->list(Router::where('slug', 'eq', $request->vars['course-slug']));
+                $course = $courseBySlug->getEntities()[0] ?? null;
                 echo self::denyEpisode($twig, $episode, $request, $twig->render('denied-episode-not-bought.twig', [
                     'episode' => $episode,
+                    'course' => $course,
                     'registrationSuccessful' => isset($_GET['registrationSuccessful']),
                 ]));
                 return;
@@ -199,8 +203,11 @@ class Episodes
             $subscriberCourse = $subscriberCourses->getEntities()[0];
 
             if (!$subscriberCourse->getIsPayed() || !$subscriberCourse->getIsVerified()) {
+                $courseBySlug = (new CourseLister($conn))->list(Router::where('slug', 'eq', $request->vars['course-slug']));
+                $course = $courseBySlug->getEntities()[0] ?? null;
                 echo self::denyEpisode($twig, $episode, $request, $twig->render('denied-episode-not-bought.twig', [
                     'episode' => $episode,
+                    'course' => $course,
                     'registrationSuccessful' => isset($_GET['registrationSuccessful']),
                 ]));
                 return;
@@ -274,11 +281,16 @@ class Episodes
             'subscriberLabel' =>  getNick($request->vars),
             'email' => $_GET['email'] ?? '',
             'content' => $content,
+            'scripts' => [
+                ...Embeddables::getKodsegedScripts(),
+            ],
+
             'styles' => [
                 ['path' => 'css/login.css'],
                 ['path' => 'css/promo.css'],
                 ['path' => 'css/post-single.css'],
                 ['path' => 'css/episode-single.css'],
+                ...Embeddables::getKodsegedStyles(),
             ],
             'ogTags' => getEpisodeOgTags($episode),
         ]);
