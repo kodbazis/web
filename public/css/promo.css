@@ -128,5 +128,8 @@ span.step {
 .preview .after {
   display: block;
   background-image: url('/public/images/preview.png');
+  background-size: 80px;
+  top: 0px !important;
+  left: 0px;
   background-repeat: no-repeat;
 }
