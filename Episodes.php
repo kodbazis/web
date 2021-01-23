@@ -18,6 +18,7 @@ use Kodbazis\Generated\Route\Episode\EpisodeSaver;
 use Kodbazis\Image\ImageSaver;
 use Twig\Environment;
 use Kodbazis\Generated\Repository\Episode\SqlLister as EpisodeLister;
+use Kodbazis\Generated\Repository\SubscriberCourse\SqlLister as SubscriberCourseLister;
 
 
 class Episodes
@@ -154,11 +155,10 @@ class Episodes
     {
         return function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
-            // if (!isset($_SESSION['subscriberId'])) {
-            //     header('Location: /react-kurzus');
-            //     return;
-            // }
-
+            if (!isset($_SESSION['subscriberId'])) {
+                header('Location: /react-kurzus');
+                return;
+            }
 
             $bySlug = (new EpisodeLister($conn))->list(Router::where('slug', 'eq', $request->vars['episode-slug']))->getEntities();
 
@@ -168,6 +168,29 @@ class Episodes
                 echo $twig->render('404.twig');
                 return;
             }
+
+            $subscriberCourses = (new SubscriberCourseLister($conn))->list(new Query(
+                1000,
+                0,
+                new Filter(
+                    'and',
+                    new Clause('eq', 'subscriberId', $_SESSION['subscriberId']),
+                    new Clause('eq', 'courseId', $episode->getCourseId()),
+                ),
+                new OrderBy('id', 'asc')
+            ));
+
+            if (!$subscriberCourses->getCount()) {
+                header('Location: /react-kurzus');
+                return;
+            }
+            $subscriberCourse = $subscriberCourses->getEntities()[0];
+
+            if (!$subscriberCourse->getIsPayed() || !$subscriberCourse->getIsVerified()) {
+                header('Location: /react-kurzus');
+                return;
+            }
+
 
             $query = new Query(
                 1000,
