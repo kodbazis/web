@@ -13,10 +13,10 @@
 			{% if style.isCdn %}
 				<link rel="stylesheet" href="{{ style.path }}">
 			{% else %}
-				<link rel="stylesheet" href="/public/{{ style.path }}">
+				<link rel="stylesheet" href="/public/{{ style.path }}?v=3">
 			{% endif %}
 		{% endfor %}
-		<link type="text/css" href="public/css/pages.css?v=2" media="all" rel="stylesheet"/>
+		<link type="text/css" href="public/css/pages.css?v=3" media="all" rel="stylesheet"/>
 		<title>
 			{{ title is defined ? title : 'Kódbázis | Programozás egyszerűen, közérthetően elmagyarázva.' }}
 		</title>
