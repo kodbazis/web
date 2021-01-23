@@ -66,6 +66,7 @@ class PublicSite
 
             echo $twig->render('wrapper.twig', [
                 'content' => $twig->render('home.twig', []),
+                'description' => 'Szoftverfejlesztő vagy? Netán annak készülsz? Itt eszközöket kapsz a fejlődéshez!',
                 'subscriberLabel' =>  getNick($request->vars),
                 'structuredData' => json_encode([
                     "@context" => "https://schema.org",
@@ -181,6 +182,7 @@ class PublicSite
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
                 'subscriberLabel' =>  getNick($request->vars),
+                'noIndex' => true,
                 'content' => $twig->render('subscriber-login.twig', [
                     'subscriberLabel' =>  getNick($request->vars),
                     'isLoggedIn' => isset($_SESSION['subscriberId']),
@@ -199,6 +201,7 @@ class PublicSite
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
                 'subscriberLabel' =>  getNick($request->vars),
+                'noIndex' => true,
                 'content' => $twig->render('subscriber-registration.twig', [
                     'isLoggedIn' => isset($_SESSION['subscriberId']),
                     'registrationSuccessful' => isset($_GET['registrationSuccessful']),
@@ -381,6 +384,8 @@ class PublicSite
 
             echo $twig->render('wrapper.twig', [
                 'subscriberLabel' =>  getNick($request->vars),
+                'title' => 'Cikkek',
+                'description' => 'Olvass és tanulj JavaScript, PHP, Docker és egyéb szoftverfejlesztői témákban',
                 'content' => $twig->render('posts.twig', [
                     'posts' => alignToRows($posts->getResults(), 3),
                 ]),
@@ -600,6 +605,8 @@ class PublicSite
             if (!isset($_SESSION['subscriberId'])) {
                 echo $twig->render('wrapper.twig', [
                     'structuredData' => courseToStructuredData($course),
+                    'title' => $course->getTitle(),
+                    'description' => $course->getDescription(),
                     'content' => $twig->render('react-paywall.twig', [
                         'course' => $course,
                         'numberOfEpisodes' => count($allEpisodesInCourse),
@@ -642,6 +649,8 @@ class PublicSite
             if (!$subscriberCourses->getCount()) {
                 echo $twig->render('wrapper.twig', [
                     'structuredData' => courseToStructuredData($course),
+                    'title' => $course->getTitle(),
+                    'description' => $course->getDescription(),
                     'content' => $twig->render('react-paywall.twig', [
                         'course' => $course,
                         'numberOfEpisodes' => count($allEpisodesInCourse),
@@ -672,6 +681,8 @@ class PublicSite
             if (!$subscriberCourse->getIsPayed()) {
                 echo $twig->render('wrapper.twig', [
                     'structuredData' => courseToStructuredData($course),
+                    'title' => $course->getTitle(),
+                    'description' => $course->getDescription(),
                     'content' => $twig->render('react-paywall.twig', [
                         'course' => $course,
                         'numberOfEpisodes' => count($allEpisodesInCourse),
@@ -703,6 +714,8 @@ class PublicSite
 
                 echo $twig->render('wrapper.twig', [
                     'structuredData' => courseToStructuredData($course),
+                    'title' => $course->getTitle(),
+                    'description' => $course->getDescription(),
                     'content' => $twig->render('react-paywall.twig', [
                         'course' => $course,
                         'numberOfEpisodes' => count($allEpisodesInCourse),
@@ -735,6 +748,8 @@ class PublicSite
             echo $twig->render('wrapper.twig', [
                 'subscriberLabel' =>  getNick($request->vars),
                 'structuredData' => courseToStructuredData($course),
+                'title' => $course->getTitle(),
+                'description' => $course->getDescription(),
                 'content' => $twig->render('course.twig', [
                     'course' => $course,
                     'subscriberCourse' => $subscriberCourse,
