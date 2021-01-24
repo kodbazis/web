@@ -31,6 +31,10 @@ class Invoice
             $header->setPaymentMethod(\SzamlaAgent\Document\Invoice\Invoice::PAYMENT_METHOD_BANKCARD);
 
             $header->setPaid(true);
+            // Számla teljesítés dátuma
+            $header->setFulfillment(date('Y-m-d'));
+            // Számla fizetési határideje
+            $header->setPaymentDue(date('Y-m-d'));
 
             // Vevő adatainak hozzáadása (kötelezően kitöltendő adatokkal)
             $buyer = new \SzamlaAgent\Buyer($name, (string)$zip, $city, $address);
