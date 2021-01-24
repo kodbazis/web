@@ -265,19 +265,19 @@ class PaymentRoutes
                         new PatchedSubscriberCourse(null, null, null, null, null, null, null, true, null, null)
                     );
 
-                    header('Location: /react-kurzus?transactionSuccessful=1&orderRef=' . $result['o'] . '&transactionId=' . $result['t'] . '#verificationPhase');
+                    header('Location: /react-kurzus?transactionSuccessful=1&orderRef=' . $result['o'] . '&transactionId=' . $result['t']);
                     return;
                     break;
                 case 'FAIL':
-                    header('Location: /react-kurzus?error=transactionFailed&transactionId=' . $result["t"] . '#paymentPhase');
+                    header('Location: /react-kurzus?error=transactionFailed&transactionId=' . $result["t"]);
                     return;
                     break;
                 case 'CANCEL':
-                    header('Location: /react-kurzus?error=transactionCancelled' . '#paymentPhase');
+                    header('Location: /react-kurzus?error=transactionCancelled');
                     return;
                     break;
                 case 'TIMEOUT':
-                    header('Location: /react-kurzus?error=transactionTimeout' . '#paymentPhase');
+                    header('Location: /react-kurzus?error=transactionTimeout');
                     return;
                     break;
             }
