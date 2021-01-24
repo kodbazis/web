@@ -431,10 +431,6 @@ class PublicSite
             ]);
         });
 
-        $r->get('/api/test', function () {
-            Invoice::sendReceipt('bolgar.m@gmail.com', 'Teszt', 10);
-        });
-
         $r->post('/api/order-course/{courseId}', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
 
 
