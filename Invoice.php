@@ -98,7 +98,7 @@ class Invoice
 
             $receipt->setHeader($header);
             // Nyugta előtag beállítása
-            $receipt->getHeader()->setPrefix('NYGTA');
+            $receipt->getHeader()->setPrefix($_SERVER['SZAMLAAGENT_RECEIPT_PREFIX']);
             // Nyugta tétel összeállítása (1 db eladó tétel 27%-os ÁFA tartalommal)
             $item = new \SzamlaAgent\Item\ReceiptItem($productName, $price);
 
