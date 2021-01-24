@@ -11,7 +11,7 @@
 				{% endif %}
 			</nav>
 
-			<span class="step ml-2 mt-2 {{paymentUrl is not defined ? 'color-blue' : ''}}">1</span>
+			<span class="step ml-2 mt-2 {{paymentUrl is not defined ? 'bg-color-blue' : ''}}">1</span>
 			{% if isInvoice %}
 				{% if error == 'requiredFieldMissing' %}
 					<div class="alert alert-danger p-1 pr-2 pl-2 w-100">
@@ -29,7 +29,7 @@
 		{% set isVerificationPhase = subscriberCourse.isPayed and not subscriberCourse.isVerified %}
 		<div class="border-bottom {{paymentUrl is not defined or subscriberCourse.isPayed ? 'text-muted bg-light' : ''}}">
 
-			<span class="step ml-2 mt-2 {{paymentUrl is defined  and not subscriberCourse.isPayed ? 'color-blue' : ''}}">2</span>
+			<span class="step ml-2 mt-2 {{paymentUrl is defined  and not subscriberCourse.isPayed ? 'bg-color-blue' : ''}}">2</span>
 			<div class="row">
 				<div class="col-sm-6 m-auto text-center p-0">
 					<p class="p-2">Fizess kártyával az
@@ -101,7 +101,7 @@
 
 
 		<div class="{{not isVerificationPhase ? 'text-muted bg-light' : ''}}" style="min-height: 150px">
-			<span class="step ml-2 mt-2 {{isVerificationPhase ? 'color-blue' : ''}}">3</span>
+			<span class="step ml-2 mt-2 {{isVerificationPhase ? 'bg-color-blue' : ''}}">3</span>
 
 			<h2 class="p-1 pr-2 pl-2 mb-2" style="font-size: 18px">
 				Befejezés

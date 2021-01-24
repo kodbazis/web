@@ -628,6 +628,7 @@ class PublicSite
                     'styles' => [
                         ['path' => 'css/login.css'],
                         ['path' => 'css/promo.css'],
+                        ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
                         ...Embeddables::getKodsegedStyles(),
                     ],
                     'scripts' => [
@@ -671,6 +672,7 @@ class PublicSite
                         ...Embeddables::getKodsegedStyles(),
                         ['path' => 'css/login.css'],
                         ['path' => 'css/promo.css'],
+                        ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
                     ],
                     'scripts' => [
                         ...Embeddables::getKodsegedScripts(),

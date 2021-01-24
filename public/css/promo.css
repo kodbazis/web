@@ -22,28 +22,6 @@
   font-weight: 500
 }
 
-.quotation:before {
-  content: open-quote;
-  display: inline;
-  height: 0;
-  line-height: 0;
-  left: -10px;
-  position: relative;
-  top: 30px;
-  color: rgb(15, 174, 241);
-  font-size: 3em;
-}
-.quotation::after {
-  content: close-quote;
-  display: inline;
-  height: 0;
-  line-height: 0;
-  left: 10px;
-  position: relative;
-  top: 35px;
-  color: rgb(15, 174, 241);
-  font-size: 3em;
-}
 .quotation-footer {
   margin: 10px;
   font-size: 16px !important;
@@ -65,9 +43,13 @@ span.step {
   width: 1.6em;
 }
 
-.color-blue {
+.bg-color-blue {
   background-color: rgb(15, 174, 241) !important;
 }
+.color-blue {
+  color: rgb(15, 174, 241) !important;
+}
+
 
 /* Opacity #1 */
 .hover11 figure img {
@@ -90,21 +72,6 @@ span.step {
 	opacity: .8;
 }
 
-.checkmark-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.checkmark-list-item {
-  padding-left: 1em; 
-  text-indent: -.7em;
-}
-
-.checkmark-list-item::before {
-  content: "✓ ";
-  color: rgb(15, 174, 241); /* or whatever color you prefer */
-}
 
 .overlay-container {
   position: relative;
