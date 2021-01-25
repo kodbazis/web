@@ -615,7 +615,7 @@ class PublicSite
                     'description' => $course->getDescription(),
                     'content' => $twig->render('react-paywall.twig', [
                         'course' => $course,
-                        'isAutoplay' => !isset($_GET['isLogin']),
+                        'isAutoplay' => !isset($_GET['isLogin']) && !isset($_GET['registrationEmailSent']),
                         'numberOfEpisodes' => count($allEpisodesInCourse),
                         'paywallForm' => $twig->render('sub-reg-panel.twig', [
                             'isLogin' => isset($_GET['isLogin']),
@@ -628,6 +628,7 @@ class PublicSite
                         ]),
                         'episodeList' => renderEpisodeList($twig, $course, $allEpisodesInCourse),
                         'registrationSuccessful' => isset($_GET['registrationSuccessful']),
+                        'isLoggedIn' => isset($_SESSION['subscriberId']),
                     ]),
                     'subscriberLabel' =>  getNick($request->vars),
                     'styles' => [
@@ -671,6 +672,7 @@ class PublicSite
                         ]),
                         'episodeList' => renderEpisodeList($twig, $course, $allEpisodesInCourse),
                         'registrationSuccessful' => isset($_GET['registrationSuccessful']),
+                        'isLoggedIn' => isset($_SESSION['subscriberId']),
                     ]),
                     'subscriberLabel' =>  getNick($request->vars),
                     'styles' => [
@@ -707,6 +709,7 @@ class PublicSite
                             'paymentUrl' => PaymentRoutes::getPaymentUrl($course, $subscriberCourse, $request->vars['subscriber'], $conn),
                         ]),
                         'episodeList' => renderEpisodeList($twig, $course, $allEpisodesInCourse),
+                        'isLoggedIn' => isset($_SESSION['subscriberId']),
                     ]),
                     'subscriberLabel' =>  getNick($request->vars),
                     'styles' => [
@@ -744,6 +747,7 @@ class PublicSite
                             'subscriber' => $request->vars['subscriber'],
                         ]),
                         'episodeList' => renderEpisodeList($twig, $course, $allEpisodesInCourse),
+                        'isLoggedIn' => isset($_SESSION['subscriberId']),
                     ]),
                     'subscriberLabel' =>  getNick($request->vars),
                     'styles' => [
