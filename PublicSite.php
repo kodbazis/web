@@ -611,6 +611,7 @@ class PublicSite
                     'description' => $course->getDescription(),
                     'content' => $twig->render('react-paywall.twig', [
                         'course' => $course,
+                        'isAutoplay' => !isset($_GET['isLogin']),
                         'numberOfEpisodes' => count($allEpisodesInCourse),
                         'paywallForm' => $twig->render('sub-reg-panel.twig', [
                             'isLogin' => isset($_GET['isLogin']),
