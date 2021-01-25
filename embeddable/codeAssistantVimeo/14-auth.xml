@@ -1,6 +1,177 @@
 <?xml version = "1.0"?>
 <root>
 <item>
+    <timestamp>01:07</timestamp>
+    <fileName>ExampleApis.php</fileName>
+    <content>
+<![CDATA[
+// Ha érdekel, hogy mi történik szerver oldalon, nézd át ezt a file-t!
+
+<?php
+
+namespace Kodbazis;
+
+use Kodbazis\Generated\Request;
+use mysqli;
+use Twig\Environment;
+use Firebase\JWT\JWT;
+use Kodbazis\Generated\Auth\AccessToken;
+use Kodbazis\Generated\Auth\AuthException;
+use Kodbazis\Generated\Auth\RefreshToken;
+use UnexpectedValueException;
+
+class ExampleApis
+{
+
+    public static function getRoutes(Pipeline $r, mysqli $conn, Environment $twig)
+    {
+        self::registerAuthRoutes($r);
+    }
+
+    public static function registerAuthRoutes($r)
+    {
+        $secret = "tokenSecret";
+        $r->post('/api/login-user', function (Request $request) use ($secret) {
+
+            header('Content-type: application/json');
+            if ((($request->body['email'] ?? '') !== 'user@kodbazis.hu') || (($request->body['password'] ?? '') !== "teszt")) {
+                http_response_code(401);
+                throw new AuthException('missing token');
+            }
+
+            $id = uniqid();
+            $access =  new AccessToken(JWT::encode([
+                "sub" => $id,
+                "iat" => time(),
+                "exp" => time() + 15,
+            ], $secret));
+
+            $refresh = new RefreshToken(JWT::encode([
+                "iat" => time(),
+                'expires' => time() + 60 * 60 * 24 * 29,
+            ], $secret));
+
+            setcookie('kodbazisRefreshToken', $refresh->getValue(), [
+                'expires' => time() + 60 * 60 * 24 * 30,
+                'httponly' => true,
+                'secure' => true,
+                'samesite' => 'None',
+            ]);
+
+            echo json_encode($access);
+        });
+
+        $r->get('/api/get-new-access-token', function (Request $request) use ($secret) {
+
+            try {
+                $decoded = JWT::decode($_COOKIE['kodbazisRefreshToken'] ?? '', $secret, ['HS256']);
+                $access =  new AccessToken(JWT::encode([
+                    "sub" => '',
+                    "iat" => time(),
+                    "exp" => time() + 15,
+                ], $secret));
+                header('Content-type: application/json');
+                echo json_encode($access);
+            } catch (\Firebase\JWT\ExpiredException $err) {
+                http_response_code(403);
+                header('Content-type: application/json');
+                echo json_encode(['error' => 'token expired']);
+            } catch (UnexpectedValueException $err) {
+                http_response_code(403);
+                header('Content-type: application/json');
+                echo json_encode(['error' => 'unauthorized']);
+            } catch (Exception $exception) {
+                http_response_code(401);
+                throw new AuthException();
+            }
+        });
+
+
+        $r->post('/api/logout-user', function () use ($secret) {
+
+            header('Content-type: application/json');
+            try {
+                setcookie('kodbazisRefreshToken', false, [
+                    'expires' => 1,
+                    'httponly' => true,
+                    'secure' => true,
+                    'samesite' => 'None',
+                ]);
+            } catch (\Firebase\JWT\ExpiredException $err) {
+                http_response_code(403);
+                echo json_encode(['error' => 'token expired']);
+            } catch (UnexpectedValueException $err) {
+                http_response_code(403);
+                echo json_encode(['error' => 'unauthorized']);
+            } catch (Exception $exception) {
+                http_response_code(401);
+                throw new AuthException();
+            }
+        });
+
+        $r->get('/api/szallasok', function (Request $request) use ($secret) {
+
+            header('Content-type: application/json');
+            try {
+                $headers = getallheaders();
+                if (!preg_match('/Bearer\s(\S+)/', $headers['Authorization'] ?? '', $matches)) {
+                    http_response_code(403);
+                    echo json_encode(['error' => 'unauthorized']);
+                    return;
+                }
+                $decoded = JWT::decode($matches[1], $secret, ['HS256']);
+                echo file_get_contents(__DIR__ . '/example-repos/airbnb.json');
+            } catch (\Firebase\JWT\ExpiredException $err) {
+                http_response_code(403);
+                echo json_encode(['error' => 'token expired']);
+            } catch (UnexpectedValueException $err) {
+                http_response_code(403);
+                echo json_encode(['error' => 'unauthorized']);
+            } catch (\Exception $exception) {
+                http_response_code(403);
+                echo json_encode(['error' => 'unauthorized']);
+            }
+        });
+        $r->get('/api/szallasok/{id}', function (Request $request) use ($secret) {
+
+            header('Content-type: application/json');
+            try {
+                $headers = getallheaders();
+                if (!preg_match('/Bearer\s(\S+)/', $headers['Authorization'] ?? '', $matches)) {
+                    http_response_code(403);
+                    echo json_encode(['error' => 'unauthorized']);
+                    return;
+                }
+                $decoded = JWT::decode($matches[1], $secret, ['HS256']);
+                $content =  file_get_contents(__DIR__ . '/example-repos/airbnb.json');
+                $items  = json_decode($content, true);
+
+                $filtered = array_values(array_filter($items, fn ($item) => $item['id'] == $request->vars['id']));
+
+                if (!count($filtered)) {
+                    http_response_code(403);
+                    echo json_encode(['error' => 'not found']);
+                }
+
+                echo json_encode($filtered[0]);
+            } catch (\Firebase\JWT\ExpiredException $err) {
+                http_response_code(403);
+                echo json_encode(['error' => 'token expired']);
+            } catch (UnexpectedValueException $err) {
+                http_response_code(403);
+                echo json_encode(['error' => 'unauthorized']);
+            } catch (\Exception $exception) {
+                http_response_code(403);
+                throw new AuthException();
+            }
+        });
+    }
+}
+
+]]>
+    </content>
+</item>
+<item>
     <timestamp>03:34</timestamp>
     <fileName>App.js</fileName>
     <content>
