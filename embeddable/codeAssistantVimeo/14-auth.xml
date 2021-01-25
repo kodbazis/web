@@ -30,7 +30,7 @@ class ExampleApis
 
     public static function registerAuthRoutes($r)
     {
-        $secret = "tokenSecret";
+        $secret = "tokenSecret"; // Ezt valóéletben érdemes kívülről bejuttatni a rendszerbe. pl: $_SERVER['TOKEN_SECRET']
 
         $r->post('/api/login-user', function (Request $request) use ($secret) {
 
