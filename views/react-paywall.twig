@@ -15,6 +15,13 @@
 					</p>
 				</div>
 			{% endif %}
+			{% if loginSuccess %}
+				<div class="alert text-center alert-success p-1 pr-2 pl-2">
+					<p style="font-size:15px">
+						<b>Bejelentkezés sikeres!</b>
+					</p>
+				</div>
+			{% endif %}
 			<p class='text-center' class="w-100" style="background-color: #151515">
 				<div id="video-panel" class="kodseged" data-videoid="{{course.videoId}}" data-isautoplay="{{isAutoplay}}" data-type="vimeo"></div>
 			</p>
@@ -27,12 +34,35 @@
 
 			<div class="row">
 				<div class="col-md-12 border-bottom">
-					<p class="text-center" style="font-size: 1.5em">Bruttó ár:
-					</p>
-					<h1 class="pb-2" style="font-size: 3em">
-						<b>{{course.price}}
-							ft</b>
-					</h1>
+					{% if course.price == discountedPrice %}
+						<h1 class="pb-2" style="font-size: 3em">
+							<b>{{course.price | number_format(0, '', ' ')}}
+								ft</b>
+						</h1>
+					{% else %}
+						<div class="row p-2">
+
+
+							<div class="col-md-8">
+								<span class="first">{{discountedPrice | number_format(0, '', ' ') }}
+									Ft</span>
+								<span class="second strikethrough">{{course.price | number_format(0, '', ' ')}}
+									Ft</span>
+							</div>
+							<div class="col-md-4">
+
+								<div class="float-right text-center">
+									<div class="third text-center">
+										-{{course.discount}}%
+									</div>
+									<span class="" style="font-size: 10px">Limitált ideig!</span>
+								</div>
+							</div>
+
+
+						</div>
+
+					{% endif %}
 				</div>
 			</div>
 

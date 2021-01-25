@@ -19,7 +19,7 @@
   quotes: "\201C""\201D""\2018""\2019";
   padding: 10px 20px;
   line-height: 1.4;
-  font-weight: 500
+  font-weight: 500;
 }
 
 .quotation-footer {
@@ -50,33 +50,31 @@ span.step {
   color: rgb(15, 174, 241) !important;
 }
 
-
 /* Opacity #1 */
 .hover11 figure img {
-	opacity: 1;
-	-webkit-transition: .3s ease-in-out;
-	transition: .3s ease-in-out;
+  opacity: 1;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .hover11 figure:hover img {
-	opacity: .5;
+  opacity: 0.5;
 }
 
 /* Opacity #1 */
 .hover11 figure img {
-	opacity: 1;
-	-webkit-transition: .3s ease-in-out;
-	transition: .3s ease-in-out;
+  opacity: 1;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 .hover11 figure:hover img {
-	opacity: .8;
+  opacity: 0.8;
 }
-
 
 .overlay-container {
   position: relative;
   width: 100%;
-  height: 100%
+  height: 100%;
 }
 .overlay-container .after {
   position: absolute;
@@ -85,18 +83,80 @@ span.step {
   width: 100%;
   height: 100%;
   display: none;
-  color: #FFF;
+  color: #fff;
 }
 .lock .after {
   display: block;
-  background-image: url('/public/images/lock-small.png');
+  background-image: url("/public/images/lock-small.png");
   background-repeat: no-repeat;
 }
 .preview .after {
   display: block;
-  background-image: url('/public/images/preview.png');
+  background-image: url("/public/images/preview.png");
   background-size: 80px;
   top: 0px !important;
   left: 0px;
   background-repeat: no-repeat;
+}
+
+.strikethrough {
+  background: linear-gradient(
+    to left top,
+    transparent 47.75%,
+    currentColor 49.5%,
+    currentColor 50.5%,
+    transparent 52.25%
+  );
+}
+
+@font-face {
+  font-family: "Main-Regular";
+  src: url("/public/css/fonts/main/09c8fb44d2c62d99647e4ce58736293e.eot");
+  src: url("/public/css/fonts/main/09c8fb44d2c62d99647e4ce58736293e.eot?#iefix") format("embedded-opentype"),
+    url("/public/css/fonts/main/09c8fb44d2c62d99647e4ce58736293e.woff2") format("woff2"),
+    url("/public/css/fonts/main/09c8fb44d2c62d99647e4ce58736293e.woff") format("woff"),
+    url("/public/css/fonts/main/09c8fb44d2c62d99647e4ce58736293e.ttf") format("truetype"),
+    url("/public/css/fonts/main/09c8fb44d2c62d99647e4ce58736293e.svg#Main-Regular") format("svg");
+}
+
+p {
+  font-family: "Main-Regular" !important;
+}
+
+.first {
+  font-size: 25px;
+  line-height: 26px;
+  text-align: left;
+  color: rgb(229 0 16);
+  font-family: "Main-Regular";
+}
+
+.second {
+  line-height: 1.5;
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: none;
+  font-family: "Main-Regular";
+}
+
+del {
+  text-decoration: line-through;
+}
+
+.third {
+  background: rgb(240 221 215);
+  color: rgb(201 0 46);
+  display: inline-block;
+  line-height: 28px;
+  padding: 0 16px;
+  right: 0;
+  font-family: "Main-Regular";
+}
+
+.red {
+  color: rgb(229 0 16);
+}
+.red-border {
+  border: 1px solid rgb(229 0 16);
+  line-height: 25px;
 }

@@ -25,13 +25,13 @@ class SqlPatcher implements Patcher
           
           $stmt = $this->connection->prepare(
               'UPDATE `courses` SET 
-                `title` = ?, `content` = ?, `slug` = ?, `imgUrl` = ?, `videoId` = ?, `description` = ?, `isActive` = ?, `price` = ?
+                `title` = ?, `content` = ?, `slug` = ?, `imgUrl` = ?, `videoId` = ?, `description` = ?, `isActive` = ?, `price` = ?, `discount` = ?
                 WHERE `id` = ?;'
           );
           
           call_user_func(function (...$params) use ($stmt) {
                 $stmt->bind_param(
-                    "ssssssiis",
+                    "ssssssiiis",
                     ...$params
                 );
             },
@@ -42,7 +42,8 @@ class SqlPatcher implements Patcher
         $merged->getVideoId(),
         $merged->getDescription(),
         $merged->getIsActive(),
-        $merged->getPrice(), $id);
+        $merged->getPrice(),
+        $merged->getDiscount(), $id);
           
           
           $stmt->execute();
@@ -51,7 +52,7 @@ class SqlPatcher implements Patcher
               throw new OperationError($stmt->error);
           }
           
-          return new Course($id, $merged->getTitle(),$merged->getContent(),$merged->getSlug(),$merged->getImgUrl(),$merged->getVideoId(),$merged->getDescription(),$byId->getCreatedAt(),$merged->getIsActive(),$merged->getPrice());
+          return new Course($id, $merged->getTitle(),$merged->getContent(),$merged->getSlug(),$merged->getImgUrl(),$merged->getVideoId(),$merged->getDescription(),$byId->getCreatedAt(),$merged->getIsActive(),$merged->getPrice(),$merged->getDiscount());
       
       } catch (\Error $exception) {
             if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {
@@ -71,7 +72,7 @@ class SqlPatcher implements Patcher
     private function merge(Course $prev, PatchedCourse $patched): PatchedCourse
     {
         return new PatchedCourse(
-            $patched->getTitle() !== null ? $patched->getTitle() : $prev->getTitle(), $patched->getContent() !== null ? $patched->getContent() : $prev->getContent(), $patched->getSlug() !== null ? $patched->getSlug() : $prev->getSlug(), $patched->getImgUrl() !== null ? $patched->getImgUrl() : $prev->getImgUrl(), $patched->getVideoId() !== null ? $patched->getVideoId() : $prev->getVideoId(), $patched->getDescription() !== null ? $patched->getDescription() : $prev->getDescription(), $patched->getIsActive() !== null ? $patched->getIsActive() : $prev->getIsActive(), $patched->getPrice() !== null ? $patched->getPrice() : $prev->getPrice()
+            $patched->getTitle() !== null ? $patched->getTitle() : $prev->getTitle(), $patched->getContent() !== null ? $patched->getContent() : $prev->getContent(), $patched->getSlug() !== null ? $patched->getSlug() : $prev->getSlug(), $patched->getImgUrl() !== null ? $patched->getImgUrl() : $prev->getImgUrl(), $patched->getVideoId() !== null ? $patched->getVideoId() : $prev->getVideoId(), $patched->getDescription() !== null ? $patched->getDescription() : $prev->getDescription(), $patched->getIsActive() !== null ? $patched->getIsActive() : $prev->getIsActive(), $patched->getPrice() !== null ? $patched->getPrice() : $prev->getPrice(), $patched->getDiscount() !== null ? $patched->getDiscount() : $prev->getDiscount()
         );
     }
 }

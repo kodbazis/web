@@ -607,9 +607,7 @@ class PublicSite
             $embeddables = count($ids) ? Embeddables::getEmbeddables($ids, $conn) : [];
             $templates = Embeddables::mapEmbeddablesToTemplates($embeddables, $twig);
             $content = Embeddables::insertEmbeddablesToContent($templates, $course->getContent());
-            $apps = array_filter($embeddables, fn ($em) => $em->getType() === 'application');
-
-
+            
             // not logged in
             if (!isset($_SESSION['subscriberId'])) {
                 echo $twig->render('wrapper.twig', [
@@ -618,6 +616,7 @@ class PublicSite
                     'description' => $course->getDescription(),
                     'content' => $twig->render('react-paywall.twig', [
                         'course' => $course,
+                        'discountedPrice' => getDiscountedPrice($course),
                         'contentWithEmbeddables' => $content,
                         'isAutoplay' => !isset($_GET['isLogin']) && !isset($_GET['registrationEmailSent']),
                         'numberOfEpisodes' => count($allEpisodesInCourse),
@@ -639,11 +638,9 @@ class PublicSite
                         ['path' => 'css/promo.css'],
                         ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
                         ...Embeddables::getKodsegedStyles(),
-                        ...Embeddables::getAppStyles($apps),
                     ],
                     'scripts' => [
                         ...Embeddables::getKodsegedScripts(),
-                        ...Embeddables::getAppScripts($apps),
                     ],
                     'ogTags' => getCourseOgTags($course),
                 ]);
@@ -670,6 +667,7 @@ class PublicSite
                     'description' => $course->getDescription(),
                     'content' => $twig->render('react-paywall.twig', [
                         'course' => $course,
+                        'discountedPrice' => getDiscountedPrice($course),
                         'contentWithEmbeddables' => $content,
                         'numberOfEpisodes' => count($allEpisodesInCourse),
                         'paywallForm' => $twig->render('paywall-form.twig', [
@@ -679,6 +677,7 @@ class PublicSite
                         ]),
                         'episodeList' => renderEpisodeList($twig, $course, $allEpisodesInCourse),
                         'registrationSuccessful' => isset($_GET['registrationSuccessful']),
+                        'loginSuccess' => isset($_GET['loginSuccess']),
                     ]),
                     'subscriberLabel' =>  getNick($request->vars),
                     'styles' => [
@@ -705,6 +704,7 @@ class PublicSite
                     'description' => $course->getDescription(),
                     'content' => $twig->render('react-paywall.twig', [
                         'course' => $course,
+                        'discountedPrice' => getDiscountedPrice($course),
                         'contentWithEmbeddables' => $content,
                         'numberOfEpisodes' => count($allEpisodesInCourse),
                         'paywallForm' => $twig->render('paywall-form.twig', [
@@ -721,6 +721,7 @@ class PublicSite
                     'styles' => [
                         ['path' => 'css/login.css'],
                         ['path' => 'css/promo.css'],
+                        ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
                         ...Embeddables::getKodsegedStyles(),
                     ],
                     'scripts' => [
@@ -740,6 +741,7 @@ class PublicSite
                     'description' => $course->getDescription(),
                     'content' => $twig->render('react-paywall.twig', [
                         'course' => $course,
+                        'discountedPrice' => getDiscountedPrice($course),
                         'contentWithEmbeddables' => $content,
                         'numberOfEpisodes' => count($allEpisodesInCourse),
                         'paywallForm' => $twig->render('paywall-form.twig', [
@@ -759,6 +761,7 @@ class PublicSite
                     'styles' => [
                         ['path' => 'css/login.css'],
                         ['path' => 'css/promo.css'],
+                        ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
                         ...Embeddables::getKodsegedStyles(),
                     ],
                     'scripts' => [
@@ -856,4 +859,13 @@ function getCourseOgTags($course)
             'content' => '705894336804251',
         ],
     ];
+}
+
+function getDiscountedPrice($course) {
+    if (!$course->getDiscount()) {
+        return $course->getPrice();
+    }
+    $multiplier = (100 - $course->getDiscount()) / 100;
+    $x = $course->getPrice() * $multiplier;
+    return round($x / 5) * 5;
 }

@@ -14,10 +14,11 @@ private $videoId;
 private $description;
 private $isActive;
 private $price;
+private $discount;
 
 
     
-public function __construct($title, $content, $slug, $imgUrl, $videoId, $description, $isActive, $price)
+public function __construct($title, $content, $slug, $imgUrl, $videoId, $description, $isActive, $price, $discount)
 {
         $this->title = $title;
 $this->content = $content;
@@ -27,6 +28,7 @@ $this->videoId = $videoId;
 $this->description = $description;
 $this->isActive = $isActive;
 $this->price = $price;
+$this->discount = $discount;
 
 }
     
@@ -62,6 +64,10 @@ $this->price = $price;
     {
         return $this->price;
     }
+    public function getDiscount(): ?int
+    {
+        return $this->discount;
+    }
     
     
     public function jsonSerialize()
@@ -75,6 +81,7 @@ $this->price = $price;
  'description' => $this->description,
  'isActive' => $this->isActive,
  'price' => $this->price,
+ 'discount' => $this->discount,
 
         ];
     }

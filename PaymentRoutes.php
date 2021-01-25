@@ -36,7 +36,10 @@ class PaymentRoutes
 
         //ORDER PRICE/TOTAL
         //-----------------------------------------------------------------------------------------
-        $trx->addData('total', $course->getPrice());
+
+        if ($course->getDiscount()) {
+            $trx->addData('discount', $course->getPrice() - getDiscountedPrice($course));
+        }
 
         $trx->addItems(
             array(

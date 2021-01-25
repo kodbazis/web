@@ -65,7 +65,7 @@
         }
 
         try {
-          $toSave = new NewCourse((string)($entity['title'] ?? ''), (string)($entity['content'] ?? ''), (string)($entity['slug'] ?? ''), (string)($entity['imgUrl'] ?? ''), (string)($entity['videoId'] ?? ''), (string)($entity['description'] ?? ''), (int)($entity['createdAt'] ?? 0), (bool)($entity['isActive'] ?? false), (int)($entity['price'] ?? 0));
+          $toSave = new NewCourse((string)($entity['title'] ?? ''), (string)($entity['content'] ?? ''), (string)($entity['slug'] ?? ''), (string)($entity['imgUrl'] ?? ''), (string)($entity['videoId'] ?? ''), (string)($entity['description'] ?? ''), (int)($entity['createdAt'] ?? 0), (bool)($entity['isActive'] ?? false), (int)($entity['price'] ?? 0), (int)($entity['discount'] ?? 0));
               return $this->saver->Save($toSave);
         } catch (Exception $err) {
                 $this->operationError->addField(Error::getOperationError());
@@ -91,7 +91,8 @@
             'description' => [$this, 'isString'],
             'createdAt' => [$this, 'isInt'],
             'isActive' => [$this, 'isBool'],
-            'price' => [$this, 'isInt']
+            'price' => [$this, 'isInt'],
+            'discount' => [$this, 'isInt']
 
         ];
         if (!array_key_exists($key, $validators)) {
