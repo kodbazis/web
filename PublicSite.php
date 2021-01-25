@@ -404,6 +404,7 @@ class PublicSite
         $r->get('/adatvedelmi-szabalyzat', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
+                'title' => "Adatvédelmi szabályzat",
                 'content' => $twig->render('privacy-policy.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
                 'description' => 'A Kódbázis adatvédelmi szabályzata',
@@ -415,6 +416,7 @@ class PublicSite
         $r->get('/adattovabbitasi-nyilatkozat', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
+                'title' => "Adattovábbítási nyilatkozat",
                 'content' => $twig->render('simplepay-legal.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
                 'description' => 'Az OTP simplepay adattovábbítási nyilatkozata',
@@ -425,10 +427,10 @@ class PublicSite
         $r->get('/aszf', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
+                'title' => "Általános szerződési feltételek",
                 'content' => $twig->render('aszf.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
                 'description' => 'A Kódbázis általános szerződési feltételei',
-                'title' => 'Általános szerződési feltételei',
                 'noIndex' => true,
             ]);
         });
