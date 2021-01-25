@@ -1,34 +1,22 @@
-<div class="mt-3 mb-3 content-body {{paddingTop is defined ? 'first-section' : ''}}">
+<div class="mt-3 mb-3 content-body first-section">
 	<div class="col-sm-12">
 		<div class="card p-3">
 			<h1>
 				{{ mainTitle is defined ? mainTitle : course.title }}
-				{# {% if subscriberCourse.id is defined %}
-					<a href="/api/reset/{{subscriberCourse.id}}">
-						<button class="btn btn-sm btn-danger w-100">Reset
-							<small style="font-size: 12px">(OTP SimplePay teszteléshez)</small>
-						</button>
-					</a>
-				{% endif %} #}
 			</h1>
 			<hr/>
 			{% for row in episodes %}
 				<div class="row">
 					{% for episode in row %}
 						<div class="col-sm-4 mb-2 pl-2 pr-2">
-							{% if isPromo is defined and isPromo %}
-								<div class="card" class="w-100">
-									<img class="card-img-top" src="/public/files/md-{{ episode.imgUrl }}" alt=""/>
+							<a href="{{course.slug}}/{{episode.slug}}">
+								<div class="card hover11" class="w-100">
+									<figure>
+										<img class="card-img-top" src="/public/files/md-{{ episode.imgUrl }}" alt=""/>
+									</figure>
 								</div>
-							{% else %}
-								<a href="{{course.slug}}/{{episode.slug}}">
-									<div class="card hover11" class="w-100">
-										<figure>
-											<img class="card-img-top" src="/public/files/md-{{ episode.imgUrl }}" alt=""/>
-										</figure>
-									</div>
-								</a>
-							{% endif %}
+							</a>
+
 						</div>
 					{% endfor %}
 				</div>

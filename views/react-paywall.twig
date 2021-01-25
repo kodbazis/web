@@ -24,18 +24,18 @@
 			{% include 'react-quotes.twig'  %}
 		</div>
 		<div class="col-md-4">
-			{% if isLoggedIn %}
-				<div class="row">
-					<div class="col-md-12 border-bottom">
-						<p class="text-center" style="font-size: 1.5em">Bruttó ár:
-						</p>
-						<h1 class="pb-2" style="font-size: 3em">
-							<b>{{course.price}}
-								ft</b>
-						</h1>
-					</div>
+
+			<div class="row">
+				<div class="col-md-12 border-bottom">
+					<p class="text-center" style="font-size: 1.5em">Bruttó ár:
+					</p>
+					<h1 class="pb-2" style="font-size: 3em">
+						<b>{{course.price}}
+							ft</b>
+					</h1>
 				</div>
-			{% endif %}
+			</div>
+
 			<div class="row p-2 mb-2 border-bottom">
 				{{paywallForm | raw}}
 			</div>
@@ -61,16 +61,15 @@
 						<b>Élő kódmegjelenítést</b>
 					</li>
 				</ul>
-
 			</div>
-			{% if isLoggedIn %}
-				<p class="lead p-2 text-danger">
-					<b>
-						Ha nem vagy elégedett, akkor visszakapod a kurzus teljes árát!
-					</b>
-				</p>
-			{% endif %}
+			<p class="lead p-2 text-danger">
+				<b>
+					Ha nem vagy elégedett a tanfolyammal, akkor visszaküldjük a teljes árat!
+				</b>
+			</p>
+
 		</div>
 	</div>
+	{{contentWithEmbeddables | raw}}
 	{{episodeList | raw}}
 </div>

@@ -80,7 +80,7 @@ class Courses
                     'csrfToken' => $request->params['csrfToken'],
                     'scripts' => [
                         ['path' => 'ckeditor/ckeditor.js'],
-                        ['path' => 'js/course-create.js'],
+                        ['path' => 'js/ckeditor-init.js'],
                     ],
                 ]);
             }

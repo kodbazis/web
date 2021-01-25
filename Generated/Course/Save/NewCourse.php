@@ -7,6 +7,7 @@ use JsonSerializable;
 class NewCourse implements JsonSerializable
 {
     private $title;
+private $content;
 private $slug;
 private $imgUrl;
 private $videoId;
@@ -17,9 +18,10 @@ private $price;
 
 
     
-public function __construct($title, $slug, $imgUrl, $videoId, $description, $createdAt, $isActive, $price)
+public function __construct($title, $content, $slug, $imgUrl, $videoId, $description, $createdAt, $isActive, $price)
 {
         $this->title = $title;
+$this->content = $content;
 $this->slug = $slug;
 $this->imgUrl = $imgUrl;
 $this->videoId = $videoId;
@@ -33,6 +35,10 @@ $this->price = $price;
     public function getTitle(): ?string
     {
         return $this->title;
+    }
+    public function getContent(): ?string
+    {
+        return $this->content;
     }
     public function getSlug(): ?string
     {
@@ -68,6 +74,7 @@ $this->price = $price;
     {
         return [
             'title' => $this->title,
+ 'content' => $this->content,
  'slug' => $this->slug,
  'imgUrl' => $this->imgUrl,
  'videoId' => $this->videoId,

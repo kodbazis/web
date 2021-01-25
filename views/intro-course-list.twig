@@ -1,0 +1,21 @@
+<div class="mt-3 mb-3 content-body first-section">
+	<div class="col-sm-12">
+		<div class="p-0">
+			<h1>
+				Epizódok:
+			</h1>
+			<hr/>
+			{% for row in episodes %}
+				<div class="row">
+					{% for episode in row %}
+						<div class="col-sm-4 mb-2 pl-2 pr-2">
+							<div class="card" class="w-100">
+								<img class="card-img-top" src="/public/files/md-{{ episode.imgUrl }}" alt=""/>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>

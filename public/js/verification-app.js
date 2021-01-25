@@ -27,7 +27,7 @@
             <p class="text-center text-dark mb-3">
               <b>Megerősítés sikeres!</b> <br>
               <b>
-                A ${dataset.purchasetype == "invoice" ? "számlát" : "nyugtát"} kiküldtük a ${dataset.email} email címre!
+                A ${dataset.purchasetype == "invoice" ? "számlát" : "nyugtát"} kiküldtük a ${dataset.email} címre!
               </b>
               <br />
               <b class="text-success">Köszönjük a vásárlást!</b>

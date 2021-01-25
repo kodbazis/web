@@ -29,6 +29,7 @@ use Kodbazis\Generated\Subscriber\Patch\PatchedSubscriber;
 use Kodbazis\Generated\Subscriber\Save\NewSubscriber;
 use Kodbazis\Generated\SubscriberCourse\Save\NewSubscriberCourse;
 use SzamlaAgent\Document\Receipt\Receipt;
+use Kodbazis\Generated\Repository\Embeddable\SqlLister as EmbeddableLister;
 
 class PublicSite
 {
@@ -601,10 +602,12 @@ class PublicSite
                 new OrderBy('position', 'asc')
             ))->getEntities();
 
-            // render course description
-            // render course img
-            // render course episodes
-            // render course intro video
+
+            $ids = Embeddables::getIds($course->getContent());
+            $embeddables = count($ids) ? Embeddables::getEmbeddables($ids, $conn) : [];
+            $templates = Embeddables::mapEmbeddablesToTemplates($embeddables, $twig);
+            $content = Embeddables::insertEmbeddablesToContent($templates, $course->getContent());
+            $apps = array_filter($embeddables, fn ($em) => $em->getType() === 'application');
 
 
             // not logged in
@@ -615,6 +618,7 @@ class PublicSite
                     'description' => $course->getDescription(),
                     'content' => $twig->render('react-paywall.twig', [
                         'course' => $course,
+                        'contentWithEmbeddables' => $content,
                         'isAutoplay' => !isset($_GET['isLogin']) && !isset($_GET['registrationEmailSent']),
                         'numberOfEpisodes' => count($allEpisodesInCourse),
                         'paywallForm' => $twig->render('sub-reg-panel.twig', [
@@ -628,7 +632,6 @@ class PublicSite
                         ]),
                         'episodeList' => renderEpisodeList($twig, $course, $allEpisodesInCourse),
                         'registrationSuccessful' => isset($_GET['registrationSuccessful']),
-                        'isLoggedIn' => isset($_SESSION['subscriberId']),
                     ]),
                     'subscriberLabel' =>  getNick($request->vars),
                     'styles' => [
@@ -636,9 +639,11 @@ class PublicSite
                         ['path' => 'css/promo.css'],
                         ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
                         ...Embeddables::getKodsegedStyles(),
+                        ...Embeddables::getAppStyles($apps),
                     ],
                     'scripts' => [
                         ...Embeddables::getKodsegedScripts(),
+                        ...Embeddables::getAppScripts($apps),
                     ],
                     'ogTags' => getCourseOgTags($course),
                 ]);
@@ -656,6 +661,7 @@ class PublicSite
                 new OrderBy('id', 'asc')
             ));
 
+
             // not ordered
             if (!$subscriberCourses->getCount()) {
                 echo $twig->render('wrapper.twig', [
@@ -664,6 +670,7 @@ class PublicSite
                     'description' => $course->getDescription(),
                     'content' => $twig->render('react-paywall.twig', [
                         'course' => $course,
+                        'contentWithEmbeddables' => $content,
                         'numberOfEpisodes' => count($allEpisodesInCourse),
                         'paywallForm' => $twig->render('paywall-form.twig', [
                             'course' => $course,
@@ -672,7 +679,6 @@ class PublicSite
                         ]),
                         'episodeList' => renderEpisodeList($twig, $course, $allEpisodesInCourse),
                         'registrationSuccessful' => isset($_GET['registrationSuccessful']),
-                        'isLoggedIn' => isset($_SESSION['subscriberId']),
                     ]),
                     'subscriberLabel' =>  getNick($request->vars),
                     'styles' => [
@@ -699,6 +705,7 @@ class PublicSite
                     'description' => $course->getDescription(),
                     'content' => $twig->render('react-paywall.twig', [
                         'course' => $course,
+                        'contentWithEmbeddables' => $content,
                         'numberOfEpisodes' => count($allEpisodesInCourse),
                         'paywallForm' => $twig->render('paywall-form.twig', [
                             'subscriberCourse' => $subscriberCourse,
@@ -709,7 +716,6 @@ class PublicSite
                             'paymentUrl' => PaymentRoutes::getPaymentUrl($course, $subscriberCourse, $request->vars['subscriber'], $conn),
                         ]),
                         'episodeList' => renderEpisodeList($twig, $course, $allEpisodesInCourse),
-                        'isLoggedIn' => isset($_SESSION['subscriberId']),
                     ]),
                     'subscriberLabel' =>  getNick($request->vars),
                     'styles' => [
@@ -734,6 +740,7 @@ class PublicSite
                     'description' => $course->getDescription(),
                     'content' => $twig->render('react-paywall.twig', [
                         'course' => $course,
+                        'contentWithEmbeddables' => $content,
                         'numberOfEpisodes' => count($allEpisodesInCourse),
                         'paywallForm' => $twig->render('paywall-form.twig', [
                             'subscriberCourse' => $subscriberCourse,
@@ -747,7 +754,6 @@ class PublicSite
                             'subscriber' => $request->vars['subscriber'],
                         ]),
                         'episodeList' => renderEpisodeList($twig, $course, $allEpisodesInCourse),
-                        'isLoggedIn' => isset($_SESSION['subscriberId']),
                     ]),
                     'subscriberLabel' =>  getNick($request->vars),
                     'styles' => [
@@ -771,7 +777,6 @@ class PublicSite
                 'content' => $twig->render('course.twig', [
                     'course' => $course,
                     'subscriberCourse' => $subscriberCourse,
-                    'paddingTop' => true,
                     'episodes' => alignToRows($allEpisodesInCourse, 3),
                     'isSuccess' => $_GET['isSuccess'] ?? '',
                 ]),
@@ -807,8 +812,7 @@ function courseToStructuredData($course)
 
 function renderEpisodeList($twig, $course, $allEpisodesInCourse)
 {
-    return $twig->render('course.twig', [
-        'mainTitle' => 'Epizódok:',
+    return $twig->render('intro-course-list.twig', [
         'isPromo' => true,
         'course' => $course,
         'episodes' => alignToRows($allEpisodesInCourse, 3),
