@@ -18,7 +18,7 @@
 		{% endfor %}
 		<link type="text/css" href="public/css/pages.css?v=3" media="all" rel="stylesheet"/>
 		<title>
-			{{ title is defined ? title : 'Kódbázis | Programozás egyszerűen, közérthetően elmagyarázva.' }}
+			{{ title is defined ? ('Kódbázis | ' ~ title) : 'Kódbázis | Programozás egyszerűen, közérthetően elmagyarázva.' }}
 		</title>
 		{% if structuredData is defined %}
 			<script type="application/ld+json">{{structuredData | raw}}</script>

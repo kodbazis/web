@@ -295,6 +295,7 @@ class PublicSite
             header('Content-Type: text/html; charset=UTF-8');
 
             echo $twig->render('wrapper.twig', [
+                'title' => "Elérhetőség",
                 'content' => $twig->render('contact.twig', []),
                 'subscriberLabel' =>  getNick($request->vars),
                 'description' => 'Elérhetőség'
@@ -303,6 +304,7 @@ class PublicSite
         $r->get('/trening', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
+                'title' => "Tréning",
                 'content' => $twig->render('training.twig', []),
                 'subscriberLabel' =>  getNick($request->vars),
                 'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.',
