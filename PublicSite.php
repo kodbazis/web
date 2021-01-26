@@ -867,5 +867,5 @@ function getDiscountedPrice($course) {
     }
     $multiplier = (100 - $course->getDiscount()) / 100;
     $x = $course->getPrice() * $multiplier;
-    return round($x / 5) * 5;
+    return round($x / 10) * 10;
 }
