@@ -144,7 +144,7 @@ del {
 }
 
 .third {
-  background: rgb(240 221 215);
+  border: 1px solid rgb(229 0 16);
   color: rgb(201 0 46);
   display: inline-block;
   line-height: 28px;
