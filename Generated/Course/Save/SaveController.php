@@ -65,7 +65,7 @@
         }
 
         try {
-          $toSave = new NewCourse((string)($entity['title'] ?? ''), (string)($entity['content'] ?? ''), (string)($entity['slug'] ?? ''), (string)($entity['imgUrl'] ?? ''), (string)($entity['videoId'] ?? ''), (string)($entity['description'] ?? ''), (int)($entity['createdAt'] ?? 0), (bool)($entity['isActive'] ?? false), (int)($entity['price'] ?? 0), (int)($entity['discount'] ?? 0));
+          $toSave = new NewCourse((string)($entity['title'] ?? ''), (string)($entity['invoiceTitle'] ?? ''), (string)($entity['content'] ?? ''), (string)($entity['slug'] ?? ''), (string)($entity['imgUrl'] ?? ''), (string)($entity['videoId'] ?? ''), (string)($entity['description'] ?? ''), (int)($entity['createdAt'] ?? 0), (bool)($entity['isActive'] ?? false), (int)($entity['price'] ?? 0), (int)($entity['discount'] ?? 0));
               return $this->saver->Save($toSave);
         } catch (Exception $err) {
                 $this->operationError->addField(Error::getOperationError());
@@ -84,6 +84,7 @@
     {
         $validators = [
             'title' => [$this, 'isString'],
+            'invoiceTitle' => [$this, 'isString'],
             'content' => [$this, 'isString'],
             'slug' => [$this, 'isString'],
             'imgUrl' => [$this, 'isString'],

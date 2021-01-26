@@ -44,7 +44,7 @@ class PaymentRoutes
         $trx->addItems(
             array(
                 'ref' => $subscriberCourse->getId(),
-                'title' => $course->getTitle(),
+                'title' => $course->getInvoiceTitle(),
                 'description' => $course->getDescription(),
                 'amount' => '1',
                 'price' => $course->getPrice(),
@@ -228,11 +228,11 @@ class PaymentRoutes
                     $subscriberCourse->getCity(),
                     $subscriberCourse->getAddress(),
                     $subscriber->getEmail(),
-                    $course->getTitle(),
+                    $course->getInvoiceTitle(),
                     getDiscountedPrice($course)
                 );
             } else {
-                Invoice::sendReceipt($subscriber->getEmail(), $course->getTitle(), getDiscountedPrice($course));
+                Invoice::sendReceipt($subscriber->getEmail(), $course->getInvoiceTitle(), getDiscountedPrice($course));
             }
             (new SubscriberCoursePatcher($conn))->patch(
                 $subscriberCourse->getId(),
