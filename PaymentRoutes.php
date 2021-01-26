@@ -229,10 +229,10 @@ class PaymentRoutes
                     $subscriberCourse->getAddress(),
                     $subscriber->getEmail(),
                     $course->getTitle(),
-                    $course->getPrice()
+                    getDiscountedPrice($course)
                 );
             } else {
-                Invoice::sendReceipt($subscriber->getEmail(), $course->getTitle(), $course->getPrice());
+                Invoice::sendReceipt($subscriber->getEmail(), $course->getTitle(), getDiscountedPrice($course));
             }
             (new SubscriberCoursePatcher($conn))->patch(
                 $subscriberCourse->getId(),
