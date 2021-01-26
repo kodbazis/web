@@ -2,9 +2,6 @@
 
 namespace Kodbazis;
 
-
-namespace Kodbazis;
-
 use Kodbazis\Generated\Listing\Clause;
 use Kodbazis\Generated\Listing\OrderBy;
 use Kodbazis\Generated\Listing\Query;
