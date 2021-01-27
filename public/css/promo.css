@@ -150,7 +150,7 @@ del {
   line-height: 28px;
   padding: 0 16px;
   right: 0;
-  font-family: "Main-Regular";
+  font-family: "Main-Regular", "Helvetica Neue", Arial, sans-serif,;
 }
 
 .red {
