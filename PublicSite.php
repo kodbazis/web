@@ -297,7 +297,7 @@ class PublicSite
 
             echo $twig->render('wrapper.twig', [
                 'title' => "Elérhetőség",
-                'content' => $twig->render('contact.twig', []),
+                'content' => $twig->render('contact.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
                 'description' => 'Elérhetőség'
             ]);
