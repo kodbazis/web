@@ -821,3 +821,14 @@ footer .right {
 .fb-like iframe[style] {
   width: 100% !important;
 }
+
+.small-text {
+  font-size: 0.8em;
+}
+.smaller-text {
+  font-size: 0.6em;
+}
+
+.list-style-circle {
+  list-style: circle;
+}

@@ -292,21 +292,57 @@ class PublicSite
             ]);
         });
 
-        $r->get('/elerhetoseg', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+        $r->get('/bemutatkozas', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
 
             echo $twig->render('wrapper.twig', [
-                'title' => "Elérhetőség",
-                'content' => $twig->render('contact.html', []),
+                'title' => "Bemutatkozás",
+                'content' => $twig->render('aboutus.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
-                'description' => 'Elérhetőség'
+                'description' => 'Bemutatkozás'
             ]);
         });
         $r->get('/trening', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
                 'title' => "Tréning",
-                'content' => $twig->render('training.twig', []),
+                'content' => $twig->render('training.html', []),
+                'subscriberLabel' =>  getNick($request->vars),
+                'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.',
+            ]);
+        });
+        $r->get('/php-es-mysql', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+            header('Content-Type: text/html; charset=UTF-8');
+            echo $twig->render('wrapper.twig', [
+                'title' => "Tréning",
+                'content' => $twig->render('php.html', []),
+                'subscriberLabel' =>  getNick($request->vars),
+                'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.',
+            ]);
+        });
+        $r->get('/javascript-az-alapoktol', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+            header('Content-Type: text/html; charset=UTF-8');
+            echo $twig->render('wrapper.twig', [
+                'title' => "Tréning",
+                'content' => $twig->render('js.html', []),
+                'subscriberLabel' =>  getNick($request->vars),
+                'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.',
+            ]);
+        });
+        $r->get('/nodejs-es-mongodb', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+            header('Content-Type: text/html; charset=UTF-8');
+            echo $twig->render('wrapper.twig', [
+                'title' => "Tréning",
+                'content' => $twig->render('node.html', []),
+                'subscriberLabel' =>  getNick($request->vars),
+                'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.',
+            ]);
+        });
+        $r->get('/online-trening', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+            header('Content-Type: text/html; charset=UTF-8');
+            echo $twig->render('wrapper.twig', [
+                'title' => "Tréning",
+                'content' => $twig->render('online.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
                 'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.',
             ]);
@@ -607,7 +643,7 @@ class PublicSite
             $embeddables = count($ids) ? Embeddables::getEmbeddables($ids, $conn) : [];
             $templates = Embeddables::mapEmbeddablesToTemplates($embeddables, $twig);
             $content = Embeddables::insertEmbeddablesToContent($templates, $course->getContent());
-            
+
             // not logged in
             if (!isset($_SESSION['subscriberId'])) {
                 echo $twig->render('wrapper.twig', [
@@ -861,7 +897,8 @@ function getCourseOgTags($course)
     ];
 }
 
-function getDiscountedPrice($course) {
+function getDiscountedPrice($course)
+{
     if (!$course->getDiscount()) {
         return $course->getPrice();
     }
