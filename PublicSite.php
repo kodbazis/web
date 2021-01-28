@@ -309,6 +309,9 @@ class PublicSite
                 'content' => $twig->render('training.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
                 'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.',
+                'styles' => [
+                    ['path' => 'css/promo.css'],
+                ],
             ]);
         });
         $r->get('/php-es-mysql', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
