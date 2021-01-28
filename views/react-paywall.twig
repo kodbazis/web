@@ -26,7 +26,7 @@
 				<div id="video-panel" class="kodseged" data-videoid="{{course.videoId}}" data-isautoplay="{{isAutoplay}}" data-type="vimeo"></div>
 			</p>
 			<p class="lead p-2 text-center">
-				<b>{{course.description}} <span class="red">Csatlakozz és vedd meg ma!</span></b>
+				<b>{{course.description}}</b>
 			</p>
 			{% include 'react-quotes.twig'  %}
 		</div>
@@ -102,4 +102,9 @@
 	</div>
 	{{contentWithEmbeddables | raw}}
 	{{episodeList | raw}}
+	<h1 class="red main-font">
+		<b>Vedd meg és lendítsd előre a karriered!
+			<i class="fa fa-thumbs-up fa-lg"></i>
+		</b>
+	</h1>
 </div>
