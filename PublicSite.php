@@ -293,14 +293,8 @@ class PublicSite
         });
 
         $r->get('/prezentacio/{slug}', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
-            $content = @file_get_contents(__DIR__ . '/embeddable/codesurfer/' . $request->vars['slug']  . '/index.html');
-            if (!$content) {
-                echo $twig->render('404.twig');
-                return;
-            }
-
             header('Content-Type: text/html; charset=UTF-8');
-            echo $content;
+            echo $twig->render('codesurfer.twig', ['folderName' => $request->vars['slug']]);
         });
 
         $r->get('/bemutatkozas', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
