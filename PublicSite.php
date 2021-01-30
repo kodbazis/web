@@ -299,28 +299,9 @@ class PublicSite
                 return;
             }
 
-            if (!isset($_SESSION['subscriberId'])) {
-                echo $twig->render('404.twig');
-                return;
-            }
-
-            $subscriberCourses = (new SubscriberCourseLister($conn))->list(new Query(
-                1000,
-                0,
-                new Clause('eq', 'subscriberId', $_SESSION['subscriberId']),
-                new OrderBy('id', 'asc')
-            ));
-
-            if (!$subscriberCourses->getCount()) {
-                echo $twig->render('404.twig');
-                return;
-            }
-
             header('Content-Type: text/html; charset=UTF-8');
             echo $content;
         });
-
-
 
         $r->get('/bemutatkozas', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
@@ -332,6 +313,7 @@ class PublicSite
                 'description' => 'Bemutatkozás'
             ]);
         });
+
         $r->get('/trening', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
