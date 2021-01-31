@@ -880,15 +880,16 @@ function courseToStructuredData($course)
         "@context" => "https://schema.org",
         "@type" => "Product",
         "name" => $course->getTitle(),
+        "sku" => $course->getId(),
         "description" => $course->getDescription(),
         "brand" => [
             "@type" => "Brand",
             "name" => "Kódbázis"
         ],
-        "image" => [$course->getImgUrl()],
+        "image" => [Router::siteUrl() . '/public/images/' . $course->getImgUrl()],
         "offers" => [
             "@type" => "Offer",
-            "url" => "https://example.com/anvil",
+            "url" => Router::siteUrl() . $course->getSlug(),
             "priceCurrency" => "HUF",
             "price" => getDiscountedPrice($course),
             "priceValidUntil" => "2021-11-20",
