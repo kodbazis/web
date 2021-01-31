@@ -848,7 +848,7 @@ function courseToStructuredData($course)
     return json_encode([
         "@context" => "https://schema.org",
         "@type" => "Course",
-        "name" => $course->getTitle() . ' kurzus KEZDŐ FEJLESZTŐKNEK',
+        "name" => $course->getTitle() . ' KEZDŐ FEJLESZTŐKNEK',
         "description" => $course->getDescription(),
         "provider" => [
             "@type" => "Organization",
