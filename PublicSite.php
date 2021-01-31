@@ -886,10 +886,10 @@ function courseToStructuredData($course)
             "@type" => "Brand",
             "name" => "Kódbázis"
         ],
-        "image" => [Router::siteUrl() . '/public/images/' . $course->getImgUrl()],
+        "image" => [Router::siteUrl() . '/public/files/' . $course->getImgUrl()],
         "offers" => [
             "@type" => "Offer",
-            "url" => Router::siteUrl() . $course->getSlug(),
+            "url" => Router::siteUrl() .'/'. $course->getSlug(),
             "priceCurrency" => "HUF",
             "price" => getDiscountedPrice($course),
             "priceValidUntil" => "2021-11-20",
