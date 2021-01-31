@@ -679,7 +679,6 @@ class PublicSite
                         'course' => $course,
                         'discountedPrice' => getDiscountedPrice($course),
                         'contentWithEmbeddables' => $content,
-                        'isAutoplay' => !isset($_GET['isLogin']) && !isset($_GET['registrationEmailSent']),
                         'numberOfEpisodes' => count($allEpisodesInCourse),
                         'paywallForm' => $twig->render('sub-reg-panel.twig', [
                             'isLogin' => isset($_GET['isLogin']),
