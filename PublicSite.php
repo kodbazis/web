@@ -920,7 +920,7 @@ function renderEpisodeList($twig, $course, $allEpisodesInCourse)
     return $twig->render('intro-course-list.twig', [
         'isPromo' => true,
         'course' => $course,
-        'episodes' => alignToRows($allEpisodesInCourse, 4),
+        'episodes' => alignToRows($allEpisodesInCourse, 3),
     ]);
 }
 
