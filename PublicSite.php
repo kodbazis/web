@@ -57,6 +57,16 @@ class PublicSite
         };
     }
 
+    private static function organizationStructuredData()
+    {
+        return json_encode([
+            "@context" => "https://schema.org",
+            "@type" => "Organization",
+            "url" => Router::siteUrl(),
+            "logo" => Router::siteUrl() . "/public/images/logo-dark.png"
+        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }
+
     public static function getRoutes(Pipeline $r, mysqli $conn, Environment $twig)
     {
 
@@ -69,12 +79,7 @@ class PublicSite
                 'content' => $twig->render('home.twig', []),
                 'description' => 'Szoftverfejlesztő vagy? Netán annak készülsz? Itt eszközöket kapsz a fejlődéshez!',
                 'subscriberLabel' =>  getNick($request->vars),
-                'structuredData' => json_encode([
-                    "@context" => "https://schema.org",
-                    "@type" => "Organization",
-                    "url" => Router::siteUrl(),
-                    "logo" => Router::siteUrl() . "/public/images/logo-dark.png"
-                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'structuredData' => self::organizationStructuredData(),
                 'scripts' => [
                     ['path' => 'js/jquery.js'],
                     ['path' => 'js/application.js'],
@@ -189,6 +194,7 @@ class PublicSite
         $r->get('/bejelentkezes', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
+                'structuredData' => self::organizationStructuredData(),
                 'subscriberLabel' =>  getNick($request->vars),
                 'noIndex' => true,
                 'content' => $twig->render('subscriber-login.twig', [
@@ -208,6 +214,7 @@ class PublicSite
         $r->get('/feliratkozas', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
+                'structuredData' => self::organizationStructuredData(),
                 'subscriberLabel' =>  getNick($request->vars),
                 'noIndex' => true,
                 'content' => $twig->render('subscriber-registration.twig', [
@@ -227,6 +234,7 @@ class PublicSite
         $r->get('/sutik-kezelese', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
+                'structuredData' => self::organizationStructuredData(),
                 'subscriberLabel' =>  getNick($request->vars),
                 'content' => $twig->render('cookie-policy.html', []),
             ]);
@@ -311,6 +319,7 @@ class PublicSite
         $r->get('/trening', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
+                'structuredData' => self::organizationStructuredData(),
                 'title' => "Tréning",
                 'content' => $twig->render('training.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
@@ -323,7 +332,8 @@ class PublicSite
         $r->get('/php-es-mysql', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
-                'title' => "Tréning",
+                'structuredData' => self::organizationStructuredData(),
+                'title' => "Kódbázis | PHP és MySQL tréning",
                 'content' => $twig->render('php.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
                 'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.',
@@ -332,7 +342,8 @@ class PublicSite
         $r->get('/javascript-az-alapoktol', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
-                'title' => "Tréning",
+                'structuredData' => self::organizationStructuredData(),
+                'title' => "Kódbázis | JavaScript tréning",
                 'content' => $twig->render('js.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
                 'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.',
@@ -341,7 +352,8 @@ class PublicSite
         $r->get('/nodejs-es-mongodb', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
-                'title' => "Tréning",
+                'structuredData' => self::organizationStructuredData(),
+                'title' => "Kódbázis | Node.JS és MongoDB tréning",
                 'content' => $twig->render('node.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
                 'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.',
@@ -350,7 +362,8 @@ class PublicSite
         $r->get('/online-trening', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
-                'title' => "Tréning",
+                'structuredData' => self::organizationStructuredData(),
+                'title' => "Kódbázis | Online tréning",
                 'content' => $twig->render('online.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
                 'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.',
@@ -450,6 +463,7 @@ class PublicSite
         $r->get('/adatvedelmi-szabalyzat', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
+                'structuredData' => self::organizationStructuredData(),
                 'title' => "Adatvédelmi szabályzat",
                 'content' => $twig->render('privacy-policy.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
@@ -462,6 +476,7 @@ class PublicSite
         $r->get('/adattovabbitasi-nyilatkozat', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
+                'structuredData' => self::organizationStructuredData(),
                 'title' => "Adattovábbítási nyilatkozat",
                 'content' => $twig->render('simplepay-legal.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
@@ -473,6 +488,7 @@ class PublicSite
         $r->get('/aszf', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
+                'structuredData' => self::organizationStructuredData(),
                 'title' => "Általános szerződési feltételek",
                 'content' => $twig->render('aszf.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
@@ -843,7 +859,7 @@ class PublicSite
     }
 }
 
-function courseToStructuredData($course)
+function courseToStructuredData2($course)
 {
     return json_encode([
         "@context" => "https://schema.org",
@@ -854,6 +870,29 @@ function courseToStructuredData($course)
             "@type" => "Organization",
             "name" => "Kódbázis",
             "sameAs" => Router::siteUrl()
+        ]
+    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+}
+
+function courseToStructuredData($course)
+{
+    return json_encode([
+        "@context" => "https://schema.org",
+        "@type" => "Product",
+        "name" => $course->getTitle(),
+        "description" => $course->getDescription(),
+        "brand" => [
+            "@type" => "Brand",
+            "name" => "Kódbázis"
+        ],
+        "image" => [$course->getImgUrl()],
+        "offers" => [
+            "@type" => "Offer",
+            "url" => "https://example.com/anvil",
+            "priceCurrency" => "HUF",
+            "price" => getDiscountedPrice($course),
+            "priceValidUntil" => "2021-11-20",
+            "availability" => "https://schema.org/InStock"
         ]
     ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 }
