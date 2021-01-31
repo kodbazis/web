@@ -347,7 +347,7 @@ class ExampleApis
             readfile($fileName);
         });
 
-        $r->post('/recipe-app/api/prune-recipes', function (Request $request) use ($folder) {
+        $r->post('/api/prune-recipes', function (Request $request) use ($folder) {
             header('Content-Type: application/json');
             if (($request->query['key'] ?? 0) !== ($_SERVER['MASTER_PW'] ?? 1)) {
                 http_response_code(401);
