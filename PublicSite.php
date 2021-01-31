@@ -889,12 +889,30 @@ function courseToStructuredData($course)
         "image" => [Router::siteUrl() . '/public/files/' . $course->getImgUrl()],
         "offers" => [
             "@type" => "Offer",
-            "url" => Router::siteUrl() .'/'. $course->getSlug(),
+            "url" => Router::siteUrl() . '/' . $course->getSlug(),
             "priceCurrency" => "HUF",
             "price" => getDiscountedPrice($course),
             "priceValidUntil" => "2021-11-20",
             "availability" => "https://schema.org/InStock"
-        ]
+        ],
+        "review" => [
+            "@type" => "Review",
+            "reviewRating" => [
+                "@type" => "Rating",
+                "ratingValue" => "5",
+                "bestRating" => "5"
+            ],
+            "author" => [
+                "@type" => "Person",
+                "name" => "Gálik János"
+            ]
+        ],
+        "aggregateRating" => [
+            "@type" => "AggregateRating",
+            "ratingValue" => "5",
+            "reviewCount" => "1"
+        ],
+        "mpn": "925872",
     ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 }
 
