@@ -13,7 +13,9 @@
 			{% if style.isCdn %}
 				<link rel="stylesheet" href="{{ style.path }}">
 			{% else %}
-				<link rel="stylesheet" href="/public/{{ style.path }}?v=7">
+				{% if style.path %}
+					<link rel="stylesheet" href="/public/{{ style.path }}?v=7">
+				{% endif %}
 			{% endif %}
 		{% endfor %}
 		<link type="text/css" href="public/css/pages.css?v=3" media="all" rel="stylesheet"/>
@@ -40,14 +42,14 @@
 
 		{{ content | raw }}
 
-		 <div class="text-center cookiealert d-none p-2">
+		<div class="text-center cookiealert d-none p-2">
 			A weboldalunkon cookie-kat használunk, hogy a legjobb felhasználói élményt nyújthassuk.
 			<a href="/sutik-kezelese" target="_blank">Részletes leírás »</a>
 
 			<button type="button" class="btn btn-primary btn-sm acceptcookies">
 				Rendben
 			</button>
-		</div> 
+		</div>
 
 		{% include 'footer.twig' %}
 
@@ -65,7 +67,7 @@
 			{% endfor %}
 		{% endif %}
 		<script defer src="./public/js/navbar.js?v=2"></script>
-		<script src="./public/js/cookiealert.js"></script> 
+		<script src="./public/js/cookiealert.js"></script>
 
 	</body>
 </html>
