@@ -912,7 +912,7 @@ function courseToStructuredData($course)
             "ratingValue" => "5",
             "reviewCount" => "1"
         ],
-        "mpn": "925872",
+        "mpn" => "925872",
     ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 }
 
