@@ -1,0 +1,1076 @@
+<?xml version = "1.0"?>
+<root>
+
+<item>
+    <timestamp>02:19</timestamp>
+    <fileName>App.jsx</fileName>
+    <content>
+<![CDATA[
+import React from "react";
+import "./App.css";
+
+function App() {
+  
+}
+
+export default App;
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>02:23</timestamp>
+    <fileName>App.jsx</fileName>
+    <content>
+<![CDATA[
+ 
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, NavLink } from "react-router-dom";
+
+function App() {
+  return (
+    <Router>
+      <nav className="navbar fixed-top navbar-expand-sm navbar-dark bg-primary mb-3">
+        <div className="" id="navbarNav">
+          <ul className="navbar-nav lead font-weight-bold">
+           
+          </ul>
+        </div>
+      </nav>
+    </Router>
+  );
+}
+
+export default App;
+ 
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>02:47</timestamp>
+    <fileName>App.jsx</fileName>
+    <content>
+<![CDATA[
+  
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, NavLink } from "react-router-dom";
+
+function App() {
+  return (
+    <Router>
+      <nav className="navbar fixed-top navbar-expand-sm navbar-dark bg-primary mb-3">
+        <div className="" id="navbarNav">
+          <ul className="navbar-nav lead font-weight-bold">
+            <li className="nav-item">
+              <NavLink to={`/`}>
+                <span className="nav-link">
+                  <img width="60px" src={`${process.env.REACT_APP_BACKEND_URL}/static/assets/logo.png`} alt="" />
+                </span>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </Router>
+  );
+}
+
+export default App;
+  
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>02:55</timestamp>
+    <fileName>.env</fileName>
+    <content>
+<![CDATA[
+    REACT_APP_BACKEND_URL = "/"
+]]>
+    </content>
+</item>
+<item>
+    <timestamp>02:56</timestamp>
+    <fileName>.env.development</fileName>
+    <content>
+<![CDATA[
+    REACT_APP_BACKEND_URL = "http://localhost:9090"
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>03:01</timestamp>
+    <fileName>App.jsx</fileName>
+    <content>
+<![CDATA[
+   
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, NavLink } from "react-router-dom";
+
+function App() {
+  return (
+    <Router>
+      <nav className="navbar fixed-top navbar-expand-sm navbar-dark bg-primary mb-3">
+        <div className="" id="navbarNav">
+          <ul className="navbar-nav lead font-weight-bold">
+            <li className="nav-item">
+              <NavLink to={`/`}>
+                <span className="nav-link">
+                  <img width="60px" src={`${process.env.REACT_APP_BACKEND_URL}/static/assets/logo.png`} alt="" />
+                </span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to={`/receptek`} activeClassName="active" exact>
+                <span className="nav-link pt-4">Receptek</span>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </Router>
+  );
+}
+
+export default App;
+   
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>03:07</timestamp>
+    <fileName>App.jsx</fileName>
+    <content>
+<![CDATA[
+    
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, NavLink } from "react-router-dom";
+
+function App() {
+  return (
+    <Router>
+      <nav className="navbar fixed-top navbar-expand-sm navbar-dark bg-primary mb-3">
+        <div className="" id="navbarNav">
+          <ul className="navbar-nav lead font-weight-bold">
+            <li className="nav-item">
+              <NavLink to={`/`}>
+                <span className="nav-link">
+                  <img width="60px" src={`${process.env.REACT_APP_BACKEND_URL}/static/assets/logo.png`} alt="" />
+                </span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to={`/receptek`} activeClassName="active" exact>
+                <span className="nav-link pt-4">Receptek</span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to={`/uj-recept`} activeClassName="active">
+                <span className="nav-link pt-4">Új recept</span>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </Router>
+  );
+}
+
+export default App;
+    
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>03:29</timestamp>
+    <fileName>App.jsx</fileName>
+    <content>
+<![CDATA[
+     
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, Switch, Route, NavLink, Redirect } from "react-router-dom";
+import { RecipeCreate } from "./RecipeCreate";
+import { RecipeEdit } from "./RecipeEdit";
+import { RecipeSingle } from "./RecipeSingle";
+import { RecipeList } from "./RecipeList";
+import { Home } from "./Home";
+
+function App() {
+  return (
+    <Router>
+      <nav className="navbar fixed-top navbar-expand-sm navbar-dark bg-primary mb-3">
+        <div className="" id="navbarNav">
+          <ul className="navbar-nav lead font-weight-bold">
+            <li className="nav-item">
+              <NavLink to={`/`}>
+                <span className="nav-link">
+                  <img width="60px" src={`${process.env.REACT_APP_BACKEND_URL}/static/assets/logo.png`} alt="" />
+                </span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to={`/receptek`} activeClassName="active" exact>
+                <span className="nav-link pt-4">Receptek</span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to={`/uj-recept`} activeClassName="active">
+                <span className="nav-link pt-4">Új recept</span>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div className="container" style={{ marginTop: "140px" }}>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/receptek" component={RecipeList} />
+          <Route exact path="/uj-recept" component={RecipeCreate} />
+          <Route exact path="/recept-szerkesztes/:recipeSlug" component={RecipeEdit} />
+          <Route exact path="/recept/:recipeSlug" component={RecipeSingle} />
+          <Redirect to={"/"} />
+        </Switch>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
+     
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>04:02</timestamp>
+    <fileName>Home.jsx</fileName>
+    <content>
+<![CDATA[
+
+import React, { useState } from "react";
+
+export function Home() {
+  
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>04:12</timestamp>
+    <fileName>Home.jsx</fileName>
+    <content>
+<![CDATA[
+
+import React, { useState } from "react";
+
+export function Home() {
+  return (
+    <div className="jumbotron">
+      <h1>Üdv a recept appban</h1>
+      <p>Jelenleg {numberOfRecipes} recept elérhető</p>
+      
+    </div>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>04:18</timestamp>
+    <fileName>Home.jsx</fileName>
+    <content>
+<![CDATA[
+
+import React, { useState } from "react";
+
+export function Home() {
+  const [numberOfRecipes, setNumberOfRecipes] = useState();
+  return (
+    <div className="jumbotron">
+      <h1>Üdv a recept appban</h1>
+      <p>Jelenleg {numberOfRecipes} recept elérhető</p>
+      
+    </div>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>04:22</timestamp>
+    <fileName>Home.jsx</fileName>
+    <content>
+<![CDATA[
+
+import React, { useState, useEffect } from "react";
+
+export function Home() {
+  const [numberOfRecipes, setNumberOfRecipes] = useState();
+
+  useEffect(() => {
+    fetch(process.env.REACT_APP_BACKEND_URL + "/api/recipes")
+      .then((res) => res.json())
+      .then((recipes) => setNumberOfRecipes(recipes.length));
+  }, []);
+
+  return (
+    <div className="jumbotron">
+      <h1>Üdv a recept appban</h1>
+      <p>Jelenleg {numberOfRecipes} recept elérhető</p>
+      
+    </div>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>04:47</timestamp>
+    <fileName>Home.jsx</fileName>
+    <content>
+<![CDATA[
+ 
+import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons";
+
+export function Home() {
+  const [numberOfRecipes, setNumberOfRecipes] = useState();
+
+  useEffect(() => {
+    fetch(process.env.REACT_APP_BACKEND_URL + "/api/recipes")
+      .then((res) => res.json())
+      .then((recipes) => setNumberOfRecipes(recipes.length));
+  }, []);
+
+  return (
+    <div className="jumbotron">
+      <h1>Üdv a recept appban</h1>
+      <p>Jelenleg {numberOfRecipes} recept elérhető</p>
+      <NavLink to={`/receptek`}>
+        <button className="btn btn-primary">
+          Tovább <FontAwesomeIcon icon={faArrowCircleRight} />
+        </button>
+      </NavLink>
+    </div>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>05:23</timestamp>
+    <fileName>RecipeList.jsx</fileName>
+    <content>
+<![CDATA[
+import React from "react";
+
+export function RecipeList() {
+
+  return "receptek listája";
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>05:25</timestamp>
+    <fileName>RecipeList.jsx</fileName>
+    <content>
+<![CDATA[
+import React, { useEffect, useState, Fragment } from "react";
+
+export function RecipeList() {
+  const [recipes, setRecipes] = useState([]);
+  const [isPending, setPending] = useState(false);
+
+  return "receptek listája";
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>05:32</timestamp>
+    <fileName>RecipeList.jsx</fileName>
+    <content>
+<![CDATA[
+
+import React, { useEffect, useState, Fragment } from "react";
+
+export function RecipeList() {
+  const [recipes, setRecipes] = useState([]);
+  const [isPending, setPending] = useState(false);
+
+  function fetchRecipes() {
+    return fetch(process.env.REACT_APP_BACKEND_URL + "/api/recipes")
+      .then((res) => res.json())
+      .then(setRecipes);
+  }
+
+  useEffect(() => {
+    setPending(true);
+    fetchRecipes().finally(() => {
+      setPending(false);
+    });
+  }, []);
+
+  return "receptek listája";
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>05:46</timestamp>
+    <fileName>RecipeList.jsx</fileName>
+    <content>
+<![CDATA[
+
+import React, { useEffect, useState, Fragment } from "react";
+import { Spinner } from "./Spinner";
+
+export function RecipeList() {
+  const [recipes, setRecipes] = useState([]);
+  const [isPending, setPending] = useState(false);
+
+  function fetchRecipes() {
+    return fetch(process.env.REACT_APP_BACKEND_URL + "/api/recipes")
+      .then((res) => res.json())
+      .then(setRecipes);
+  }
+
+  useEffect(() => {
+    setPending(true);
+    fetchRecipes().finally(() => {
+      setPending(false);
+    });
+  }, []);
+
+  if (isPending) {
+    return <Spinner />;
+  }
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>05:58</timestamp>
+    <fileName>RecipeList.jsx</fileName>
+    <content>
+<![CDATA[
+
+import React, { useEffect, useState, Fragment } from "react";
+import { Spinner } from "./Spinner";
+
+export function RecipeList() {
+  const [recipes, setRecipes] = useState([]);
+  const [isPending, setPending] = useState(false);
+
+  function fetchRecipes() {
+    return fetch(process.env.REACT_APP_BACKEND_URL + "/api/recipes")
+      .then((res) => res.json())
+      .then(setRecipes);
+  }
+
+  useEffect(() => {
+    setPending(true);
+    fetchRecipes().finally(() => {
+      setPending(false);
+    });
+  }, []);
+
+  if (isPending) {
+    return <Spinner />;
+  }
+
+  return (
+    <Fragment>
+      {alignToRows(recipes).map((row, i) => (
+        <div className="row mb-3" key={i}>
+          {row.map((recipe) => (
+            <div className="col-md-4" key={recipe.id}>
+              <div className="card w-100 h-100">
+                
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </Fragment>
+  );
+}
+
+const alignToRows = (items) =>
+  items.slice().reduceRight((acc, curr, i, arr) => {
+    acc.push(arr.splice(0, 3));
+    return acc;
+  }, []);
+
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>07:14</timestamp>
+    <fileName>RecipeList.jsx</fileName>
+    <content>
+<![CDATA[
+
+import React, { useEffect, useState, Fragment } from "react";
+import { Spinner } from "./Spinner";
+
+export function RecipeList() {
+  const [recipes, setRecipes] = useState([]);
+  const [isPending, setPending] = useState(false);
+
+  function fetchRecipes() {
+    return fetch(process.env.REACT_APP_BACKEND_URL + "/api/recipes")
+      .then((res) => res.json())
+      .then(setRecipes);
+  }
+
+  useEffect(() => {
+    setPending(true);
+    fetchRecipes().finally(() => {
+      setPending(false);
+    });
+  }, []);
+
+  if (isPending) {
+    return <Spinner />;
+  }
+
+  return (
+    <Fragment>
+      {alignToRows(recipes).map((row, i) => (
+        <div className="row mb-3" key={i}>
+          {row.map((recipe) => (
+            <div className="col-md-4" key={recipe.id}>
+              <div className="card w-100 h-100">
+                <img
+                  className="card-img-top mb-2"
+                  src={`${process.env.REACT_APP_BACKEND_URL}/static/images/${recipe.imageURL}`}
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{recipe.name}</h5>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </Fragment>
+  );
+}
+
+const alignToRows = (items) =>
+  items.slice().reduceRight((acc, curr, i, arr) => {
+    acc.push(arr.splice(0, 3));
+    return acc;
+  }, []);
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>07:30</timestamp>
+    <fileName>RecipeList.jsx</fileName>
+    <content>
+<![CDATA[
+
+import React, { useEffect, useState, Fragment } from "react";
+import { Spinner } from "./Spinner";
+
+export function RecipeList() {
+  const [recipes, setRecipes] = useState([]);
+  const [isPending, setPending] = useState(false);
+
+  function fetchRecipes() {
+    return fetch(process.env.REACT_APP_BACKEND_URL + "/api/recipes")
+      .then((res) => res.json())
+      .then(setRecipes);
+  }
+
+  useEffect(() => {
+    setPending(true);
+    fetchRecipes().finally(() => {
+      setPending(false);
+    });
+  }, []);
+
+  if (isPending) {
+    return <Spinner />;
+  }
+
+  return (
+    <Fragment>
+      {alignToRows(recipes).map((row, i) => (
+        <div className="row mb-3" key={i}>
+          {row.map((recipe) => (
+            <div className="col-md-4" key={recipe.id}>
+              <div className="card w-100 h-100">
+                <img
+                  className="card-img-top mb-2"
+                  src={`${process.env.REACT_APP_BACKEND_URL}/static/images/${recipe.imageURL}`}
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{recipe.name}</h5>
+                </div>
+                <div className="w-75 p-3">
+                  <NavLink to={`/recept-szerkesztes/${recipe.slug}`}>
+                    <button className="btn btn-sm btn-outline-warning mr-2">
+                      <FontAwesomeIcon icon={faPencilAlt} />
+                    </button>
+                  </NavLink>                      
+                  <NavLink to={`/recept/${recipe.slug}`}>
+                    <button className="btn btn-sm btn-outline-primary">
+                      <FontAwesomeIcon icon={faEye} />
+                    </button>
+                  </NavLink>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </Fragment>
+  );
+}
+
+const alignToRows = (items) =>
+  items.slice().reduceRight((acc, curr, i, arr) => {
+    acc.push(arr.splice(0, 3));
+    return acc;
+  }, []);
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>07:41</timestamp>
+    <fileName>RecipeList.jsx</fileName>
+    <content>
+<![CDATA[
+
+import React, { useEffect, useState } from "react";
+import { Spinner } from "./Spinner";
+import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faPencilAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
+
+export function RecipeList() {
+  const [recipes, setRecipes] = useState([]);
+  const [isPending, setPending] = useState(false);
+
+  function fetchRecipes() {
+    return fetch(process.env.REACT_APP_BACKEND_URL + "/api/recipes")
+      .then((res) => res.json())
+      .then(setRecipes);
+  }
+
+  useEffect(() => {
+    setPending(true);
+    fetchRecipes().finally(() => {
+      setPending(false);
+    });
+  }, []);
+
+  if (isPending) {
+    return <Spinner />;
+  }
+
+  return (
+    <Fragment>
+      {alignToRows(recipes).map((row, i) => (
+        <div className="row mb-3" key={i}>
+          {row.map((recipe) => (
+            <div className="col-md-4" key={recipe.id}>
+              <div className="card w-100 h-100">
+                <img
+                  className="card-img-top mb-2"
+                  src={`${process.env.REACT_APP_BACKEND_URL}/static/images/${recipe.imageURL}`}
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{recipe.name}</h5>
+                </div>
+                <div className="w-75 p-3">
+                  <NavLink to={`/recept-szerkesztes/${recipe.slug}`}>
+                    <button className="btn btn-sm btn-outline-warning mr-2">
+                      <FontAwesomeIcon icon={faPencilAlt} />
+                    </button>
+                  </NavLink>                      
+                  <NavLink to={`/recept/${recipe.slug}`}>
+                    <button className="btn btn-sm btn-outline-primary">
+                      <FontAwesomeIcon icon={faEye} />
+                    </button>
+                  </NavLink>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </Fragment>
+  );
+}
+
+const alignToRows = (items) =>
+  items.slice().reduceRight((acc, curr, i, arr) => {
+    acc.push(arr.splice(0, 3));
+    return acc;
+  }, []);
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>08:04</timestamp>
+    <fileName>RecipeList.jsx</fileName>
+    <content>
+<![CDATA[
+
+import React, { useEffect, useState } from "react";
+import { Spinner } from "./Spinner";
+import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faPencilAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
+
+export function RecipeList() {
+  const [recipes, setRecipes] = useState([]);
+  const [isPending, setPending] = useState(false);
+  const [deleteId, setDeleteId] = useState("");
+
+  function fetchRecipes() {
+    return fetch(process.env.REACT_APP_BACKEND_URL + "/api/recipes")
+      .then((res) => res.json())
+      .then(setRecipes);
+  }
+
+  useEffect(() => {
+    setPending(true);
+    fetchRecipes().finally(() => {
+      setPending(false);
+    });
+  }, []);
+
+  if (isPending) {
+    return <Spinner />;
+  }
+
+  return (
+    <Fragment>
+      {alignToRows(recipes).map((row, i) => (
+        <div className="row mb-3" key={i}>
+          {row.map((recipe) => (
+            <div className="col-md-4" key={recipe.id}>
+              <div className="card w-100 h-100">
+                <img
+                  className="card-img-top mb-2"
+                  src={`${process.env.REACT_APP_BACKEND_URL}/static/images/${recipe.imageURL}`}
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{recipe.name}</h5>
+                </div>
+                <div className="w-75 p-3">
+                  <NavLink to={`/recept-szerkesztes/${recipe.slug}`}>
+                    <button className="btn btn-sm btn-outline-warning mr-2">
+                      <FontAwesomeIcon icon={faPencilAlt} />
+                    </button>
+                  </NavLink>                      
+                  <button
+                    className="btn btn-sm btn-outline-danger mr-2"
+                    onClick={() => {
+                      setDeleteId(recipe.id);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faTimes} />
+                  </button>                   
+                  <NavLink to={`/recept/${recipe.slug}`}>
+                    <button className="btn btn-sm btn-outline-primary">
+                      <FontAwesomeIcon icon={faEye} />
+                    </button>
+                  </NavLink>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </Fragment>
+  );
+}
+
+const alignToRows = (items) =>
+  items.slice().reduceRight((acc, curr, i, arr) => {
+    acc.push(arr.splice(0, 3));
+    return acc;
+  }, []);
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>08:30</timestamp>
+    <fileName>RecipeList.jsx</fileName>
+    <content>
+<![CDATA[
+
+import React, { useEffect, useState } from "react";
+import { Spinner } from "./Spinner";
+import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faPencilAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
+
+export function RecipeList() {
+  const [recipes, setRecipes] = useState([]);
+  const [isPending, setPending] = useState(false);
+  const [deleteId, setDeleteId] = useState("");
+
+  function fetchRecipes() {
+    return fetch(process.env.REACT_APP_BACKEND_URL + "/api/recipes")
+      .then((res) => res.json())
+      .then(setRecipes);
+  }
+
+  useEffect(() => {
+    setPending(true);
+    fetchRecipes().finally(() => {
+      setPending(false);
+    });
+  }, []);
+
+  if (isPending) {
+    return <Spinner />;
+  }
+
+  return (
+    <Fragment>
+      {deleteId !== "" ? (
+        <Modal
+          onApproved={async () => {
+            setPending(true);
+            await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/recipes/${deleteId}`, { method: "DELETE" });
+            setDeleteId("");
+            await fetchRecipes();
+            setPending(false);
+          }}
+          onClosed={() => setDeleteId("")}
+        >
+          Biztosan törlöd a {recipes.find((recipe) => recipe.id === deleteId)?.name} receptjét?
+        </Modal>
+      ) : (
+        ""
+      )}
+      {alignToRows(recipes).map((row, i) => (
+        <div className="row mb-3" key={i}>
+          {row.map((recipe) => (
+            <div className="col-md-4" key={recipe.id}>
+              <div className="card w-100 h-100">
+                <img
+                  className="card-img-top mb-2"
+                  src={`${process.env.REACT_APP_BACKEND_URL}/static/images/${recipe.imageURL}`}
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{recipe.name}</h5>
+                </div>
+                <div className="w-75 p-3">
+                  <NavLink to={`/recept-szerkesztes/${recipe.slug}`}>
+                    <button className="btn btn-sm btn-outline-warning mr-2">
+                      <FontAwesomeIcon icon={faPencilAlt} />
+                    </button>
+                  </NavLink>                      
+                  <button
+                    className="btn btn-sm btn-outline-danger mr-2"
+                    onClick={() => {
+                      setDeleteId(recipe.id);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faTimes} />
+                  </button>                   
+                  <NavLink to={`/recept/${recipe.slug}`}>
+                    <button className="btn btn-sm btn-outline-primary">
+                      <FontAwesomeIcon icon={faEye} />
+                    </button>
+                  </NavLink>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </Fragment>
+  );
+}
+
+const alignToRows = (items) =>
+  items.slice().reduceRight((acc, curr, i, arr) => {
+    acc.push(arr.splice(0, 3));
+    return acc;
+  }, []);
+
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>09:51</timestamp>
+    <fileName>Modal.jsx</fileName>
+    <content>
+<![CDATA[
+ 
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>09:54</timestamp>
+    <fileName>Modal.jsx</fileName>
+    <content>
+<![CDATA[
+
+import React from "react";
+
+export function Modal({ onClosed, onApproved, children }) {
+  return (
+    <div className="modal d-block">
+
+    </div>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>10:17</timestamp>
+    <fileName>Modal.jsx</fileName>
+    <content>
+<![CDATA[
+
+import React from "react";
+
+export function Modal({ onClosed, onApproved, children }) {
+  return (
+    <div className="modal d-block">
+      <div className="modal-dialog">
+        <div className="modal-content">
+          
+          <div className="modal-body">{children}</div>
+
+        </div>
+      </div>
+    </div>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>10:38</timestamp>
+    <fileName>Modal.jsx</fileName>
+    <content>
+<![CDATA[
+
+import React from "react";
+
+export function Modal({ onClosed, onApproved, children }) {
+  return (
+    <div className="modal d-block">
+      <div className="modal-dialog">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title">Figyelem!</h5>
+            <button type="button" className="close" onClick={onClosed}>
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div className="modal-body">{children}</div>
+
+        </div>
+      </div>
+    </div>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>10:48</timestamp>
+    <fileName>Modal.jsx</fileName>
+    <content>
+<![CDATA[
+
+import React from "react";
+
+export function Modal({ onClosed, onApproved, children }) {
+  return (
+    <div className="modal d-block">
+      <div className="modal-dialog">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title">Figyelem!</h5>
+            <button type="button" className="close" onClick={onClosed}>
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div className="modal-body">{children}</div>
+
+          <div className="modal-footer">
+            <button type="button" className="btn btn-primary" onClick={onApproved}>
+              Megerősítés
+            </button>
+            <button type="button" className="btn btn-secondary" onClick={onClosed}>
+              Vissza
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+</root>
