@@ -130,14 +130,14 @@ class PublicSite
                 new PatchedSubscriber(null, null, 1, $token)
             );
 
+            header('Location: /elfelejtett-jelszo?emailSent=1');
+
             $msg = $twig->render('forgot-password-email.twig', [
                 'email' => $subscriber->getEmail(),
                 'link' => Router::siteUrl() . "/jelszo-megvaltoztatasa/" . $token . "?referer=" . $_GET['referer'],
             ]);
 
             @(new Mailer())->sendMail($subscriber->getEmail(), 'Jelszó megváltoztatása', $msg);
-
-            header('Location: /elfelejtett-jelszo?emailSent=1');
         });
 
         $r->get('/jelszo-megvaltoztatasa/{token}', function (Request $request) use ($conn, $twig) {
