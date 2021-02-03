@@ -29,6 +29,10 @@
   color: #333 !important;
 }
 
+.bg-transparent-70 {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+}
+
 span.step {
   background: #cccccc;
   border-radius: 0.8em;
@@ -150,7 +154,7 @@ del {
   line-height: 28px;
   padding: 0 16px;
   right: 0;
-  font-family: "Main-Regular", "Helvetica Neue", Arial, sans-serif,;
+  font-family: "Main-Regular", "Helvetica Neue", Arial, sans-serif;
 }
 
 .red {
