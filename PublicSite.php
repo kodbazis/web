@@ -400,10 +400,10 @@ class PublicSite
                 'email' => $request->body['email'],
                 'link' => Router::siteUrl() . "/megerosites/" . $token . "?referer=" . $_SERVER['HTTP_REFERER'],
             ]);
-            @(new Mailer())->sendMail($request->body['email'], 'Megerősítés egyetlen kattintással', $msg);
-
+            
             $params = ['registrationEmailSent=1'];
             header('Location: ' .  $_SERVER['HTTP_REFERER']  . Router::mergeQueries($_SERVER['HTTP_REFERER'], $params));
+            @(new Mailer())->sendMail($request->body['email'], 'Megerősítés egyetlen kattintással', $msg);
         });
 
         $r->get('/megerosites/{token}', function (Request $request) use ($conn, $twig) {
