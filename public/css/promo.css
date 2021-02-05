@@ -1,8 +1,8 @@
 .content-body {
-  width: 1024px !important;
+  width: 1140px !important;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1140px) {
   .content-body {
     width: 100% !important;
   }

@@ -1026,7 +1026,7 @@ p:first-child {
   margin-top: 0;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1140px) {
   ._3LfvI {
     transform: translateY(0) scale(1);
     border-bottom: none;
@@ -1043,7 +1043,7 @@ p:first-child {
   align-items: center;
   transform: translateY(2.5rem);
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1140px) {
   .e87AC {
     transform: translateY(0);
   }
@@ -1057,7 +1057,7 @@ p:first-child {
   max-width: 15.625rem;
   transform: scale(1.2);
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1140px) {
   ._1tX6S {
     transform: scale(1);
     max-width: none;
@@ -1069,7 +1069,7 @@ p:first-child {
   width: 100%;
   padding: 0 1.25rem;
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1140px) {
   ._251_U {
     max-width: 26.25rem;
     padding: 0;
@@ -1078,7 +1078,7 @@ p:first-child {
 ._28gRR {
   padding: 1.25rem 1.875rem;
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1140px) {
   ._28gRR {
     padding: 1.25rem 4.375rem;
   }
@@ -1095,7 +1095,7 @@ p:first-child {
 ._2nBLo {
   display: -ms-flexbox;
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1140px) {
   ._1puiF {
     -ms-flex-direction: row;
     flex-direction: row;
@@ -1108,7 +1108,7 @@ p:first-child {
   padding-bottom: 0.9375rem;
   padding-top: 0.625rem;
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1140px) {
   ._2ItZc {
     max-width: 24.375rem;
     padding-top: 0;
@@ -1138,7 +1138,7 @@ p:first-child {
   width: 100%;
   margin-bottom: 0.9375rem;
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1140px) {
   ._1rw25 {
     padding: 2.5rem 0;
   }

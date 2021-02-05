@@ -139,7 +139,7 @@ body {
 
 .wrapper {
   position: relative;
-  width: 1024px;
+  width: 1140px;
   margin: 0 auto;
 }
 
@@ -166,13 +166,13 @@ h4 {
 }
 
 .content-body {
-  width: 1024px;
+  width: 1140px;
   margin: auto;
   min-height: 90%;
 }
 
 .kodseged-inline {
-  width: 1024px;
+  width: 1140px;
 }
 
 .page-footer {
@@ -183,13 +183,13 @@ h4 {
   /* padding-bottom: 30px; */
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1140px) {
   .kodseged-inline {
     width: 100%;
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1140px) {
   .wrapper {
     width: 90%;
   }
@@ -393,7 +393,7 @@ footer {
   line-height: 1.5;
   color: #777;
   clear: both;
-  width: 1024px;
+  width: 1140px;
   /* padding: 40px 0; */
   /* border-top: 1px solid #eee; */
 }
