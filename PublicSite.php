@@ -841,7 +841,7 @@ class PublicSite
                 'content' => $twig->render('course.twig', [
                     'course' => $course,
                     'subscriberCourse' => $subscriberCourse,
-                    'episodes' => alignToRows($allEpisodesInCourse, 4),
+                    'episodes' => alignToRows($allEpisodesInCourse, 3),
                     'isSuccess' => $_GET['isSuccess'] ?? '',
                 ]),
                 'styles' => [
@@ -921,7 +921,7 @@ function renderEpisodeList($twig, $course, $allEpisodesInCourse)
     return $twig->render('intro-course-list.twig', [
         'isPromo' => true,
         'course' => $course,
-        'episodes' => alignToRows($allEpisodesInCourse, 3),
+        'episodes' => alignToRows($allEpisodesInCourse, 4),
     ]);
 }
 
