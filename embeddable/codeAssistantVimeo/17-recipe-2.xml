@@ -71,7 +71,6 @@ export function RecipeCreate() {
 
   return "Recept létrehozó form";
 }
-
 ]]>
     </content>
 </item>
@@ -138,7 +137,6 @@ export function RecipeCreate() {
     </div>
   );
 }
-
 ]]>
     </content>
 </item>
@@ -194,7 +192,6 @@ export function uuidv4() {
     return v.toString(16);
   });
 }
-
 ]]>
     </content>
 </item>
@@ -253,7 +250,6 @@ export function uuidv4() {
     return v.toString(16);
   });
 }
-
 ]]>
     </content>
 </item>
@@ -331,7 +327,6 @@ export function uuidv4() {
     return v.toString(16);
   });
 }
-
 ]]>
     </content>
 </item>
@@ -416,7 +411,6 @@ export function uuidv4() {
     return v.toString(16);
   });
 }
-
 ]]>
     </content>
 </item>
@@ -510,7 +504,6 @@ export function uuidv4() {
     return v.toString(16);
   });
 }
-
 ]]>
     </content>
 </item>
@@ -622,7 +615,6 @@ export function uuidv4() {
     return v.toString(16);
   });
 }
-
 ]]>
     </content>
 </item>
@@ -785,7 +777,6 @@ export function uuidv4() {
     return v.toString(16);
   });
 }
-
 ]]>
     </content>
 </item>
@@ -954,7 +945,6 @@ export function uuidv4() {
     return v.toString(16);
   });
 }
-
 ]]>
     </content>
 </item>
@@ -1164,7 +1154,6 @@ export function uuidv4() {
     return v.toString(16);
   });
 }
-
 ]]>
     </content>
 </item>
@@ -1208,7 +1197,6 @@ export function RecipeEdit(props) {
 
   return "recept szerkesztő form";
 }
-
 ]]>
     </content>
 </item>
@@ -1254,7 +1242,6 @@ export function RecipeEdit(props) {
 
   return "recept szerkesztő form";
 }
-
 ]]>
     </content>
 </item>
@@ -1497,8 +1484,6 @@ export function RecipeEdit(props) {
     </div>
   );
 }
-
-
 ]]>
     </content>
 </item>
@@ -1586,7 +1571,6 @@ export function RecipeSingle(props) {
     </div>
   );
 }
-
 ]]>
     </content>
 </item>

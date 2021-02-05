@@ -23,7 +23,6 @@ export default App;
     <fileName>App.jsx</fileName>
     <content>
 <![CDATA[
- 
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, NavLink } from "react-router-dom";
@@ -53,7 +52,6 @@ export default App;
     <fileName>App.jsx</fileName>
     <content>
 <![CDATA[
-  
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, NavLink } from "react-router-dom";
@@ -108,7 +106,6 @@ export default App;
     <fileName>App.jsx</fileName>
     <content>
 <![CDATA[
-   
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, NavLink } from "react-router-dom";
@@ -149,7 +146,6 @@ export default App;
     <fileName>App.jsx</fileName>
     <content>
 <![CDATA[
-    
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, NavLink } from "react-router-dom";
@@ -185,7 +181,6 @@ function App() {
 }
 
 export default App;
-    
 ]]>
     </content>
 </item>
@@ -195,7 +190,6 @@ export default App;
     <fileName>App.jsx</fileName>
     <content>
 <![CDATA[
-     
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, NavLink, Redirect } from "react-router-dom";
@@ -246,7 +240,6 @@ function App() {
 }
 
 export default App;
-     
 ]]>
     </content>
 </item>
@@ -257,13 +250,11 @@ export default App;
     <fileName>Home.jsx</fileName>
     <content>
 <![CDATA[
-
 import React, { useState } from "react";
 
 export function Home() {
   
 }
-
 ]]>
     </content>
 </item>
@@ -273,7 +264,6 @@ export function Home() {
     <fileName>Home.jsx</fileName>
     <content>
 <![CDATA[
-
 import React, { useState } from "react";
 
 export function Home() {
@@ -285,7 +275,6 @@ export function Home() {
     </div>
   );
 }
-
 ]]>
     </content>
 </item>
@@ -295,7 +284,6 @@ export function Home() {
     <fileName>Home.jsx</fileName>
     <content>
 <![CDATA[
-
 import React, { useState } from "react";
 
 export function Home() {
@@ -308,7 +296,6 @@ export function Home() {
     </div>
   );
 }
-
 ]]>
     </content>
 </item>
@@ -318,7 +305,6 @@ export function Home() {
     <fileName>Home.jsx</fileName>
     <content>
 <![CDATA[
-
 import React, { useState, useEffect } from "react";
 
 export function Home() {
@@ -338,7 +324,6 @@ export function Home() {
     </div>
   );
 }
-
 ]]>
     </content>
 </item>
@@ -348,7 +333,6 @@ export function Home() {
     <fileName>Home.jsx</fileName>
     <content>
 <![CDATA[
- 
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -375,7 +359,6 @@ export function Home() {
     </div>
   );
 }
-
 ]]>
     </content>
 </item>
@@ -418,7 +401,6 @@ export function RecipeList() {
     <fileName>RecipeList.jsx</fileName>
     <content>
 <![CDATA[
-
 import React, { useEffect, useState, Fragment } from "react";
 
 export function RecipeList() {
@@ -440,7 +422,6 @@ export function RecipeList() {
 
   return "receptek listája";
 }
-
 ]]>
     </content>
 </item>
@@ -450,7 +431,6 @@ export function RecipeList() {
     <fileName>RecipeList.jsx</fileName>
     <content>
 <![CDATA[
-
 import React, { useEffect, useState, Fragment } from "react";
 import { Spinner } from "./Spinner";
 
@@ -475,7 +455,6 @@ export function RecipeList() {
     return <Spinner />;
   }
 }
-
 ]]>
     </content>
 </item>
@@ -485,7 +464,6 @@ export function RecipeList() {
     <fileName>Spinner.jsx</fileName>
     <content>
 <![CDATA[
-
 import React from "react";
 
 export function Spinner() {
@@ -501,8 +479,6 @@ export function Spinner() {
     </div>
   );
 }
-
-
 ]]>
     </content>
 </item>
@@ -512,7 +488,6 @@ export function Spinner() {
     <fileName>RecipeList.jsx</fileName>
     <content>
 <![CDATA[
-
 import React, { useEffect, useState, Fragment } from "react";
 import { Spinner } from "./Spinner";
 
@@ -559,7 +534,6 @@ const alignToRows = (items) =>
     acc.push(arr.splice(0, 3));
     return acc;
   }, []);
-
 ]]>
     </content>
 </item>
@@ -570,7 +544,6 @@ const alignToRows = (items) =>
     <fileName>RecipeList.jsx</fileName>
     <content>
 <![CDATA[
-
 import React, { useEffect, useState, Fragment } from "react";
 import { Spinner } from "./Spinner";
 
@@ -623,7 +596,6 @@ const alignToRows = (items) =>
     acc.push(arr.splice(0, 3));
     return acc;
   }, []);
-
 ]]>
     </content>
 </item>
@@ -633,7 +605,6 @@ const alignToRows = (items) =>
     <fileName>RecipeList.jsx</fileName>
     <content>
 <![CDATA[
-
 import React, { useEffect, useState, Fragment } from "react";
 import { Spinner } from "./Spinner";
 
@@ -698,7 +669,6 @@ const alignToRows = (items) =>
     acc.push(arr.splice(0, 3));
     return acc;
   }, []);
-
 ]]>
     </content>
 </item>
@@ -708,7 +678,6 @@ const alignToRows = (items) =>
     <fileName>RecipeList.jsx</fileName>
     <content>
 <![CDATA[
-
 import React, { useEffect, useState } from "react";
 import { Spinner } from "./Spinner";
 import { NavLink } from "react-router-dom";
@@ -776,7 +745,6 @@ const alignToRows = (items) =>
     acc.push(arr.splice(0, 3));
     return acc;
   }, []);
-
 ]]>
     </content>
 </item>
@@ -786,7 +754,6 @@ const alignToRows = (items) =>
     <fileName>RecipeList.jsx</fileName>
     <content>
 <![CDATA[
-
 import React, { useEffect, useState } from "react";
 import { Spinner } from "./Spinner";
 import { NavLink } from "react-router-dom";
@@ -863,7 +830,6 @@ const alignToRows = (items) =>
     acc.push(arr.splice(0, 3));
     return acc;
   }, []);
-
 ]]>
     </content>
 </item>
@@ -873,7 +839,6 @@ const alignToRows = (items) =>
     <fileName>RecipeList.jsx</fileName>
     <content>
 <![CDATA[
-
 import React, { useEffect, useState } from "react";
 import { Spinner } from "./Spinner";
 import { NavLink } from "react-router-dom";
@@ -966,7 +931,6 @@ const alignToRows = (items) =>
     acc.push(arr.splice(0, 3));
     return acc;
   }, []);
-
 ]]>
     </content>
 </item>
@@ -987,7 +951,6 @@ const alignToRows = (items) =>
     <fileName>Modal.jsx</fileName>
     <content>
 <![CDATA[
-
 import React from "react";
 
 export function Modal({ onClosed, onApproved, children }) {
@@ -997,7 +960,6 @@ export function Modal({ onClosed, onApproved, children }) {
     </div>
   );
 }
-
 ]]>
     </content>
 </item>
@@ -1007,7 +969,6 @@ export function Modal({ onClosed, onApproved, children }) {
     <fileName>Modal.jsx</fileName>
     <content>
 <![CDATA[
-
 import React from "react";
 
 export function Modal({ onClosed, onApproved, children }) {
@@ -1023,7 +984,6 @@ export function Modal({ onClosed, onApproved, children }) {
     </div>
   );
 }
-
 ]]>
     </content>
 </item>
@@ -1033,7 +993,6 @@ export function Modal({ onClosed, onApproved, children }) {
     <fileName>Modal.jsx</fileName>
     <content>
 <![CDATA[
-
 import React from "react";
 
 export function Modal({ onClosed, onApproved, children }) {
@@ -1055,7 +1014,6 @@ export function Modal({ onClosed, onApproved, children }) {
     </div>
   );
 }
-
 ]]>
     </content>
 </item>
@@ -1065,7 +1023,6 @@ export function Modal({ onClosed, onApproved, children }) {
     <fileName>Modal.jsx</fileName>
     <content>
 <![CDATA[
-
 import React from "react";
 
 export function Modal({ onClosed, onApproved, children }) {
@@ -1095,7 +1052,6 @@ export function Modal({ onClosed, onApproved, children }) {
     </div>
   );
 }
-
 ]]>
     </content>
 </item>
