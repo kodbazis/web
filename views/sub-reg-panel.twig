@@ -1,4 +1,4 @@
-<div class="w-100 bg-transparent-70 border" id="right-panel">
+<div class="w-100 bg-white border" id="right-panel">
 	{% if isLogin or isPasswordModificationSuccess %}
 		{% include 'subscriber-login-form.twig' with {'error': error, 'email': email, registrationPath: '?', 'isPasswordModificationSuccess' : isPasswordModificationSuccess}  %}
 	{% else %}
