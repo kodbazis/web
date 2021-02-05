@@ -1,0 +1,1595 @@
+<?xml version = "1.0"?>
+<root>
+
+<item>
+    <timestamp>00:01</timestamp>
+    <fileName>App.jsx</fileName>
+    <content>
+<![CDATA[
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, Switch, Route, NavLink, Redirect } from "react-router-dom";
+import { RecipeCreate } from "./RecipeCreate";
+import { RecipeEdit } from "./RecipeEdit";
+import { RecipeSingle } from "./RecipeSingle";
+import { RecipeList } from "./RecipeList";
+import { Home } from "./Home";
+
+function App() {
+  return (
+    <Router>
+      <nav className="navbar fixed-top navbar-expand-sm navbar-dark bg-primary mb-3">
+        <div className="" id="navbarNav">
+          <ul className="navbar-nav lead font-weight-bold">
+            <li className="nav-item">
+              <NavLink to={`/`}>
+                <span className="nav-link">
+                  <img width="60px" src={`${process.env.REACT_APP_BACKEND_URL}/static/assets/logo.png`} alt="" />
+                </span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to={`/receptek`} activeClassName="active" exact>
+                <span className="nav-link pt-4">Receptek</span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to={`/uj-recept`} activeClassName="active">
+                <span className="nav-link pt-4">Új recept</span>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div className="container" style={{ marginTop: "140px" }}>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/receptek" component={RecipeList} />
+          <Route exact path="/uj-recept" component={RecipeCreate} />
+          <Route exact path="/recept-szerkesztes/:recipeSlug" component={RecipeEdit} />
+          <Route exact path="/recept/:recipeSlug" component={RecipeSingle} />
+          <Redirect to={"/"} />
+        </Switch>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
+
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>01:09</timestamp>
+    <fileName>RecipeCreate.jsx</fileName>
+    <content>
+<![CDATA[
+export function RecipeCreate() {
+
+  return "Recept létrehozó form";
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>01:17</timestamp>
+    <fileName>RecipeCreate.jsx</fileName>
+    <content>
+<![CDATA[
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+
+export function RecipeCreate() {
+
+  return (
+    <div className="card p-3">
+      <h1>Új recept:</h1>
+      <hr />
+      <form>
+        <div className="form-group row pb-3 border-bottom">
+          <label className="col-sm-2 col-form-label">Hozzávalók:</label>
+
+        </div>
+        
+        <button type="submit" className="btn btn-success btn-sm">
+          Küldés <FontAwesomeIcon icon={faCheckCircle} />
+        </button>
+      </form>
+    </div>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>01:33</timestamp>
+    <fileName>RecipeCreate.jsx</fileName>
+    <content>
+<![CDATA[
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+
+export function RecipeCreate() {
+  const [ingredientIds, setIngredientIds] = useState([]);
+
+  return (
+    <div className="card p-3">
+      <h1>Új recept:</h1>
+      <hr />
+      <form>
+        <div className="form-group row pb-3 border-bottom">
+          <label className="col-sm-2 col-form-label">Hozzávalók:</label>
+
+        </div>
+        
+        <button type="submit" className="btn btn-success btn-sm">
+          Küldés <FontAwesomeIcon icon={faCheckCircle} />
+        </button>
+      </form>
+    </div>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>01:43</timestamp>
+    <fileName>RecipeCreate.jsx</fileName>
+    <content>
+<![CDATA[
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+
+export function RecipeCreate() {
+  const [ingredientIds, setIngredientIds] = useState([]);
+
+  return (
+    <div className="card p-3">
+      <h1>Új recept:</h1>
+      <hr />
+      <form>
+        <div className="form-group row pb-3 border-bottom">
+          <label className="col-sm-2 col-form-label">Hozzávalók:</label>
+
+          <div className="row w-100">
+            <div className="col-md-3 offset-md-9">
+              <button
+                type="button"
+                className="btn btn-success btn-sm float-right"
+                onClick={() => {
+                  setIngredientIds((prev) => [...prev, uuidv4()]);
+                }}
+              >
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
+            </div>
+          </div>
+
+        </div>
+        
+        <button type="submit" className="btn btn-success btn-sm">
+          Küldés <FontAwesomeIcon icon={faCheckCircle} />
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export function uuidv4() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>02:49</timestamp>
+    <fileName>RecipeCreate.jsx</fileName>
+    <content>
+<![CDATA[
+export function RecipeCreate() {
+  const [ingredientIds, setIngredientIds] = useState([]);
+
+  return (
+    <div className="card p-3">
+      <h1>Új recept:</h1>
+      <hr />
+      <form>
+        <div className="form-group row pb-3 border-bottom">
+          <label className="col-sm-2 col-form-label">Hozzávalók:</label>
+          {ingredientIds.map((ingredientId, i) => (
+            <div key={ingredientId} className="col-sm-10 offset-2">
+              <div className="row mb-3">
+                
+                <div className="col-md-2">
+                </div>
+              </div>
+            </div>
+          ))}
+          <div className="row w-100">
+            <div className="col-md-3 offset-md-9">
+              <button
+                type="button"
+                className="btn btn-success btn-sm float-right"
+                onClick={() => {
+                  setIngredientIds((prev) => [...prev, uuidv4()]);
+                }}
+              >
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <button type="submit" className="btn btn-success btn-sm">
+          Küldés <FontAwesomeIcon icon={faCheckCircle} />
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export function uuidv4() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>02:58</timestamp>
+    <fileName>RecipeCreate.jsx</fileName>
+    <content>
+<![CDATA[
+export function RecipeCreate() {
+  const [ingredientIds, setIngredientIds] = useState([]);
+
+  return (
+    <div className="card p-3">
+      <h1>Új recept:</h1>
+      <hr />
+      <form>
+        <div className="form-group row pb-3 border-bottom">
+          <label className="col-sm-2 col-form-label">Hozzávalók:</label>
+          {ingredientIds.map((ingredientId, i) => (
+            <div key={ingredientId} className="col-sm-10 offset-2">
+              <div className="row mb-3">
+                
+                <div className="col-md-2">
+                  <div className="w-100">
+                    <button
+                      className="btn btn-danger mb-3"
+                      type="button"
+                      onClick={() => {
+                        setIngredientIds((prevIds) => {
+                          const ret = [...prevIds];
+                          ret.splice(
+                            prevIds.findIndex((id) => id === ingredientId),
+                            1
+                          );
+                          return ret;
+                        });
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+          <div className="row w-100">
+            <div className="col-md-3 offset-md-9">
+              <button
+                type="button"
+                className="btn btn-success btn-sm float-right"
+                onClick={() => {
+                  setIngredientIds((prev) => [...prev, uuidv4()]);
+                }}
+              >
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <button type="submit" className="btn btn-success btn-sm">
+          Küldés <FontAwesomeIcon icon={faCheckCircle} />
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export function uuidv4() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>03:19</timestamp>
+    <fileName>RecipeCreate.jsx</fileName>
+    <content>
+<![CDATA[
+export function RecipeCreate() {
+  const [ingredientIds, setIngredientIds] = useState([]);
+
+  return (
+    <div className="card p-3">
+      <h1>Új recept:</h1>
+      <hr />
+      <form>
+        <div className="form-group row pb-3 border-bottom">
+          <label className="col-sm-2 col-form-label">Hozzávalók:</label>
+          {ingredientIds.map((ingredientId, i) => (
+            <div key={ingredientId} className="col-sm-10 offset-2">
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <input
+                    type="text"
+                    name={"ingredient-name-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    placeholder="Név"
+                    required
+                  />
+                </div>
+                <div className="col-md-2">
+                  <div className="w-100">
+                    <button
+                      className="btn btn-danger mb-3"
+                      type="button"
+                      onClick={() => {
+                        setIngredientIds((prevIds) => {
+                          const ret = [...prevIds];
+                          ret.splice(
+                            prevIds.findIndex((id) => id === ingredientId),
+                            1
+                          );
+                          return ret;
+                        });
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+          <div className="row w-100">
+            <div className="col-md-3 offset-md-9">
+              <button
+                type="button"
+                className="btn btn-success btn-sm float-right"
+                onClick={() => {
+                  setIngredientIds((prev) => [...prev, uuidv4()]);
+                }}
+              >
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <button type="submit" className="btn btn-success btn-sm">
+          Küldés <FontAwesomeIcon icon={faCheckCircle} />
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export function uuidv4() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>03:20</timestamp>
+    <fileName>RecipeCreate.jsx</fileName>
+    <content>
+<![CDATA[
+export function RecipeCreate() {
+  const [ingredientIds, setIngredientIds] = useState([]);
+
+  return (
+    <div className="card p-3">
+      <h1>Új recept:</h1>
+      <hr />
+      <form>
+        <div className="form-group row pb-3 border-bottom">
+          <label className="col-sm-2 col-form-label">Hozzávalók:</label>
+          {ingredientIds.map((ingredientId, i) => (
+            <div key={ingredientId} className="col-sm-10 offset-2">
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <input
+                    type="text"
+                    name={"ingredient-name-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    placeholder="Név"
+                    required
+                  />
+                </div>
+                <div className="col-md-2"> 
+                  <input
+                    type="text"
+                    name={"ingredient-quantity-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    placeholder="Mennyiség"
+                    required
+                  />
+                </div>
+                <div className="col-md-2">
+                  <div className="w-100">
+                    <button
+                      className="btn btn-danger mb-3"
+                      type="button"
+                      onClick={() => {
+                        setIngredientIds((prevIds) => {
+                          const ret = [...prevIds];
+                          ret.splice(
+                            prevIds.findIndex((id) => id === ingredientId),
+                            1
+                          );
+                          return ret;
+                        });
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+          <div className="row w-100">
+            <div className="col-md-3 offset-md-9">
+              <button
+                type="button"
+                className="btn btn-success btn-sm float-right"
+                onClick={() => {
+                  setIngredientIds((prev) => [...prev, uuidv4()]);
+                }}
+              >
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <button type="submit" className="btn btn-success btn-sm">
+          Küldés <FontAwesomeIcon icon={faCheckCircle} />
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export function uuidv4() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>03:23</timestamp>
+    <fileName>RecipeCreate.jsx</fileName>
+    <content>
+<![CDATA[
+export function RecipeCreate() {
+  const [ingredientIds, setIngredientIds] = useState([]);
+
+  return (
+    <div className="card p-3">
+      <h1>Új recept:</h1>
+      <hr />
+      <form>
+        <div className="form-group row pb-3 border-bottom">
+          <label className="col-sm-2 col-form-label">Hozzávalók:</label>
+          {ingredientIds.map((ingredientId, i) => (
+            <div key={ingredientId} className="col-sm-10 offset-2">
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <input
+                    type="text"
+                    name={"ingredient-name-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    placeholder="Név"
+                    required
+                  />
+                </div>
+                <div className="col-md-2"> 
+                  <input
+                    type="text"
+                    name={"ingredient-quantity-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    placeholder="Mennyiség"
+                    required
+                  />
+                </div>
+                <div className="col-md-2"> 
+                  <select
+                    defaultValue=""
+                    name={"ingredient-type-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    required
+                  >
+                    <option value="" disabled>
+                      Típus
+                    </option>
+                    <option value="meat">Hús</option>
+                    <option value="drink">Ital</option>
+                    <option value="dairy">Tejtermék</option>
+                    <option value="fruit">Gyümölcs</option>
+                    <option value="spice">Fűszer</option>
+                    <option value="other">Egyéb</option>
+                  </select>
+                </div>
+                <div className="col-md-2">
+                  <div className="w-100">
+                    <button
+                      className="btn btn-danger mb-3"
+                      type="button"
+                      onClick={() => {
+                        setIngredientIds((prevIds) => {
+                          const ret = [...prevIds];
+                          ret.splice(
+                            prevIds.findIndex((id) => id === ingredientId),
+                            1
+                          );
+                          return ret;
+                        });
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+          <div className="row w-100">
+            <div className="col-md-3 offset-md-9">
+              <button
+                type="button"
+                className="btn btn-success btn-sm float-right"
+                onClick={() => {
+                  setIngredientIds((prev) => [...prev, uuidv4()]);
+                }}
+              >
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <button type="submit" className="btn btn-success btn-sm">
+          Küldés <FontAwesomeIcon icon={faCheckCircle} />
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export function uuidv4() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>04:11</timestamp>
+    <fileName>RecipeCreate.jsx</fileName>
+    <content>
+<![CDATA[
+export function RecipeCreate() {
+  const [ingredientIds, setIngredientIds] = useState([]);
+  const [stepIds, setStepIds] = useState([]);
+
+  return (
+    <div className="card p-3">
+      <h1>Új recept:</h1>
+      <hr />
+      <form>
+        <div className="form-group row pb-3 border-bottom">
+          <label className="col-sm-2 col-form-label">Hozzávalók:</label>
+          {ingredientIds.map((ingredientId, i) => (
+            <div key={ingredientId} className="col-sm-10 offset-2">
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <input
+                    type="text"
+                    name={"ingredient-name-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    placeholder="Név"
+                    required
+                  />
+                </div>
+                <div className="col-md-2"> 
+                  <input
+                    type="text"
+                    name={"ingredient-quantity-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    placeholder="Mennyiség"
+                    required
+                  />
+                </div>
+                <div className="col-md-2"> 
+                  <select
+                    defaultValue=""
+                    name={"ingredient-type-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    required
+                  >
+                    <option value="" disabled>
+                      Típus
+                    </option>
+                    <option value="meat">Hús</option>
+                    <option value="drink">Ital</option>
+                    <option value="dairy">Tejtermék</option>
+                    <option value="fruit">Gyümölcs</option>
+                    <option value="spice">Fűszer</option>
+                    <option value="other">Egyéb</option>
+                  </select>
+                </div>
+                <div className="col-md-2">
+                  <div className="w-100">
+                    <button
+                      className="btn btn-danger mb-3"
+                      type="button"
+                      onClick={() => {
+                        setIngredientIds((prevIds) => {
+                          const ret = [...prevIds];
+                          ret.splice(
+                            prevIds.findIndex((id) => id === ingredientId),
+                            1
+                          );
+                          return ret;
+                        });
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="form-group row pb-3 border-bottom">
+          <label className="col-sm-2 col-form-label">Lépések:</label>
+          {stepIds.map((stepId, i) => (
+            <div key={stepId} className="col-sm-10 offset-2">
+              <div className="row mb-3 border-bottom">
+                <div className="col-md-6">
+                  <input
+                    type="text"
+                    name={"step-content-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    placeholder={i + 1 + ". lépés"}
+                    required
+                  />
+                </div>
+                <div className="col-md-2">
+                  <input
+                    type="number"
+                    name={"step-timer-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    placeholder="idő"
+                    min={1}
+                    required
+                  />
+                </div>
+                <div className="col-md-2">
+                  <div className="w-100">
+                    <button
+                      className="btn btn-danger mb-3"
+                      type="button"
+                      onClick={() => {
+                        setIngredientIds((prevIds) => {
+                          const ret = [...prevIds];
+                          ret.splice(
+                            prevIds.findIndex((id) => id === ingredientId),
+                            1
+                          );
+                          return ret;
+                        });
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+          <div className="row w-100">
+            <div className="col-md-3 offset-md-9">
+              <button
+                type="button"
+                className="btn btn-success btn-sm float-right"
+                onClick={() => {
+                  setStepIds((prev) => [...prev, uuidv4()]);
+                }}
+              >
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <button type="submit" className="btn btn-success btn-sm">
+          Küldés <FontAwesomeIcon icon={faCheckCircle} />
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export function uuidv4() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>04:32</timestamp>
+    <fileName>RecipeCreate.jsx</fileName>
+    <content>
+<![CDATA[
+export function RecipeCreate() {
+  const [ingredientIds, setIngredientIds] = useState([]);
+  const [stepIds, setStepIds] = useState([]);
+  
+
+  return (
+    <div className="card p-3">
+      <h1>Új recept:</h1>
+      <hr />
+      <form
+        onSubmit={async (e) => {
+          e.preventDefault();
+
+          console.log(e.target.elements);
+        }}
+      >
+        <div className="form-group row pb-3 border-bottom">
+          <label className="col-sm-2 col-form-label">Hozzávalók:</label>
+          {ingredientIds.map((ingredientId, i) => (
+            <div key={ingredientId} className="col-sm-10 offset-2">
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <input
+                    type="text"
+                    name={"ingredient-name-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    placeholder="Név"
+                    required
+                  />
+                </div>
+                <div className="col-md-2"> 
+                  <input
+                    type="text"
+                    name={"ingredient-quantity-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    placeholder="Mennyiség"
+                    required
+                  />
+                </div>
+                <div className="col-md-2"> 
+                  <select
+                    defaultValue=""
+                    name={"ingredient-type-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    required
+                  >
+                    <option value="" disabled>
+                      Típus
+                    </option>
+                    <option value="meat">Hús</option>
+                    <option value="drink">Ital</option>
+                    <option value="dairy">Tejtermék</option>
+                    <option value="fruit">Gyümölcs</option>
+                    <option value="spice">Fűszer</option>
+                    <option value="other">Egyéb</option>
+                  </select>
+                </div>
+                <div className="col-md-2">
+                  <div className="w-100">
+                    <button
+                      className="btn btn-danger mb-3"
+                      type="button"
+                      onClick={() => {
+                        setIngredientIds((prevIds) => {
+                          const ret = [...prevIds];
+                          ret.splice(
+                            prevIds.findIndex((id) => id === ingredientId),
+                            1
+                          );
+                          return ret;
+                        });
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="form-group row pb-3 border-bottom">
+          <label className="col-sm-2 col-form-label">Lépések:</label>
+          {stepIds.map((stepId, i) => (
+            <div key={stepId} className="col-sm-10 offset-2">
+              <div className="row mb-3 border-bottom">
+                <div className="col-md-6">
+                  <input
+                    type="text"
+                    name={"step-content-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    placeholder={i + 1 + ". lépés"}
+                    required
+                  />
+                </div>
+                <div className="col-md-2">
+                  <input
+                    type="number"
+                    name={"step-timer-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    placeholder="idő"
+                    min={1}
+                    required
+                  />
+                </div>
+                <div className="col-md-2">
+                  <div className="w-100">
+                    <button
+                      className="btn btn-danger mb-3"
+                      type="button"
+                      onClick={() => {
+                        setIngredientIds((prevIds) => {
+                          const ret = [...prevIds];
+                          ret.splice(
+                            prevIds.findIndex((id) => id === ingredientId),
+                            1
+                          );
+                          return ret;
+                        });
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+          <div className="row w-100">
+            <div className="col-md-3 offset-md-9">
+              <button
+                type="button"
+                className="btn btn-success btn-sm float-right"
+                onClick={() => {
+                  setStepIds((prev) => [...prev, uuidv4()]);
+                }}
+              >
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <button type="submit" className="btn btn-success btn-sm">
+          Küldés <FontAwesomeIcon icon={faCheckCircle} />
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export function uuidv4() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>08:15</timestamp>
+    <fileName>RecipeCreate.jsx</fileName>
+    <content>
+<![CDATA[
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { useHistory } from "react-router";
+import { Spinner } from "./Spinner";
+
+export function transformToStructure(elements, type) {
+  return Object.values(
+    Object.entries(elements)
+      .filter(([kulcs, ertek]) => {
+        const [dataType] = kulcs.split("-");
+        return dataType === type;
+      })
+      .reduce((acc, [kulcs, ertek]) => {
+        const [_, name, index] = kulcs.split("-");
+        return {
+          ...acc,
+          [index]: acc[index]
+            ? {
+                ...acc[index],
+                [name]: ertek.value,
+              }
+            : { [name]: ertek.value },
+        };
+      }, {})
+  );
+}
+
+export function RecipeCreate() {
+  const [ingredientIds, setIngredientIds] = useState([]);
+  const [stepIds, setStepIds] = useState([]);
+  const [isPending, setPending] = useState(false);
+  const history = useHistory();
+
+  if (isPending) {
+    return <Spinner />;
+  }
+
+  return (
+    <div className="card p-3">
+      <h1>Új recept:</h1>
+      <hr />
+      <form
+        onSubmit={async (e) => {
+          const formData = new FormData();
+          formData.append("name", e.target.elements.name.value);
+          formData.append("ingredients", JSON.stringify(transformToStructure(e.target.elements, "ingredient")));
+          formData.append("steps", JSON.stringify(transformToStructure(e.target.elements, "step")));
+          formData.append("image", e.target.elements["img-url"].files[0]);
+
+          setPending(true);
+          await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/recipes`, { method: "POST", body: formData });
+          setPending(false);
+          history.push("/receptek");
+        }}
+      >
+        <div className="form-group row pb-3 border-bottom">
+          <label className="col-sm-2 col-form-label">Hozzávalók:</label>
+          {ingredientIds.map((ingredientId, i) => (
+            <div key={ingredientId} className="col-sm-10 offset-2">
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <input
+                    type="text"
+                    name={"ingredient-name-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    placeholder="Név"
+                    required
+                  />
+                </div>
+                <div className="col-md-2"> 
+                  <input
+                    type="text"
+                    name={"ingredient-quantity-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    placeholder="Mennyiség"
+                    required
+                  />
+                </div>
+                <div className="col-md-2"> 
+                  <select
+                    defaultValue=""
+                    name={"ingredient-type-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    required
+                  >
+                    <option value="" disabled>
+                      Típus
+                    </option>
+                    <option value="meat">Hús</option>
+                    <option value="drink">Ital</option>
+                    <option value="dairy">Tejtermék</option>
+                    <option value="fruit">Gyümölcs</option>
+                    <option value="spice">Fűszer</option>
+                    <option value="other">Egyéb</option>
+                  </select>
+                </div>
+                <div className="col-md-2">
+                  <div className="w-100">
+                    <button
+                      className="btn btn-danger mb-3"
+                      type="button"
+                      onClick={() => {
+                        setIngredientIds((prevIds) => {
+                          const ret = [...prevIds];
+                          ret.splice(
+                            prevIds.findIndex((id) => id === ingredientId),
+                            1
+                          );
+                          return ret;
+                        });
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="form-group row pb-3 border-bottom">
+          <label className="col-sm-2 col-form-label">Lépések:</label>
+          {stepIds.map((stepId, i) => (
+            <div key={stepId} className="col-sm-10 offset-2">
+              <div className="row mb-3 border-bottom">
+                <div className="col-md-6">
+                  <input
+                    type="text"
+                    name={"step-content-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    placeholder={i + 1 + ". lépés"}
+                    required
+                  />
+                </div>
+                <div className="col-md-2">
+                  <input
+                    type="number"
+                    name={"step-timer-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    placeholder="idő"
+                    min={1}
+                    required
+                  />
+                </div>
+                <div className="col-md-2">
+                  <div className="w-100">
+                    <button
+                      className="btn btn-danger mb-3"
+                      type="button"
+                      onClick={() => {
+                        setIngredientIds((prevIds) => {
+                          const ret = [...prevIds];
+                          ret.splice(
+                            prevIds.findIndex((id) => id === ingredientId),
+                            1
+                          );
+                          return ret;
+                        });
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+          <div className="row w-100">
+            <div className="col-md-3 offset-md-9">
+              <button
+                type="button"
+                className="btn btn-success btn-sm float-right"
+                onClick={() => {
+                  setStepIds((prev) => [...prev, uuidv4()]);
+                }}
+              >
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <button type="submit" className="btn btn-success btn-sm">
+          Küldés <FontAwesomeIcon icon={faCheckCircle} />
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export function uuidv4() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>09:05</timestamp>
+    <fileName>RecipeEdit.jsx</fileName>
+    <content>
+<![CDATA[
+import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { Spinner } from "./Spinner";
+import { useHistory } from "react-router";
+import { transformToStructure, uuidv4 } from "./RecipeCreate";
+
+export function RecipeEdit(props) {
+  const [recipe, setRecipe] = useState();
+
+  const [isPending, setPending] = useState();
+  const history = useHistory();
+
+  function fetchRecipeBySlug() {
+    return fetch(`${process.env.REACT_APP_BACKEND_URL}/api/recipes/${props.match.params.recipeSlug}`)
+      .then((res) => res.json())
+      .then((recipe) => {
+        setRecipe(recipe);
+       
+      });
+  }
+
+  useEffect(() => {
+    setPending(true);
+    fetchRecipeBySlug();
+    setPending(false);
+  }, []);
+
+  if (isPending || !recipe) {
+    return <Spinner />;
+  }
+
+  return "recept szerkesztő form";
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>09:22</timestamp>
+    <fileName>RecipeEdit.jsx</fileName>
+    <content>
+<![CDATA[
+import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { Spinner } from "./Spinner";
+import { useHistory } from "react-router";
+import { transformToStructure, uuidv4 } from "./RecipeCreate";
+
+export function RecipeEdit(props) {
+  const [recipe, setRecipe] = useState();
+  const [ingredients, setIngredients] = useState([]);
+  const [steps, setSteps] = useState([]);
+  const [isPending, setPending] = useState();
+  const history = useHistory();
+
+  function fetchRecipeBySlug() {
+    return fetch(`${process.env.REACT_APP_BACKEND_URL}/api/recipes/${props.match.params.recipeSlug}`)
+      .then((res) => res.json())
+      .then((recipe) => {
+        setRecipe(recipe);
+        setIngredients(recipe.ingredients.map((ingredient) => [uuidv4(), ingredient]));
+        setSteps(recipe.steps.map((step) => [uuidv4(), step]));
+      });
+  }
+
+  useEffect(() => {
+    setPending(true);
+    fetchRecipeBySlug();
+    setPending(false);
+  }, []);
+
+  if (isPending || !recipe) {
+    return <Spinner />;
+  }
+
+  return "recept szerkesztő form";
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>10:19</timestamp>
+    <fileName>RecipeEdit.jsx</fileName>
+    <content>
+<![CDATA[
+import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { Spinner } from "./Spinner";
+import { useHistory } from "react-router";
+import { transformToStructure, uuidv4 } from "./RecipeCreate";
+
+export function RecipeEdit(props) {
+  const [recipe, setRecipe] = useState();
+  const [ingredients, setIngredients] = useState([]);
+  const [steps, setSteps] = useState([]);
+  const [isPending, setPending] = useState();
+  const history = useHistory();
+
+  function fetchRecipeBySlug() {
+    return fetch(`${process.env.REACT_APP_BACKEND_URL}/api/recipes/${props.match.params.recipeSlug}`)
+      .then((res) => res.json())
+      .then((recipe) => {
+        setRecipe(recipe);
+        setIngredients(recipe.ingredients.map((ingredient) => [uuidv4(), ingredient]));
+        setSteps(recipe.steps.map((step) => [uuidv4(), step]));
+      });
+  }
+
+  useEffect(() => {
+    setPending(true);
+    fetchRecipeBySlug();
+    setPending(false);
+  }, []);
+
+  if (isPending || !recipe) {
+    return <Spinner />;
+  }
+
+  return (
+    <div className="card p-3">
+      <h1>Recept szerkesztése:</h1>
+      <hr />
+      <form
+        onSubmit={async (e) => {
+          e.preventDefault();
+          const formData = new FormData();
+          formData.append("name", e.target.elements.name.value);
+          formData.append("ingredients", JSON.stringify(transformToStructure(e.target.elements, "ingredient")));
+          formData.append("steps", JSON.stringify(transformToStructure(e.target.elements, "step")));
+          formData.append("image", e.target.elements["img-url"].files[0]);
+          setPending(true);
+          await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/recipes/${recipe.id}`, {
+            method: "PUT",
+            body: formData,
+          });
+          await fetchRecipeBySlug();
+          setPending(false);
+          history.push("/receptek");
+        }}
+      >
+        <div className="form-group row pb-3 border-bottom">
+          <label className="col-sm-2 col-form-label">Név:</label>
+          <div className="col-sm-10">
+            <input type="text" name="name" className="form-control" defaultValue={recipe.name} required />
+          </div>
+        </div>
+        <div className="form-group row pb-3 border-bottom">
+          <label className="col-sm-2 col-form-label">Hozzávalók:</label>
+          {ingredients.map(([ingredientId, ingredient], i) => (
+            <div key={ingredientId} className="col-sm-10 offset-2">
+              <div className={"row mb-3 " + (i === ingredients.length - 1 ? "" : "border-bottom")}>
+                <div className="col-md-6">
+                  <input
+                    type="text"
+                    name={"ingredient-name-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    placeholder="Név"
+                    defaultValue={ingredient.name}
+                    required
+                  />
+                </div>
+                <div className="col-md-2">
+                  <input
+                    type="text"
+                    name={"ingredient-quantity-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    placeholder="Mennyiség"
+                    defaultValue={ingredient.quantity}
+                    required
+                  />
+                </div>
+                <div className="col-md-2">
+                  <select
+                    name={"ingredient-type-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    defaultValue={ingredient.type}
+                    required
+                  >
+                    <option value="" disabled>
+                      Típus
+                    </option>
+                    <option value="meat">Hús</option>
+                    <option value="drink">Ital</option>
+                    <option value="dairy">Tejtermék</option>
+                    <option value="fruit">Gyümölcs</option>
+                    <option value="spice">Fűszer</option>
+                    <option value="spice">Egyéb</option>
+                  </select>
+                </div>
+                <div className="col-md-2">
+                  <div className="w-100">
+                    <button
+                      className="btn btn-danger mb-3"
+                      type="button"
+                      onClick={() => {
+                        setIngredients((prev) => {
+                          const ret = [...prev];
+                          ret.splice(
+                            prev.findIndex(([id]) => id === ingredientId),
+                            1
+                          );
+                          return ret;
+                        });
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+          <div className="row w-100">
+            <div className="col-md-3 offset-md-9">
+              <button
+                type="button"
+                className="btn btn-success btn-sm float-right"
+                onClick={() => {
+                  setIngredients((prev) => [
+                    ...prev,
+                    [
+                      uuidv4(),
+                      {
+                        name: "",
+                        type: "",
+                        quantity: "",
+                      },
+                    ],
+                  ]);
+                }}
+              >
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="form-group row pb-3 border-bottom">
+          <label className="col-sm-2 col-form-label">Lépések:</label>
+          {steps.map(([stepId, step], i) => (
+            <div key={stepId} className="col-sm-10 offset-2">
+              <div className={"row mb-3 " + (i === steps.length - 1 ? "" : "border-bottom")}>
+                <div className="col-md-6">
+                  <input
+                    type="text"
+                    name={"step-content-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    placeholder={i + 1 + ". lépés"}
+                    defaultValue={step.content}
+                    required
+                  />
+                </div>
+                <div className="col-md-2">
+                  <input
+                    type="number"
+                    name={"step-timer-" + i}
+                    className="form-control d-inline-block mr-2 mb-2"
+                    placeholder="Idő"
+                    defaultValue={step.timer}
+                    required
+                  />
+                </div>
+                <div className="col-md-2">
+                    <div className="w-100">
+                      <button
+                        className="btn btn-danger mb-3"
+                        type="button"
+                        onClick={() => {
+                          setSteps((prev) => {
+                            const ret = [...prev];
+                            ret.splice(
+                              prev.findIndex(([item, _]) => item === stepId),
+                              1
+                            );
+                            return ret;
+                          });
+                        }}
+                      >
+                        <FontAwesomeIcon icon={faTrash} />
+                      </button>
+                    </div>
+                </div>
+              </div>
+            </div>
+          ))}
+          <div className="row w-100">
+            <div className="col-md-3 offset-md-9">
+              <button
+                type="button"
+                className="btn btn-success btn-sm float-right"
+                onClick={() => {
+                  setSteps((prev) => [...prev, [uuidv4(), { content: "", timer: 0 }]]);
+                }}
+              >
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="form-group row pb-3 border-bottom">
+          <label className="col-sm-2 col-form-label">Kép:</label>
+          <div className="col-md-5">
+            <input type="file" name="img-url" className="form-control" />
+          </div>
+          <div className="col-md-5">
+            <img
+              src={`${process.env.REACT_APP_BACKEND_URL}/static/images/${recipe.imageURL}`}
+              className="img-thumbnail"
+            />
+          </div>
+        </div>
+        <button type="submit" className="btn btn-success btn-sm">
+          Küldés <FontAwesomeIcon icon={faCheckCircle} />
+        </button>
+      </form>
+    </div>
+  );
+}
+
+
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>11:05</timestamp>
+    <fileName>RecipeSingle.jsx</fileName>
+    <content>
+<![CDATA[
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClock } from "@fortawesome/free-solid-svg-icons";
+import { Spinner } from "./Spinner";
+
+export function RecipeSingle(props) {
+  const [recipe, setRecipe] = useState();
+  const [selectedStepIndex, setSelectedStepIndex] = useState(0);
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/recipes/${props.match.params.recipeSlug}`)
+      .then((res) => res.json())
+      .then(setRecipe);
+  }, []);
+
+  if (!recipe) {
+    return <Spinner />;
+  }
+
+  return (
+    <div>
+      <div className="row m-2">
+        <div className="col-md-8">
+          <h1>{recipe.name}</h1>
+
+          <div className="p-2">
+            <h3>Hozzávalók:</h3>
+            <ul className="list-group list-group-flush">
+              {recipe.ingredients.map((ingredient, i) => (
+                <li key={i} className="list-group-item">
+                  {ingredient.name} ({ingredient.quantity})
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="col-md-4 m-auto">
+          <img
+            width="100%"
+            className="card-img-top mb-2"
+            src={`${process.env.REACT_APP_BACKEND_URL}/static/images/${recipe.imageURL}`}
+            alt="Card image cap"
+          />
+        </div>
+      </div>
+      <div className="row p-3">
+        <div className="col-md-9 border-right">
+          <h3>Elkészítés:</h3>
+          <ul className="list-group list-group-flush">
+            {recipe.steps.map((step, i) => (
+              <li
+                key={i}
+                className={"list-group-item " + (selectedStepIndex === i ? "active" : "")}
+                onClick={() => {
+                  setSelectedStepIndex(i);
+                }}
+              >
+                {step.content}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="col-md-3 border-right">
+          <div className="card">
+            <div className="card-body">
+              <h2>
+                <FontAwesomeIcon icon={faClock} className="mr-2" />
+                {recipe.steps[selectedStepIndex]?.timer ? recipe.steps[selectedStepIndex].timer + " perc" : "-"}
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+]]>
+    </content>
+</item>
+
+
+</root>
