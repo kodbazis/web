@@ -123,6 +123,14 @@ p {
   font-family: "Main-Regular" !important;
 }
 
+.no-discount {
+  font-size: 25px;
+  line-height: 26px;
+  text-align: center;
+  color: rgb(229 0 16);
+  font-family: "Main-Regular";
+}
+
 .first {
   font-size: 25px;
   line-height: 26px;
