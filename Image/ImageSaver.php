@@ -23,9 +23,11 @@ class ImageSaver
 
             $ext = pathinfo($request->files['mainImage']['name'], PATHINFO_EXTENSION);
 
-            $filename = uniqid(rand(), true) . '.' . $ext;
+            $rand = uniqid(rand(), true);
+            $originalFileName = $rand . '.' . $ext;
+            $webpFilename = $rand . '.webp';
 
-            if (!file_put_contents(__DIR__ . '/../public/files/' . $filename, file_get_contents($request->files['mainImage']['tmp_name']))) {
+            if (!file_put_contents(__DIR__ . '/../public/files/' . $originalFileName, file_get_contents($request->files['mainImage']['tmp_name']))) {
                 $err = new OperationError();
                 $err->addField(['file save failed']);
                 throw $err;
@@ -39,13 +41,15 @@ class ImageSaver
                 (new SimpleImage())
                     ->fromFile($request->files['mainImage']['tmp_name'])
                     ->bestFit($dimensions->getWidth(), $dimensions->getHeight())
-                    ->toFile(__DIR__ . '/../public/files/' . $dimensions->getSizeName() . '-' . $filename, 'image/png');
+                    ->toFile(__DIR__ . '/../public/files/' . $dimensions->getSizeName() . '-' . $webpFilename, 'image/webp');
             }
 
-            $request->vars['savedFiles']['mainImage'] = $filename;
+            $request->vars['savedFiles']['mainImage'] = $webpFilename;
 
             return $request;
         } catch (Exception $err) {
+            var_dump($err);
+            exit;
             return $request;
         }
 

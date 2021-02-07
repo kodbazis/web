@@ -29,7 +29,7 @@
 									<figure {{ep.isPreview or isVerified? '' : 'style="opacity: 0.4"'}}>
 
 										{% if ep.imgUrl %}
-											<img class="img-thumbnail p-0" src="/public/files/sm-{{ep.imgUrl}}"/>
+											<img loading="lazy" class="img-thumbnail p-0" src="/public/files/sm-{{ep.imgUrl}}"/>
 											{% if not isVerified %}
 												<div class="after"></div>
 											{% endif %}
