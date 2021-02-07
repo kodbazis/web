@@ -22,8 +22,8 @@
 					</p>
 				</div>
 			{% endif %}
-			<p class='text-center' class="w-100" style="background-color: #151515">
-				<div id="video-panel" class="kodseged" data-videoid="{{course.videoId}}" data-isautoplay="{{isAutoplay}}" data-type="vimeo"></div>
+			<p class='embed-container'>
+				<iframe src="https://player.vimeo.com/video/{{course.videoId}}" class="w-100" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
 			</p>
 			<p class="lead p-2 text-center">
 				<b>{{course.description}}</b>

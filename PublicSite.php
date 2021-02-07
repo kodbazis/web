@@ -698,10 +698,10 @@ class PublicSite
                         ['path' => 'css/login.css'],
                         ['path' => 'css/promo.css'],
                         ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
-                        ...Embeddables::getKodsegedStyles(),
+                        // ...Embeddables::getKodsegedStyles(),
                     ],
                     'scripts' => [
-                        ...Embeddables::getKodsegedScripts(),
+                        // ...Embeddables::getKodsegedScripts(),
                     ],
                     'ogTags' => getCourseOgTags($course),
                 ]);
@@ -742,13 +742,13 @@ class PublicSite
                     ]),
                     'subscriberLabel' =>  getNick($request->vars),
                     'styles' => [
-                        ...Embeddables::getKodsegedStyles(),
+                        // ...Embeddables::getKodsegedStyles(),
                         ['path' => 'css/login.css'],
                         ['path' => 'css/promo.css'],
                         ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
                     ],
                     'scripts' => [
-                        ...Embeddables::getKodsegedScripts(),
+                        // ...Embeddables::getKodsegedScripts(),
                     ],
                     'ogTags' => getCourseOgTags($course),
                 ]);
@@ -783,10 +783,10 @@ class PublicSite
                         ['path' => 'css/login.css'],
                         ['path' => 'css/promo.css'],
                         ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
-                        ...Embeddables::getKodsegedStyles(),
+                        // ...Embeddables::getKodsegedStyles(),
                     ],
                     'scripts' => [
-                        ...Embeddables::getKodsegedScripts(),
+                        // ...Embeddables::getKodsegedScripts(),
                     ],
                     'ogTags' => getCourseOgTags($course),
                 ]);
@@ -823,10 +823,10 @@ class PublicSite
                         ['path' => 'css/login.css'],
                         ['path' => 'css/promo.css'],
                         ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
-                        ...Embeddables::getKodsegedStyles(),
+                        // ...Embeddables::getKodsegedStyles(),
                     ],
                     'scripts' => [
-                        ...Embeddables::getKodsegedScripts(),
+                        // ...Embeddables::getKodsegedScripts(),
                     ],
                     'ogTags' => getCourseOgTags($course),
                 ]);
