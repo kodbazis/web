@@ -698,6 +698,19 @@ export function RecipeCreate() {
               </div>
             </div>
           ))}
+          <div className="row w-100">
+            <div className="col-md-3 offset-md-9">
+              <button
+                type="button"
+                className="btn btn-success btn-sm float-right"
+                onClick={() => {
+                  setIngredientIds((prev) => [...prev, uuidv4()]);
+                }}
+              >
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
+            </div>
+          </div>
         </div>
 
         <div className="form-group row pb-3 border-bottom">
@@ -866,6 +879,19 @@ export function RecipeCreate() {
               </div>
             </div>
           ))}
+          <div className="row w-100">
+            <div className="col-md-3 offset-md-9">
+              <button
+                type="button"
+                className="btn btn-success btn-sm float-right"
+                onClick={() => {
+                  setIngredientIds((prev) => [...prev, uuidv4()]);
+                }}
+              >
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
+            </div>
+          </div>
         </div>
 
         <div className="form-group row pb-3 border-bottom">
@@ -1075,6 +1101,19 @@ export function RecipeCreate() {
               </div>
             </div>
           ))}
+          <div className="row w-100">
+            <div className="col-md-3 offset-md-9">
+              <button
+                type="button"
+                className="btn btn-success btn-sm float-right"
+                onClick={() => {
+                  setIngredientIds((prev) => [...prev, uuidv4()]);
+                }}
+              >
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
+            </div>
+          </div>
         </div>
 
         <div className="form-group row pb-3 border-bottom">
@@ -1138,7 +1177,12 @@ export function RecipeCreate() {
             </div>
           </div>
         </div>
-        
+        <div className="form-group row pb-3 border-bottom">
+          <label className="col-sm-2 col-form-label">Kép:</label>
+          <div className="col-md-6 offset-md-1">
+            <input type="file" name="img-url" className="form-control" />
+          </div>
+        </div>
         <button type="submit" className="btn btn-success btn-sm">
           Küldés <FontAwesomeIcon icon={faCheckCircle} />
         </button>
