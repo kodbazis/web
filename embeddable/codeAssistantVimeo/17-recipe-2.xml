@@ -1038,6 +1038,12 @@ export function RecipeCreate() {
         }}
       >
         <div className="form-group row pb-3 border-bottom">
+          <label className="col-sm-2 col-form-label">Név:</label>
+          <div className="col-sm-10">
+            <input type="text" name="name" className="form-control" required />
+          </div>
+        </div>
+        <div className="form-group row pb-3 border-bottom">
           <label className="col-sm-2 col-form-label">Hozzávalók:</label>
           {ingredientIds.map((ingredientId, i) => (
             <div key={ingredientId} className="col-sm-10 offset-2">
