@@ -9,11 +9,19 @@
 	<div class="row m-auto">
 		<div class="col-md-8 mb-3 p-2">
 			{% if registrationSuccessful %}
-				<div class="alert text-center alert-success p-1 pr-2 pl-2">
-					<p style="font-size:15px">
+				<div id="registrationEmailSent-alert" class="alert alert-success p-2 m-2">
+					<p class="text-center" style="font-size:15px">
 						<b>Regisztráció sikeres! Kattints a "Megveszem" gombra és kezdj neki a tanfolyamnak!</b>
 					</p>
 				</div>
+				<script>
+					const el = document.getElementById('registrationEmailSent-alert');
+					let isLight = false
+					setInterval(() => {
+					el.style.background = isLight ? '#D4EDDA' : '#7ABE89';
+					isLight = ! isLight
+					}, 950);
+				</script>
 			{% endif %}
 			{% if loginSuccess %}
 				<div class="alert text-center alert-success p-1 pr-2 pl-2">
@@ -89,7 +97,7 @@
 						<i class="fa fa-check color-blue mr-2"></i>
 						<b>{{numberOfEpisodes}}
 							könnyen megérthető
-																					oktatóvideót</b>
+																												oktatóvideót</b>
 					</li>
 					<li>
 						<i class="fa fa-check color-blue mr-2"></i>
