@@ -22,9 +22,9 @@ class SqlSaver implements Saver
         try {
             $statement = $this->connection->prepare(
                 "INSERT INTO `episodes` (
-                `id`, `title`, `slug`, `courseId`, `imgUrl`, `description`, `content`, `createdAt`, `position`, `isActive`, `isPreview`
+                `id`, `title`, `slug`, `courseId`, `imgUrl`, `description`, `shortDescription`, `content`, `createdAt`, `position`, `isActive`, `isPreview`
                 ) 
-                VALUES (NULL, ?,?,?,?,?,?,?,?,?,?);"
+                VALUES (NULL, ?,?,?,?,?,?,?,?,?,?,?);"
             );
     
             $title = $new->getTitle();
@@ -32,6 +32,7 @@ class SqlSaver implements Saver
         $courseId = $new->getCourseId();
         $imgUrl = $new->getImgUrl();
         $description = $new->getDescription();
+        $shortDescription = $new->getShortDescription();
         $content = $new->getContent();
         $createdAt = $new->getCreatedAt();
         $position = $new->getPosition();
@@ -40,12 +41,12 @@ class SqlSaver implements Saver
         
     
             $statement->bind_param(
-                "ssisssiiii",
-                 $title, $slug, $courseId, $imgUrl, $description, $content, $createdAt, $position, $isActive, $isPreview        
+                "ssissssiiii",
+                 $title, $slug, $courseId, $imgUrl, $description, $shortDescription, $content, $createdAt, $position, $isActive, $isPreview        
              );
             $statement->execute();
     
-            return new Episode((string)$statement->insert_id, $new->getTitle(),$new->getSlug(),$new->getCourseId(),$new->getImgUrl(),$new->getDescription(),$new->getContent(),$new->getCreatedAt(),$new->getPosition(),$new->getIsActive(),$new->getIsPreview());
+            return new Episode((string)$statement->insert_id, $new->getTitle(),$new->getSlug(),$new->getCourseId(),$new->getImgUrl(),$new->getDescription(),$new->getShortDescription(),$new->getContent(),$new->getCreatedAt(),$new->getPosition(),$new->getIsActive(),$new->getIsPreview());
         } catch (\Error $exception) {
             if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {
                 var_dump($exception);

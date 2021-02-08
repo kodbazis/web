@@ -11,6 +11,7 @@ private $slug;
 private $courseId;
 private $imgUrl;
 private $description;
+private $shortDescription;
 private $content;
 private $createdAt;
 private $position;
@@ -19,13 +20,14 @@ private $isPreview;
 
 
     
-public function __construct($title, $slug, $courseId, $imgUrl, $description, $content, $createdAt, $position, $isActive, $isPreview)
+public function __construct($title, $slug, $courseId, $imgUrl, $description, $shortDescription, $content, $createdAt, $position, $isActive, $isPreview)
 {
         $this->title = $title;
 $this->slug = $slug;
 $this->courseId = $courseId;
 $this->imgUrl = $imgUrl;
 $this->description = $description;
+$this->shortDescription = $shortDescription;
 $this->content = $content;
 $this->createdAt = $createdAt;
 $this->position = $position;
@@ -53,6 +55,10 @@ $this->isPreview = $isPreview;
     public function getDescription(): ?string
     {
         return $this->description;
+    }
+    public function getShortDescription(): ?string
+    {
+        return $this->shortDescription;
     }
     public function getContent(): ?string
     {
@@ -84,6 +90,7 @@ $this->isPreview = $isPreview;
  'courseId' => $this->courseId,
  'imgUrl' => $this->imgUrl,
  'description' => $this->description,
+ 'shortDescription' => $this->shortDescription,
  'content' => $this->content,
  'createdAt' => $this->createdAt,
  'position' => $this->position,
