@@ -400,7 +400,7 @@ class PublicSite
                 'email' => $request->body['email'],
                 'link' => Router::siteUrl() . "/megerosites/" . $token . "?referer=" . $_SERVER['HTTP_REFERER'],
             ]);
-            
+
             $params = ['registrationEmailSent=1'];
             header('Location: ' .  $_SERVER['HTTP_REFERER']  . Router::mergeQueries($_SERVER['HTTP_REFERER'], $params));
             @(new Mailer())->sendMail($request->body['email'], 'Megerősítés egyetlen kattintással', $msg);
@@ -663,6 +663,16 @@ class PublicSite
                 new OrderBy('position', 'asc')
             ))->getEntities();
 
+            $subscribersInCourse = (new SubscriberCourseLister($conn))->list(new Query(
+                1000,
+                0,
+                new Filter(
+                    'and',
+                    new Clause('eq', 'isVerified', '1'),
+                    new Clause('eq', 'courseId', $course->getId()),
+                ),
+                new OrderBy('id', 'asc')
+            ));
 
             $ids = Embeddables::getIds($course->getContent());
             $embeddables = count($ids) ? Embeddables::getEmbeddables($ids, $conn) : [];
@@ -678,6 +688,7 @@ class PublicSite
                     'content' => $twig->render('react-paywall.twig', [
                         'course' => $course,
                         'discountedPrice' => getDiscountedPrice($course),
+                        'numberOfSubscribers' => $subscribersInCourse->getCount(),
                         'contentWithEmbeddables' => $content,
                         'isAutoplay' => !isset($_GET['isLogin']) && !isset($_GET['registrationEmailSent']),
                         'numberOfEpisodes' => count($allEpisodesInCourse),
@@ -698,10 +709,7 @@ class PublicSite
                         ['path' => 'css/login.css'],
                         ['path' => 'css/promo.css'],
                         ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
-                        // ...Embeddables::getKodsegedStyles(),
-                    ],
-                    'scripts' => [
-                        // ...Embeddables::getKodsegedScripts(),
+
                     ],
                     'ogTags' => getCourseOgTags($course),
                 ]);
@@ -719,7 +727,6 @@ class PublicSite
                 new OrderBy('id', 'asc')
             ));
 
-
             // not ordered
             if (!$subscriberCourses->getCount()) {
                 echo $twig->render('wrapper.twig', [
@@ -729,6 +736,7 @@ class PublicSite
                     'content' => $twig->render('react-paywall.twig', [
                         'course' => $course,
                         'discountedPrice' => getDiscountedPrice($course),
+                        'numberOfSubscribers' => $subscribersInCourse->getCount(),
                         'contentWithEmbeddables' => $content,
                         'numberOfEpisodes' => count($allEpisodesInCourse),
                         'paywallForm' => $twig->render('paywall-form.twig', [
@@ -742,13 +750,9 @@ class PublicSite
                     ]),
                     'subscriberLabel' =>  getNick($request->vars),
                     'styles' => [
-                        // ...Embeddables::getKodsegedStyles(),
                         ['path' => 'css/login.css'],
                         ['path' => 'css/promo.css'],
                         ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
-                    ],
-                    'scripts' => [
-                        // ...Embeddables::getKodsegedScripts(),
                     ],
                     'ogTags' => getCourseOgTags($course),
                 ]);
@@ -766,6 +770,7 @@ class PublicSite
                     'content' => $twig->render('react-paywall.twig', [
                         'course' => $course,
                         'discountedPrice' => getDiscountedPrice($course),
+                        'numberOfSubscribers' => $subscribersInCourse->getCount(),
                         'contentWithEmbeddables' => $content,
                         'numberOfEpisodes' => count($allEpisodesInCourse),
                         'paywallForm' => $twig->render('paywall-form.twig', [
@@ -783,10 +788,6 @@ class PublicSite
                         ['path' => 'css/login.css'],
                         ['path' => 'css/promo.css'],
                         ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
-                        // ...Embeddables::getKodsegedStyles(),
-                    ],
-                    'scripts' => [
-                        // ...Embeddables::getKodsegedScripts(),
                     ],
                     'ogTags' => getCourseOgTags($course),
                 ]);
@@ -803,6 +804,7 @@ class PublicSite
                     'content' => $twig->render('react-paywall.twig', [
                         'course' => $course,
                         'discountedPrice' => getDiscountedPrice($course),
+                        'numberOfSubscribers' => $subscribersInCourse->getCount(),
                         'contentWithEmbeddables' => $content,
                         'numberOfEpisodes' => count($allEpisodesInCourse),
                         'paywallForm' => $twig->render('paywall-form.twig', [
@@ -823,10 +825,6 @@ class PublicSite
                         ['path' => 'css/login.css'],
                         ['path' => 'css/promo.css'],
                         ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
-                        // ...Embeddables::getKodsegedStyles(),
-                    ],
-                    'scripts' => [
-                        // ...Embeddables::getKodsegedScripts(),
                     ],
                     'ogTags' => getCourseOgTags($course),
                 ]);
