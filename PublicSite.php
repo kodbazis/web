@@ -929,7 +929,7 @@ function getNick($vars)
         return '';
     }
 
-    return explode('@', $vars['subscriber']->getEmail())[0] ?? '';
+    return $vars['subscriber']->getEmail();
 }
 
 function getCourseOgTags($course)
