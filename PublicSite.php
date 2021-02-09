@@ -20,6 +20,8 @@ use Kodbazis\Generated\Repository\SubscriberCourse\SqlSaver as SubscriberCourseS
 use Kodbazis\Generated\Repository\SubscriberCourse\SqlDeleter as SubscriberCourseDeleter;
 use Kodbazis\Generated\Repository\SubscriberCourse\SqlByIdGetter as SubscriberCourseById;
 use Kodbazis\Generated\Repository\Episode\SqlLister as EpisodeLister;
+use Kodbazis\Generated\Repository\Quote\SqlLister as QuoteLister;
+use Kodbazis\Generated\Repository\Spec\SqlLister as SpecLister;
 use Kodbazis\Episodes;
 use Kodbazis\Generated\Listing\Clause;
 use Kodbazis\Generated\Listing\Filter;
@@ -559,17 +561,6 @@ class PublicSite
             header('Location: /' . $courseById->getEntities()[0]->getSlug());
         });
 
-        $r->post('/api/delete-course-order/{subscriberCourseId}', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
-            if (!isset($_SESSION['subscriberId'])) {
-                header('Location: /react-kurzus');
-                return;
-            }
-
-
-            (new SubscriberCourseDeleter($conn))->delete($request->vars['subscriberCourseId']);
-            header('Location: /react-kurzus');
-        });
-
         $r->get('/api/isPaymentVerified/{subscriberCourseId}', $initSubscriberSession, function (Request $request) use ($conn) {
             header('Content-Type: application/json');
             if (!isset($_SESSION['subscriberId'])) {
@@ -651,7 +642,6 @@ class PublicSite
                 return;
             }
 
-
             $allEpisodesInCourse = (new EpisodeLister($conn))->list(new Query(
                 1000,
                 0,
@@ -660,6 +650,20 @@ class PublicSite
                     new Clause('eq', 'courseId', $course->getId()),
                     new Clause('eq', 'isActive', 1),
                 ),
+                new OrderBy('position', 'asc')
+            ))->getEntities();
+
+            $quotes = (new QuoteLister($conn))->list(new Query(
+                1000,
+                0,
+                new Clause('eq', 'courseId', $course->getId()),
+                new OrderBy('position', 'asc')
+            ))->getEntities();
+
+            $specs = (new SpecLister($conn))->list(new Query(
+                1000,
+                0,
+                new Clause('eq', 'courseId', $course->getId()),
                 new OrderBy('position', 'asc')
             ))->getEntities();
 
@@ -674,24 +678,19 @@ class PublicSite
                 new OrderBy('id', 'asc')
             ));
 
-            $ids = Embeddables::getIds($course->getContent());
-            $embeddables = count($ids) ? Embeddables::getEmbeddables($ids, $conn) : [];
-            $templates = Embeddables::mapEmbeddablesToTemplates($embeddables, $twig);
-            $content = Embeddables::insertEmbeddablesToContent($templates, $course->getContent());
-
             // not logged in
             if (!isset($_SESSION['subscriberId'])) {
                 echo $twig->render('wrapper.twig', [
                     'structuredData' => courseToStructuredData($course),
                     'title' => $course->getTitle(),
                     'description' => $course->getDescription(),
-                    'content' => $twig->render('react-paywall.twig', [
+                    'content' => $twig->render('paywall.twig', [
                         'course' => $course,
                         'discountedPrice' => getDiscountedPrice($course),
                         'numberOfSubscribers' => $subscribersInCourse->getCount(),
-                        'contentWithEmbeddables' => $content,
-                        'isAutoplay' => !isset($_GET['isLogin']) && !isset($_GET['registrationEmailSent']),
-                        'numberOfEpisodes' => count($allEpisodesInCourse),
+                        'quotes' => $quotes,
+                        'specs' => $specs,
+                        'contentWithEmbeddables' => $course->getContent(),
                         'paywallForm' => $twig->render('sub-reg-panel.twig', [
                             'isLogin' => isset($_GET['isLogin']),
                             'isLoggedIn' => isset($_SESSION['subscriberId']),
@@ -733,12 +732,13 @@ class PublicSite
                     'structuredData' => courseToStructuredData($course),
                     'title' => $course->getTitle(),
                     'description' => $course->getDescription(),
-                    'content' => $twig->render('react-paywall.twig', [
+                    'content' => $twig->render('paywall.twig', [
                         'course' => $course,
                         'discountedPrice' => getDiscountedPrice($course),
                         'numberOfSubscribers' => $subscribersInCourse->getCount(),
-                        'contentWithEmbeddables' => $content,
-                        'numberOfEpisodes' => count($allEpisodesInCourse),
+                        'quotes' => $quotes,
+                        'specs' => $specs,
+                        'contentWithEmbeddables' => $course->getContent(),
                         'paywallForm' => $twig->render('paywall-form.twig', [
                             'course' => $course,
                             'isInvoice' => isset($_GET['isInvoice']),
@@ -767,12 +767,13 @@ class PublicSite
                     'structuredData' => courseToStructuredData($course),
                     'title' => $course->getTitle(),
                     'description' => $course->getDescription(),
-                    'content' => $twig->render('react-paywall.twig', [
+                    'content' => $twig->render('paywall.twig', [
                         'course' => $course,
                         'discountedPrice' => getDiscountedPrice($course),
                         'numberOfSubscribers' => $subscribersInCourse->getCount(),
-                        'contentWithEmbeddables' => $content,
-                        'numberOfEpisodes' => count($allEpisodesInCourse),
+                        'quotes' => $quotes,
+                        'specs' => $specs,
+                        'contentWithEmbeddables' => $course->getContent(),
                         'paywallForm' => $twig->render('paywall-form.twig', [
                             'subscriberCourse' => $subscriberCourse,
                             'course' => $course,
@@ -794,6 +795,7 @@ class PublicSite
                 return;
             }
 
+
             // waiting for ipn
             if (!$subscriberCourse->getIsVerified()) {
 
@@ -801,12 +803,13 @@ class PublicSite
                     'structuredData' => courseToStructuredData($course),
                     'title' => $course->getTitle(),
                     'description' => $course->getDescription(),
-                    'content' => $twig->render('react-paywall.twig', [
+                    'content' => $twig->render('paywall.twig', [
                         'course' => $course,
                         'discountedPrice' => getDiscountedPrice($course),
                         'numberOfSubscribers' => $subscribersInCourse->getCount(),
-                        'contentWithEmbeddables' => $content,
-                        'numberOfEpisodes' => count($allEpisodesInCourse),
+                        'quotes' => $quotes,
+                        'specs' => $specs,
+                        'contentWithEmbeddables' => $course->getContent(),
                         'paywallForm' => $twig->render('paywall-form.twig', [
                             'subscriberCourse' => $subscriberCourse,
                             'course' => $course,

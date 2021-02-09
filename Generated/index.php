@@ -7,6 +7,8 @@ use Kodbazis\Generated\Route\Course;
 use Kodbazis\Generated\Route\Episode;
 use Kodbazis\Generated\Route\Embeddable;
 use Kodbazis\Generated\Route\Feedback;
+use Kodbazis\Generated\Route\Quote;
+use Kodbazis\Generated\Route\Spec;
 use Kodbazis\Generated\Route\Subscriber;
 use Kodbazis\Generated\Route\SubscriberCourse;
 
@@ -48,6 +50,16 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) use ($conn
       
       $r->post('/api/feedbacks', [
           new \Kodbazis\Generated\Route\Feedback\FeedbackSaver,
+          'getRoute'
+      ]);
+  
+      $r->post('/api/quotes', [
+          new \Kodbazis\Generated\Route\Quote\QuoteSaver,
+          'getRoute'
+      ]);
+  
+      $r->post('/api/specs', [
+          new \Kodbazis\Generated\Route\Spec\SpecSaver,
           'getRoute'
       ]);
   

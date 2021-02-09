@@ -16,11 +16,11 @@
 				</div>
 				<script>
 					const el = document.getElementById('registrationEmailSent-alert');
-					let isLight = false
-					setInterval(() => {
-					el.style.background = isLight ? '#D4EDDA' : '#7ABE89';
-					isLight = ! isLight
-					}, 950);
+let isLight = false
+setInterval(() => {
+el.style.background = isLight ? '#D4EDDA' : '#7ABE89';
+isLight = ! isLight
+}, 950);
 				</script>
 			{% endif %}
 			{% if loginSuccess %}
@@ -36,7 +36,26 @@
 			<p class="lead p-2 text-center">
 				<b>{{course.description}}</b>
 			</p>
-			{% include 'react-quotes.twig'  %}
+
+			{% if quotes is not empty %}
+				<h1 class="p-3">Vélemények:</h1>
+				<div class="card">
+					<div class="card-body w-100 p-2">
+						{% for quote in quotes %}
+							<blockquote class="p-2">
+								<p class="quotation">
+									<i class="fa fa-quote-left color-blue mr-2"></i>
+									{{quote.content}}
+									<i class="fa fa-quote-right color-blue ml-2"></i>
+								</p>
+								<p class="quotation-footer">—
+									{{quote.author}}
+								</p>
+							</blockquote>
+						{% endfor %}
+					</div>
+				</div>
+			{% endif %}
 		</div>
 		<div class="col-md-4">
 
@@ -82,48 +101,32 @@
 				{{paywallForm | raw}}
 			</div>
 
-			<div class="col-md-12 m-auto pb-2">
-				<h1 class="text-center mb-2">Mit kapsz?</h1>
-				<ul class="lead list-unstyled">
-					<li>
-						<i class="fa fa-check color-blue mr-2"></i>
-						<b>Munkaerőpiacon használható tudást</b>
-					</li>
-					<li>
-						<i class="fa fa-check color-blue mr-2"></i>
-						<b>Több év tapasztalatából táplálkozó, gyakorlatban is használható ismereteket</b>
-					</li>
-					<li>
-						<i class="fa fa-check color-blue mr-2"></i>
-						<b>{{numberOfEpisodes}}
-							könnyen megérthető
-																												oktatóvideót</b>
-					</li>
-					<li>
-						<i class="fa fa-check color-blue mr-2"></i>
-						<b>7 valóéletbeli React appot</b>
-					</li>
-					<li>
-						<i class="fa fa-check color-blue mr-2"></i>
-						<b>6 interaktív prezentációt</b>
-					</li>
-					<li>
-						<i class="fa fa-check color-blue mr-2"></i>
-						<b>Élő kódmegjelenítést</b>
-					</li>
-				</ul>
-			</div>
-			<p class="lead p-2 red mb-3">
-				<b>
-					Ha nem vagy elégedett a tanfolyammal, akkor visszaküldjük a teljes árát!
-				</b>
-			</p>
-			<p class="card p-3 d-inline-block">
-				<span class="fa fa-user mr-2 color-blue"></span>
-				A képzésre eddig
-				{{numberOfSubscribers}}
-				személy iratkozott be.
-			</p>
+			{% if specs is not empty %}
+				<div class="col-md-12 m-auto pb-2">
+					<h1 class="text-center mb-2">Mit kapsz?</h1>
+					<ul class="lead list-unstyled">
+						{% for spec in specs %}
+							<li>
+								<i class="fa fa-check color-blue mr-2"></i>
+								<b>{{spec.content}}</b>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<p class="lead p-2 red mb-3">
+					<b>
+						Ha nem vagy elégedett a tanfolyammal, akkor visszaküldjük a teljes árát!
+					</b>
+				</p>
+			{% endif %}
+			{% if numberOfSubscribers is not empty %}
+				<p class="card p-3 d-inline-block">
+					<span class="fa fa-user mr-2 color-blue"></span>
+					A képzésre eddig
+					{{numberOfSubscribers}}
+					személy iratkozott be.
+				</p>
+			{% endif %}
 		</div>
 	</div>
 	<div class="p-2">
