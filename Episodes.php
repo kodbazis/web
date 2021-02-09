@@ -11,6 +11,7 @@ use mysqli;
 use Kodbazis\Generated\Repository\Episode\SqlByIdGetter;
 use Kodbazis\Generated\Repository\Episode\SqlLister;
 use Kodbazis\Generated\Repository\Course\SqlLister as CourseSqlLister;
+use Kodbazis\Generated\Repository\Course\SqlByIdGetter as CourseById;
 use Kodbazis\Generated\Request;
 use Kodbazis\Generated\Route\Episode\EpisodeDeleter;
 use Kodbazis\Generated\Route\Episode\EpisodePatcher;
@@ -169,7 +170,9 @@ class Episodes
 
 
             if (!isset($_SESSION['subscriberId']) && !$episode->getIsPreview()) {
+                $course = (new CourseById($conn))->byId($episode->getCourseId());
                 echo self::denyEpisode($twig, $episode, $request, $twig->render('denied-episode.twig', [
+                    'course' => $course,
                     'episode' => $episode,
                     'isLogin' => isset($_GET['isLogin']),
                     'error' => $_GET['error'] ?? '0',
@@ -250,6 +253,8 @@ class Episodes
                 new OrderBy('id', 'asc')
             ));
 
+            $course = (new CourseById($conn))->byId($episode->getCourseId());
+
             $apps = array_filter($embeddables, fn ($em) => $em->getType() === 'application');
             echo $twig->render('wrapper.twig', [
                 'title' => $episode->getTitle(),
@@ -258,6 +263,7 @@ class Episodes
                 'email' => $_GET['email'] ?? '',
                 'content' => $twig->render('episode-single.twig', [
                     'isVerified' => (bool)$subscriberCourses->getCount(),
+                    'course' => $course,
                     'isLoggedIn' => isset($_SESSION['subscriberId']),
                     'loginError' => $_GET['loginError'] ?? '0',
                     'episode' => $episode,

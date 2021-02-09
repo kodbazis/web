@@ -61,18 +61,16 @@ isLight = ! isLight
 
 			<div class="row p-2">
 				<div class="col-md-12 border bg-white">
+					<p class="text-center pt-1">
+						<b>A teljes képzés ára:</b>
+					</p>
 					{% if course.price == discountedPrice %}
-						<p class="text-center pt-1">
-							<b>A teljes képzés ára:</b>
-						</p>
 						<h1 class="p-3 no-discount" style="font-size: 3em">
 							<b>{{course.price | number_format(0, '', ' ')}}
 								Ft</b>
 						</h1>
 					{% else %}
 						<div class="row p-2">
-
-
 							<div class="col-md-8">
 								<span class="first">{{discountedPrice | number_format(0, '', ' ') }}
 									Ft</span>
@@ -119,7 +117,7 @@ isLight = ! isLight
 					</b>
 				</p>
 			{% endif %}
-			{% if numberOfSubscribers is not empty %}
+			{% if numberOfSubscribers > 5 %}
 				<p class="card p-3 d-inline-block">
 					<span class="fa fa-user mr-2 color-blue"></span>
 					A képzésre eddig
