@@ -94,7 +94,7 @@ window.slides = {
     };
 
     Slideshow.prototype.src = function (index) {
-      return "images/slideshow/" + this.filename(index) + ".webm";
+      return "images/slideshow/" + this.filename(index) + ".webp";
     };
 
     Slideshow.prototype.imgHtml = function (index) {
