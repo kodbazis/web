@@ -392,7 +392,7 @@ class ExampleApis
                 "slug" => (new \Kodbazis\Generated\Slugifier\Slugifier())->slugify($request->body['name']),
                 "ingredients" => json_decode($request->body['ingredients']),
                 "steps" => json_decode($request->body['steps']),
-                "imageURL" => "placeholder.jpg"
+                "imageURL" => "placeholder.webp"
             ];
             $recipes[] = $newItem;
             file_put_contents($folder . '/' .  $fileName, json_encode($recipes, JSON_UNESCAPED_UNICODE));
