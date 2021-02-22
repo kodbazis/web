@@ -686,6 +686,7 @@ class PublicSite
                     'description' => $course->getDescription(),
                     'content' => $twig->render('paywall.twig', [
                         'course' => $course,
+                        'url' => Router::siteUrl() . parse_url(Router::siteUrl() . $_SERVER['REQUEST_URI'])['path'],
                         'discountedPrice' => getDiscountedPrice($course),
                         'numberOfSubscribers' => $subscribersInCourse->getCount(),
                         'quotes' => $quotes,
@@ -734,6 +735,7 @@ class PublicSite
                     'description' => $course->getDescription(),
                     'content' => $twig->render('paywall.twig', [
                         'course' => $course,
+                        'url' => Router::siteUrl() . parse_url(Router::siteUrl() . $_SERVER['REQUEST_URI'])['path'],
                         'discountedPrice' => getDiscountedPrice($course),
                         'numberOfSubscribers' => $subscribersInCourse->getCount(),
                         'quotes' => $quotes,
@@ -769,6 +771,7 @@ class PublicSite
                     'description' => $course->getDescription(),
                     'content' => $twig->render('paywall.twig', [
                         'course' => $course,
+                        'url' => Router::siteUrl() . parse_url(Router::siteUrl() . $_SERVER['REQUEST_URI'])['path'],
                         'discountedPrice' => getDiscountedPrice($course),
                         'numberOfSubscribers' => $subscribersInCourse->getCount(),
                         'quotes' => $quotes,
@@ -805,6 +808,7 @@ class PublicSite
                     'description' => $course->getDescription(),
                     'content' => $twig->render('paywall.twig', [
                         'course' => $course,
+                        'url' => Router::siteUrl() . parse_url(Router::siteUrl() . $_SERVER['REQUEST_URI'])['path'],
                         'discountedPrice' => getDiscountedPrice($course),
                         'numberOfSubscribers' => $subscribersInCourse->getCount(),
                         'quotes' => $quotes,
