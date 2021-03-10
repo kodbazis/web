@@ -255,6 +255,13 @@ class Episodes
 
             $course = (new CourseById($conn))->byId($episode->getCourseId());
 
+            $recommendedCourses = (new CourseSqlLister($conn))->list(new Query(
+                1000,
+                0,
+                new Clause('nin', 'id', [$episode->getCourseId()]),
+                new OrderBy('id', 'asc')
+            ));
+
             $apps = array_filter($embeddables, fn ($em) => $em->getType() === 'application');
             echo $twig->render('wrapper.twig', [
                 'title' => $episode->getTitle(),
@@ -262,6 +269,7 @@ class Episodes
                 'subscriberLabel' =>  getNick($request->vars),
                 'email' => $_GET['email'] ?? '',
                 'content' => $twig->render('episode-single.twig', [
+                    'recommendedCourses' => $recommendedCourses->getEntities(),
                     'isVerified' => (bool)$subscriberCourses->getCount(),
                     'course' => $course,
                     'isLoggedIn' => isset($_SESSION['subscriberId']),
