@@ -2,7 +2,7 @@
   {
     "timestamp": 1,
     "fileName": "index.php",
-    "content": ""
+    "content": "<?php \n\n// Pénzváltó alkalmazás készítése"
   },
   {
     "timestamp": 143,
