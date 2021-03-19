@@ -34,6 +34,12 @@
   -webkit-overflow-scrolling: touch;
 }
 
+@media screen and (max-width: 600px) {
+  .hs {
+    grid-auto-columns: calc(70% - var(--gutter) * 2);
+  }
+}
+
 .hs:before,
 .hs:after {
   content: "";
