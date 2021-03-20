@@ -7,11 +7,16 @@
 				</div>
 				<hr>
 				{{ episodeContent | raw }}
-				<hr class="mb-3">
 			</div>
+			<hr>
+			{% if not isVerified %}
+				<h1>Vedd meg a teljes kurzust
+					<a href="/{{course.slug}}">itt</a>!
+				</h1>
+			{% endif %}
 
 			<div class="bg-light mb-2">
-				<h2 class="pt-3 pb-2 text-center">
+				<h2 class="pb-2 text-center">
 					További epizódok:
 				</h2>
 
