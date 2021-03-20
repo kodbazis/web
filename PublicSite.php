@@ -208,7 +208,8 @@ class PublicSite
                     'email' => $_GET['email'] ?? '',
                 ]),
                 'styles' => [
-                    ['path' => 'css/login.css']
+                    ['path' => 'css/login.css'],
+                    ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
                 ],
             ]);
         });

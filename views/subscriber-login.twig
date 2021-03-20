@@ -1,38 +1,33 @@
 <div class="mt-3 mb-3 content-body">
-
+	<div style="margin-bottom:60px"></div>
 	<div class="card">
-		<div class="card-body w-100 p-0" id="hero-spot2">
-
-
-			{% if isLoggedIn %}
+		{% if isLoggedIn %}
+			<div class="card-body w-100 p-0" id="hero-spot2">
 				<div class="card-title">
-					<h1 class="mb-4 mt-5 text-success">
-						Bejelentkezett felhasználó:
-						{{subscriberLabel}}
-					</h1>
-
-					<div class="row">
-						{% include 'home-links.twig' %}
-					</div>
-
+					<h2 class="mb-4 mt-5 text-success">
+						Bejelentkezve <i class="fa fa-check-circle"></i>
+					</h2>
 				</div>
-			{% else %}
-				<div style="margin-bottom:60px"></div>
-
-				<div class="row">
-					<div class="col-sm-6 m-auto text-center pb-5">
+			</div>
+			<div class="row">
+				{% include 'home-links.twig' %}
+			</div>
+		{% else %}
+			<div class="row m-0">
+				<div class="col-md-8 m-auto text-center">
+					<div class="card-body w-100 p-0" id="hero-spot2">
 						<h1>
 							Lépj be a Kódbázisba
 						</h1>
 					</div>
-					<div class="col-sm-6">
-						<div class="p-3">
-							{% include 'subscriber-login-form.twig' with {'loginError': loginError, 'email': email, registrationPath: '/feliratkozas', 'isPasswordModificationSuccess': isPasswordModificationSuccess}  %}
-						</div>
+				</div>
+				<div class="col-md-4">
+					<div class="p-3">
+						{% include 'subscriber-login-form.twig' with {'loginError': loginError, 'email': email, registrationPath: '/feliratkozas', 'isPasswordModificationSuccess': isPasswordModificationSuccess}  %}
 					</div>
 				</div>
-			{% endif %}
+			</div>
 		</div>
-	</div>
+	{% endif %}
 
-</div>
+</div></div>
