@@ -5,18 +5,34 @@
 	{% for row in episodes %}
 		<div class="row m-0">
 			{% for episode in row %}
-				<div class="col-md-6">
-					<div class="card p-2 mb-2 w-100">
+				{% set card = '
 						<div class="row w-100 m-auto">
 							<div class="col-md-6 mb-2 pl-2 pr-2">
-								<span class="step lead ml-2 mt-2 bg-color-blue">{{episode.position}}</span>
-								<div class="card-body m-2">{{episode.shortDescription | raw}}</div>
+								<span class="step lead ml-2 mt-2 bg-color-blue">' ~ episode.position ~ '</span>
+								<div class="card-body m-2">' ~ episode.shortDescription ~ '</div>
 							</div>
 							<div class="col-md-6 mb-2 pl-2 pr-2 d-flex">
-								<img loading="lazy" class="card-img-top m-auto text-center" src="/public/files/sm-{{ episode.imgUrl }}" alt=""/>
+								<img loading="lazy" class="card-img-top m-auto text-center" src="/public/files/sm-' ~ episode.imgUrl ~ '" alt=""/>
+								<div class="after" style="left: -30px"></div>
 							</div>
 						</div>
-					</div>
+						' 
+				%}
+				<div class="col-md-6">
+					{% if episode.isPreview%}
+						<a class="text-dark" href="{{course.slug}}/{{episode.slug}}">
+							<div class="card p-2 mb-2 w-100 overlay-container item preview hover11">
+								<figure>
+									{{card | raw}}
+								</figure>
+							</div>
+						</a>
+					{% else %}
+						<div class="card p-2 mb-2 w-100">
+							{{card | raw}}
+						</div>
+					{% endif %}
+
 				</div>
 			{% endfor %}
 		</div>
