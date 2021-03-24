@@ -257,7 +257,7 @@ textarea {
 }
 
 .footer-cookie-padding {
-  padding-bottom: 100px;
+  padding-bottom: 90px !important;
 }
 
 @media screen and (max-width: 600px) {
