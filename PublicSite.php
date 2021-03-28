@@ -78,14 +78,23 @@ class PublicSite
             header('Content-Type: text/html; charset=UTF-8');
 
             echo $twig->render('wrapper.twig', [
-                'content' => $twig->render('home.twig', []),
-                'description' => 'Szoftverfejlesztő vagy? Netán annak készülsz? Itt eszközöket kapsz a fejlődéshez!',
+                'content' => $twig->render('home.twig', [
+                    'content' => $twig->render('introduction.twig', [
+                        "items" => getCourseItems($conn),
+                    ]),
+                ]),
+                'description' => 'Kódbázis | Programozás egyszerűen elmagyarázva',
                 'subscriberLabel' =>  getNick($request->vars),
                 'structuredData' => self::organizationStructuredData(),
                 'scripts' => [
                     ['path' => 'js/jquery.js'],
                     ['path' => 'js/application.js'],
-                ]
+                ],
+                'styles' => [
+                    ['path' => 'css/login.css'],
+                    ['path' => 'css/promo.css'],
+                    ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
+                ],
             ]);
         });
 
@@ -214,6 +223,27 @@ class PublicSite
             ]);
         });
 
+        $r->get('/webfejleszto-online-kurzusok', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+            header('Content-Type: text/html; charset=UTF-8');
+
+            echo $twig->render('wrapper.twig', [
+                'structuredData' => self::organizationStructuredData(),
+                'subscriberLabel' =>  getNick($request->vars),
+                'title' => "Webfejlesztő online kurzusok",
+                'description' => "Válj full stack fejlesztővé, kezdőknek szóló online kurzusok segítségével",
+                'content' => $twig->render('introduction-wrapper.twig', [
+                    'content' => $twig->render('introduction.twig', [
+                        "items" => getCourseItems($conn),
+                    ])
+                ]),
+                'styles' => [
+                    ['path' => 'css/login.css'],
+                    ['path' => 'css/promo.css'],
+                    ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
+                ],
+            ]);
+        });
+
         $r->get('/feliratkozas', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
@@ -239,6 +269,7 @@ class PublicSite
             echo $twig->render('wrapper.twig', [
                 'structuredData' => self::organizationStructuredData(),
                 'subscriberLabel' =>  getNick($request->vars),
+                'title' => "Sütik kezelése",
                 'content' => $twig->render('cookie-policy.html', []),
             ]);
         });
@@ -336,7 +367,7 @@ class PublicSite
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
                 'structuredData' => self::organizationStructuredData(),
-                'title' => "Kódbázis | PHP és MySQL tréning",
+                'title' => "PHP és MySQL tréning",
                 'content' => $twig->render('php.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
                 'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.',
@@ -346,7 +377,7 @@ class PublicSite
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
                 'structuredData' => self::organizationStructuredData(),
-                'title' => "Kódbázis | JavaScript tréning",
+                'title' => "JavaScript tréning",
                 'content' => $twig->render('js.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
                 'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.',
@@ -356,7 +387,7 @@ class PublicSite
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
                 'structuredData' => self::organizationStructuredData(),
-                'title' => "Kódbázis | Node.JS és MongoDB tréning",
+                'title' => "Node.JS és MongoDB tréning",
                 'content' => $twig->render('node.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
                 'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.',
@@ -366,7 +397,7 @@ class PublicSite
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
                 'structuredData' => self::organizationStructuredData(),
-                'title' => "Kódbázis | Online tréning",
+                'title' => "Online tréning",
                 'content' => $twig->render('online.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
                 'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.',
@@ -978,4 +1009,51 @@ function getDiscountedPrice($course)
     $multiplier = (100 - $course->getDiscount()) / 100;
     $x = $course->getPrice() * $multiplier;
     return round($x / 10) * 10;
+}
+
+function getCourseItems($conn)
+{
+    $courses = (new CourseLister($conn))->list(new Query(
+        15,
+        0,
+        [],
+        new OrderBy('createdAt', 'desc'),
+        []
+    ));
+
+    return array_map(function ($course) use ($conn) {
+        $subscribersInCourse = (new SubscriberCourseLister($conn))->list(new Query(
+            1000,
+            0,
+            new Filter(
+                'and',
+                new Clause('eq', 'isVerified', '1'),
+                new Clause('eq', 'courseId', $course->getId()),
+            ),
+            new OrderBy('id', 'asc')
+        ));
+
+
+        $quotes = (new QuoteLister($conn))->list(new Query(
+            1000,
+            0,
+            new Clause('eq', 'courseId', $course->getId()),
+            new OrderBy('position', 'asc')
+        ))->getEntities();
+
+        $specs = (new SpecLister($conn))->list(new Query(
+            1000,
+            0,
+            new Clause('eq', 'courseId', $course->getId()),
+            new OrderBy('position', 'asc')
+        ))->getEntities();
+
+        return [
+            "course" => $course,
+            "discountedPrice" => getDiscountedPrice($course),
+            "numberOfSubscribers" => $subscribersInCourse->getCount(),
+            "quotes" => $quotes,
+            "specs" => $specs
+        ];
+    },  $courses->getEntities());
 }

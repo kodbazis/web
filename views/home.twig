@@ -7,9 +7,8 @@
 		<img src="/public/images/slideshow/yellow.webp" class="slide" width="600"/>
 	</div>
 </section>
-<p class="text-center lead p-2 card">Szoftverfejlesztő vagy? Netán annak készülsz? Itt eszközöket kapsz a fejlődéshez!</p>
-<section class="tutorial bg-transparent-70">
 
+<section class="tutorial bg-transparent-70 content-body">
+	{{ content | raw }}
 	{% include 'home-links.twig' %}
-
 </section>
