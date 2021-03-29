@@ -271,6 +271,7 @@ class PublicSite
                 'subscriberLabel' =>  getNick($request->vars),
                 'title' => "Sütik kezelése",
                 'content' => $twig->render('cookie-policy.html', []),
+                'noIndex' => true,
             ]);
         });
 
