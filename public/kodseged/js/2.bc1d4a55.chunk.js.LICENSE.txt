@@ -5,6 +5,22 @@ object-assign
 */
 
 /*!
+ * Change
+ * This is used for comparing two lines.
+ *
+ * @name Change
+ * @function
+ * @param {String} oldLine The old line value.
+ * @param {String} addedLine The new line.
+ * @param {Number} sensitivity The diff sensitivity.
+ * @return {Change} The `Change` object:
+ *
+ *  - `_` (Array): An array with the old line and the new line.
+ *  - `changes` (Number): How many changes are there, calculated with the levenshtein distance algorithm.
+ *  - `modified` (Boolean): A boolean value representing if the old line was modified or not.
+ */
+
+/*!
  * Determine if an object is a Buffer
  *
  * @author   Feross Aboukhadijeh <https://feross.org>

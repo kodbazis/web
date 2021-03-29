@@ -3,10 +3,10 @@
 		<div class="border-bottom {{paymentUrl is defined ? 'text-muted bg-light' : ''}}">
 			<nav class="nav nav-pills flex-column flex-sm-row">
 				{% if  paymentUrl is not defined %}
-					<a class="flex-sm-fill text-sm-center nav-link bg-muted {{ not isInvoice ? 'active-purchaseType': 'text-muted bg-light'}}" href="?">Nyugta kiállítása</a>
+					<a class="flex-sm-fill text-sm-center nav-link bg-muted {{ not isInvoice ? 'active-purchaseType': 'text-muted bg-light'}}" href="?">Nyugtát kérek</a>
 					<a class="flex-sm-fill text-sm-center nav-link bg-muted {{ isInvoice ? 'active-purchaseType': 'text-muted bg-light'}}" href="?isInvoice=1">Számlát kérek</a>
 				{% else %}
-					<p class="flex-sm-fill text-sm-center nav-link bg-muted {{ not isInvoice ? 'active-purchaseType': 'text-muted bg-light'}}">Nyugta kiállítása</p>
+					<p class="flex-sm-fill text-sm-center nav-link bg-muted {{ not isInvoice ? 'active-purchaseType': 'text-muted bg-light'}}">Nyugtát kérek</p>
 					<p class="flex-sm-fill text-sm-center nav-link bg-muted {{ isInvoice ? 'active-purchaseType': 'text-muted bg-light'}}">Számlát kérek</p>
 				{% endif %}
 			</nav>
@@ -34,7 +34,10 @@
 				<div class="col-sm-6 m-auto text-center p-0">
 					<p class="p-2">Fizetés kártyával az
 						<br><b>OTP SimplePay</b><br>
-						felületén</p>
+						felületén<sup>
+							<i class="fa fa-asterisk text-danger" style="font-size: 6px"></i>
+						</sup>
+					</p>
 					{% if paymentUrl is defined and not subscriberCourse.isPayed %}
 						<a href="{{paymentUrl}}">
 							<button class="btn btn-success" type='submit'>
@@ -95,7 +98,12 @@
 					</div>
 				{% endif %}
 			</div>
-
+			<p class="text-left ml-4 pb-2">
+				<sup>
+					<i class="fa fa-asterisk text-danger" style="font-size: 6px"></i>
+				</sup>
+				<span>Figyelem! A kodbazis.hu semmilyen módon nem tárol bankkártya adatokat!</span>
+			</p>
 
 		</div>
 
