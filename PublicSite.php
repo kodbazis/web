@@ -106,6 +106,7 @@ class PublicSite
             }
 
             echo $twig->render('wrapper.twig', [
+                "title" => "Elfelejtett jelszó",
                 'content' => $twig->render('forgot-password.twig', [
                     'isError' => isset($_GET['isError']),
                     'emailSent' => isset($_GET['emailSent']),
@@ -115,6 +116,7 @@ class PublicSite
                 'styles' => [
                     ['path' => 'css/login.css']
                 ],
+                'noIndex' => true,
             ]);
         });
 
