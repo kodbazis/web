@@ -76,14 +76,15 @@
 				</div>
 
 				{% if not isVerified %}
-					<h1>Vedd meg a teljes kurzust
+					<h4 class="text-center mb-2" style="font-weight: bold;">
+						Vedd meg a teljes kurzust
 						<a href="/{{course.slug}}">itt</a>!
-					</h1>
+					</h4>
 				{% endif %}
 
 			</div>
 			<hr>
-			<div class="bg-light">
+			<div class="bg-light mb-2 border-bottom mb-4">
 				<h4 class="pt-3 pb-2 text-center">
 					További ajánlott kurzusok:
 				</h4>
@@ -100,8 +101,15 @@
 						{% endfor %}
 					</ul>
 				</div>
-				<div class="m-3" id="fb-root"></div>
 			</div>
+
+
+			<h4 class="text-center mb-2" style="font-weight: bold;">
+				<code>Vállalkozó vagy?</code> Tartalomkészítőként szeretnél pénzt keresni, online programozó kurzusaid eladásával? Kattints
+				<a href="/legyel-te-is-tartalomkeszito">ide</a>!
+			</h4>
+
+			<div class="m-3" id="fb-root"></div>
 			<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0&appId=705894336804251&autoLogAppEvents=1" nonce="GLaxzOjV"></script>
 			<div class="fb-like" data-href="{{url}}" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
 		</div>

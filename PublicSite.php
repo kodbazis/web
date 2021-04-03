@@ -246,6 +246,24 @@ class PublicSite
             ]);
         });
 
+        $r->get('/legyel-te-is-tartalomkeszito', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+            header('Content-Type: text/html; charset=UTF-8');
+
+            echo $twig->render('wrapper.twig', [
+                'structuredData' => self::organizationStructuredData(),
+                'subscriberLabel' =>  getNick($request->vars),
+                'title' => "Legyél te is tartalomkészítő",
+                'description' => "Legyél te is tartalomkészítő a Kódbázison!",
+                'content' => $twig->render('platform-invitation.html', [
+                    "items" => getCourseItems($conn),
+                ]),
+                'styles' => [
+                    ['path' => 'css/promo.css'],
+                    ['path' => 'fontawesome/css/all.css'],
+                ],
+            ]);
+        });
+
         $r->get('/feliratkozas', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             echo $twig->render('wrapper.twig', [
