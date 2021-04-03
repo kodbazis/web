@@ -9,10 +9,10 @@
 
 		<link type="text/css" href="public/css/pages.css?v=1" media="all" rel="stylesheet"/>
 		<title>
-			{{ title is defined ? title : 'Kódbázis | Programozás egyszerűen, közérthetően elmagyarázva.' }}
+			{{ title is defined ? title : 'Kódbázis | Programozás egyszerűen elmagyarázva.' }}
 		</title>
 		<meta property="og:locale" content="hu_HU"/>
-		<meta name="description" content="{{ description is defined ? description : 'Programozás egyszerűen, közérthetően elmagyarázva.' }}"/>
+		<meta name="description" content="{{ description is defined ? description : 'Programozás egyszerűen elmagyarázva.' }}"/>
 		<meta name="robots" content="noindex"/>
 		{% for ogTag in ogTags %}
 			<meta property="{{ogTag.property}}" content="{{ogTag.content}}"/>

@@ -20,13 +20,13 @@
 		{% endfor %}
 		<link type="text/css" href="public/css/pages.css?v=11" media="all" rel="stylesheet"/>
 		<title>
-			{{ title is defined ? ('Kódbázis | ' ~ title) : 'Kódbázis | Programozás egyszerűen, közérthetően elmagyarázva.' }}
+			{{ title is defined ? ('Kódbázis | ' ~ title) : 'Kódbázis | Programozás egyszerűen elmagyarázva.' }}
 		</title>
 		{% if structuredData is defined %}
 			<script type="application/ld+json">{{structuredData | raw}}</script>
 		{% endif %}
 		<meta property="og:locale" content="hu_HU"/>
-		<meta name="description" content="{{ description is defined ? description : 'Programozás egyszerűen, közérthetően elmagyarázva.' }}"/>
+		<meta name="description" content="{{ description is defined ? description : 'Programozás egyszerűen elmagyarázva.' }}"/>
 		{% for ogTag in ogTags %}
 			<meta property="{{ogTag.property}}" content="{{ogTag.content}}"/>
 		{% endfor %}
