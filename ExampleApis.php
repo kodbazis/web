@@ -23,6 +23,24 @@ class ExampleApis
 
     public static function registerAuthRoutes($r)
     {
+
+        $r->get("/api/exchangerates", function (Request $request) {
+            header('Content-type: application/json');
+            if (!isset($request->query["base"])) {
+                echo json_encode(["error" => "base query parameter missing"]);
+                return;
+            }
+
+            if (!in_array(strtoupper($request->query["base"]), ["HUF", "EUR", "USD", "RUB"])) {
+                echo json_encode(["error" => "invalid currency"]);
+                return;
+            }
+
+            $contents = file_get_contents(__DIR__ . "/example-repos/rates.json");
+            $rates = json_decode($contents, true);
+            echo json_encode(["rates" => $rates[strtoupper($request->query["base"])], "base" => strtoupper($request->query["base"])]);
+        });
+
         $secret = "tokenSecret";
         $r->post('/api/login-user', function (Request $request) use ($secret) {
             header('Content-type: application/json');
