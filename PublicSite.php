@@ -254,12 +254,41 @@ class PublicSite
                 'subscriberLabel' =>  getNick($request->vars),
                 'title' => "Legyél te is tartalomkészítő",
                 'description' => "Legyél te is tartalomkészítő a Kódbázison!",
-                'content' => $twig->render('platform-invitation.html', [
-                    "items" => getCourseItems($conn),
-                ]),
+                'content' => $twig->render('platform-invitation.html'),
                 'styles' => [
                     ['path' => 'css/promo.css'],
                     ['path' => 'fontawesome/css/all.css'],
+                ],
+            ]);
+        });
+
+        $r->get('/beagyazhato-segedletek', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+            header('Content-Type: text/html; charset=UTF-8');
+
+            $ids = Embeddables::getIds("{{52}}");
+            $embeddables = count($ids) ? Embeddables::getEmbeddables($ids, $conn) : [];
+
+            $apps = array_filter($embeddables, fn ($em) => $em->getType() === 'application');
+
+            echo $twig->render('wrapper.twig', [
+                'structuredData' => self::organizationStructuredData(),
+                'subscriberLabel' =>  getNick($request->vars),
+                'title' => "Beágyazható segédletek",
+                'description' => "Beágyazható segédletek a Kódbázison!",
+                'content' => $twig->render('embeddables-preview.twig', [
+                    "codeAssistant" => Embeddables::contentWithEmbeddables($conn, $twig, "{{78}}"),
+                    "app" =>Embeddables::contentWithEmbeddables($conn, $twig, "{{52}}"),
+                    "codeAssistantGif" => Embeddables::contentWithEmbeddables($conn, $twig, "{{15}}"),
+                    "gif" => Embeddables::contentWithEmbeddables($conn, $twig, "{{9}}"),
+                ]),
+                'styles' => [
+                    ['path' => 'css/promo.css'],
+                    ...Embeddables::getKodsegedStyles(),
+                    ...Embeddables::getAppStyles($apps),
+                ],
+                'scripts' => [
+                    ...Embeddables::getKodsegedScripts(),
+                    ...Embeddables::getAppScripts($apps),
                 ],
             ]);
         });

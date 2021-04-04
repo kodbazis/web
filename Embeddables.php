@@ -371,4 +371,12 @@ class Embeddables
         }
         return $content;
     }
+
+    public static function contentWithEmbeddables($conn, $twig, $content)
+    {
+        $ids = Embeddables::getIds($content);
+        $embeddables = count($ids) ? Embeddables::getEmbeddables($ids, $conn) : [];
+        $templates = Embeddables::mapEmbeddablesToTemplates($embeddables, $twig);
+        return Embeddables::insertEmbeddablesToContent($templates, $content);
+    }
 }
