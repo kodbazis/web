@@ -3,8 +3,16 @@
 		<div class="border-bottom {{paymentUrl is defined ? 'text-muted bg-light' : ''}}">
 			<nav class="nav nav-pills flex-column flex-sm-row">
 				{% if  paymentUrl is not defined %}
-					<a class="flex-sm-fill text-sm-center nav-link bg-muted {{ not isInvoice ? 'active-purchaseType': 'text-muted bg-light'}}" href="?">Nyugtát kérek</a>
-					<a class="flex-sm-fill text-sm-center nav-link bg-muted {{ isInvoice ? 'active-purchaseType': 'text-muted bg-light'}}" href="?isInvoice=1">Számlát kérek</a>
+					<a class="flex-sm-fill text-sm-center nav-link bg-muted {{ not isInvoice ? 'active-purchaseType': 'text-muted bg-light'}}" href="?">
+						<p>
+							Nyugtát kérek
+						</p>
+					</a>
+					<a class="flex-sm-fill text-sm-center nav-link bg-muted {{ isInvoice ? 'active-purchaseType': 'text-muted bg-light'}}" href="?isInvoice=1">
+						<p>
+							Számlát kérek
+						</p>
+					</a>
 				{% else %}
 					<p class="flex-sm-fill text-sm-center nav-link bg-muted {{ not isInvoice ? 'active-purchaseType': 'text-muted bg-light'}}">Nyugtát kérek</p>
 					<p class="flex-sm-fill text-sm-center nav-link bg-muted {{ isInvoice ? 'active-purchaseType': 'text-muted bg-light'}}">Számlát kérek</p>
@@ -65,10 +73,10 @@
 					<div class="alert alert-danger p-1 pr-2 pl-2 w-100">
 						<p style="font-size:14px">
 							Sikertelen tranzakció.
-							SimplePay tranzakció azonosító:
+																																			SimplePay tranzakció azonosító:
 							{{transactionId}}
 							Kérjük, ellenőrizze a tranzakció során megadott adatok helyességét. 
-							Amennyiben minden adatot helyesen adott meg, a visszautasítás okának kivizsgálása érdekében kérjük, szíveskedjen kapcsolatba lépni kártyakibocsátó bankjával.
+																																			Amennyiben minden adatot helyesen adott meg, a visszautasítás okának kivizsgálása érdekében kérjük, szíveskedjen kapcsolatba lépni kártyakibocsátó bankjával.
 						</p>
 					</div>
 				{% endif %}
@@ -121,7 +129,8 @@
 			<div class="w-100 text-center m-auto m-2 pb-3">
 				<a href="{{course.slug}}" disabled>
 					<button id="navigate-to-course" class="btn btn-outline-dark" disabled>
-						Tovább a kurzusra <i class="fa fa-arrow-circle-right"></i>
+						Tovább a kurzusra
+						<i class="fa fa-arrow-circle-right"></i>
 					</button>
 				</a>
 			</div>
