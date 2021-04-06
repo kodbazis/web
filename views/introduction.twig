@@ -18,13 +18,13 @@
 							<b>A teljes képzés ára:</b>
 						</p>
 						{% if item.course.price == item.discountedPrice %}
-							<h1 class="p-3 no-discount" style="font-size: 3em">
+							<h1 class="p-3 no-discount" style="font-size: 3em; text-shadow: 2px 3px 5px #ccc;">
 								<b>{{item.course.price | number_format(0, '', ' ')}}
 									Ft</b>
 							</h1>
 						{% else %}
 							<div class="row p-2">
-								<div class="col-md-8">
+								<div class="col-md-8" style="text-shadow: 2px 3px 5px #ccc;">
 									<span class="first">{{item.discountedPrice | number_format(0, '', ' ') }}
 										Ft</span>
 									<span class="second strikethrough">{{item.course.price | number_format(0, '', ' ')}}
