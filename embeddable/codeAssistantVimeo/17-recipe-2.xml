@@ -743,10 +743,10 @@ export function RecipeCreate() {
                       className="btn btn-danger mb-3"
                       type="button"
                       onClick={() => {
-                        setIngredientIds((prevIds) => {
+                        setStepIds((prevIds) => {
                           const ret = [...prevIds];
                           ret.splice(
-                            prevIds.findIndex((id) => id === ingredientId),
+                            prevIds.findIndex((id) => id === stepId),
                             1
                           );
                           return ret;
@@ -924,10 +924,10 @@ export function RecipeCreate() {
                       className="btn btn-danger mb-3"
                       type="button"
                       onClick={() => {
-                        setIngredientIds((prevIds) => {
+                        setStepIds((prevIds) => {
                           const ret = [...prevIds];
                           ret.splice(
-                            prevIds.findIndex((id) => id === ingredientId),
+                            prevIds.findIndex((id) => id === stepId),
                             1
                           );
                           return ret;
@@ -1152,10 +1152,10 @@ export function RecipeCreate() {
                       className="btn btn-danger mb-3"
                       type="button"
                       onClick={() => {
-                        setIngredientIds((prevIds) => {
+                        setStepIds((prevIds) => {
                           const ret = [...prevIds];
                           ret.splice(
-                            prevIds.findIndex((id) => id === ingredientId),
+                            prevIds.findIndex((id) => id === stepId),
                             1
                           );
                           return ret;
