@@ -252,13 +252,39 @@ class PublicSite
             echo $twig->render('wrapper.twig', [
                 'structuredData' => self::organizationStructuredData(),
                 'subscriberLabel' =>  getNick($request->vars),
-                'title' => "Legyél te is tartalomkészítő",
+                'title' => "Legyél te is tartalomkészítő a Kódbázison",
                 'description' => "Legyél te is tartalomkészítő a Kódbázison!",
                 'content' => $twig->render('platform-invitation.html'),
                 'styles' => [
                     ['path' => 'css/promo.css'],
                     ['path' => 'fontawesome/css/all.css'],
                 ],
+                'ogTags' => [
+                    [
+                        'property' => 'og:url',
+                        'content' => Router::siteUrl() . parse_url(Router::siteUrl() . $_SERVER['REQUEST_URI'])['path'],
+                    ],
+                    [
+                        'property' => 'og:type',
+                        'content' => 'article',
+                    ],
+                    [
+                        'property' => 'og:title',
+                        'content' => 'Legyél te is tartalomkészítő a Kódbázison',
+                    ],
+                    [
+                        'property' => 'og:image',
+                        'content' => Router::siteUrl() . '/public/images/invitation.webp',
+                    ],
+                    [
+                        'property' => 'og:description',
+                        'content' => 'Legyél te is tartalomkészítő a Kódbázison',
+                    ],
+                    [
+                        'property' => 'fb:app_id',
+                        'content' => '705894336804251',
+                    ],
+                ]
             ]);
         });
 
@@ -277,7 +303,7 @@ class PublicSite
                 'description' => "Beágyazható segédletek a Kódbázison!",
                 'content' => $twig->render('embeddables-preview.twig', [
                     "codeAssistant" => Embeddables::contentWithEmbeddables($conn, $twig, "{{78}}"),
-                    "app" =>Embeddables::contentWithEmbeddables($conn, $twig, "{{52}}"),
+                    "app" => Embeddables::contentWithEmbeddables($conn, $twig, "{{52}}"),
                     "codeAssistantGif" => Embeddables::contentWithEmbeddables($conn, $twig, "{{15}}"),
                     "gif" => Embeddables::contentWithEmbeddables($conn, $twig, "{{9}}"),
                 ]),
