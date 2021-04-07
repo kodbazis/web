@@ -270,7 +270,7 @@ class PublicSite
                     ],
                     [
                         'property' => 'og:title',
-                        'content' => 'Legyél te is tartalomkészítő a Kódbázison!',
+                        'content' => 'Legyél Te is tartalomkészítő a Kódbázison!',
                     ],
                     [
                         'property' => 'og:image',
