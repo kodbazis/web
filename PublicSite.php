@@ -252,8 +252,8 @@ class PublicSite
             echo $twig->render('wrapper.twig', [
                 'structuredData' => self::organizationStructuredData(),
                 'subscriberLabel' =>  getNick($request->vars),
-                'title' => "Legyél te is tartalomkészítő a Kódbázison",
-                'description' => "Legyél te is tartalomkészítő a Kódbázison!",
+                'title' => "Legyél te is tartalomkészítő a Kódbázison!",
+                'description' => "Készítsd el saját online kurzusod és értékesítsd a Kódbázis felületén!",
                 'content' => $twig->render('platform-invitation.html'),
                 'styles' => [
                     ['path' => 'css/promo.css'],
@@ -270,7 +270,7 @@ class PublicSite
                     ],
                     [
                         'property' => 'og:title',
-                        'content' => 'Legyél te is tartalomkészítő a Kódbázison',
+                        'content' => 'Legyél te is tartalomkészítő a Kódbázison!',
                     ],
                     [
                         'property' => 'og:image',
@@ -278,7 +278,7 @@ class PublicSite
                     ],
                     [
                         'property' => 'og:description',
-                        'content' => 'Legyél te is tartalomkészítő a Kódbázison',
+                        'content' => 'Készítsd el saját online kurzusod és értékesítsd a Kódbázis felületén!',
                     ],
                     [
                         'property' => 'fb:app_id',
