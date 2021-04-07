@@ -302,7 +302,7 @@ class PublicSite
                 'title' => "Beágyazható segédletek",
                 'description' => "Beágyazható segédletek a Kódbázison!",
                 'content' => $twig->render('embeddables-preview.twig', [
-                    "codeAssistant" => Embeddables::contentWithEmbeddables($conn, $twig, "{{78}}"),
+                    "codeAssistant" => Embeddables::contentWithEmbeddables($conn, $twig, "{{80}}"),
                     "app" => Embeddables::contentWithEmbeddables($conn, $twig, "{{52}}"),
                     "codeAssistantGif" => Embeddables::contentWithEmbeddables($conn, $twig, "{{15}}"),
                     "gif" => Embeddables::contentWithEmbeddables($conn, $twig, "{{9}}"),
