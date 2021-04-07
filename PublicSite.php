@@ -252,7 +252,7 @@ class PublicSite
             echo $twig->render('wrapper.twig', [
                 'structuredData' => self::organizationStructuredData(),
                 'subscriberLabel' =>  getNick($request->vars),
-                'title' => "Legyél te is tartalomkészítő a Kódbázison!",
+                'title' => "Legyél Te is tartalomkészítő a Kódbázison!",
                 'description' => "Készítsd el saját online kurzusod és értékesítsd a Kódbázis felületén keresztül!",
                 'content' => $twig->render('platform-invitation.html'),
                 'styles' => [
