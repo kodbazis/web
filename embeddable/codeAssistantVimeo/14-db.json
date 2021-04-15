@@ -17,7 +17,7 @@
   {
     "timestamp": 76.2,
     "fileName": "parancsok",
-    "content": "# Futásban lévő Docker konténerek leállítása:\ndocker stop $(docker ps -a -q)\n\n# Docker konténerek eltávolítása (opcionális):\ndocker rm -f $(docker ps -a -q)\n\n# Fejlesztői környezet elindítása:\ndocker-compose up \n\n\n"
+    "content": "# Futásban lévő Docker konténerek leállítása:\ndocker stop $(docker ps -a -q)\n\n# Docker konténerek eltávolítása (opcionális):\ndocker rm -f $(docker ps -a -q)\n\n# Fejlesztői környezet elindítása:\ndocker-compose up\n\n\n"
   },
   {
     "timestamp": 81,
