@@ -20,9 +20,9 @@
     "content": "# Futásban lévő Docker konténerek leállítása:\ndocker stop $(docker ps -a -q)\n\n# Docker konténerek eltávolítása (opcionális):\ndocker rm -f $(docker ps -a -q)\n\n# Fejlesztői környezet elindítása:\ndocker-compose up \n\n\n"
   },
   {
-    "timestamp": 82.2,
+    "timestamp": 81,
     "fileName": "parancsok",
-    "content": "# Futásban lévő Docker konténerek leállítása:\ndocker stop $(docker ps -a -q)\n\n# Docker konténerek eltávolítása (opcionális):\ndocker rm -f $(docker ps -a -q)\n\n# Fejlesztői környezet elindítása:\ndocker-compose up\n\n\n# Ha fut egyéb olyan program, (pl: XAMPP), ami lefoglalhatja a portokat,\nakkor azt is le kell állítani..."
+    "content": "# Futásban lévő Docker konténerek leállítása:\ndocker stop $(docker ps -a -q)\n\n# Docker konténerek eltávolítása (opcionális):\ndocker rm -f $(docker ps -a -q)\n\n# Fejlesztői környezet elindítása:\ndocker-compose up\n\n\n# Ha fut egyéb olyan program, (pl: XAMPP), ami lefoglalhatja a portokat,\nakkor azt is le kell állítani!"
   },
   { "timestamp": 148.633, "fileName": "index.php", "content": "<?php\n\necho \"php fut\"; " },
   { "timestamp": 150.933, "fileName": "index.php", "content": "<?php\n\necho \"php fut\"; " },
