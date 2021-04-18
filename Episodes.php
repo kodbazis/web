@@ -164,6 +164,7 @@ class Episodes
             $episode = $bySlug[0] ?? null;
 
             if (!$episode) {
+                http_response_code(404);
                 echo $twig->render('404.twig');
                 return;
             }

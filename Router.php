@@ -117,6 +117,7 @@ class Router
     public function registerNotFoundRoute($conn)
     {
         header('Content-Type: text/html; charset=UTF-8');
+        http_response_code(404);
         echo $this->twig->render('404.twig');
     }
 

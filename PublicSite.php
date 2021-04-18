@@ -746,6 +746,7 @@ class PublicSite
             $course = $courseBySlug->getEntities()[0] ?? null;
 
             if (!$course) {
+                http_response_code(404);
                 echo $twig->render('404.twig');
                 return;
             }

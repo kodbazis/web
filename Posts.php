@@ -153,6 +153,7 @@ class Posts
             $bySlug = (new SqlLister($conn))->list(Router::where('slug', 'eq', $request->vars['slug']));
 
             if (!isset($bySlug->getEntities()[0])) {
+                http_response_code(404);
                 echo $twig->render('404.twig');
                 return;
             }
