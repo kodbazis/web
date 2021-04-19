@@ -12,7 +12,7 @@ const statusClassMap = {
 };
 const statusFeedbackMap = {
   INIT: "",
-  INVALID: "<div class='invalid-feedback'>Érvénytelen kupon, próbáld újra!</div>",
+  INVALID: "<div class='invalid-feedback'>Érvénytelen kuponkód, próbáld újra!</div>",
   VALID: "<div class='valid-feedback'>Kupon beváltása sikeres!</div>",
 };
 function renderCouponApp() {
