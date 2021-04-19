@@ -18,7 +18,7 @@ use Kodbazis\Generated\SubscriberCourse\Patch\PatchedSubscriberCourse;
 class PaymentRoutes
 {
 
-    public static function getPaymentUrl($course, $subscriberCourse, $subscriber, $conn)
+    public static function getPaymentUrl($course, $subscriberCourse, $conn)
     {
         //Import config data
         require_once 'simplepay/config.php';
@@ -34,9 +34,9 @@ class PaymentRoutes
         //ORDER PRICE/TOTAL
         //-----------------------------------------------------------------------------------------
 
-        if ($course->getDiscount()) {
-            $trx->addData('discount', $course->getPrice() - getDiscountedPrice($course));
-        }
+
+        $trx->addData('discount', $course->getPrice() - getDiscountedPrice($course, $subscriberCourse->getSubscriberId(), $conn));
+
 
         $trx->addItems(
             array(
@@ -219,10 +219,10 @@ class PaymentRoutes
                     $subscriberCourse->getAddress(),
                     $subscriber->getEmail(),
                     $course->getInvoiceTitle(),
-                    getDiscountedPrice($course)
+                    getDiscountedPrice($course, $subscriberCourse->getSubscriberId(), $conn)
                 );
             } else {
-                Invoice::sendReceipt($subscriber->getEmail(), $course->getInvoiceTitle(), getDiscountedPrice($course));
+                Invoice::sendReceipt($subscriber->getEmail(), $course->getInvoiceTitle(), getDiscountedPrice($course, $subscriberCourse->getSubscriberId(), $conn));
             }
             (new SubscriberCoursePatcher($conn))->patch(
                 $subscriberCourse->getId(),

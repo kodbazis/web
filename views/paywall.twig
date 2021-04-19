@@ -81,9 +81,9 @@ isLight = ! isLight
 
 								<div class="float-right text-center">
 									<div class="third text-center">
-										-{{course.discount}}%
+										{{((discountedPrice - course.price)  / course.price * 100) | number_format(0, '', ' ')}}%
 									</div>
-									<span style="font-size: 10px">Limitált ideig!</span>
+									<!-- <span style="font-size: 10px">Limitált ideig!</span> -->
 
 								</div>
 							</div>
@@ -111,11 +111,6 @@ isLight = ! isLight
 						{% endfor %}
 					</ul>
 				</div>
-				{# <p class="lead p-2 red mb-3">
-					<b>
-						Ha nem vagy elégedett a tanfolyammal, akkor visszaküldjük a teljes árát!
-					</b>
-				</p> #}
 			{% endif %}
 			{% if numberOfSubscribers > 5 %}
 				<p class="card p-3 d-inline-block w-100">
@@ -137,22 +132,6 @@ isLight = ! isLight
 		</b>
 	</h1>
 	<div id="fb-root"></div>
-		<script 
-			async 
-			defer 
-			crossorigin="anonymous" 
-			src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0&appId=705894336804251&autoLogAppEvents=1" 
-			nonce="GLaxzOjV"
-		></script>
-		<div 
-			class="fb-like" 
-			data-href="{{url}}" 
-			data-width="" 
-			data-layout="standard" 
-			data-action="like" 
-			data-size="small" 
-			data-share="true"
-		>
-	</div>
+	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0&appId=705894336804251&autoLogAppEvents=1" nonce="GLaxzOjV"></script>
+	<div class="fb-like" data-href="{{url}}" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
 </div>
-

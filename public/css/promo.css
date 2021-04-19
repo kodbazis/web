@@ -13,6 +13,10 @@
   color: white;
 }
 
+.active-purchaseType:hover {
+  color: white !important;
+}
+
 .quotation {
   font-size: 18px;
   margin: 0 auto;
@@ -48,6 +52,20 @@ span.step {
 }
 .color-blue {
   color: rgb(15, 174, 241) !important;
+}
+
+.blue-outline-btn {
+  border-color: rgb(15, 174, 241) !important;
+  color: rgb(15, 174, 241) !important;
+}
+
+.blue-outline-btn:hover {
+  background-color: rgb(15, 174, 241);
+  color: white !important;
+}
+.blue-outline-btn:focus-within {
+  background-color: rgb(15, 174, 241);
+  color: white !important;
 }
 
 /* Opacity #1 */
@@ -132,7 +150,7 @@ p {
 }
 
 .first {
-  font-size: 25px;
+  font-size: 30px;
   line-height: 26px;
   text-align: left;
   color: rgb(229 0 16);

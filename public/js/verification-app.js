@@ -38,7 +38,7 @@
       app.innerHTML = `
         <div class="w-100 m-auto text-center m-2 pb-2">
             <p class="text-center text-dark mb-2">
-              Várakozás az OTP simplepay megerősítő üzenetére... <br> 
+              Várakozás az OTP SimplePay megerősítő üzenetére... <br> 
               <b>Ez akár 30 másodpercig is eltarthat!</b>
             </p>
             <div class="spinner-border text-success m-auto mb-2 text-center">

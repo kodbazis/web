@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card w-100">
 	<div class="card-body w-100 p-0">
 		<div class="border-bottom {{paymentUrl is defined ? 'text-muted bg-light' : ''}}">
 			<nav class="nav nav-pills flex-column flex-sm-row">
@@ -18,8 +18,22 @@
 					<p class="flex-sm-fill text-sm-center nav-link bg-muted {{ isInvoice ? 'active-purchaseType': 'text-muted bg-light'}}">Számlát kérek</p>
 				{% endif %}
 			</nav>
-
+			{% set isVerificationPhase = subscriberCourse.isPayed and not subscriberCourse.isVerified %}
 			<span class="step lead ml-2 mt-2 {{paymentUrl is not defined ? 'bg-color-blue' : ''}}">1</span>
+			{% if isCouponRedeemed %}
+				<div class="_2xvqr">
+					<button disabled class="mb-2 btn btn-sm btn-outline-success">
+						<p>
+							Kupon beváltva!
+							<i class="fa fa-check mr-1"></i>
+						</p>
+					</button>
+				</div>
+			{% else %}
+				{% if not isVerificationPhase and paymentUrl is not defined %}
+					{% include "coupon-form.twig" with {'courseId': course.id} %}
+				{% endif %}
+			{% endif %}
 			{% if isInvoice %}
 				{% if error == 'requiredFieldMissing' %}
 					<div class="alert alert-danger p-1 pr-2 pl-2 w-100">
@@ -34,7 +48,7 @@
 			{% endif %}
 		</div>
 
-		{% set isVerificationPhase = subscriberCourse.isPayed and not subscriberCourse.isVerified %}
+
 		<div class="border-bottom {{paymentUrl is not defined or subscriberCourse.isPayed ? 'text-muted bg-light' : ''}}">
 
 			<span class="step lead ml-2 mt-2 {{paymentUrl is defined  and not subscriberCourse.isPayed ? 'bg-color-blue' : ''}}">2</span>
@@ -54,7 +68,9 @@
 						</a>
 					{% else %}
 						{% if isVerificationPhase %}
-							<span class="ml-2 mt-2 text-success">Fizetve ✓</span>
+							<p class="ml-2 text-success">Fizetve
+								<i class="fa fa-check ml-1"></i>
+							</p>
 						{% else %}
 							<button class="btn btn-outline-dark" disabled type='submit'>
 								Fizetés
@@ -94,7 +110,7 @@
 						</p>
 					</div>
 				{% endif %}
-				{% if transactionSuccessful is defined %}
+				{% if transactionSuccessful is defined and transactionId != "" %}
 					<div class="alert alert-success p-1 pr-2 pl-2 w-100">
 						<p style="font-size:14px">
 							<b>Sikeres tranzakció.</b>

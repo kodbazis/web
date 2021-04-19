@@ -15,6 +15,8 @@ use Kodbazis\Generated\Repository\Subscriber\SqlLister as SubscriberLister;
 use Kodbazis\Generated\Repository\Subscriber\SqlPatcher as SubscriberPatcher;
 use Kodbazis\Generated\Repository\Embeddable\SqlByIdGetter;
 use Kodbazis\Generated\Repository\Course\SqlLister as CourseLister;
+use Kodbazis\Generated\Repository\Coupon\SqlLister as CouponLister;
+use Kodbazis\Generated\Repository\Coupon\SqlPatcher as CouponPatcher;
 use Kodbazis\Generated\Repository\SubscriberCourse\SqlLister as SubscriberCourseLister;
 use Kodbazis\Generated\Repository\SubscriberCourse\SqlSaver as SubscriberCourseSaver;
 use Kodbazis\Generated\Repository\SubscriberCourse\SqlDeleter as SubscriberCourseDeleter;
@@ -23,6 +25,7 @@ use Kodbazis\Generated\Repository\Episode\SqlLister as EpisodeLister;
 use Kodbazis\Generated\Repository\Quote\SqlLister as QuoteLister;
 use Kodbazis\Generated\Repository\Spec\SqlLister as SpecLister;
 use Kodbazis\Episodes;
+use Kodbazis\Generated\Coupon\Patch\PatchedCoupon;
 use Kodbazis\Generated\Listing\Clause;
 use Kodbazis\Generated\Listing\Filter;
 use Kodbazis\Generated\Listing\OrderBy;
@@ -607,6 +610,36 @@ class PublicSite
             ]);
         });
 
+        $r->post('/api/apply-coupon/{courseId}', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+
+            $coupons = (new CouponLister($conn))->list(
+                new Query(
+                    1,
+                    0,
+                    new Filter(
+                        'and',
+                        new Clause('eq', 'courseId', $request->vars['courseId']),
+                        new Filter(
+                            'and',
+                            new Clause('eq', 'code', $request->body["code"]),
+                            new Filter(
+                                'and',
+                                new Clause('eq', 'isRedeemed', 0),
+                                new Clause('gt', 'validUntil', time()),
+                            )
+                        )
+                    ),
+                    new OrderBy('id', 'asc')
+                )
+            );
+            if (!$coupons->getCount()) {
+                http_response_code(401);
+                return;
+            }
+
+            (new CouponPatcher($conn))->patch($coupons->getEntities()[0]->getId(), new PatchedCoupon($_SESSION['subscriberId'], 1));
+        });
+
         $r->post('/api/order-course/{courseId}', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
 
 
@@ -781,7 +814,7 @@ class PublicSite
                 0,
                 new Filter(
                     'and',
-                    new Clause('eq', 'isVerified', '1'),
+                    new Clause('eq', 'isPayed', '1'),
                     new Clause('eq', 'courseId', $course->getId()),
                 ),
                 new OrderBy('id', 'asc')
@@ -796,12 +829,13 @@ class PublicSite
                     'content' => $twig->render('paywall.twig', [
                         'course' => $course,
                         'url' => Router::siteUrl() . parse_url(Router::siteUrl() . $_SERVER['REQUEST_URI'])['path'],
-                        'discountedPrice' => getDiscountedPrice($course),
+                        'discountedPrice' => getDiscountedPrice($course, 0, $conn),
                         'numberOfSubscribers' => $subscribersInCourse->getCount(),
                         'quotes' => $quotes,
                         'specs' => $specs,
                         'contentWithEmbeddables' => $course->getContent(),
                         'paywallForm' => $twig->render('sub-reg-panel.twig', [
+                            'isCouponRedeemed' => false,
                             'isLogin' => isset($_GET['isLogin']),
                             'isLoggedIn' => isset($_SESSION['subscriberId']),
                             'loginSuccess' => isset($_GET['loginSuccess']),
@@ -836,6 +870,10 @@ class PublicSite
                 new OrderBy('id', 'asc')
             ));
 
+            // kupon?
+            $coupons = getRedeemedAndValidCoupon($conn, $course, $_SESSION['subscriberId']);
+            $isCouponRedeemed = $coupons->getCount() > 0;
+
             // not ordered
             if (!$subscriberCourses->getCount()) {
                 echo $twig->render('wrapper.twig', [
@@ -845,12 +883,13 @@ class PublicSite
                     'content' => $twig->render('paywall.twig', [
                         'course' => $course,
                         'url' => Router::siteUrl() . parse_url(Router::siteUrl() . $_SERVER['REQUEST_URI'])['path'],
-                        'discountedPrice' => getDiscountedPrice($course),
+                        'discountedPrice' => getDiscountedPrice($course, $_SESSION['subscriberId'], $conn),
                         'numberOfSubscribers' => $subscribersInCourse->getCount(),
                         'quotes' => $quotes,
                         'specs' => $specs,
                         'contentWithEmbeddables' => $course->getContent(),
                         'paywallForm' => $twig->render('paywall-form.twig', [
+                            'isCouponRedeemed' => $isCouponRedeemed,
                             'course' => $course,
                             'isInvoice' => isset($_GET['isInvoice']),
                             'error' => $_GET['error'] ?? '',
@@ -881,18 +920,19 @@ class PublicSite
                     'content' => $twig->render('paywall.twig', [
                         'course' => $course,
                         'url' => Router::siteUrl() . parse_url(Router::siteUrl() . $_SERVER['REQUEST_URI'])['path'],
-                        'discountedPrice' => getDiscountedPrice($course),
+                        'discountedPrice' => getDiscountedPrice($course, $_SESSION['subscriberId'], $conn),
                         'numberOfSubscribers' => $subscribersInCourse->getCount(),
                         'quotes' => $quotes,
                         'specs' => $specs,
                         'contentWithEmbeddables' => $course->getContent(),
                         'paywallForm' => $twig->render('paywall-form.twig', [
+                            'isCouponRedeemed' => $isCouponRedeemed,
                             'subscriberCourse' => $subscriberCourse,
                             'course' => $course,
                             'isInvoice' => $subscriberCourse->getPurchaseType() === 'invoice',
                             'error' => $_GET['error'] ?? '',
                             'transactionId' => $_GET['transactionId'] ?? '',
-                            'paymentUrl' => PaymentRoutes::getPaymentUrl($course, $subscriberCourse, $request->vars['subscriber'], $conn),
+                            'paymentUrl' => PaymentRoutes::getPaymentUrl($course, $subscriberCourse, $conn),
                         ]),
                         'episodeList' => renderEpisodeList($twig, $course, $allEpisodesInCourse),
                     ]),
@@ -918,12 +958,13 @@ class PublicSite
                     'content' => $twig->render('paywall.twig', [
                         'course' => $course,
                         'url' => Router::siteUrl() . parse_url(Router::siteUrl() . $_SERVER['REQUEST_URI'])['path'],
-                        'discountedPrice' => getDiscountedPrice($course),
+                        'discountedPrice' => getDiscountedPrice($course, $_SESSION['subscriberId'], $conn),
                         'numberOfSubscribers' => $subscribersInCourse->getCount(),
                         'quotes' => $quotes,
                         'specs' => $specs,
                         'contentWithEmbeddables' => $course->getContent(),
                         'paywallForm' => $twig->render('paywall-form.twig', [
+                            'isCouponRedeemed' => $isCouponRedeemed,
                             'subscriberCourse' => $subscriberCourse,
                             'course' => $course,
                             'isInvoice' => $subscriberCourse->getPurchaseType() === 'invoice',
@@ -1005,7 +1046,7 @@ function courseToStructuredData($course)
             "@type" => "Offer",
             "url" => Router::siteUrl() . '/' . $course->getSlug(),
             "priceCurrency" => "HUF",
-            "price" => getDiscountedPrice($course),
+            "price" => getDiscountedPrice($course, 0),
             "priceValidUntil" => "2021-11-20",
             "availability" => "https://schema.org/InStock"
         ],
@@ -1078,14 +1119,62 @@ function getCourseOgTags($course)
     ];
 }
 
-function getDiscountedPrice($course)
+function getDiscountedPrice($course, $subscriberId, $conn = null)
 {
-    if (!$course->getDiscount()) {
-        return $course->getPrice();
-    }
-    $multiplier = (100 - $course->getDiscount()) / 100;
+
+    $discount = getDiscount($course, $subscriberId, $conn);
+
+    $multiplier = (100 - $discount) / 100;
     $x = $course->getPrice() * $multiplier;
     return round($x / 10) * 10;
+}
+
+function getDiscount($course, $subscriberId, $conn = null)
+{
+
+    if ($course->getDiscount()) {
+        return $course->getDiscount();
+    }
+
+    if (!isset($_SESSION['subscriberId'])) {
+        return 0;
+    }
+
+    if (!$subscriberId || !$conn) {
+        return 0;
+    }
+
+    $coupons = getRedeemedAndValidCoupon($conn, $course, $subscriberId);
+
+    if (!$coupons->getCount()) {
+        return 0;
+    }
+
+    return  $coupons->getEntities()[0]->getDiscount();
+}
+
+function getRedeemedAndValidCoupon($conn, $course, $subscriberId)
+{
+    return (new CouponLister($conn))->list(
+        new Query(
+            1,
+            0,
+            new Filter(
+                'and',
+                new Clause('eq', 'courseId', $course->getId()),
+                new Filter(
+                    'and',
+                    new Clause('eq', 'subscriberId', $subscriberId),
+                    new Filter(
+                        'and',
+                        new Clause('eq', 'isRedeemed', 1),
+                        new Clause('gt', 'validUntil', time()),
+                    )
+                )
+            ),
+            new OrderBy('id', 'asc')
+        )
+    );
 }
 
 function getCourseItems($conn)
@@ -1127,7 +1216,7 @@ function getCourseItems($conn)
 
         return [
             "course" => $course,
-            "discountedPrice" => getDiscountedPrice($course),
+            "discountedPrice" => getDiscountedPrice($course, 0),
             "numberOfSubscribers" => $subscribersInCourse->getCount(),
             "quotes" => $quotes,
             "specs" => $specs
