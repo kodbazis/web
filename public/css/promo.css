@@ -64,7 +64,12 @@ span.step {
   color: white !important;
 }
 .blue-outline-btn:focus-within {
-  background-color: rgb(15, 174, 241);
+  color: white !important;
+}
+
+.blue-filled-btn {
+  border-color: rgb(15, 174, 241) !important;
+  background-color: rgb(15, 174, 241) !important;
   color: white !important;
 }
 

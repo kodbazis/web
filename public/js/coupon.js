@@ -12,8 +12,8 @@ const statusClassMap = {
 };
 const statusFeedbackMap = {
   INIT: "",
-  INVALID: "<div class='invalid-feedback'>Érvénytelen kuponkód, próbáld újra!</div>",
-  VALID: "<div class='valid-feedback'>Kupon beváltása sikeres!</div>",
+  INVALID: "<div class='invalid-feedback'><p>Érvénytelen kuponkód, próbáld újra!</p></div>",
+  VALID: "<div class='valid-feedback'><p>Kupon beváltása sikeres!</p></div>",
 };
 function renderCouponApp() {
   couponAppContainer.innerHTML = isActive
@@ -22,8 +22,8 @@ function renderCouponApp() {
         <div class="input-group mb-3">
             <input type="text" class="form-control ${statusClassMap[status]}" placeholder="Kuponkód" name="code">
             <div class="input-group-append">
-                <button type="submit" class="btn btn-primary btn-sm form-control h-100 bg-color-blue">
-                    Kupon beváltása
+                <button type="submit" class="btn btn-primary btn-sm form-control h-100 blue-filled-btn">
+                <p>Kupon beváltása</p>
                 </button>
             </div>
             ${statusFeedbackMap[status]}
