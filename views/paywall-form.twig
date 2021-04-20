@@ -22,12 +22,10 @@
 			<span class="step lead ml-2 mt-2 {{paymentUrl is not defined ? 'bg-color-blue' : ''}}">1</span>
 			{% if isCouponRedeemed %}
 				<div class="_2xvqr">
-					<button disabled class="mb-2 btn btn-sm btn-outline-success">
-						<p>
-							Kupon beváltva!
-							<i class="fa fa-check mr-1"></i>
-						</p>
-					</button>
+					<p class="text-success lead">
+						Kupon beváltva!
+						<i class="fa fa-check-circle mr-1"></i>
+					</p>
 				</div>
 			{% else %}
 				{% if not isVerificationPhase and paymentUrl is not defined %}
@@ -89,10 +87,10 @@
 					<div class="alert alert-danger p-1 pr-2 pl-2 w-100">
 						<p style="font-size:14px">
 							Sikertelen tranzakció.
-																																			SimplePay tranzakció azonosító:
+																																																	SimplePay tranzakció azonosító:
 							{{transactionId}}
 							Kérjük, ellenőrizze a tranzakció során megadott adatok helyességét. 
-																																			Amennyiben minden adatot helyesen adott meg, a visszautasítás okának kivizsgálása érdekében kérjük, szíveskedjen kapcsolatba lépni kártyakibocsátó bankjával.
+																																																	Amennyiben minden adatot helyesen adott meg, a visszautasítás okának kivizsgálása érdekében kérjük, szíveskedjen kapcsolatba lépni kártyakibocsátó bankjával.
 						</p>
 					</div>
 				{% endif %}

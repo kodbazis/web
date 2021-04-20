@@ -36,7 +36,7 @@
         public function update(array $entity, string $id): Coupon
         {    
             try {
-                $toUpdate = new UpdatedCoupon($entity['subscriberId'] ?? 0, $entity['isRedeemed'] ?? false);
+                $toUpdate = new UpdatedCoupon($entity['redeemedBy'] ?? 0);
                
                 return $this->updater->update($id, $toUpdate);
             } catch (Exception $err) {

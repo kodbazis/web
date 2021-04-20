@@ -16,23 +16,31 @@ const statusFeedbackMap = {
   VALID: "<div class='valid-feedback'><p>Kupon beváltása sikeres!</p></div>",
 };
 function renderCouponApp() {
-  couponAppContainer.innerHTML = isActive
-    ? `
-    <form class="_2bCMA pl-3 pr-3" onsubmit="sendCoupon.apply(this, arguments)">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control ${statusClassMap[status]}" placeholder="Kuponkód" name="code">
-            <div class="input-group-append">
-                <button type="submit" class="btn btn-primary btn-sm form-control h-100 blue-filled-btn">
-                <p>Kupon beváltása</p>
-                </button>
+  const template =
+    status === "VALID"
+      ? `<p class="text-success lead">
+          Kupon beváltva!
+          <i class="fa fa-check-circle mr-1"></i>
+        </p>`
+      : `
+        <form class="_2bCMA pl-3 pr-3" onsubmit="sendCoupon.apply(this, arguments)">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control ${statusClassMap[status]}" placeholder="Írd be a kuponkódot..." name="code">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary btn-sm form-control h-100 blue-filled-btn">
+                    <p>Kupon beváltása</p>
+                    </button>
+                </div>
+                ${statusFeedbackMap[status]}
             </div>
-            ${statusFeedbackMap[status]}
-        </div>
-	</form>`
+      </form>`;
+
+  couponAppContainer.innerHTML = isActive
+    ? template
     : `
-    <button class="mb-2 btn btn-sm blue-outline-btn" onclick="switchCouponForm.apply(this, arguments)">
+    <button class="mb-2 btn blue-outline-btn" onclick="switchCouponForm.apply(this, arguments)">
         <p>
-            Kuponod van? Váltsd be itt!
+            Kupon beváltása
         </p>
     </button>
         `;
@@ -56,6 +64,7 @@ function sendCoupon(e) {
     if (res.ok) {
       status = "VALID";
       renderCouponApp();
+      // res.text().then(console.log)
       location.reload();
     } else {
       status = "INVALID";

@@ -112,7 +112,7 @@ class SqlLister implements Lister
     
             return new CountedSubscribers(
                 array_map(function ($array) {
-                    return new Subscriber((int)$array['id'], (string)$array['email'], (string)$array['password'], (bool)$array['isVerified'], (string)$array['verificationToken'], (int)$array['createdAt']);
+                    return new Subscriber((int)$array['id'], (string)$array['email'], (string)$array['password'], (bool)$array['isVerified'], (string)$array['verificationToken'], (int)$array['createdAt'], (bool)$array['isUnsubscribed']);
                 }, $results),
                 $count
             );

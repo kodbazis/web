@@ -23,7 +23,7 @@ class SqlByIdGetter implements ById
             $stmt->bind_param('s', $id);
             $stmt->execute();
             $result = $stmt->get_result()->fetch_assoc();
-            return new Coupon((int)$result['id'], (int)$result['courseId'], (int)$result['subscriberId'], (bool)$result['isRedeemed'], (int)$result['discount'], (int)$result['issuedTo'], (string)$result['code'], (int)$result['validUntil'], (int)$result['createdAt']);
+            return new Coupon((int)$result['id'], (int)$result['courseId'], (int)$result['issuedTo'], (int)$result['mailedAt'], (string)$result['ref'], (int)$result['redeemedBy'], (int)$result['discount'], (string)$result['code'], (int)$result['validUntil'], (int)$result['createdAt']);
         
         } catch (\Error $exception) {
             if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {

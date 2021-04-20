@@ -25,20 +25,21 @@ class SqlPatcher implements Patcher
           
           $stmt = $this->connection->prepare(
               'UPDATE `subscribers` SET 
-                `email` = ?, `password` = ?, `isVerified` = ?, `verificationToken` = ?
+                `email` = ?, `password` = ?, `isVerified` = ?, `verificationToken` = ?, `isUnsubscribed` = ?
                 WHERE `id` = ?;'
           );
           
           call_user_func(function (...$params) use ($stmt) {
                 $stmt->bind_param(
-                    "ssiss",
+                    "ssisis",
                     ...$params
                 );
             },
                 $merged->getEmail(),
         $merged->getPassword(),
         $merged->getIsVerified(),
-        $merged->getVerificationToken(), $id);
+        $merged->getVerificationToken(),
+        $merged->getIsUnsubscribed(), $id);
           
           
           $stmt->execute();
@@ -47,7 +48,7 @@ class SqlPatcher implements Patcher
               throw new OperationError($stmt->error);
           }
           
-          return new Subscriber($id, $merged->getEmail(),$merged->getPassword(),$merged->getIsVerified(),$merged->getVerificationToken(),$byId->getCreatedAt());
+          return new Subscriber($id, $merged->getEmail(),$merged->getPassword(),$merged->getIsVerified(),$merged->getVerificationToken(),$byId->getCreatedAt(),$merged->getIsUnsubscribed());
       
       } catch (\Error $exception) {
             if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {
@@ -67,7 +68,7 @@ class SqlPatcher implements Patcher
     private function merge(Subscriber $prev, PatchedSubscriber $patched): PatchedSubscriber
     {
         return new PatchedSubscriber(
-            $patched->getEmail() !== null ? $patched->getEmail() : $prev->getEmail(), $patched->getPassword() !== null ? $patched->getPassword() : $prev->getPassword(), $patched->getIsVerified() !== null ? $patched->getIsVerified() : $prev->getIsVerified(), $patched->getVerificationToken() !== null ? $patched->getVerificationToken() : $prev->getVerificationToken()
+            $patched->getEmail() !== null ? $patched->getEmail() : $prev->getEmail(), $patched->getPassword() !== null ? $patched->getPassword() : $prev->getPassword(), $patched->getIsVerified() !== null ? $patched->getIsVerified() : $prev->getIsVerified(), $patched->getVerificationToken() !== null ? $patched->getVerificationToken() : $prev->getVerificationToken(), $patched->getIsUnsubscribed() !== null ? $patched->getIsUnsubscribed() : $prev->getIsUnsubscribed()
         );
     }
 }

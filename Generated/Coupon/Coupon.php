@@ -8,24 +8,26 @@ class Coupon implements JsonSerializable
 {
     private $id;
 private $courseId;
-private $subscriberId;
-private $isRedeemed;
-private $discount;
 private $issuedTo;
+private $mailedAt;
+private $ref;
+private $redeemedBy;
+private $discount;
 private $code;
 private $validUntil;
 private $createdAt;
 
 
     
-public function __construct($id, $courseId, $subscriberId, $isRedeemed, $discount, $issuedTo, $code, $validUntil, $createdAt)
+public function __construct($id, $courseId, $issuedTo, $mailedAt, $ref, $redeemedBy, $discount, $code, $validUntil, $createdAt)
 {
         $this->id = $id;
 $this->courseId = $courseId;
-$this->subscriberId = $subscriberId;
-$this->isRedeemed = $isRedeemed;
-$this->discount = $discount;
 $this->issuedTo = $issuedTo;
+$this->mailedAt = $mailedAt;
+$this->ref = $ref;
+$this->redeemedBy = $redeemedBy;
+$this->discount = $discount;
 $this->code = $code;
 $this->validUntil = $validUntil;
 $this->createdAt = $createdAt;
@@ -40,21 +42,25 @@ $this->createdAt = $createdAt;
     {
         return $this->courseId;
     }
-    public function getSubscriberId(): ?int
+    public function getIssuedTo(): ?int
     {
-        return $this->subscriberId;
+        return $this->issuedTo;
     }
-    public function getIsRedeemed(): ?bool
+    public function getMailedAt(): ?int
     {
-        return $this->isRedeemed;
+        return $this->mailedAt;
+    }
+    public function getRef(): ?string
+    {
+        return $this->ref;
+    }
+    public function getRedeemedBy(): ?int
+    {
+        return $this->redeemedBy;
     }
     public function getDiscount(): ?int
     {
         return $this->discount;
-    }
-    public function getIssuedTo(): ?int
-    {
-        return $this->issuedTo;
     }
     public function getCode(): ?string
     {
@@ -75,10 +81,11 @@ $this->createdAt = $createdAt;
         return [
             'id' => $this->id,
  'courseId' => $this->courseId,
- 'subscriberId' => $this->subscriberId,
- 'isRedeemed' => $this->isRedeemed,
- 'discount' => $this->discount,
  'issuedTo' => $this->issuedTo,
+ 'mailedAt' => $this->mailedAt,
+ 'ref' => $this->ref,
+ 'redeemedBy' => $this->redeemedBy,
+ 'discount' => $this->discount,
  'code' => $this->code,
  'validUntil' => $this->validUntil,
  'createdAt' => $this->createdAt,

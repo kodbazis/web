@@ -24,20 +24,19 @@ class SqlUpdater implements Updater
           
           $stmt = $this->connection->prepare(
               'UPDATE `coupons` SET 
-                `subscriberId` = ?, `isRedeemed` = ?
+                `redeemedBy` = ?
                 WHERE `id` = ?;'
           );
           
-          $subscriberId= $entity->getSubscriberId();
-        $isRedeemed= $entity->getIsRedeemed();
+          $redeemedBy= $entity->getRedeemedBy();
          
           $stmt->bind_param(
-              "iis",
-               $subscriberId, $isRedeemed, $id        
+              "is",
+               $redeemedBy, $id        
           );
           $stmt->execute();
           
-          return new Coupon($id, $byId->getCourseId(),$entity->getSubscriberId(),$entity->getIsRedeemed(),$byId->getDiscount(),$byId->getIssuedTo(),$byId->getCode(),$byId->getValidUntil(),$byId->getCreatedAt());
+          return new Coupon($id, $byId->getCourseId(),$byId->getIssuedTo(),$byId->getMailedAt(),$byId->getRef(),$entity->getRedeemedBy(),$byId->getDiscount(),$byId->getCode(),$byId->getValidUntil(),$byId->getCreatedAt());
       
       } catch (\Error $exception) {
           if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {

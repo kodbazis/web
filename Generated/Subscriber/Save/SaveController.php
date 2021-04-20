@@ -65,7 +65,7 @@
         }
 
         try {
-          $toSave = new NewSubscriber((string)($entity['email']), (string)($entity['password'] ?? ''), (bool)($entity['isVerified'] ?? false), (string)($entity['verificationToken'] ?? ''), (int)($entity['createdAt'] ?? 0));
+          $toSave = new NewSubscriber((string)($entity['email']), (string)($entity['password'] ?? ''), (bool)($entity['isVerified'] ?? false), (string)($entity['verificationToken'] ?? ''), (int)($entity['createdAt'] ?? 0), (bool)($entity['isUnsubscribed'] ?? false));
               return $this->saver->Save($toSave);
         } catch (Exception $err) {
                 $this->operationError->addField(Error::getOperationError());
@@ -87,7 +87,8 @@
             'password' => [$this, 'isString'],
             'isVerified' => [$this, 'isBool'],
             'verificationToken' => [$this, 'isString'],
-            'createdAt' => [$this, 'isInt']
+            'createdAt' => [$this, 'isInt'],
+            'isUnsubscribed' => [$this, 'isBool']
 
         ];
         if (!array_key_exists($key, $validators)) {

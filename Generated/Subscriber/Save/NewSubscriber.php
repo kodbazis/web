@@ -11,16 +11,18 @@ private $password;
 private $isVerified;
 private $verificationToken;
 private $createdAt;
+private $isUnsubscribed;
 
 
     
-public function __construct($email, $password, $isVerified, $verificationToken, $createdAt)
+public function __construct($email, $password, $isVerified, $verificationToken, $createdAt, $isUnsubscribed)
 {
         $this->email = $email;
 $this->password = $password;
 $this->isVerified = $isVerified;
 $this->verificationToken = $verificationToken;
 $this->createdAt = $createdAt;
+$this->isUnsubscribed = $isUnsubscribed;
 
 }
     
@@ -44,6 +46,10 @@ $this->createdAt = $createdAt;
     {
         return $this->createdAt;
     }
+    public function getIsUnsubscribed(): ?bool
+    {
+        return $this->isUnsubscribed;
+    }
     
     
     public function jsonSerialize()
@@ -54,6 +60,7 @@ $this->createdAt = $createdAt;
  'isVerified' => $this->isVerified,
  'verificationToken' => $this->verificationToken,
  'createdAt' => $this->createdAt,
+ 'isUnsubscribed' => $this->isUnsubscribed,
 
         ];
     }

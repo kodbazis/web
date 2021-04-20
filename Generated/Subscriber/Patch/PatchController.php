@@ -35,7 +35,7 @@
         public function patch(array $entity, string $id): Subscriber
         {
             try {
-                @$toPatch = new PatchedSubscriber($entity['email'] ?? null, $entity['password'] ?? null, (bool)$entity['isVerified'] ?? null, $entity['verificationToken'] ?? null);
+                @$toPatch = new PatchedSubscriber($entity['email'] ?? null, $entity['password'] ?? null, (bool)$entity['isVerified'] ?? null, $entity['verificationToken'] ?? null, (bool)$entity['isUnsubscribed'] ?? null);
                 return $this->patcher->patch($id, $toPatch);
             } catch (Exception $err) {
                 $this->operationError->addField(Error::getOperationError());

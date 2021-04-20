@@ -24,7 +24,7 @@ class SqlUpdater implements Updater
           
           $stmt = $this->connection->prepare(
               'UPDATE `subscribers` SET 
-                `email` = ?, `password` = ?, `isVerified` = ?, `verificationToken` = ?
+                `email` = ?, `password` = ?, `isVerified` = ?, `verificationToken` = ?, `isUnsubscribed` = ?
                 WHERE `id` = ?;'
           );
           
@@ -32,14 +32,15 @@ class SqlUpdater implements Updater
         $password= $entity->getPassword();
         $isVerified= $entity->getIsVerified();
         $verificationToken= $entity->getVerificationToken();
+        $isUnsubscribed= $entity->getIsUnsubscribed();
          
           $stmt->bind_param(
-              "ssiss",
-               $email, $password, $isVerified, $verificationToken, $id        
+              "ssisis",
+               $email, $password, $isVerified, $verificationToken, $isUnsubscribed, $id        
           );
           $stmt->execute();
           
-          return new Subscriber($id, $entity->getEmail(),$entity->getPassword(),$entity->getIsVerified(),$entity->getVerificationToken(),$byId->getCreatedAt());
+          return new Subscriber($id, $entity->getEmail(),$entity->getPassword(),$entity->getIsVerified(),$entity->getVerificationToken(),$byId->getCreatedAt(),$entity->getIsUnsubscribed());
       
       } catch (\Error $exception) {
           if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {

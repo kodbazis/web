@@ -35,7 +35,7 @@
         public function patch(array $entity, string $id): Coupon
         {
             try {
-                @$toPatch = new PatchedCoupon($entity['subscriberId'] ?? null, (bool)$entity['isRedeemed'] ?? null);
+                @$toPatch = new PatchedCoupon($entity['redeemedBy'] ?? null);
                 return $this->patcher->patch($id, $toPatch);
             } catch (Exception $err) {
                 $this->operationError->addField(Error::getOperationError());

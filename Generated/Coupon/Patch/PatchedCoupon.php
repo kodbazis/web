@@ -6,33 +6,26 @@ use JsonSerializable;
 
 class PatchedCoupon implements JsonSerializable
 {
-    private $subscriberId;
-private $isRedeemed;
+    private $redeemedBy;
 
 
     
-public function __construct($subscriberId, $isRedeemed)
+public function __construct($redeemedBy)
 {
-        $this->subscriberId = $subscriberId;
-$this->isRedeemed = $isRedeemed;
+        $this->redeemedBy = $redeemedBy;
 
 }
     
-    public function getSubscriberId(): ?int
+    public function getRedeemedBy(): ?int
     {
-        return $this->subscriberId;
-    }
-    public function getIsRedeemed(): ?bool
-    {
-        return $this->isRedeemed;
+        return $this->redeemedBy;
     }
     
     
     public function jsonSerialize()
     {
         return [
-            'subscriberId' => $this->subscriberId,
- 'isRedeemed' => $this->isRedeemed,
+            'redeemedBy' => $this->redeemedBy,
 
         ];
     }

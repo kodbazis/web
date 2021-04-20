@@ -25,18 +25,17 @@ class SqlPatcher implements Patcher
           
           $stmt = $this->connection->prepare(
               'UPDATE `coupons` SET 
-                `subscriberId` = ?, `isRedeemed` = ?
+                `redeemedBy` = ?
                 WHERE `id` = ?;'
           );
           
           call_user_func(function (...$params) use ($stmt) {
                 $stmt->bind_param(
-                    "iis",
+                    "is",
                     ...$params
                 );
             },
-                $merged->getSubscriberId(),
-        $merged->getIsRedeemed(), $id);
+                $merged->getRedeemedBy(), $id);
           
           
           $stmt->execute();
@@ -45,7 +44,7 @@ class SqlPatcher implements Patcher
               throw new OperationError($stmt->error);
           }
           
-          return new Coupon($id, $byId->getCourseId(),$merged->getSubscriberId(),$merged->getIsRedeemed(),$byId->getDiscount(),$byId->getIssuedTo(),$byId->getCode(),$byId->getValidUntil(),$byId->getCreatedAt());
+          return new Coupon($id, $byId->getCourseId(),$byId->getIssuedTo(),$byId->getMailedAt(),$byId->getRef(),$merged->getRedeemedBy(),$byId->getDiscount(),$byId->getCode(),$byId->getValidUntil(),$byId->getCreatedAt());
       
       } catch (\Error $exception) {
             if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {
@@ -65,7 +64,7 @@ class SqlPatcher implements Patcher
     private function merge(Coupon $prev, PatchedCoupon $patched): PatchedCoupon
     {
         return new PatchedCoupon(
-            $patched->getSubscriberId() !== null ? $patched->getSubscriberId() : $prev->getSubscriberId(), $patched->getIsRedeemed() !== null ? $patched->getIsRedeemed() : $prev->getIsRedeemed()
+            $patched->getRedeemedBy() !== null ? $patched->getRedeemedBy() : $prev->getRedeemedBy()
         );
     }
 }

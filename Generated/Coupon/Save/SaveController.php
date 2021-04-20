@@ -40,8 +40,7 @@
             return empty($entity[$fieldName]);
         }));
 
-        $entity['validUntil'] = (new \DateTime())->getTimestamp();
-$entity['createdAt'] = (new \DateTime())->getTimestamp();
+        $entity['createdAt'] = (new \DateTime())->getTimestamp();
 
 
         $notUnique = array_map(function ($fieldName) {
@@ -66,7 +65,7 @@ $entity['createdAt'] = (new \DateTime())->getTimestamp();
         }
 
         try {
-          $toSave = new NewCoupon((int)($entity['courseId'] ?? 0), (int)($entity['subscriberId'] ?? 0), (bool)($entity['isRedeemed'] ?? false), (int)($entity['discount'] ?? 0), (int)($entity['issuedTo'] ?? 0), (string)($entity['code'] ?? ''), (int)($entity['validUntil'] ?? 0), (int)($entity['createdAt'] ?? 0));
+          $toSave = new NewCoupon((int)($entity['courseId'] ?? 0), (int)($entity['issuedTo'] ?? 0), (int)($entity['mailedAt'] ?? 0), (string)($entity['ref'] ?? ''), (int)($entity['redeemedBy'] ?? 0), (int)($entity['discount'] ?? 0), (string)($entity['code'] ?? ''), (int)($entity['validUntil'] ?? 0), (int)($entity['createdAt'] ?? 0));
               return $this->saver->Save($toSave);
         } catch (Exception $err) {
                 $this->operationError->addField(Error::getOperationError());
@@ -85,10 +84,11 @@ $entity['createdAt'] = (new \DateTime())->getTimestamp();
     {
         $validators = [
             'courseId' => [$this, 'isInt'],
-            'subscriberId' => [$this, 'isInt'],
-            'isRedeemed' => [$this, 'isBool'],
-            'discount' => [$this, 'isInt'],
             'issuedTo' => [$this, 'isInt'],
+            'mailedAt' => [$this, 'isInt'],
+            'ref' => [$this, 'isString'],
+            'redeemedBy' => [$this, 'isInt'],
+            'discount' => [$this, 'isInt'],
             'code' => [$this, 'isString'],
             'validUntil' => [$this, 'isInt'],
             'createdAt' => [$this, 'isInt']

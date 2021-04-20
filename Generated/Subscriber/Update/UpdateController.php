@@ -36,7 +36,7 @@
         public function update(array $entity, string $id): Subscriber
         {    
             try {
-                $toUpdate = new UpdatedSubscriber($entity['email'] ?? '', $entity['password'] ?? '', $entity['isVerified'] ?? false, $entity['verificationToken'] ?? '');
+                $toUpdate = new UpdatedSubscriber($entity['email'] ?? '', $entity['password'] ?? '', $entity['isVerified'] ?? false, $entity['verificationToken'] ?? '', $entity['isUnsubscribed'] ?? false);
                
                 return $this->updater->update($id, $toUpdate);
             } catch (Exception $err) {

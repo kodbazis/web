@@ -49,8 +49,9 @@
 	</head>
 
 	<body>
-			<div class="dashboard-main-wrapper"> 
-				<div class="dashboard-header"> <nav class="navbar navbar-expand-lg bg-dark fixed-top">
+		<div class="dashboard-main-wrapper">
+			<div class="dashboard-header">
+				<nav class="navbar navbar-expand-lg bg-dark fixed-top">
 					<a class="navbar-brand" href="/">
 						<img src="public/images/logo.png" alt="Kódbázis" width="150px" class="logo"/>
 						<span class="text-white">Admin</span>
@@ -59,12 +60,12 @@
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="" id="navbarSupportedContent">
-						<ul class="navbar-nav ml-auto navbar-right-top">
-						</ul>
+						<ul class="navbar-nav ml-auto navbar-right-top"></ul>
 					</div>
 				</nav>
 			</div>
-				<div class="nav-left-sidebar sidebar-dark"> <div class="menu-list">
+			<div class="nav-left-sidebar sidebar-dark">
+				<div class="menu-list">
 					<nav class="navbar navbar-expand-lg navbar-light">
 						<div class="w-100" id="navbarNav">
 							<ul class="navbar-nav flex-column">
@@ -81,6 +82,9 @@
 									<a class="nav-link {{ activePath == '/admin/beagyazhatok' ? 'active' : '' }}" href="/admin/beagyazhatok">
 										<i class="fa fa-image"></i>Beágyazhatók
 									</a>
+									<a class="nav-link {{ activePath == '/admin/kuponok' ? 'active' : '' }}" href="/admin/kuponok">
+										<i class="fa fa-tags"></i>Kuponok
+									</a>
 									<a class="nav-link {{ activePath == '/admin/visszajelzesek' ? 'active' : '' }}" href="/admin/visszajelzesek">
 										<i class="fa fa-comment"></i>Visszajelzések
 									</a>
@@ -90,18 +94,23 @@
 					</nav>
 				</div>
 			</div>
-				<div class="dashboard-wrapper"> <div class="dashboard-ecommerce">
+			<div class="dashboard-wrapper">
+				<div class="dashboard-ecommerce">
 					<div
 						class="container-fluid dashboard-content ">
 						{# main content #}
-						{% include content %}
+						{% include content ignore missing %}
+						{% if innerTemplate is defined %}
+							{{innerTemplate | raw}}
+						{% endif %}
 					</div>
 				</div>
 			</div>
 		</div>
 		{% if scripts is defined %}
 			{% for script in scripts %}
-				{% if script.isCdn %}<script src="{{ script.path }}"> </script>
+				{% if script.isCdn %}
+					<script src="{{ script.path }}"></script>
 				{% else %}
 					<script src="/public/{{ script.path }}"></script>
 				{% endif %}

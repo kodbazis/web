@@ -101,6 +101,72 @@ class PublicSite
             ]);
         });
 
+        $r->post('/api/unsubscribe/{subscriberId}', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+            $byId = (new SubscriberLister($conn))->list(Router::where('id', 'eq', $request->vars['subscriberId']));
+
+            $parsed = parse_url($_SERVER['HTTP_REFERER']);
+            $requestUri = $parsed['path'];
+
+            if (!$byId->getCount()) {
+                $params = [
+                    'error=invalidCredentials',
+                ];
+                header('Location: ' .  $requestUri . Router::mergeQueries($_SERVER['HTTP_REFERER'], $params));
+                return;
+            }
+
+            $subscriber = $byId->getEntities()[0];
+
+            if (!$subscriber->getIsVerified()) {
+                $params = [
+                    'error=notVerified',
+                ];
+                header('Location: ' .  $requestUri . Router::mergeQueries($_SERVER['HTTP_REFERER'], $params));
+                return;
+            }
+
+            if (!password_verify($request->body['password'], $subscriber->getPassword())) {
+                $params = [
+                    'error=invalidCredentials',
+                ];
+
+                header('Location: ' .  $requestUri . Router::mergeQueries($_SERVER['HTTP_REFERER'], $params));
+                return;
+            }
+
+            (new SubscriberPatcher($conn))->patch(
+                $subscriber->getId(),
+                new PatchedSubscriber(null, null, null, null, 1)
+            );
+
+            $params = [
+                'isSuccess=1',
+            ];
+            header('Location: ' .  $requestUri . Router::mergeQueries($_SERVER['HTTP_REFERER'], $params));
+        });
+
+        $r->get('/leiratkozas/{subscriberId}', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+            header('Content-Type: text/html; charset=UTF-8');
+            if (!isset($request->vars['subscriberId'])) {
+                header('Location: /');
+                return;
+            }
+            echo $twig->render('wrapper.twig', [
+                "title" => "Leiratkozás",
+                'content' => $twig->render('unsubscribe.twig', [
+                    'isError' => isset($_GET['error']),
+                    'subscriberId' => $request->vars['subscriberId'],
+                    'isSuccess' => isset($_GET['isSuccess']),
+                    'referer' => $_SERVER['HTTP_REFERER'] ?? '',
+                ]),
+                'subscriberLabel' =>  getNick($request->vars),
+                'styles' => [
+                    ['path' => 'css/login.css']
+                ],
+                'noIndex' => true,
+            ]);
+        });
+
         $r->get('/elfelejtett-jelszo', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             if (isset($request->vars['subscriber'])) {
@@ -143,7 +209,7 @@ class PublicSite
 
             (new SubscriberPatcher($conn))->patch(
                 $subscriber->getId(),
-                new PatchedSubscriber(null, null, 1, $token)
+                new PatchedSubscriber(null, null, 1, $token, null)
             );
 
             header('Location: /elfelejtett-jelszo?emailSent=1');
@@ -190,7 +256,7 @@ class PublicSite
             }
 
             $password = password_hash($request->body['password'], PASSWORD_DEFAULT);
-            $byToken = (new SubscriberPatcher($conn))->patch($subscriber->getId(), new PatchedSubscriber(null, $password, 1, ''));
+            $byToken = (new SubscriberPatcher($conn))->patch($subscriber->getId(), new PatchedSubscriber(null, $password, 1, '', null));
             if ($_GET['referer']) {
                 $parsedUrl = parse_url($_GET['referer']);
                 $params = ['isPasswordModificationSuccess=1'];
@@ -506,7 +572,8 @@ class PublicSite
                 password_hash($request->body['password'], PASSWORD_DEFAULT),
                 0,
                 $token,
-                time()
+                time(),
+                0
             ));
 
             $msg = $twig->render('verification-email.twig', [
@@ -534,7 +601,7 @@ class PublicSite
                 return;
             }
 
-            $byToken = (new SubscriberPatcher($conn))->patch($subscriber->getId(), new PatchedSubscriber(null, null, 1, ''));
+            $byToken = (new SubscriberPatcher($conn))->patch($subscriber->getId(), new PatchedSubscriber(null, null, 1, '', null, null));
             session_start();
             $_SESSION['subscriberId'] = $subscriber->getId();
             $requestUri = parse_url($_GET['referer'])['path'];
@@ -610,34 +677,48 @@ class PublicSite
             ]);
         });
 
-        $r->post('/api/apply-coupon/{courseId}', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+        $r->get(
+            '/kupon-bevaltasa/{ref}',
+            function (Request $request) use ($conn, $twig) {
+                $coupons = fetchAll(
+                    $conn->query(
+                        "SELECT * FROM `coupons` WHERE `ref` = '" . $request->vars['ref'] . "'"
+                    )
+                );
 
-            $coupons = (new CouponLister($conn))->list(
-                new Query(
-                    1,
-                    0,
-                    new Filter(
-                        'and',
-                        new Clause('eq', 'courseId', $request->vars['courseId']),
-                        new Filter(
-                            'and',
-                            new Clause('eq', 'code', $request->body["code"]),
-                            new Filter(
-                                'and',
-                                new Clause('eq', 'isRedeemed', 0),
-                                new Clause('gt', 'validUntil', time()),
-                            )
-                        )
-                    ),
-                    new OrderBy('id', 'asc')
-                )
+                if (!count($coupons)) {
+                    header("Location: /" . $request->query['c']);
+                    return;
+                }
+
+                session_start();
+                $_SESSION['subscriberId'] = $coupons[0]['issuedTo'];
+
+                header("Location: /" . $request->query['c']);
+            }
+        );
+
+        $r->post('/api/apply-coupon/{courseId}', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
+            $stmt = $conn->prepare(
+                "SELECT * FROM coupons WHERE 
+                    courseId = ? AND
+                    code = ? AND
+                    redeemedBy IS NULL AND
+                    validUntil > UNIX_TIMESTAMP()
+                "
             );
-            if (!$coupons->getCount()) {
+            $courseId = $request->vars['courseId'];
+            $code = $request->body["code"];
+            $stmt->bind_param('ss', $courseId, $code);
+            $stmt->execute();
+            $coupons = fetchAll($stmt->get_result());
+
+            if (!count($coupons)) {
                 http_response_code(401);
                 return;
             }
 
-            (new CouponPatcher($conn))->patch($coupons->getEntities()[0]->getId(), new PatchedCoupon($_SESSION['subscriberId'], 1));
+            (new CouponPatcher($conn))->patch($coupons[0]['id'], new PatchedCoupon($_SESSION['subscriberId']));
         });
 
         $r->post('/api/order-course/{courseId}', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
@@ -1164,12 +1245,8 @@ function getRedeemedAndValidCoupon($conn, $course, $subscriberId)
                 new Clause('eq', 'courseId', $course->getId()),
                 new Filter(
                     'and',
-                    new Clause('eq', 'subscriberId', $subscriberId),
-                    new Filter(
-                        'and',
-                        new Clause('eq', 'isRedeemed', 1),
-                        new Clause('gt', 'validUntil', time()),
-                    )
+                    new Clause('eq', 'redeemedBy', $subscriberId),
+                    new Clause('gt', 'validUntil', time()),
                 )
             ),
             new OrderBy('id', 'asc')

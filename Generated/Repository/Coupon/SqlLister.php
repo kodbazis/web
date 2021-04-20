@@ -112,7 +112,7 @@ class SqlLister implements Lister
     
             return new CountedCoupons(
                 array_map(function ($array) {
-                    return new Coupon((int)$array['id'], (int)$array['courseId'], (int)$array['subscriberId'], (bool)$array['isRedeemed'], (int)$array['discount'], (int)$array['issuedTo'], (string)$array['code'], (int)$array['validUntil'], (int)$array['createdAt']);
+                    return new Coupon((int)$array['id'], (int)$array['courseId'], (int)$array['issuedTo'], (int)$array['mailedAt'], (string)$array['ref'], (int)$array['redeemedBy'], (int)$array['discount'], (string)$array['code'], (int)$array['validUntil'], (int)$array['createdAt']);
                 }, $results),
                 $count
             );

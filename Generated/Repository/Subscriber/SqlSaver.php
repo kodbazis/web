@@ -22,9 +22,9 @@ class SqlSaver implements Saver
         try {
             $statement = $this->connection->prepare(
                 "INSERT INTO `subscribers` (
-                `id`, `email`, `password`, `isVerified`, `verificationToken`, `createdAt`
+                `id`, `email`, `password`, `isVerified`, `verificationToken`, `createdAt`, `isUnsubscribed`
                 ) 
-                VALUES (NULL, ?,?,?,?,?);"
+                VALUES (NULL, ?,?,?,?,?,?);"
             );
     
             $email = $new->getEmail();
@@ -32,15 +32,16 @@ class SqlSaver implements Saver
         $isVerified = $new->getIsVerified();
         $verificationToken = $new->getVerificationToken();
         $createdAt = $new->getCreatedAt();
+        $isUnsubscribed = $new->getIsUnsubscribed();
         
     
             $statement->bind_param(
-                "ssisi",
-                 $email, $password, $isVerified, $verificationToken, $createdAt        
+                "ssisii",
+                 $email, $password, $isVerified, $verificationToken, $createdAt, $isUnsubscribed        
              );
             $statement->execute();
     
-            return new Subscriber((string)$statement->insert_id, $new->getEmail(),$new->getPassword(),$new->getIsVerified(),$new->getVerificationToken(),$new->getCreatedAt());
+            return new Subscriber((string)$statement->insert_id, $new->getEmail(),$new->getPassword(),$new->getIsVerified(),$new->getVerificationToken(),$new->getCreatedAt(),$new->getIsUnsubscribed());
         } catch (\Error $exception) {
             if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {
                 var_dump($exception);

@@ -49,6 +49,7 @@ class Router
             PaymentRoutes::class,
             ExampleApis::class,
             Feedbacks::class,
+            Coupons::class,
             PublicSite::class,
         ];
 

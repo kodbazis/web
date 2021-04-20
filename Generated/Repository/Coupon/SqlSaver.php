@@ -22,28 +22,29 @@ class SqlSaver implements Saver
         try {
             $statement = $this->connection->prepare(
                 "INSERT INTO `coupons` (
-                `id`, `courseId`, `subscriberId`, `isRedeemed`, `discount`, `issuedTo`, `code`, `validUntil`, `createdAt`
+                `id`, `courseId`, `issuedTo`, `mailedAt`, `ref`, `redeemedBy`, `discount`, `code`, `validUntil`, `createdAt`
                 ) 
-                VALUES (NULL, ?,?,?,?,?,?,?,?);"
+                VALUES (NULL, ?,?,?,?,?,?,?,?,?);"
             );
     
             $courseId = $new->getCourseId();
-        $subscriberId = $new->getSubscriberId();
-        $isRedeemed = $new->getIsRedeemed();
-        $discount = $new->getDiscount();
         $issuedTo = $new->getIssuedTo();
+        $mailedAt = $new->getMailedAt();
+        $ref = $new->getRef();
+        $redeemedBy = $new->getRedeemedBy();
+        $discount = $new->getDiscount();
         $code = $new->getCode();
         $validUntil = $new->getValidUntil();
         $createdAt = $new->getCreatedAt();
         
     
             $statement->bind_param(
-                "iiiiisii",
-                 $courseId, $subscriberId, $isRedeemed, $discount, $issuedTo, $code, $validUntil, $createdAt        
+                "iiisiisii",
+                 $courseId, $issuedTo, $mailedAt, $ref, $redeemedBy, $discount, $code, $validUntil, $createdAt        
              );
             $statement->execute();
     
-            return new Coupon((string)$statement->insert_id, $new->getCourseId(),$new->getSubscriberId(),$new->getIsRedeemed(),$new->getDiscount(),$new->getIssuedTo(),$new->getCode(),$new->getValidUntil(),$new->getCreatedAt());
+            return new Coupon((string)$statement->insert_id, $new->getCourseId(),$new->getIssuedTo(),$new->getMailedAt(),$new->getRef(),$new->getRedeemedBy(),$new->getDiscount(),$new->getCode(),$new->getValidUntil(),$new->getCreatedAt());
         } catch (\Error $exception) {
             if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {
                 var_dump($exception);
