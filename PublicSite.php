@@ -692,7 +692,7 @@ class PublicSite
                 }
 
                 session_start();
-                $_SESSION['subscriberId'] = $coupons[0]['issuedTo'];
+                $_SESSION['subscriberId'] = (int)$coupons[0]['issuedTo'];
 
                 header("Location: /" . $request->query['c']);
             }
@@ -791,6 +791,7 @@ class PublicSite
                 return;
             }
             $byId = (new SubscriberCourseById($conn))->byId($request->vars['subscriberCourseId']);
+
             if ($byId->getSubscriberId() !== $_SESSION['subscriberId']) {
                 http_response_code(401);
                 json_encode(['error', 'unauthorized']);
