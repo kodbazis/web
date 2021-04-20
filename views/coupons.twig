@@ -1,5 +1,5 @@
 <h1 class="text-center">
-	Kuponok
+	Felhasználók ({{subscribers | length}})
 </h1>
 
 <div class="table-responsive table-hover">
@@ -11,6 +11,9 @@
 				</th>
 				<th scope="col">
 					<b>email</b>
+				</th>
+				<th scope="col">
+					<b>createdAt</b>
 				</th>
 				<th scope="col">
 					<b>courseIds</b>
@@ -35,12 +38,12 @@
 				<tr>
 					<th scope="row">{{subscriber.id}}</th>
 					<td>{{subscriber.email}}</td>
+					<td>{{subscriber.createdAt | date('Y-m-d')}}</td>
 					<td>
 						{% for course in subscriber.courses %}
 							<span class="{{course.isBoughtWithCoupon ? 'text-primary': ''}}">
 								{{course.id}},
 							</span>
-
 						{% endfor %}
 
 					</td>
