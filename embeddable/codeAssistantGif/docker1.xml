@@ -5,7 +5,8 @@
     <fileName>Dockerfile</fileName>
     <content>
 FROM node:12
-WORKDIR /usr/src/app\nCOPY package.json .
+WORKDIR /usr/src/app
+COPY package.json .
 RUN npm install
 COPY index.js .
 ENTRYPOINT [ "node", "index.js" ]
