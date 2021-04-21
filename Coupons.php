@@ -41,6 +41,15 @@ class Coupons
             }
         );
 
+        $r->get(
+            '/admin/get-active-sessions',
+            [Auth::class, 'validate'],
+            function (Request $request) use ($conn, $twig) {
+                echo '<pre>';
+                var_dump(scandir(session_save_path()));
+            }
+        );
+
         $r->post(
             '/admin/api/sendCouponMails/{subscriberId}',
             [Auth::class, 'validate'],
