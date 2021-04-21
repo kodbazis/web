@@ -45,8 +45,24 @@ class Coupons
             '/admin/get-active-sessions',
             [Auth::class, 'validate'],
             function (Request $request) use ($conn, $twig) {
+
+                $allSessions = [];
+                $sessionNames = scandir(session_save_path());
+
+                foreach ($sessionNames as $sessionName) {
+                    $sessionName = str_replace("sess_", "", $sessionName);
+                    //This skips temp files that aren't sessions
+                    if (strpos($sessionName, ".") === false) {
+                        session_id($sessionName);
+                        session_start();
+                        $allSessions[$sessionName] = $_SESSION;
+                        session_abort();
+                    }
+                }
+
+
                 echo '<pre>';
-                var_dump(scandir(session_save_path()));
+                var_dump($allSessions);
             }
         );
 
