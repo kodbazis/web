@@ -42,7 +42,14 @@ class PublicSite
     public static function initSubscriberSession($conn)
     {
         return function (Request $request) use ($conn) {
-            session_start();
+            if (!isset($_COOKIE[session_name()])) {
+                return $request;
+            }
+
+            if (!isset($_SESSION)) {
+                session_start();
+            }
+
             $subscriber = null;
             if (!isset($_SESSION['subscriberId'])) {
                 return $request;
@@ -421,7 +428,10 @@ class PublicSite
 
         $r->post('/api/subscriber-logout', function (Request $request) use ($conn, $twig) {
             session_start();
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', 0, $params['path'], $params['domain'], $params['secure'], isset($params['httponly']));
             session_destroy();
+
             $requestUri = parse_url($_SERVER['HTTP_REFERER'])['path'];
             header('Location: ' . $requestUri);
         });
