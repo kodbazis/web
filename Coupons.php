@@ -22,7 +22,7 @@ class Coupons
                 $coursesWithoutIssuedCoupons = getCoursesWithoutIssuedCoupons($conn, $courses, $subscriberId);
 
                 $now = time();
-                $plusOneMonth = date('U', strtotime('+1 month', $now));
+                $plusFiveDays = date('U', strtotime('+5 day', $now));
                 foreach ($coursesWithoutIssuedCoupons as $course) {
                     $conn->query(
                         "INSERT INTO `coupons` 
@@ -32,7 +32,7 @@ class Coupons
                             '" . $request->vars['subscriberId'] . "', 
                             '" . $request->body['discount'] . "', 
                             '" . uniqId($course['id']) . "', 
-                            '" . $plusOneMonth . "',
+                            '" . $plusFiveDays . "',
                             '" . $now . "'
                         );"
                     );

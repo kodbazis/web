@@ -48,18 +48,18 @@
 																							<tr>
 																								<td style="padding-bottom: 20px;">
 																									<div style="border: 1px solid lightgrey; padding: 5px; border-radius: 0 0 6px 6px;">
+																										<h1 style="font-family:BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0px;padding:0px;border:0px;margin-bottom:8px">
+																											Kedvezmény:
+																											<span style="color:#E93F33">{{coupon.couponDiscount}}%</span>
+																										</h1>
 																										<h2 style="font-family:BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0px;padding:0px;border:0px;margin-bottom:8px">
 																											Kuponkód:
 																											<span style="color:#E93F33; padding: 5px; margin: 5px border-radius: 6px">{{coupon.code}}</span>
 																										</h2>
-																										<h2 style="font-family:BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0px;padding:0px;border:0px;margin-bottom:8px">
-																											Kedvezmény:
-																											<span style="color:#E93F33">{{coupon.couponDiscount}}%</span>
-																										</h2>
-																										<h4 style="font-family:BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0px;padding:0px;border:0px;margin-bottom:8px">
-																											<sup style="color:#E93F33">*</sup>Érvényes:
-																											{{coupon.validUntil |date("Y. m. d.")}}-ig!
-																										</h4>
+																										<h3 style="font-family:BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0px;padding:0px;border:0px;margin-bottom:8px">
+																											Érvényes:
+																											{{coupon.validUntil |date("Y. m. d. H:i")}}-ig!
+																										</h3>
 
 																										<a target="_blank" style="text-decoration:none" class="m_4325997054331131087button" href="{{siteUrl}}/kupon-bevaltasa/{{ref}}?c={{coupon.slug}}">
 																											<div align="center" bgcolor="#0898FF" class="m_4325997054331131087button-inner" style="font-family:BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0px;padding:0px;border:0px;font-size:14px;line-height:20px;text-align:center;color:#ffffff;background:#0898ff;border-radius:3px;border:1px solid #0898ff;background:#0898ff;padding-top:8px;padding-right:16px;padding-bottom:8px;padding-left:16px" valign="middle">
