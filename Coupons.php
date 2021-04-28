@@ -125,7 +125,7 @@ class Coupons
                     'ref' => $ref,
                 ]);
 
-                if (!@(new Mailer())->sendMail($subscribers[0]['email'], 'Kupon akció a Kódbázison', $msg)) {
+                if (!@(new Mailer())->sendMail($subscribers[0]['email'], 'Kuponakció a Kódbázison', $msg)) {
                     echo "email error";
                     exit;
                 }

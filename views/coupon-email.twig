@@ -28,9 +28,9 @@
 																								<h1 style="font-family:BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0px;padding:0px;border:0px;font-weight:bold;font-size:24px;line-height:32px;margin-bottom:8px;display:block; text-align:center">
 
 																									{% if coupons | length > 1 %}
-																										Váltsd be az ajándék kuponjaid és tanulj kedvezményes áron!
+																										Ajándék kuponokban részesültél, amelyeket Kódbázis kurzusaira tudsz felhasználni!
 																									{% else %}
-																										Váltsd be az ajándék kuponod és tanulj kedvezményes áron!
+																										Ajándék kuponban részesültél, amit a Kódbázis kurzusára tudsz felhasználni!
 																									{% endif %}
 																								</h1>
 																							</td>
@@ -52,7 +52,7 @@
 																											Kedvezmény:
 																										</h2>
 																										<h2 style="font-family:BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0px;padding:0px;border:0px;margin-bottom:25px;text-align:center">
-																											<span style="  border: 1px solid rgb(229 0 16);color: rgb(201 0 46);display: inline-block;line-height: 28px;padding: 6px 12px;right: 0;font-family: " main-regular", " helvetica neue", arial, sans-serif;">
+																											<span style="border: 1px solid red;color:red;display: inline-block;line-height: 28px;padding: 6px 12px;right: 0;">
 																												{{coupon.couponDiscount}}%
 																											</span>
 																										</h2>
@@ -61,7 +61,7 @@
 																												{{coupon.price | number_format(0, '', ' ')}}
 																												Ft
 																											</span>
-																											<span class="first" style="color: rgb(201 0 46); font-size: 2.5rem">
+																											<span class="first" style="color:red; font-size: 2.5rem">
 																												{{coupon.discountedPrice | number_format(0, '', ' ') }}
 																												Ft
 																											</span>
@@ -77,8 +77,8 @@
 																										</h3>
 
 																										<a target="_blank" style="text-decoration:none" class="m_4325997054331131087button" href="{{siteUrl}}/kupon-bevaltasa/{{ref}}?c={{coupon.slug}}">
-																											<div align="center" bgcolor="#0898FF" class="m_4325997054331131087button-inner" style="font-family:BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0px;padding:0px;border:0px;font-size:14px;line-height:20px;text-align:center;color:#ffffff;background:#0898ff;border-radius:3px;border:1px solid #0898ff;background:#0898ff;padding-top:8px;padding-right:16px;padding-bottom:8px;padding-left:16px" valign="middle">
-																												<span class="il" style="color:white; text-decoration:none">Kupon beváltása</span>
+																											<div align="center" bgcolor="red" class="m_4325997054331131087button-inner" style="font-family:BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0px;padding:0px;border:0px;font-size:14px;line-height:20px;text-align:center;color:#ffffff;border-radius:3px;border:1px solid red;background:red;padding-top:8px;padding-right:16px;padding-bottom:8px;padding-left:16px" valign="middle">
+																												<span class="il" style="color:white; text-decoration:none">Váltsd be most</span>
 																											</div>
 																										</a>
 																									</div>
