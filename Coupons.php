@@ -7,6 +7,7 @@ use Kodbazis\Generated\Repository\Feedback\SqlLister;
 use Kodbazis\Generated\Request;
 use Kodbazis\Mailer\Mailer;
 use Twig\Environment;
+use Twig\Extra\Intl\IntlExtension;
 
 class Coupons
 {
@@ -22,7 +23,7 @@ class Coupons
                 $coursesWithoutIssuedCoupons = getCoursesWithoutIssuedCoupons($conn, $courses, $subscriberId);
 
                 $now = time();
-                $plusFiveDays = date('U', strtotime('+5 day', $now));
+                $plusFiveDays = date('U', strtotime('+3 day', $now));
                 foreach ($coursesWithoutIssuedCoupons as $course) {
                     $conn->query(
                         "INSERT INTO `coupons` 
@@ -70,6 +71,9 @@ class Coupons
             '/admin/api/sendCouponMails/{subscriberId}',
             [Auth::class, 'validate'],
             function (Request $request) use ($conn, $twig) {
+
+                $twig->addExtension(new IntlExtension());
+
                 $subscriberId = $request->vars['subscriberId'];
 
                 $coupons = fetchAll($conn->query(
@@ -103,14 +107,26 @@ class Coupons
                     return;
                 }
 
+                $discountedPrice = function ($price, $discount) {
+                    $multiplier = (100 - $discount) / 100;
+                    $x = $price * $multiplier;
+                    return round($x / 10) * 10;
+                };
+
                 $ref = uniqid();
 
                 $msg = $twig->render('coupon-email.twig', [
                     'subscriberId' => $subscriberId,
                     'siteUrl' => Router::siteUrl(),
-                    'coupons' =>  $coupons,
+                    'coupons' =>  array_map(function ($c) use ($discountedPrice) {
+                        $c['discountedPrice'] = $discountedPrice($c['price'], $c['couponDiscount']);
+                        return $c;
+                    }, $coupons),
                     'ref' => $ref,
                 ]);
+
+                echo $msg;
+                exit;
 
                 if (!@(new Mailer())->sendMail($subscribers[0]['email'], 'Kupon akció a Kódbázison', $msg)) {
                     echo "email error";

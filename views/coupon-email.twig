@@ -28,9 +28,9 @@
 																								<h1 style="font-family:BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0px;padding:0px;border:0px;font-weight:bold;font-size:24px;line-height:32px;margin-bottom:8px;display:block; text-align:center">
 
 																									{% if coupons | length > 1 %}
-																										Váltsd be az ajándék kuponjaid és tanulj a Kódbázison kedvezményes áron!
+																										Váltsd be az ajándék kuponjaid és tanulj kedvezményes áron!
 																									{% else %}
-																										Váltsd be az ajándék kuponod és tanulj a Kódbázison kedvezményes áron!
+																										Váltsd be az ajándék kuponod és tanulj kedvezményes áron!
 																									{% endif %}
 																								</h1>
 																							</td>
@@ -48,17 +48,32 @@
 																							<tr>
 																								<td style="padding-bottom: 20px;">
 																									<div style="border: 1px solid lightgrey; padding: 5px; border-radius: 0 0 6px 6px;">
-																										<h1 style="font-family:BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0px;padding:0px;border:0px;margin-bottom:8px">
+																										<h2 style="font-family:BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0px;padding:0px;border:0px;margin-bottom:25px;text-align:center">
 																											Kedvezmény:
-																											<span style="color:#E93F33">{{coupon.couponDiscount}}%</span>
-																										</h1>
-																										<h2 style="font-family:BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0px;padding:0px;border:0px;margin-bottom:8px">
-																											Kuponkód:
-																											<span style="color:#E93F33; padding: 5px; margin: 5px border-radius: 6px">{{coupon.code}}</span>
 																										</h2>
-																										<h3 style="font-family:BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0px;padding:0px;border:0px;margin-bottom:8px">
+																										<h2 style="font-family:BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0px;padding:0px;border:0px;margin-bottom:25px;text-align:center">
+																											<span style="  border: 1px solid rgb(229 0 16);color: rgb(201 0 46);display: inline-block;line-height: 28px;padding: 6px 12px;right: 0;font-family: " main-regular", " helvetica neue", arial, sans-serif;">
+																												{{coupon.couponDiscount}}%
+																											</span>
+																										</h2>
+																										<h2 style="font-family:BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0px;padding:0px;border:0px;margin-bottom:25px;text-align:center">
+																											<span style="margin-right: 10px;line-height: 1.5; font-size: 1.5rem;font-weight: 400; text-transform: none; background: linear-gradient(to left top,transparent 47.75%,currentColor 49.5%,currentColor 50.5%,transparent 52.25%);">
+																												{{coupon.price | number_format(0, '', ' ')}}
+																												Ft
+																											</span>
+																											<span class="first" style="color: rgb(201 0 46); font-size: 2.5rem">
+																												{{coupon.discountedPrice | number_format(0, '', ' ') }}
+																												Ft
+																											</span>
+																										</h2>
+
+																										<h3 style="font-family:BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0px;padding:0px;border:0px;margin-bottom:8px;text-align:center">
+																											Kuponkód:
+																											<span style="padding: 5px; margin: 5px border-radius: 6px">{{coupon.code}}</span>
+																										</h3>
+																										<h3 style="font-family:BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0px;padding:0px;border:0px;margin-bottom:8px;text-align:center">
 																											Érvényes:
-																											{{coupon.validUntil |date("Y. m. d. H:i")}}-ig!
+																											{{coupon.validUntil |format_datetime('full', 'none', locale='hu')}}ig!
 																										</h3>
 
 																										<a target="_blank" style="text-decoration:none" class="m_4325997054331131087button" href="{{siteUrl}}/kupon-bevaltasa/{{ref}}?c={{coupon.slug}}">
