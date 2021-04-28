@@ -510,7 +510,7 @@ class PublicSite
             echo $twig->render('wrapper.twig', [
                 'structuredData' => self::organizationStructuredData(),
                 'title' => "Tréning",
-                'content' => $twig->render('training.html', []),
+                'content' => $twig->render('online.html', []),
                 'subscriberLabel' =>  getNick($request->vars),
                 'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.',
                 'styles' => [
