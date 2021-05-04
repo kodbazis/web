@@ -290,6 +290,7 @@ class Episodes
                     ['path' => 'css/promo.css'],
                     ['path' => 'css/post-single.css'],
                     ['path' => 'css/episode-single.css'],
+                    ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
                     ...Embeddables::getKodsegedStyles(),
                     ...Embeddables::getAppStyles($apps),
                 ],

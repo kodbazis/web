@@ -8,6 +8,211 @@
 				<hr>
 				{{ episodeContent | raw }}
 			</div>
+
+			<div class="col-md-10 offset-md-1 card">
+				<h2 class="mb-3">
+					<i class="fa fa-info-circle"></i>
+					Kisokos
+					<button id="info-box-toggle" class="float-right btn btn-outline-dark btn-circle mt-2" style="font-size:12px">
+						<i class="fa fa-arrow-down m-auto"></i>
+					</button>
+					<script>
+						window.addEventListener('load', function () {
+							let isVisible = false;
+							const btn = document.getElementById('info-box-toggle');
+							const body = document.getElementById('info-box-body');
+							btn.onclick = function (e) {
+								isVisible = !isVisible;
+								if(isVisible) {
+									body.classList.remove('d-none');
+									btn.innerHTML = '<i class="fa fa-arrow-up m-auto"></i>';
+								} else {
+									body.classList.add('d-none');
+									btn.innerHTML = '<i class="fa fa-arrow-down m-auto"></i>';
+								}
+							}
+						});
+					</script>
+				</h2>
+
+				<div id="info-box-body" class="d-none">
+					<h4 class="mb-3 text-center">Leghasznosabb Visual Studio Code gyorsbillentyűk</h4>
+					<p class="text-center mb-2">"Keyboard shortcuts" alatt állíthatók be a VSCode-ban</p>
+					<table border="1" cellpadding="1" cellspacing="1" class="table table-dark table-responsive-sm table-striped mb-4">
+						<thead class="text-center">
+							<tr>
+								<th scope="col">
+									<h3>
+										<strong>Művelet</strong>
+									</h3>
+								</th>
+								<th scope="col">
+									<h3>
+										<strong>Megnevezés</strong>
+									</h3>
+								</th>
+							</tr>
+						</thead>
+						<tbody style="font-size: 16px">
+							<tr>
+								<td class="text-warning">
+									<p>
+										Dokumentum automatikus formázása
+									</p>
+								</td>
+								<td class="text-danger">
+									<p>
+										Format Document
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td class="text-warning">
+									<p>
+										Kijelölés duplikálása
+									</p>
+								</td>
+								<td class="text-danger">
+									<p>
+										Duplicate Selection
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td class="text-warning">
+									<p>
+										Keresés
+									</p>
+								</td>
+								<td class="text-danger">
+									<p>
+										Find
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td class="text-warning">
+									<p>
+										Keresés és csere
+									</p>
+								</td>
+								<td class="text-danger">
+									<p>
+										Replace
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td class="text-warning">
+									<p>
+										Kijelölés mozgatása fel
+									</p>
+								</td>
+								<td class="text-danger">
+									<p>
+										Move Line Up
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td class="text-warning">
+									<p>
+										Kijelölés mozgatása le
+									</p>
+								</td>
+								<td class="text-danger">
+									<p>
+										Move Line Down
+									</p>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<h4 class="mb-3 text-center">Gyakori Docker parancsok</h4>
+					<table border="1" cellpadding="1" cellspacing="1" class="table table-dark table-responsive-sm table-striped">
+						<thead class="text-center">
+							<tr>
+								<th scope="col">
+									<h3>
+										<strong>Művelet</strong>
+									</h3>
+								</th>
+								<th scope="col">
+									<h3>
+										<strong>Parancs</strong>
+									</h3>
+								</th>
+							</tr>
+						</thead>
+						<tbody style="font-size: 16px">
+							<tr>
+								<td class="text-warning">
+									<p>
+										Összes konténer leállítása
+									</p>
+								</td>
+								<td class="text-info">
+									<p>
+										docker stop $(docker ps -a -q)
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td class="text-warning">
+									<p>
+										Összes konténer eltávolítása:
+									</p>
+								</td>
+								<td class="text-info">
+									<p>
+										docker rm -f $(docker ps -a -q)
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td class="text-warning">
+									<p>
+										Konténerek indítása egy adott projektben
+									</p>
+								</td>
+								<td class="text-info">
+									<p>
+										docker-compose up
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td class="text-warning">
+									<p>
+										Docker image-ek újraépítése és konténerek indítása
+									</p>
+									<p>
+										(Leginkább akkor hasznos, amikor újra akarod építeni az adatbázist)
+									</p>
+								</td>
+								<td class="text-info">
+									<p>
+										docker-compose up --build
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td class="text-warning">
+									<p>
+										Konténerek leállítása egy adott projektben
+									</p>
+								</td>
+								<td class="text-info">
+									<p>
+										docker-compose down
+									</p>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 			<hr>
 
 			<div class="bg-light mb-2">
