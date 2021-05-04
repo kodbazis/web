@@ -145,7 +145,7 @@
 								</th>
 							</tr>
 						</thead>
-						<tbody style="font-size: 16px; vertical-align: middle">
+						<tbody style="font-size: 16px">
 							<tr>
 								<td class="text-warning">
 									<p>
@@ -155,7 +155,7 @@
 										(Akkor hasznos, amikor port ütközést tapasztalsz egy másik futó konténer miatt)
 									</p>
 								</td>
-								<td class="text-info">
+								<td class="text-info align-middle">
 									<p>
 										docker stop $(docker ps -a -q)
 									</p>
@@ -167,7 +167,7 @@
 										Összes konténer eltávolítása
 									</p>
 								</td>
-								<td class="text-info">
+								<td class="text-info align-middle">
 									<p>
 										docker rm -f $(docker ps -a -q)
 									</p>
@@ -179,7 +179,7 @@
 										Konténerek indítása egy adott projektben
 									</p>
 								</td>
-								<td class="text-info">
+								<td class="text-info align-middle">
 									<p>
 										docker-compose up
 									</p>
@@ -194,7 +194,7 @@
 										(Leginkább akkor hasznos, amikor újra akarod építeni az adatbázist)
 									</p>
 								</td>
-								<td class="text-info">
+								<td class="text-info align-middle">
 									<p>
 										docker-compose up --build
 									</p>
@@ -206,7 +206,7 @@
 										Konténerek leállítása és eltávolítása egy adott projektben
 									</p>
 								</td>
-								<td class="text-info">
+								<td class="text-info align-middle">
 									<p>
 										docker-compose down
 									</p>
