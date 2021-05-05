@@ -25,7 +25,7 @@ function renderCouponApp() {
       : `
         <form class="_2bCMA pl-3 pr-3" onsubmit="sendCoupon.apply(this, arguments)">
             <div class="input-group mb-3">
-                <input type="text" class="form-control ${statusClassMap[status]}" placeholder="Írd be a kuponkódot..." name="code">
+                <input type="password" class="form-control ${statusClassMap[status]}" placeholder="Írd be a kuponkódot..." name="code">
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-primary btn-sm form-control h-100 blue-filled-btn">
                     <p>Kupon beváltása</p>
