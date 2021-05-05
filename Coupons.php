@@ -23,7 +23,7 @@ class Coupons
                 $coursesWithoutIssuedCoupons = getCoursesWithoutIssuedCoupons($conn, $courses, $subscriberId);
 
                 $now = time();
-                $plusFiveDays = date('U', strtotime('+3 day', $now));
+                $plusFiveDays = date('U', strtotime('+5 day', $now));
                 foreach ($coursesWithoutIssuedCoupons as $course) {
                     $conn->query(
                         "INSERT INTO `coupons` 
@@ -125,7 +125,7 @@ class Coupons
                     'ref' => $ref,
                 ]);
 
-                if (!@(new Mailer())->sendMail($subscribers[0]['email'], 'Kuponakció a Kódbázison', $msg)) {
+                if (!@(new Mailer())->sendMail($subscribers[0]['email'], 'Ajándék a Kódbázistól', $msg)) {
                     echo "email error";
                     exit;
                 }

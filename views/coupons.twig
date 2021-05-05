@@ -57,7 +57,7 @@
 					</td>
 					<td>
 						<form action="/admin/api/issueCoupons/{{subscriber.id}}" method="POST">
-							<input {{subscriber.areCouponsIssuable ? '': 'disabled'}} class="form-control w-25 d-inline-block mr-2" name="discount" type="number" value="50"/>%
+							<input {{subscriber.areCouponsIssuable ? '': 'disabled'}} class="form-control w-25 d-inline-block mr-2" name="discount" type="number" value="30"/>%
 							<button {{subscriber.areCouponsIssuable ? '': 'disabled'}} class="btn btn-sm btn-danger">
 								Issue coupons
 							</button>
