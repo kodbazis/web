@@ -148,7 +148,7 @@ class Episodes
                 }
 
                 (new EpisodePatcher())->getRoute($request);
-                header('Location: /admin/epizodok?isSuccess=1');
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
             }
         );
     }
