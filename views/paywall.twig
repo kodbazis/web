@@ -65,7 +65,7 @@ isLight = ! isLight
 						<b>A teljes képzés ára:</b>
 					</p>
 					{% if course.price == discountedPrice %}
-						<h1 class="p-3 no-discount color-blue" style="font-size: 3em; text-shadow: 2px 3px 5px #ddd;">
+						<h1 class="p-3 no-discount" style="font-size: 3em; text-shadow: 2px 3px 5px #ddd;">
 							<b>{{course.price | number_format(0, '', ' ')}}
 								Ft</b>
 						</h1>
