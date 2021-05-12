@@ -47,21 +47,6 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) use ($conn
     try {
 
       
-      $r->post('/api/feedbacks', [
-          new \Kodbazis\Generated\Route\Feedback\FeedbackSaver,
-          'getRoute'
-      ]);
-  
-      $r->post('/api/quotes', [
-          new \Kodbazis\Generated\Route\Quote\QuoteSaver,
-          'getRoute'
-      ]);
-  
-      $r->post('/api/specs', [
-          new \Kodbazis\Generated\Route\Spec\SpecSaver,
-          'getRoute'
-      ]);
-  
 
      \Kodbazis\Generated\Route\Auth\Auth::getRoutes($r, $conn);
 
