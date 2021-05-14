@@ -5,6 +5,29 @@
 				<div class="card-title">
 					<h1 class="mb-4 mt-5">{{ episode.title }}</h1>
 				</div>
+				<button class="btn btn-outline-primary btn-sm text-center" id="short-description-toggle-btn">
+					Témakörök <i class="fa fa-arrow-circle-up"></i>
+				</button>
+				<div class="card p-3 pr-4 pl-4 d-none mt-2" id="short-description-body">
+					{{episode.shortDescription | raw}}
+				</div>
+				<script>
+						window.addEventListener('load', function () {
+							let isVisible = false;
+							const btn = document.getElementById('short-description-toggle-btn');
+							const body = document.getElementById('short-description-body');
+							btn.onclick = function (e) {
+								isVisible = !isVisible;
+								if(isVisible) {
+									body.classList.remove('d-none');
+									btn.innerHTML = 'Témakörök <i class="fa fa-arrow-circle-down"></i>';
+								} else {
+									body.classList.add('d-none');
+									btn.innerHTML = 'Témakörök <i class="fa fa-arrow-circle-up"></i>';
+								}
+							}
+						});
+				</script>
 				<hr>
 				{{ episodeContent | raw }}
 			</div>
@@ -58,6 +81,9 @@
 								<td class="text-warning">
 									<p>
 										Dokumentum automatikus formázása
+									</p>
+									<p style="font-size:13px" class="text-success">
+										(A VSCode első formázáskor felszólíthat, hogy tölts le egy formázó plugint. Ilyen pl. a "Prettier" kiegészítő)
 									</p>
 								</td>
 								<td class="text-danger">
