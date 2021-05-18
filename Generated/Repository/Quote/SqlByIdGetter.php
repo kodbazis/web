@@ -23,7 +23,7 @@ class SqlByIdGetter implements ById
             $stmt->bind_param('s', $id);
             $stmt->execute();
             $result = $stmt->get_result()->fetch_assoc();
-            return new Quote((int)$result['id'], (string)$result['content'], (string)$result['author'], (int)$result['position'], (int)$result['courseId'], (int)$result['createdAt']);
+            return new Quote((int)$result['id'], (string)$result['content'], (string)$result['author'], (int)$result['position'], (int)$result['courseId'], (int)$result['rating'], (int)$result['createdAt']);
         
         } catch (\Error $exception) {
             if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {

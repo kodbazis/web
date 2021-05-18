@@ -22,25 +22,26 @@ class SqlSaver implements Saver
         try {
             $statement = $this->connection->prepare(
                 "INSERT INTO `quotes` (
-                `id`, `content`, `author`, `position`, `courseId`, `createdAt`
+                `id`, `content`, `author`, `position`, `courseId`, `rating`, `createdAt`
                 ) 
-                VALUES (NULL, ?,?,?,?,?);"
+                VALUES (NULL, ?,?,?,?,?,?);"
             );
     
             $content = $new->getContent();
         $author = $new->getAuthor();
         $position = $new->getPosition();
         $courseId = $new->getCourseId();
+        $rating = $new->getRating();
         $createdAt = $new->getCreatedAt();
         
     
             $statement->bind_param(
-                "ssiii",
-                 $content, $author, $position, $courseId, $createdAt        
+                "ssiiii",
+                 $content, $author, $position, $courseId, $rating, $createdAt        
              );
             $statement->execute();
     
-            return new Quote((string)$statement->insert_id, $new->getContent(),$new->getAuthor(),$new->getPosition(),$new->getCourseId(),$new->getCreatedAt());
+            return new Quote((string)$statement->insert_id, $new->getContent(),$new->getAuthor(),$new->getPosition(),$new->getCourseId(),$new->getRating(),$new->getCreatedAt());
         } catch (\Error $exception) {
             if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {
                 var_dump($exception);

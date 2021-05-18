@@ -2,6 +2,7 @@
 
 namespace Kodbazis;
 
+use DateTime;
 use Kodbazis\Generated\OperationError;
 use Kodbazis\Generated\Request;
 use mysqli;
@@ -914,7 +915,7 @@ class PublicSite
             // not logged in
             if (!isset($_SESSION['subscriberId'])) {
                 echo $twig->render('wrapper.twig', [
-                    'structuredData' => courseToStructuredData($course),
+                    'structuredData' => courseToStructuredData($course, $conn),
                     'title' => $course->getTitle(),
                     'description' => $course->getDescription(),
                     'content' => $twig->render('paywall.twig', [
@@ -968,7 +969,7 @@ class PublicSite
             // not ordered
             if (!$subscriberCourses->getCount()) {
                 echo $twig->render('wrapper.twig', [
-                    'structuredData' => courseToStructuredData($course),
+                    'structuredData' => courseToStructuredData($course, $conn),
                     'title' => $course->getTitle(),
                     'description' => $course->getDescription(),
                     'content' => $twig->render('paywall.twig', [
@@ -1005,7 +1006,7 @@ class PublicSite
 
             if (!$subscriberCourse->getIsPayed()) {
                 echo $twig->render('wrapper.twig', [
-                    'structuredData' => courseToStructuredData($course),
+                    'structuredData' => courseToStructuredData($course, $conn),
                     'title' => $course->getTitle(),
                     'description' => $course->getDescription(),
                     'content' => $twig->render('paywall.twig', [
@@ -1043,7 +1044,7 @@ class PublicSite
             if (!$subscriberCourse->getIsVerified()) {
 
                 echo $twig->render('wrapper.twig', [
-                    'structuredData' => courseToStructuredData($course),
+                    'structuredData' => courseToStructuredData($course, $conn),
                     'title' => $course->getTitle(),
                     'description' => $course->getDescription(),
                     'content' => $twig->render('paywall.twig', [
@@ -1081,7 +1082,7 @@ class PublicSite
 
             echo $twig->render('wrapper.twig', [
                 'subscriberLabel' =>  getNick($request->vars),
-                'structuredData' => courseToStructuredData($course),
+                'structuredData' => courseToStructuredData($course, $conn),
                 'title' => $course->getTitle(),
                 'description' => $course->getDescription(),
                 'content' => $twig->render('course.twig', [
@@ -1120,8 +1121,17 @@ function courseToStructuredData2($course)
     ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 }
 
-function courseToStructuredData($course)
+function courseToStructuredData($course, $conn)
 {
+    $quotes = (new QuoteLister($conn))->list(new Query(
+        1000,
+        0,
+        new Clause('eq', 'courseId', $course->getId()),
+        new OrderBy('position', 'asc')
+    ));
+
+    $now = time();
+    $plusOneMonth = date('U', strtotime('+1 month', $now));
     return json_encode([
         "@context" => "https://schema.org",
         "@type" => "Product",
@@ -1138,25 +1148,27 @@ function courseToStructuredData($course)
             "url" => Router::siteUrl() . '/' . $course->getSlug(),
             "priceCurrency" => "HUF",
             "price" => getDiscountedPrice($course, 0),
-            "priceValidUntil" => "2021-11-20",
+            "priceValidUntil" => (new DateTime())->setTimestamp($plusOneMonth)->format('Y-m-d'),
             "availability" => "https://schema.org/InStock"
         ],
-        "review" => [
-            "@type" => "Review",
-            "reviewRating" => [
-                "@type" => "Rating",
-                "ratingValue" => "5",
-                "bestRating" => "5"
-            ],
-            "author" => [
-                "@type" => "Person",
-                "name" => "Gálik János"
-            ]
-        ],
+        "review" => array_map(function ($quote) {
+            return [
+                "@type" => "Review",
+                "reviewRating" => [
+                    "@type" => "Rating",
+                    "ratingValue" => $quote->getRating(),
+                ],
+                "reviewBody" => $quote->getContent(),
+                "author" => [
+                    "@type" => "Person",
+                    "name" => $quote->getAuthor(),
+                ],
+            ];
+        }, $quotes->getEntities()),
         "aggregateRating" => [
             "@type" => "AggregateRating",
             "ratingValue" => "5",
-            "reviewCount" => "1"
+            "reviewCount" => $quotes->getCount(),
         ],
         "mpn" => "925872",
     ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);

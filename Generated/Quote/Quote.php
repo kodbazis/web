@@ -11,17 +11,19 @@ private $content;
 private $author;
 private $position;
 private $courseId;
+private $rating;
 private $createdAt;
 
 
     
-public function __construct($id, $content, $author, $position, $courseId, $createdAt)
+public function __construct($id, $content, $author, $position, $courseId, $rating, $createdAt)
 {
         $this->id = $id;
 $this->content = $content;
 $this->author = $author;
 $this->position = $position;
 $this->courseId = $courseId;
+$this->rating = $rating;
 $this->createdAt = $createdAt;
 
 }
@@ -46,6 +48,10 @@ $this->createdAt = $createdAt;
     {
         return $this->courseId;
     }
+    public function getRating(): ?int
+    {
+        return $this->rating;
+    }
     public function getCreatedAt(): ?int
     {
         return $this->createdAt;
@@ -60,6 +66,7 @@ $this->createdAt = $createdAt;
  'author' => $this->author,
  'position' => $this->position,
  'courseId' => $this->courseId,
+ 'rating' => $this->rating,
  'createdAt' => $this->createdAt,
 
         ];

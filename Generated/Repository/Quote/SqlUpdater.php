@@ -37,7 +37,7 @@ class SqlUpdater implements Updater
           );
           $stmt->execute();
           
-          return new Quote($id, $byId->getContent(),$byId->getAuthor(),$entity->getPosition(),$entity->getCourseId(),$byId->getCreatedAt());
+          return new Quote($id, $byId->getContent(),$byId->getAuthor(),$entity->getPosition(),$entity->getCourseId(),$byId->getRating(),$byId->getCreatedAt());
       
       } catch (\Error $exception) {
           if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {

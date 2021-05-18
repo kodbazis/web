@@ -112,7 +112,7 @@ class SqlLister implements Lister
     
             return new CountedQuotes(
                 array_map(function ($array) {
-                    return new Quote((int)$array['id'], (string)$array['content'], (string)$array['author'], (int)$array['position'], (int)$array['courseId'], (int)$array['createdAt']);
+                    return new Quote((int)$array['id'], (string)$array['content'], (string)$array['author'], (int)$array['position'], (int)$array['courseId'], (int)$array['rating'], (int)$array['createdAt']);
                 }, $results),
                 $count
             );

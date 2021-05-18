@@ -45,7 +45,7 @@ class SqlPatcher implements Patcher
               throw new OperationError($stmt->error);
           }
           
-          return new Quote($id, $byId->getContent(),$byId->getAuthor(),$merged->getPosition(),$merged->getCourseId(),$byId->getCreatedAt());
+          return new Quote($id, $byId->getContent(),$byId->getAuthor(),$merged->getPosition(),$merged->getCourseId(),$byId->getRating(),$byId->getCreatedAt());
       
       } catch (\Error $exception) {
             if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {

@@ -36,7 +36,7 @@
     {
         $missing = array_map(function ($fieldName) {
             return Error::getValidationError($fieldName);
-        }, array_filter(['content', 'author', 'courseId'], function ($fieldName) use ($entity) {
+        }, array_filter(['content', 'author', 'courseId', 'rating'], function ($fieldName) use ($entity) {
             return empty($entity[$fieldName]);
         }));
 
@@ -65,7 +65,7 @@
         }
 
         try {
-          $toSave = new NewQuote((string)($entity['content']), (string)($entity['author']), (int)($entity['position'] ?? 0), (int)($entity['courseId']), (int)($entity['createdAt'] ?? 0));
+          $toSave = new NewQuote((string)($entity['content']), (string)($entity['author']), (int)($entity['position'] ?? 0), (int)($entity['courseId']), (int)($entity['rating']), (int)($entity['createdAt'] ?? 0));
               return $this->saver->Save($toSave);
         } catch (Exception $err) {
                 $this->operationError->addField(Error::getOperationError());
@@ -87,6 +87,7 @@
             'author' => [$this, 'isString'],
             'position' => [$this, 'isInt'],
             'courseId' => [$this, 'isInt'],
+            'rating' => [$this, 'isInt'],
             'createdAt' => [$this, 'isInt']
 
         ];
