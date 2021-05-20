@@ -2,6 +2,8 @@
 
 namespace Kodbazis;
 
+use Kodbazis\Generated\Listing\OrderBy;
+use Kodbazis\Generated\Listing\Query;
 use mysqli;
 use Kodbazis\Generated\Repository\Post\SqlByIdGetter;
 
@@ -10,6 +12,7 @@ use Kodbazis\Generated\Request;
 use Kodbazis\Generated\Route\Post\PostDeleter;
 use Kodbazis\Generated\Route\Post\PostPatcher;
 use Kodbazis\Generated\Route\Post\PostSaver;
+use Kodbazis\Generated\Repository\Course\SqlLister as CourseSqlLister;
 use Kodbazis\Image\ImageSaver;
 use Twig\Environment;
 
@@ -185,6 +188,14 @@ class Posts
                 return array_map(fn ($item) => ['path' => "app/" . $app->getName() . "/$item"], $codeAssistScripts2);
             }, $apps);
 
+
+            $recommendedCourses = (new CourseSqlLister($conn))->list(new Query(
+                1000,
+                0,
+                null,
+                new OrderBy('id', 'asc')
+            ));
+
             echo $twig->render('wrapper.twig', [
                 'title' => $post->getTitle(),
                 'description' => $post->getDescription(),
@@ -219,10 +230,13 @@ class Posts
                     'post' => $post,
                     'postContent' => $content,
                     'url' => Router::siteUrl() . $_SERVER['REQUEST_URI'],
+                    'recommendedCourses' => $recommendedCourses->getEntities(),
                 ]),
                 'scripts' => array_merge($codeAssistScriptPaths, ...$appScripts),
                 'styles' => array_merge([
                     ['path' => 'css/post-single.css'],
+                    ['path' => 'css/episode-single.css'],
+                    ['path' => 'css/promo.css'],
                 ], $codeAssistStylePaths, ...$appStyles),
                 'ogTags' => [
                     [
