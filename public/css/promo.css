@@ -132,20 +132,6 @@ span.step {
   );
 }
 
-@font-face {
-  font-family: "Main-Regular";
-  src: url("/public/css/fonts/main/09c8fb44d2c62d99647e4ce58736293e.eot");
-  src: url("/public/css/fonts/main/09c8fb44d2c62d99647e4ce58736293e.eot?#iefix") format("embedded-opentype"),
-    url("/public/css/fonts/main/09c8fb44d2c62d99647e4ce58736293e.woff2") format("woff2"),
-    url("/public/css/fonts/main/09c8fb44d2c62d99647e4ce58736293e.woff") format("woff"),
-    url("/public/css/fonts/main/09c8fb44d2c62d99647e4ce58736293e.ttf") format("truetype"),
-    url("/public/css/fonts/main/09c8fb44d2c62d99647e4ce58736293e.svg#Main-Regular") format("svg");
-}
-
-p {
-  font-family: "Main-Regular" !important;
-}
-
 .no-discount {
   font-size: 25px;
   line-height: 26px;
