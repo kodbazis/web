@@ -195,10 +195,6 @@ del {
   line-height: 25px;
 }
 
-.main-font {
-  font-family: "Main-Regular", "Helvetica Neue", Arial, sans-serif;
-}
-
 .embed-container {
   --video--width: 1296;
   --video--height: 740;

@@ -493,3 +493,7 @@ footer .right {
 .bg-transparent-70 {
   background-color: rgba(255, 255, 255, 0.7) !important;
 }
+
+.main-font {
+  font-family: "Main-Regular", "Helvetica Neue", Arial, sans-serif;
+}
