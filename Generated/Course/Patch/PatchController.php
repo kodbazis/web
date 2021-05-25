@@ -35,7 +35,7 @@
         public function patch(array $entity, string $id): Course
         {
             try {
-                @$toPatch = new PatchedCourse($entity['title'] ?? null, $entity['invoiceTitle'] ?? null, $entity['content'] ?? null, $entity['slug'] ?? null, $entity['imgUrl'] ?? null, $entity['videoId'] ?? null, $entity['description'] ?? null, (bool)$entity['isActive'] ?? null, $entity['price'] ?? null, $entity['discount'] ?? null);
+                @$toPatch = new PatchedCourse($entity['title'] ?? null, $entity['invoiceTitle'] ?? null, $entity['content'] ?? null, $entity['slug'] ?? null, $entity['imgUrl'] ?? null, $entity['videoId'] ?? null, $entity['description'] ?? null, (bool)$entity['isFinished'] ?? null, $entity['price'] ?? null, $entity['discount'] ?? null);
                 return $this->patcher->patch($id, $toPatch);
             } catch (Exception $err) {
                 $this->operationError->addField(Error::getOperationError());

@@ -22,7 +22,7 @@ class SqlSaver implements Saver
         try {
             $statement = $this->connection->prepare(
                 "INSERT INTO `courses` (
-                `id`, `title`, `invoiceTitle`, `content`, `slug`, `imgUrl`, `videoId`, `description`, `createdAt`, `isActive`, `price`, `discount`
+                `id`, `title`, `invoiceTitle`, `content`, `slug`, `imgUrl`, `videoId`, `description`, `createdAt`, `isFinished`, `price`, `discount`
                 ) 
                 VALUES (NULL, ?,?,?,?,?,?,?,?,?,?,?);"
             );
@@ -35,18 +35,18 @@ class SqlSaver implements Saver
         $videoId = $new->getVideoId();
         $description = $new->getDescription();
         $createdAt = $new->getCreatedAt();
-        $isActive = $new->getIsActive();
+        $isFinished = $new->getIsFinished();
         $price = $new->getPrice();
         $discount = $new->getDiscount();
         
     
             $statement->bind_param(
                 "sssssssiiii",
-                 $title, $invoiceTitle, $content, $slug, $imgUrl, $videoId, $description, $createdAt, $isActive, $price, $discount        
+                 $title, $invoiceTitle, $content, $slug, $imgUrl, $videoId, $description, $createdAt, $isFinished, $price, $discount        
              );
             $statement->execute();
     
-            return new Course((string)$statement->insert_id, $new->getTitle(),$new->getInvoiceTitle(),$new->getContent(),$new->getSlug(),$new->getImgUrl(),$new->getVideoId(),$new->getDescription(),$new->getCreatedAt(),$new->getIsActive(),$new->getPrice(),$new->getDiscount());
+            return new Course((string)$statement->insert_id, $new->getTitle(),$new->getInvoiceTitle(),$new->getContent(),$new->getSlug(),$new->getImgUrl(),$new->getVideoId(),$new->getDescription(),$new->getCreatedAt(),$new->getIsFinished(),$new->getPrice(),$new->getDiscount());
         } catch (\Error $exception) {
             if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {
                 var_dump($exception);

@@ -24,7 +24,7 @@ class SqlUpdater implements Updater
           
           $stmt = $this->connection->prepare(
               'UPDATE `courses` SET 
-                `title` = ?, `invoiceTitle` = ?, `content` = ?, `slug` = ?, `imgUrl` = ?, `videoId` = ?, `description` = ?, `isActive` = ?, `price` = ?, `discount` = ?
+                `title` = ?, `invoiceTitle` = ?, `content` = ?, `slug` = ?, `imgUrl` = ?, `videoId` = ?, `description` = ?, `isFinished` = ?, `price` = ?, `discount` = ?
                 WHERE `id` = ?;'
           );
           
@@ -35,17 +35,17 @@ class SqlUpdater implements Updater
         $imgUrl= $entity->getImgUrl();
         $videoId= $entity->getVideoId();
         $description= $entity->getDescription();
-        $isActive= $entity->getIsActive();
+        $isFinished= $entity->getIsFinished();
         $price= $entity->getPrice();
         $discount= $entity->getDiscount();
          
           $stmt->bind_param(
               "sssssssiiis",
-               $title, $invoiceTitle, $content, $slug, $imgUrl, $videoId, $description, $isActive, $price, $discount, $id        
+               $title, $invoiceTitle, $content, $slug, $imgUrl, $videoId, $description, $isFinished, $price, $discount, $id        
           );
           $stmt->execute();
           
-          return new Course($id, $entity->getTitle(),$entity->getInvoiceTitle(),$entity->getContent(),$entity->getSlug(),$entity->getImgUrl(),$entity->getVideoId(),$entity->getDescription(),$byId->getCreatedAt(),$entity->getIsActive(),$entity->getPrice(),$entity->getDiscount());
+          return new Course($id, $entity->getTitle(),$entity->getInvoiceTitle(),$entity->getContent(),$entity->getSlug(),$entity->getImgUrl(),$entity->getVideoId(),$entity->getDescription(),$byId->getCreatedAt(),$entity->getIsFinished(),$entity->getPrice(),$entity->getDiscount());
       
       } catch (\Error $exception) {
           if ($_SERVER['DEPLOYMENT_ENV'] === 'dev') {

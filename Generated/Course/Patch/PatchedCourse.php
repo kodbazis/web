@@ -13,13 +13,13 @@ private $slug;
 private $imgUrl;
 private $videoId;
 private $description;
-private $isActive;
+private $isFinished;
 private $price;
 private $discount;
 
 
     
-public function __construct($title, $invoiceTitle, $content, $slug, $imgUrl, $videoId, $description, $isActive, $price, $discount)
+public function __construct($title, $invoiceTitle, $content, $slug, $imgUrl, $videoId, $description, $isFinished, $price, $discount)
 {
         $this->title = $title;
 $this->invoiceTitle = $invoiceTitle;
@@ -28,7 +28,7 @@ $this->slug = $slug;
 $this->imgUrl = $imgUrl;
 $this->videoId = $videoId;
 $this->description = $description;
-$this->isActive = $isActive;
+$this->isFinished = $isFinished;
 $this->price = $price;
 $this->discount = $discount;
 
@@ -62,9 +62,9 @@ $this->discount = $discount;
     {
         return $this->description;
     }
-    public function getIsActive(): ?bool
+    public function getIsFinished(): ?bool
     {
-        return $this->isActive;
+        return $this->isFinished;
     }
     public function getPrice(): ?int
     {
@@ -86,7 +86,7 @@ $this->discount = $discount;
  'imgUrl' => $this->imgUrl,
  'videoId' => $this->videoId,
  'description' => $this->description,
- 'isActive' => $this->isActive,
+ 'isFinished' => $this->isFinished,
  'price' => $this->price,
  'discount' => $this->discount,
 
