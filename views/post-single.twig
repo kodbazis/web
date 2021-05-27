@@ -16,7 +16,7 @@
 				<div class="app mb-0 bg-light">
 					<ul class="hs full">
 						{% for recommendedCourse in recommendedCourses %}
-							{% if (recommendedCourse.id is not 3) %}
+							{% if (recommendedCourse.id != 3) %}
 								<a class="hover11" href="/{{recommendedCourse.slug}}">
 									<li class="overlay-container item text-center">
 										<figure>

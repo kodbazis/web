@@ -3,7 +3,7 @@
 </h1>
 <div class="row m-auto mb-4">
 	{% for item in items %}
-		{% if (item.id != 3) %}
+		{% if (item.course.id != 3) %}
 
 			<div class="col-md-6">
 				<a href="{{item.course.slug}}">
