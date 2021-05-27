@@ -6,27 +6,28 @@
 					<h1 class="mb-4 mt-5">{{ episode.title }}</h1>
 				</div>
 				<button class="btn btn-outline-primary btn-sm text-center" id="short-description-toggle-btn">
-					Témakörök <i class="fa fa-arrow-circle-up"></i>
+					Témakörök
+					<i class="fa fa-arrow-circle-up"></i>
 				</button>
 				<div class="card p-3 pl-5 d-none mt-2" id="short-description-body">
 					{{episode.shortDescription | raw}}
 				</div>
 				<script>
-						window.addEventListener('load', function () {
-							let isVisible = false;
-							const btn = document.getElementById('short-description-toggle-btn');
-							const body = document.getElementById('short-description-body');
-							btn.onclick = function (e) {
-								isVisible = !isVisible;
-								if(isVisible) {
-									body.classList.remove('d-none');
-									btn.innerHTML = 'Témakörök <i class="fa fa-arrow-circle-down"></i>';
-								} else {
-									body.classList.add('d-none');
-									btn.innerHTML = 'Témakörök <i class="fa fa-arrow-circle-up"></i>';
-								}
-							}
-						});
+					window.addEventListener('load', function () {
+let isVisible = false;
+const btn = document.getElementById('short-description-toggle-btn');
+const body = document.getElementById('short-description-body');
+btn.onclick = function (e) {
+isVisible = ! isVisible;
+if (isVisible) {
+body.classList.remove('d-none');
+btn.innerHTML = 'Témakörök <i class="fa fa-arrow-circle-down"></i>';
+} else {
+body.classList.add('d-none');
+btn.innerHTML = 'Témakörök <i class="fa fa-arrow-circle-up"></i>';
+}
+}
+});
 				</script>
 				<hr>
 				{{ episodeContent | raw }}
@@ -41,20 +42,20 @@
 					</button>
 					<script>
 						window.addEventListener('load', function () {
-							let isVisible = false;
-							const btn = document.getElementById('info-box-toggle');
-							const body = document.getElementById('info-box-body');
-							btn.onclick = function (e) {
-								isVisible = !isVisible;
-								if(isVisible) {
-									body.classList.remove('d-none');
-									btn.innerHTML = '<i class="fa fa-arrow-down m-auto"></i>';
-								} else {
-									body.classList.add('d-none');
-									btn.innerHTML = '<i class="fa fa-arrow-up m-auto"></i>';
-								}
-							}
-						});
+let isVisible = false;
+const btn = document.getElementById('info-box-toggle');
+const body = document.getElementById('info-box-body');
+btn.onclick = function (e) {
+isVisible = ! isVisible;
+if (isVisible) {
+body.classList.remove('d-none');
+btn.innerHTML = '<i class="fa fa-arrow-down m-auto"></i>';
+} else {
+body.classList.add('d-none');
+btn.innerHTML = '<i class="fa fa-arrow-up m-auto"></i>';
+}
+}
+});
 					</script>
 				</h2>
 
@@ -325,13 +326,15 @@
 				<div class="app mb-0 bg-light">
 					<ul class="hs full">
 						{% for recommendedCourse in recommendedCourses %}
-							<a class="hover11" href="/{{recommendedCourse.slug}}">
-								<li class="overlay-container item text-center">
-									<figure>
-										<img loading="lazy" class="img-thumbnail p-0" src="/public/files/sm-{{recommendedCourse.imgUrl}}"/>
-									</figure>
-								</li>
-							</a>
+							{% if (recommendedCourse.id is not 3) %}
+								<a class="hover11" href="/{{recommendedCourse.slug}}">
+									<li class="overlay-container item text-center">
+										<figure>
+											<img loading="lazy" class="img-thumbnail p-0" src="/public/files/sm-{{recommendedCourse.imgUrl}}"/>
+										</figure>
+									</li>
+								</a>
+							{% endif %}
 						{% endfor %}
 					</ul>
 				</div>

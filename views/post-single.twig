@@ -16,13 +16,15 @@
 				<div class="app mb-0 bg-light">
 					<ul class="hs full">
 						{% for recommendedCourse in recommendedCourses %}
-							<a class="hover11" href="/{{recommendedCourse.slug}}">
-								<li class="overlay-container item text-center">
-									<figure>
-										<img loading="lazy" class="img-thumbnail p-0" src="/public/files/sm-{{recommendedCourse.imgUrl}}"/>
-									</figure>
-								</li>
-							</a>
+							{% if (recommendedCourse.id is not 3) %}
+								<a class="hover11" href="/{{recommendedCourse.slug}}">
+									<li class="overlay-container item text-center">
+										<figure>
+											<img loading="lazy" class="img-thumbnail p-0" src="/public/files/sm-{{recommendedCourse.imgUrl}}"/>
+										</figure>
+									</li>
+								</a>
+							{% endif %}
 						{% endfor %}
 					</ul>
 				</div>
