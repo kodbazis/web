@@ -19,7 +19,7 @@ class Coupons
             [Auth::class, 'validate'],
             function (Request $request) use ($conn, $twig) {
                 $subscriberId = $request->vars['subscriberId'];
-                $courses = fetchAll($conn->query('SELECT * FROM courses'));
+                $courses = fetchAll($conn->query('SELECT * FROM courses WHERE isFinished = 1'));
                 $coursesWithoutIssuedCoupons = getCoursesWithoutIssuedCoupons($conn, $courses, $subscriberId);
 
                 $now = time();
