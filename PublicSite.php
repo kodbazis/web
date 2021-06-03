@@ -187,7 +187,7 @@ class PublicSite
                 'content' => $twig->render('forgot-password.twig', [
                     'isError' => isset($_GET['isError']),
                     'emailSent' => isset($_GET['emailSent']),
-                    'referer' => $_SERVER['HTTP_REFERER'],
+                    'referer' => $_SERVER['HTTP_REFERER'] ?? '',
                 ]),
                 'subscriberLabel' =>  getNick($request->vars),
                 'styles' => [
@@ -195,6 +195,10 @@ class PublicSite
                 ],
                 'noIndex' => true,
             ]);
+        });
+
+        $r->get('/api/forgot-password', function (Request $request) {
+            header('Location: /elfelejtett-jelszo?isError=1');
         });
 
         $r->post('/api/forgot-password', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
