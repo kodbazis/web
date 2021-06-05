@@ -196,7 +196,8 @@ class PublicSite
                 ]),
                 'subscriberLabel' =>  getNick($request->vars),
                 'styles' => [
-                    ['path' => 'css/login.css']
+                    ['path' => 'css/login.css'],
+                    ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
                 ],
                 'noIndex' => true,
             ]);
