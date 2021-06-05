@@ -253,7 +253,6 @@ class PublicSite
                 return;
             }
 
-
             $messages = (new MessageLister($conn))->list(new Query(
                 1000,
                 0,
