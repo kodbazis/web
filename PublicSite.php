@@ -644,14 +644,23 @@ class PublicSite
                 0
             ));
 
-            $msg = $twig->render('verification-email.twig', [
+            $body = $twig->render('verification-email.twig', [
                 'email' => $request->body['email'],
                 'link' => Router::siteUrl() . "/megerosites/" . $token . "?referer=" . $_SERVER['HTTP_REFERER'],
             ]);
 
             $params = ['registrationEmailSent=1'];
             header('Location: ' .  $_SERVER['HTTP_REFERER']  . Router::mergeQueries($_SERVER['HTTP_REFERER'], $params));
-            @(new Mailer())->sendMail($request->body['email'], 'Megerősítés egyetlen kattintással', $msg);
+
+            (new MessageSaver($conn))->Save(new NewMessage(
+                $request->body['email'],
+                'Megerősítés egyetlen kattintással',
+                $body,
+                "notSent",
+                0,
+                null,
+                time()
+            ));
         });
 
         $r->get('/megerosites/{token}', function (Request $request) use ($conn, $twig) {
