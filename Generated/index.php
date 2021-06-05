@@ -4,6 +4,7 @@ require '../../vendor/autoload.php';
 
 use Kodbazis\Generated\Route\Post;
 use Kodbazis\Generated\Route\Course;
+use Kodbazis\Generated\Route\Message;
 use Kodbazis\Generated\Route\Episode;
 use Kodbazis\Generated\Route\Embeddable;
 use Kodbazis\Generated\Route\Feedback;

@@ -12,6 +12,9 @@ use Kodbazis\Generated\Paging\Pager;
 use Kodbazis\Generated\Post\Listing\ListController;
 use Kodbazis\Generated\Repository\Post\SqlLister;
 use Kodbazis\Generated\Repository\Subscriber\SqlSaver as SubscriberSaver;
+use Kodbazis\Generated\Repository\Message\SqlSaver as MessageSaver;
+use Kodbazis\Generated\Repository\Message\SqlPatcher as MessagePatcher;
+use Kodbazis\Generated\Repository\Message\SqlLister as MessageLister;
 use Kodbazis\Generated\Repository\Subscriber\SqlLister as SubscriberLister;
 use Kodbazis\Generated\Repository\Subscriber\SqlPatcher as SubscriberPatcher;
 use Kodbazis\Generated\Repository\Embeddable\SqlByIdGetter;
@@ -31,6 +34,8 @@ use Kodbazis\Generated\Listing\Clause;
 use Kodbazis\Generated\Listing\Filter;
 use Kodbazis\Generated\Listing\OrderBy;
 use Kodbazis\Generated\Listing\Query;
+use Kodbazis\Generated\Message\Patch\PatchedMessage;
+use Kodbazis\Generated\Message\Save\NewMessage;
 use Kodbazis\Generated\Subscriber\Patch\PatchedSubscriber;
 use Kodbazis\Generated\Subscriber\Save\NewSubscriber;
 use Kodbazis\Generated\SubscriberCourse\Save\NewSubscriberCourse;
@@ -203,7 +208,6 @@ class PublicSite
 
         $r->post('/api/forgot-password', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
-
             if (isset($request->vars['subscriber'])) {
                 header('Location: /');
                 return;
@@ -215,6 +219,7 @@ class PublicSite
                 header('Location: /elfelejtett-jelszo?isError=1');
                 return;
             }
+            header('Location: /elfelejtett-jelszo?emailSent=1');
 
             $subscriber = $byEmail->getEntities()[0];
             $token = uniqid();
@@ -224,14 +229,63 @@ class PublicSite
                 new PatchedSubscriber(null, null, 1, $token, null)
             );
 
-            header('Location: /elfelejtett-jelszo?emailSent=1');
-
-            $msg = $twig->render('forgot-password-email.twig', [
+            $body = $twig->render('forgot-password-email.twig', [
                 'email' => $subscriber->getEmail(),
                 'link' => Router::siteUrl() . "/jelszo-megvaltoztatasa/" . $token . "?referer=" . $_GET['referer'],
             ]);
 
-            @(new Mailer())->sendMail($subscriber->getEmail(), 'Jelszó megváltoztatása', $msg);
+            (new MessageSaver($conn))->Save(new NewMessage(
+                $subscriber->getEmail(),
+                'Jelszó megváltoztatása',
+                $body,
+                "notSent",
+                0,
+                null,
+                time()
+            ));
+        });
+
+        $r->post("/api/send-mails", function (Request $request) use ($conn, $twig) {
+            header('Content-Type: application/json');
+            if (($request->body['key'] ?? 0) !== ($_SERVER['MASTER_PW'] ?? 1)) {
+                http_response_code(401);
+                echo json_encode(['error' => 'unauthorized']);
+                return;
+            }
+
+
+            $messages = (new MessageLister($conn))->list(new Query(
+                1000,
+                0,
+                new Filter(
+                    'and',
+                    new Clause('lt', 'numberOfAttempts', 10),
+                    new Clause('eq', 'status', "notSent"),
+                ),
+                new OrderBy('createdAt', 'asc')
+            ));
+
+            foreach ($messages->getEntities() as $message) {
+                (new MessagePatcher($conn))->patch($message->getId(), new PatchedMessage(
+                    "sending",
+                    $message->getNumberOfAttempts() + 1,
+                    null,
+                ));
+                $isSent = (new Mailer())->sendMail($message->getEmail(), $message->getSubject(), $message->getBody());
+                if ($isSent) {
+                    (new MessagePatcher($conn))->patch($message->getId(), new PatchedMessage(
+                        "sent",
+                        null,
+                        time()
+                    ));
+                } else {
+                    (new MessagePatcher($conn))->patch($message->getId(), new PatchedMessage(
+                        "notSent",
+                        null,
+                        null,
+                    ));
+                }
+            }
         });
 
         $r->get('/jelszo-megvaltoztatasa/{token}', function (Request $request) use ($conn, $twig) {
