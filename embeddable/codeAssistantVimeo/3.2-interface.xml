@@ -1,0 +1,1380 @@
+<?xml version = "1.0"?>
+<root>
+
+<item>
+    <timestamp>01:27</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>01:30</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+$numbers = range(1, 10000);
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>01:37</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+$numbers = range(1, 10000);
+shuffle($numbers);
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>01:45</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+$numbers = range(1, 10000);
+shuffle($numbers);
+
+$sorted = sortItems($numbers);
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>01:55</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+$numbers = range(1, 10000);
+shuffle($numbers);
+$start = microtime(true);
+
+$sorted = sortItems($numbers);
+
+$end = microtime(true);
+
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>02:03</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+$numbers = range(1, 10000);
+shuffle($numbers);
+$start = microtime(true);
+
+$sorted = sortItems($numbers);
+
+$end = microtime(true);
+$time = number_format($end - $start, 4);
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>02:12</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+$numbers = range(1, 10000);
+shuffle($numbers);
+$start = microtime(true);
+
+$sorted = sortItems($numbers);
+
+$end = microtime(true);
+$time = number_format($end - $start, 4);
+
+// Bubblesort
+function sortItems(array $array): array
+{
+    if (!$length = count($array)) {
+        return $array;
+    }
+    for ($outer = 0; $outer < $length; $outer++) {
+        for ($inner = 0; $inner < $length; $inner++) {
+            if ($array[$outer] < $array[$inner]) {
+                $tmp = $array[$outer];
+                $array[$outer] = $array[$inner];
+                $array[$inner] = $tmp;
+            }
+        }
+    }
+    return $array;
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>02:34</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+$numbers = range(1, 10000);
+shuffle($numbers);
+$start = microtime(true);
+
+$sorted = sortItems($numbers);
+
+$end = microtime(true);
+$time = number_format($end - $start, 4);
+
+echo "Algoritmus: BubbleSort, <br> 
+Elemek száma: " . count($sorted) . ", <br> 
+A művelet $time sec ideig tartott";
+
+// Bubblesort
+function sortItems(array $array): array
+{
+    if (!$length = count($array)) {
+        return $array;
+    }
+    for ($outer = 0; $outer < $length; $outer++) {
+        for ($inner = 0; $inner < $length; $inner++) {
+            if ($array[$outer] < $array[$inner]) {
+                $tmp = $array[$outer];
+                $array[$outer] = $array[$inner];
+                $array[$inner] = $tmp;
+            }
+        }
+    }
+    return $array;
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>02:54</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+// Benchmark mérés
+$numbers = range(1, 10000);
+shuffle($numbers);
+$start = microtime(true);
+
+// Sorbarendezés
+$sorted = sortItems($numbers);
+
+// Benchmark mérés
+$end = microtime(true);
+$time = number_format($end - $start, 4);
+
+// Kiírás
+echo "Algoritmus: BubbleSort, <br> 
+Elemek száma: " . count($sorted) . ", <br> 
+A művelet $time sec ideig tartott";
+
+// Bubblesort
+function sortItems(array $array): array
+{
+    if (!$length = count($array)) {
+        return $array;
+    }
+    for ($outer = 0; $outer < $length; $outer++) {
+        for ($inner = 0; $inner < $length; $inner++) {
+            if ($array[$outer] < $array[$inner]) {
+                $tmp = $array[$outer];
+                $array[$outer] = $array[$inner];
+                $array[$inner] = $tmp;
+            }
+        }
+    }
+    return $array;
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>03:37</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+class BenchmarkCalculator
+{
+    
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>03:41</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+class BenchmarkCalculator
+{
+
+    public function measure(int $numberOfItems)
+    {
+
+    }
+    
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>03:47</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+class BenchmarkCalculator
+{
+
+    public function measure(int $numberOfItems)
+    {
+        $numbers = range(1, $numberOfItems);
+        shuffle($numbers);
+        $start = microtime(true);
+
+        $end = microtime(true);
+        $time = number_format($end - $start, 4);
+
+
+    }
+    
+}
+‏‏‎
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>03:59</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+class BenchmarkCalculator
+{
+
+    public function measure(int $numberOfItems)
+    {
+        $numbers = range(1, $numberOfItems);
+        shuffle($numbers);
+        $start = microtime(true);
+        // Itt kell sorba rendezni
+        $end = microtime(true);
+        $time = number_format($end - $start, 4);
+
+        // Itt kell kiírni a végeredményt
+    }
+    
+}
+‏‏‎
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>04:17</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+class BenchmarkCalculator
+{
+    private BubbleSorter $sorter;
+    private HTTPResponseLogger $logger;
+
+    public function measure(int $numberOfItems)
+    {
+        $numbers = range(1, $numberOfItems);
+        shuffle($numbers);
+        $start = microtime(true);
+        // Itt kell sorba rendezni
+        $end = microtime(true);
+        $time = number_format($end - $start, 4);
+
+        // Itt kell kiírni a végeredményt
+    }
+    
+}
+‏‏‎ 
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>04:46</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+class BenchmarkCalculator
+{
+    private BubbleSorter $sorter;
+    private HTTPResponseLogger $logger;
+
+    public function __construct(BubbleSorter $sorter, HTTPResponseLogger $logger)
+    {
+        $this->sorter = $sorter;
+        $this->logger = $logger;
+    }
+
+    public function measure(int $numberOfItems)
+    {
+        $numbers = range(1, $numberOfItems);
+        shuffle($numbers);
+        $start = microtime(true);
+        // Itt kell sorba rendezni
+        $end = microtime(true);
+        $time = number_format($end - $start, 4);
+
+        // Itt kell kiírni a végeredményt
+    }
+    
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>05:02</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+class BenchmarkCalculator
+{
+    private BubbleSorter $sorter;
+    private HTTPResponseLogger $logger;
+
+    public function __construct(BubbleSorter $sorter, HTTPResponseLogger $logger)
+    {
+        $this->sorter = $sorter;
+        $this->logger = $logger;
+    }
+
+    public function measure(int $numberOfItems)
+    {
+        $numbers = range(1, $numberOfItems);
+        shuffle($numbers);
+        $start = microtime(true);
+        $sorted = $this->sorter->sortItems($numbers);
+        $end = microtime(true);
+        $time = number_format($end - $start, 4);
+
+        // Itt kell kiírni a végeredményt
+    }
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>05:08</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+class BenchmarkCalculator
+{
+    private BubbleSorter $sorter;
+    private HTTPResponseLogger $logger;
+
+    public function __construct(BubbleSorter $sorter, HTTPResponseLogger $logger)
+    {
+        $this->sorter = $sorter;
+        $this->logger = $logger;
+    }
+
+    public function measure(int $numberOfItems)
+    {
+        $numbers = range(1, $numberOfItems);
+        shuffle($numbers);
+        $start = microtime(true);
+        $sorted = $this->sorter->sortItems($numbers);
+        $end = microtime(true);
+        $time = number_format($end - $start, 4);
+
+        $this->logger->log(
+            "Algoritmus: " . get_class($this->sorter) . ", <br> 
+            Elemek száma: " . count($sorted) . ", <br> 
+            A művelet $time sec ideig tartott"
+        );
+    }
+}
+‏‏‎ ‎
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>05:14</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+class BenchmarkCalculator
+{
+    private BubbleSorter $sorter;
+    private HTTPResponseLogger $logger;
+
+    public function __construct(BubbleSorter $sorter, HTTPResponseLogger $logger)
+    {
+        $this->sorter = $sorter;
+        $this->logger = $logger;
+    }
+
+    public function measure(int $numberOfItems)
+    {
+        $numbers = range(1, $numberOfItems);
+        shuffle($numbers);
+        $start = microtime(true);
+        $sorted = $this->sorter->sortItems($numbers);
+        $end = microtime(true);
+        $time = number_format($end - $start, 4);
+
+        $this->logger->log(
+            "Algoritmus: " . get_class($this->sorter) . ", <br> 
+            Elemek száma: " . count($sorted) . ", <br> 
+            A művelet $time sec ideig tartott"
+        );
+    }
+}
+
+class HTTPResponseLogger
+{
+    function log(string $input): void
+    {
+        echo $input;
+    }
+}
+
+class BubbleSorter
+{
+    function sortItems(array $array): array
+    {
+        if (!$length = count($array)) {
+            return $array;
+        }
+        for ($outer = 0; $outer < $length; $outer++) {
+            for ($inner = 0; $inner < $length; $inner++) {
+                if ($array[$outer] < $array[$inner]) {
+                    $tmp = $array[$outer];
+                    $array[$outer] = $array[$inner];
+                    $array[$inner] = $tmp;
+                }
+            }
+        }
+        return $array;
+    }
+}
+
+(new BenchmarkCalculator(
+    new BubbleSorter,
+    new HTTPResponseLogger
+))->measure(10000);
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>08:55</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+interface Sorter
+{
+    function sortItems(array $input): array;
+}
+ 
+class BenchmarkCalculator
+{
+    private BubbleSorter $sorter;
+    private HTTPResponseLogger $logger;
+
+    public function __construct(BubbleSorter $sorter, HTTPResponseLogger $logger)
+    {
+        $this->sorter = $sorter;
+        $this->logger = $logger;
+    }
+
+    public function measure(int $numberOfItems)
+    {
+        $numbers = range(1, $numberOfItems);
+        shuffle($numbers);
+        $start = microtime(true);
+        $sorted = $this->sorter->sortItems($numbers);
+        $end = microtime(true);
+        $time = number_format($end - $start, 4);
+
+        $this->logger->log(
+            "Algoritmus: " . get_class($this->sorter) . ", <br> 
+            Elemek száma: " . count($sorted) . ", <br> 
+            A művelet $time sec ideig tartott"
+        );
+    }
+}
+
+class HTTPResponseLogger
+{
+    function log(string $input): void
+    {
+        echo $input;
+    }
+}
+
+class BubbleSorter
+{
+    function sortItems(array $array): array
+    {
+        if (!$length = count($array)) {
+            return $array;
+        }
+        for ($outer = 0; $outer < $length; $outer++) {
+            for ($inner = 0; $inner < $length; $inner++) {
+                if ($array[$outer] < $array[$inner]) {
+                    $tmp = $array[$outer];
+                    $array[$outer] = $array[$inner];
+                    $array[$inner] = $tmp;
+                }
+            }
+        }
+        return $array;
+    }
+}
+
+(new BenchmarkCalculator(
+    new BubbleSorter,
+    new HTTPResponseLogger
+))->measure(10000);
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>09:52</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+interface Sorter
+{
+    function sortItems(array $input): array;
+}
+
+interface Logger
+{
+    function log(string $input): void;
+}
+ 
+class BenchmarkCalculator
+{
+    private BubbleSorter $sorter;
+    private HTTPResponseLogger $logger;
+
+    public function __construct(BubbleSorter $sorter, HTTPResponseLogger $logger)
+    {
+        $this->sorter = $sorter;
+        $this->logger = $logger;
+    }
+
+    public function measure(int $numberOfItems)
+    {
+        $numbers = range(1, $numberOfItems);
+        shuffle($numbers);
+        $start = microtime(true);
+        $sorted = $this->sorter->sortItems($numbers);
+        $end = microtime(true);
+        $time = number_format($end - $start, 4);
+
+        $this->logger->log(
+            "Algoritmus: " . get_class($this->sorter) . ", <br> 
+            Elemek száma: " . count($sorted) . ", <br> 
+            A művelet $time sec ideig tartott"
+        );
+    }
+}
+
+class HTTPResponseLogger
+{
+    function log(string $input): void
+    {
+        echo $input;
+    }
+}
+
+class BubbleSorter
+{
+    function sortItems(array $array): array
+    {
+        if (!$length = count($array)) {
+            return $array;
+        }
+        for ($outer = 0; $outer < $length; $outer++) {
+            for ($inner = 0; $inner < $length; $inner++) {
+                if ($array[$outer] < $array[$inner]) {
+                    $tmp = $array[$outer];
+                    $array[$outer] = $array[$inner];
+                    $array[$inner] = $tmp;
+                }
+            }
+        }
+        return $array;
+    }
+}
+
+(new BenchmarkCalculator(
+    new BubbleSorter,
+    new HTTPResponseLogger
+))->measure(10000);
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>10:31</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+interface Sorter
+{
+    function sortItems(array $input): array;
+}
+
+interface Logger
+{
+    function log(string $input): void;
+}
+ 
+class BenchmarkCalculator
+{
+    private Sorter $sorter;
+    private Logger $logger;
+
+    public function __construct(Sorter $sorter, Logger $logger)
+    {
+        $this->sorter = $sorter;
+        $this->logger = $logger;
+    }
+
+    public function measure(int $numberOfItems)
+    {
+        $numbers = range(1, $numberOfItems);
+        shuffle($numbers);
+        $start = microtime(true);
+        $sorted = $this->sorter->sortItems($numbers);
+        $end = microtime(true);
+        $time = number_format($end - $start, 4);
+
+        $this->logger->log(
+            "Algoritmus: " . get_class($this->sorter) . ", <br> 
+            Elemek száma: " . count($sorted) . ", <br> 
+            A művelet $time sec ideig tartott"
+        );
+    }
+}
+
+class HTTPResponseLogger
+{
+    function log(string $input): void
+    {
+        echo $input;
+    }
+}
+
+class BubbleSorter implements Sorter
+{
+    function sortItems(array $array): array
+    {
+        if (!$length = count($array)) {
+            return $array;
+        }
+        for ($outer = 0; $outer < $length; $outer++) {
+            for ($inner = 0; $inner < $length; $inner++) {
+                if ($array[$outer] < $array[$inner]) {
+                    $tmp = $array[$outer];
+                    $array[$outer] = $array[$inner];
+                    $array[$inner] = $tmp;
+                }
+            }
+        }
+        return $array;
+    }
+}
+
+(new BenchmarkCalculator(
+    new BubbleSorter,
+    new HTTPResponseLogger
+))->measure(10000);
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>11:03</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+interface Sorter
+{
+    function sortItems(array $input): array;
+}
+
+interface Logger
+{
+    function log(string $input): void;
+}
+ 
+class BenchmarkCalculator
+{
+    private Sorter $sorter;
+    private Logger $logger;
+
+    public function __construct(Sorter $sorter, Logger $logger)
+    {
+        $this->sorter = $sorter;
+        $this->logger = $logger;
+    }
+
+    public function measure(int $numberOfItems)
+    {
+        $numbers = range(1, $numberOfItems);
+        shuffle($numbers);
+        $start = microtime(true);
+        $sorted = $this->sorter->sortItems($numbers);
+        $end = microtime(true);
+        $time = number_format($end - $start, 4);
+
+        $this->logger->log(
+            "Algoritmus: " . get_class($this->sorter) . ", <br> 
+            Elemek száma: " . count($sorted) . ", <br> 
+            A művelet $time sec ideig tartott"
+        );
+    }
+}
+
+class HTTPResponseLogger implements Logger
+{
+    function log(string $input): void
+    {
+        echo $input;
+    }
+}
+
+class BubbleSorter implements Sorter
+{
+    function sortItems(array $array): array
+    {
+        if (!$length = count($array)) {
+            return $array;
+        }
+        for ($outer = 0; $outer < $length; $outer++) {
+            for ($inner = 0; $inner < $length; $inner++) {
+                if ($array[$outer] < $array[$inner]) {
+                    $tmp = $array[$outer];
+                    $array[$outer] = $array[$inner];
+                    $array[$inner] = $tmp;
+                }
+            }
+        }
+        return $array;
+    }
+}
+
+(new BenchmarkCalculator(
+    new BubbleSorter,
+    new HTTPResponseLogger
+))->measure(10000);
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>11:34</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+interface Sorter
+{
+    function sortItems(array $input): array;
+}
+
+interface Logger
+{
+    function log(string $input): void;
+}
+ 
+class BenchmarkCalculator
+{
+    private Sorter $sorter;
+    private Logger $logger;
+
+    public function __construct(Sorter $sorter, Logger $logger)
+    {
+        $this->sorter = $sorter;
+        $this->logger = $logger;
+    }
+
+    public function measure(int $numberOfItems)
+    {
+        $numbers = range(1, $numberOfItems);
+        shuffle($numbers);
+        $start = microtime(true);
+        $sorted = $this->sorter->sortItems($numbers);
+        $end = microtime(true);
+        $time = number_format($end - $start, 4);
+
+        $this->logger->log(
+            "Algoritmus: " . get_class($this->sorter) . ", <br> 
+            Elemek száma: " . count($sorted) . ", <br> 
+            A művelet $time sec ideig tartott"
+        );
+    }
+}
+
+class HTTPResponseLogger implements Logger
+{
+    function log(string $input): void
+    {
+        echo $input;
+    }
+}
+
+class BubbleSorter implements Sorter
+{
+    function sortItems(array $array): array
+    {
+        if (!$length = count($array)) {
+            return $array;
+        }
+        for ($outer = 0; $outer < $length; $outer++) {
+            for ($inner = 0; $inner < $length; $inner++) {
+                if ($array[$outer] < $array[$inner]) {
+                    $tmp = $array[$outer];
+                    $array[$outer] = $array[$inner];
+                    $array[$inner] = $tmp;
+                }
+            }
+        }
+        return $array;
+    }
+}
+
+class QuickSorter implements Sorter
+{
+    function sortItems(array $array): array
+    {
+        if (!$length = count($array)) {
+            return $array;
+        }
+
+        $k = $array[0];
+        $x = $y = array();
+
+        for ($i = 1; $i < $length; $i++) {
+            if ($array[$i] <= $k) {
+                $x[] = $array[$i];
+            } else {
+                $y[] = $array[$i];
+            }
+        }
+        return array_merge($this->sortItems($x), array($k), $this->sortItems($y));
+    }
+}
+
+(new BenchmarkCalculator(
+    new BubbleSorter,
+    new HTTPResponseLogger
+))->measure(10000);
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>11:38</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+interface Sorter
+{
+    function sortItems(array $input): array;
+}
+
+interface Logger
+{
+    function log(string $input): void;
+}
+ 
+class BenchmarkCalculator
+{
+    private Sorter $sorter;
+    private Logger $logger;
+
+    public function __construct(Sorter $sorter, Logger $logger)
+    {
+        $this->sorter = $sorter;
+        $this->logger = $logger;
+    }
+
+    public function measure(int $numberOfItems)
+    {
+        $numbers = range(1, $numberOfItems);
+        shuffle($numbers);
+        $start = microtime(true);
+        $sorted = $this->sorter->sortItems($numbers);
+        $end = microtime(true);
+        $time = number_format($end - $start, 4);
+
+        $this->logger->log(
+            "Algoritmus: " . get_class($this->sorter) . ", <br> 
+            Elemek száma: " . count($sorted) . ", <br> 
+            A művelet $time sec ideig tartott"
+        );
+    }
+}
+
+class HTTPResponseLogger implements Logger
+{
+    function log(string $input): void
+    {
+        echo $input;
+    }
+}
+
+class BubbleSorter implements Sorter
+{
+    function sortItems(array $array): array
+    {
+        if (!$length = count($array)) {
+            return $array;
+        }
+        for ($outer = 0; $outer < $length; $outer++) {
+            for ($inner = 0; $inner < $length; $inner++) {
+                if ($array[$outer] < $array[$inner]) {
+                    $tmp = $array[$outer];
+                    $array[$outer] = $array[$inner];
+                    $array[$inner] = $tmp;
+                }
+            }
+        }
+        return $array;
+    }
+}
+
+class QuickSorter implements Sorter
+{
+    function sortItems(array $array): array
+    {
+        if (!$length = count($array)) {
+            return $array;
+        }
+
+        $k = $array[0];
+        $x = $y = array();
+
+        for ($i = 1; $i < $length; $i++) {
+            if ($array[$i] <= $k) {
+                $x[] = $array[$i];
+            } else {
+                $y[] = $array[$i];
+            }
+        }
+        return array_merge($this->sortItems($x), array($k), $this->sortItems($y));
+    }
+}
+
+class CocktailShakerSorter implements Sorter
+{
+
+    function sortItems(array $array): array
+    {
+        if (!$length = count($array)) {
+            return $array;
+        }
+        $start = -1;
+        while ($start < $length) {
+            ++$start;
+            --$length;
+            for ($i = $start; $i < $length; ++$i) {
+                if ($array[$i] > $array[$i + 1]) {
+                    $temp = $array[$i];
+                    $array[$i] = $array[$i + 1];
+                    $array[$i + 1] = $temp;
+                }
+            }
+            for ($i = $length; --$i >= $start;) {
+                if ($array[$i] > $array[$i + 1]) {
+                    $temp = $array[$i];
+                    $array[$i] = $array[$i + 1];
+                    $array[$i + 1] = $temp;
+                }
+            }
+        }
+        return $array;
+    }
+}
+
+(new BenchmarkCalculator(
+    new BubbleSorter,
+    new HTTPResponseLogger
+))->measure(10000);
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>12:08</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+interface Sorter
+{
+    function sortItems(array $input): array;
+}
+
+interface Logger
+{
+    function log(string $input): void;
+}
+ 
+class BenchmarkCalculator
+{
+    private Sorter $sorter;
+    private Logger $logger;
+
+    public function __construct(Sorter $sorter, Logger $logger)
+    {
+        $this->sorter = $sorter;
+        $this->logger = $logger;
+    }
+
+    public function measure(int $numberOfItems)
+    {
+        $numbers = range(1, $numberOfItems);
+        shuffle($numbers);
+        $start = microtime(true);
+        $sorted = $this->sorter->sortItems($numbers);
+        $end = microtime(true);
+        $time = number_format($end - $start, 4);
+
+        $this->logger->log(
+            "Algoritmus: " . get_class($this->sorter) . ", <br> 
+            Elemek száma: " . count($sorted) . ", <br> 
+            A művelet $time sec ideig tartott"
+        );
+    }
+}
+
+class HTTPResponseLogger implements Logger
+{
+    function log(string $input): void
+    {
+        echo $input;
+    }
+}
+
+class FileLogger implements Logger
+{
+    function log(string $input): void
+    {
+        file_put_contents("./output.txt", $input . "\n -------- \n", FILE_APPEND);
+    }
+}
+
+class BubbleSorter implements Sorter
+{
+    function sortItems(array $array): array
+    {
+        if (!$length = count($array)) {
+            return $array;
+        }
+        for ($outer = 0; $outer < $length; $outer++) {
+            for ($inner = 0; $inner < $length; $inner++) {
+                if ($array[$outer] < $array[$inner]) {
+                    $tmp = $array[$outer];
+                    $array[$outer] = $array[$inner];
+                    $array[$inner] = $tmp;
+                }
+            }
+        }
+        return $array;
+    }
+}
+
+class QuickSorter implements Sorter
+{
+    function sortItems(array $array): array
+    {
+        if (!$length = count($array)) {
+            return $array;
+        }
+
+        $k = $array[0];
+        $x = $y = array();
+
+        for ($i = 1; $i < $length; $i++) {
+            if ($array[$i] <= $k) {
+                $x[] = $array[$i];
+            } else {
+                $y[] = $array[$i];
+            }
+        }
+        return array_merge($this->sortItems($x), array($k), $this->sortItems($y));
+    }
+}
+
+class CocktailShakerSorter implements Sorter
+{
+
+    function sortItems(array $array): array
+    {
+        if (!$length = count($array)) {
+            return $array;
+        }
+        $start = -1;
+        while ($start < $length) {
+            ++$start;
+            --$length;
+            for ($i = $start; $i < $length; ++$i) {
+                if ($array[$i] > $array[$i + 1]) {
+                    $temp = $array[$i];
+                    $array[$i] = $array[$i + 1];
+                    $array[$i + 1] = $temp;
+                }
+            }
+            for ($i = $length; --$i >= $start;) {
+                if ($array[$i] > $array[$i + 1]) {
+                    $temp = $array[$i];
+                    $array[$i] = $array[$i + 1];
+                    $array[$i + 1] = $temp;
+                }
+            }
+        }
+        return $array;
+    }
+}
+
+(new BenchmarkCalculator(
+    new BubbleSorter,
+    new HTTPResponseLogger
+))->measure(10000);
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>12:35</timestamp>
+    <fileName>index.php</fileName>
+    <content>
+<![CDATA[
+<?php
+
+interface Sorter
+{
+    function sortItems(array $input): array;
+}
+
+interface Logger
+{
+    function log(string $input): void;
+}
+ 
+class BenchmarkCalculator
+{
+    private Sorter $sorter;
+    private Logger $logger;
+
+    public function __construct(Sorter $sorter, Logger $logger)
+    {
+        $this->sorter = $sorter;
+        $this->logger = $logger;
+    }
+
+    public function measure(int $numberOfItems)
+    {
+        $numbers = range(1, $numberOfItems);
+        shuffle($numbers);
+        $start = microtime(true);
+        $sorted = $this->sorter->sortItems($numbers);
+        $end = microtime(true);
+        $time = number_format($end - $start, 4);
+
+        $this->logger->log(
+            "Algoritmus: " . get_class($this->sorter) . ", <br> 
+            Elemek száma: " . count($sorted) . ", <br> 
+            A művelet $time sec ideig tartott"
+        );
+    }
+}
+
+class HTTPResponseLogger implements Logger
+{
+    function log(string $input): void
+    {
+        echo $input;
+    }
+}
+
+class FileLogger implements Logger
+{
+    function log(string $input): void
+    {
+        file_put_contents("./output.txt", $input . "\n -------- \n", FILE_APPEND);
+    }
+}
+
+class BubbleSorter implements Sorter
+{
+    function sortItems(array $array): array
+    {
+        if (!$length = count($array)) {
+            return $array;
+        }
+        for ($outer = 0; $outer < $length; $outer++) {
+            for ($inner = 0; $inner < $length; $inner++) {
+                if ($array[$outer] < $array[$inner]) {
+                    $tmp = $array[$outer];
+                    $array[$outer] = $array[$inner];
+                    $array[$inner] = $tmp;
+                }
+            }
+        }
+        return $array;
+    }
+}
+
+class QuickSorter implements Sorter
+{
+    function sortItems(array $array): array
+    {
+        if (!$length = count($array)) {
+            return $array;
+        }
+
+        $k = $array[0];
+        $x = $y = array();
+
+        for ($i = 1; $i < $length; $i++) {
+            if ($array[$i] <= $k) {
+                $x[] = $array[$i];
+            } else {
+                $y[] = $array[$i];
+            }
+        }
+        return array_merge($this->sortItems($x), array($k), $this->sortItems($y));
+    }
+}
+
+class CocktailShakerSorter implements Sorter
+{
+
+    function sortItems(array $array): array
+    {
+        if (!$length = count($array)) {
+            return $array;
+        }
+        $start = -1;
+        while ($start < $length) {
+            ++$start;
+            --$length;
+            for ($i = $start; $i < $length; ++$i) {
+                if ($array[$i] > $array[$i + 1]) {
+                    $temp = $array[$i];
+                    $array[$i] = $array[$i + 1];
+                    $array[$i + 1] = $temp;
+                }
+            }
+            for ($i = $length; --$i >= $start;) {
+                if ($array[$i] > $array[$i + 1]) {
+                    $temp = $array[$i];
+                    $array[$i] = $array[$i + 1];
+                    $array[$i + 1] = $temp;
+                }
+            }
+        }
+        return $array;
+    }
+}
+
+(new BenchmarkCalculator(
+    new CocktailShakerSorter,
+    new HTTPResponseLogger
+))->measure(10000);
+
+]]>
+    </content>
+</item>
+
+
+
+
+</root>
