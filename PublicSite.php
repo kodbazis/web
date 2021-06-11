@@ -565,7 +565,7 @@ class PublicSite
                 'title' => "Bemutatkozás",
                 'description' => 'Bemutatkozás',
                 'content' => $twig->render('aboutus.twig', [
-                    "codeAssistant" => Embeddables::contentWithEmbeddables($conn, $twig, "{{95}}"),
+                    "codeAssistant" => Embeddables::contentWithEmbeddables($conn, $twig, "{{73}}"),
                     "app" => Embeddables::contentWithEmbeddables($conn, $twig, "{{52}}"),
                     "codeAssistantGif" => Embeddables::contentWithEmbeddables($conn, $twig, "{{15}}"),
                     "gif" => Embeddables::contentWithEmbeddables($conn, $twig, "{{9}}"),
