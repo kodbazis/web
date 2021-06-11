@@ -239,6 +239,36 @@ btn.innerHTML = '<i class="fa fa-arrow-up m-auto"></i>';
 									</p>
 								</td>
 							</tr>
+							<tr>
+								<td class="text-warning">
+									<p>
+										Image-ek kitörlése
+									</p>
+									<p style="font-size:13px" class="text-success">
+										(Idővel felgyűnek az image-ek és egyre több helyet foglalnak a gépeden. Ezt a parancsot pár havonta érdemes lefuttatni.)
+									</p>
+								</td>
+								<td class="text-info align-middle">
+									<p>
+										docker image prune
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td class="text-warning">
+									<p>
+										Volume-ok törlése
+									</p>
+									<p style="font-size:13px" class="text-success">
+										(A volume-ok időnkénti törlésével több GB-nyi hely felszabadítható. Figyelem, adatvesztéssel járhat!)
+									</p>
+								</td>
+								<td class="text-info align-middle">
+									<p>
+										docker volume prune
+									</p>
+								</td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
