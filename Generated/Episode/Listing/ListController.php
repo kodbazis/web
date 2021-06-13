@@ -41,7 +41,6 @@ class ListController
     public function list(array $rawQuery): Response
     {
         try {
-            $orderBy = @json_decode($rawQuery['orderBy'] ?? '', true);
             $query = new Query(
                 $rawQuery['limit'],
                 $rawQuery['from'],

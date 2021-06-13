@@ -5,6 +5,7 @@ require '../../vendor/autoload.php';
 use Kodbazis\Generated\Route\Post;
 use Kodbazis\Generated\Route\Course;
 use Kodbazis\Generated\Route\Message;
+use Kodbazis\Generated\Route\Comment;
 use Kodbazis\Generated\Route\Episode;
 use Kodbazis\Generated\Route\Embeddable;
 use Kodbazis\Generated\Route\Feedback;
@@ -48,6 +49,16 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) use ($conn
     try {
 
       
+      $r->post('/api/comments', [
+          new \Kodbazis\Generated\Route\Comment\CommentSaver,
+          'getRoute'
+      ]);
+  
+      $r->get('/api/comments', [
+          new \Kodbazis\Generated\Route\Comment\CommentLister,
+          'getRoute'
+      ]);
+  
 
      \Kodbazis\Generated\Route\Auth\Auth::getRoutes($r, $conn);
 

@@ -7,7 +7,7 @@ use JsonSerializable;
 use Throwable;
 
 class OperationError extends Exception implements JsonSerializable, 
-\Kodbazis\Generated\Post\Error\OperationError, \Kodbazis\Generated\Course\Error\OperationError, \Kodbazis\Generated\Message\Error\OperationError, \Kodbazis\Generated\Episode\Error\OperationError, \Kodbazis\Generated\Embeddable\Error\OperationError, \Kodbazis\Generated\Feedback\Error\OperationError, \Kodbazis\Generated\Quote\Error\OperationError, \Kodbazis\Generated\Spec\Error\OperationError, \Kodbazis\Generated\Subscriber\Error\OperationError, \Kodbazis\Generated\SubscriberCourse\Error\OperationError, \Kodbazis\Generated\Coupon\Error\OperationError
+\Kodbazis\Generated\Post\Error\OperationError, \Kodbazis\Generated\Course\Error\OperationError, \Kodbazis\Generated\Message\Error\OperationError, \Kodbazis\Generated\Comment\Error\OperationError, \Kodbazis\Generated\Episode\Error\OperationError, \Kodbazis\Generated\Embeddable\Error\OperationError, \Kodbazis\Generated\Feedback\Error\OperationError, \Kodbazis\Generated\Quote\Error\OperationError, \Kodbazis\Generated\Spec\Error\OperationError, \Kodbazis\Generated\Subscriber\Error\OperationError, \Kodbazis\Generated\SubscriberCourse\Error\OperationError, \Kodbazis\Generated\Coupon\Error\OperationError
 {
     private $fields = [];
 

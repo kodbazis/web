@@ -26,7 +26,7 @@ class SpecLister implements RouterFn
             $query['filters'] = (array)json_decode(($query['filters'] ?? ''), true);
         }
 
-        if (isset($query['filters'])) {
+        if (isset($query['orderBy'])) {
             $query['orderBy'] = (array)json_decode(($query['orderBy'] ?? ''), true);
         }
 

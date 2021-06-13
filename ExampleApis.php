@@ -189,6 +189,8 @@ class ExampleApis
 
             setcookie('instrumentAPIID', $id, [
                 'expires' => time() + 60 * 60 * 24,
+                'samesite' => 'None',
+                'secure' => true,
             ]);
             $fileName = $id . '.json';
             copy($imagefileName,  $folder . '/' .  $fileName);
@@ -328,6 +330,8 @@ class ExampleApis
 
             setcookie('recipesAPIID', $id, [
                 'expires' => time() + 60 * 60 * 24,
+                'samesite' => 'None',
+                'secure' => true,
             ]);
             $fileName = $id . '.json';
             copy($imagefileName,  $folder . '/' .  $fileName);
