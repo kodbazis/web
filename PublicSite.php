@@ -41,6 +41,7 @@ use Kodbazis\Generated\Subscriber\Save\NewSubscriber;
 use Kodbazis\Generated\SubscriberCourse\Save\NewSubscriberCourse;
 use SzamlaAgent\Document\Receipt\Receipt;
 use Kodbazis\Generated\Repository\Embeddable\SqlLister as EmbeddableLister;
+use Kodbazis\Generated\Route\Comment\CommentSaver;
 
 class PublicSite
 {
@@ -112,6 +113,20 @@ class PublicSite
                     ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
                 ],
             ]);
+        });
+
+        $r->post('/api/comments', function (Request $request) use ($conn, $twig) {
+            (new MessageSaver($conn))->Save(new NewMessage(
+                $_SERVER['SMTP_SENDER_EMAIL'],
+                'Új kérdés érkezett',
+                "EmbeddableId: " . $request->body['embeddableId'],
+                "notSent",
+                0,
+                null,
+                time()
+            ));
+
+            echo (new CommentSaver)->getRoute($request);
         });
 
         $r->post('/api/unsubscribe/{subscriberId}', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
