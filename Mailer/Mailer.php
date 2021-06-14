@@ -21,7 +21,7 @@ class Mailer
             $mail->Subject = $subject;
             $mail->Body = $body;
             $mail->SMTPAuth = true;
-            $mail->SMTPSecure = \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
+            $mail->SMTPSecure = "ssl";
             $mail->Port = $_SERVER['SMTP_PORT'];
             $mail->SMTPOptions = [
                 'ssl' => [
