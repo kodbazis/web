@@ -40,7 +40,6 @@ class ListController
 
     public function list(array $rawQuery): Response
     {
-
         try {
             $query = new Query(
                 $rawQuery['limit'],
@@ -48,7 +47,6 @@ class ListController
                 !empty($rawQuery['filters']) ? $this->getFilters($rawQuery['filters']): null,
                 new OrderBy($rawQuery['orderBy']['key'] ?? '', $rawQuery['orderBy']['value'] ?? '')
             );
-            
 
             $countedList = $this->lister->list($query);
             $paging = $this->pager->getPaging($query->getLimit(), $query->getOffset(), '', $countedList->getCount());

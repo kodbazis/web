@@ -47,7 +47,8 @@ $conn = new mysqli(
 $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) use ($conn) {
 
     try {
-  
+
+      
       $r->get('/api/comments', [
           new \Kodbazis\Generated\Route\Comment\CommentLister,
           'getRoute'

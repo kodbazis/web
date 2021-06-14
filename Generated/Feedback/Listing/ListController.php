@@ -45,7 +45,7 @@ class ListController
                 $rawQuery['limit'],
                 $rawQuery['from'],
                 !empty($rawQuery['filters']) ? $this->getFilters($rawQuery['filters']): null,
-                new OrderBy($orderBy['key'] ?? '', $orderBy['value'] ?? '')
+                new OrderBy($rawQuery['orderBy']['key'] ?? '', $rawQuery['orderBy']['value'] ?? '')
             );
 
             $countedList = $this->lister->list($query);
