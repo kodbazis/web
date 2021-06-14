@@ -3,7 +3,7 @@
 {% elseif type == 'codeAssistantYoutube'  %}
 	<div class="kodseged" data-wrapperclassname="content-body" data-layout='{{layout}}' data-videoid="{{videoId}}" data-filechangesurl="/embeddable/codeAssistantYoutube/{{id}}/fileChanges" data-type="codeAssistantYoutube"></div>
 {% elseif type == 'codeAssistantVimeo'  %}
-	<div class="kodseged" data-wrapperclassname="content-body" data-layout='{{layout}}' data-videoid="{{videoId}}" data-filechangesurl="/embeddable/codeAssistantVimeo/{{id}}/fileChanges" data-type="codeAssistantVimeo" data-id="{{id}}"></div>
+	<div class="kodseged" data-wrapperclassname="content-body" data-layout='{{layout}}' data-videoid="{{videoId}}" data-filechangesurl="/embeddable/codeAssistantVimeo/{{id}}/fileChanges" data-type="codeAssistantVimeo" data-embeddableid="{{id}}"></div>
 {% elseif type == 'codeAssistant'  %}
 	<div class='kodseged' data-layout='{{layout}}' data-filechangesurl='/embeddable/codeAssistant/{{id}}/fileChanges' data-videourl='/embeddable/codeAssistant/{{id}}/video' data-type='onSite'></div>
 {% elseif type == 'youtube'  %}
@@ -12,7 +12,7 @@
 	</p>
 {% elseif type == 'vimeo'  %}
 	<p class='text-center'>
-		<div class="kodseged" data-videoid="{{videoId}}" data-type="vimeo"></div>
+		<div class="kodseged" data-videoid="{{videoId}}" data-type="vimeo" data-embeddableid="{{id}}"></div>
 	</p>
 {% elseif type == 'gif'  %}
 	<div class='kodseged' data-gifurl='/embeddable/gif/{{id}}/gif' data-type='gif'></div>
