@@ -356,15 +356,13 @@ btn.innerHTML = '<i class="fa fa-arrow-up m-auto"></i>';
 				<div class="app mb-0 bg-light">
 					<ul class="hs full">
 						{% for recommendedCourse in recommendedCourses %}
-							{% if (recommendedCourse.id != 3) %}
-								<a class="hover11" href="/{{recommendedCourse.slug}}">
-									<li class="overlay-container item text-center">
-										<figure>
-											<img loading="lazy" class="img-thumbnail p-0" src="/public/files/sm-{{recommendedCourse.imgUrl}}"/>
-										</figure>
-									</li>
-								</a>
-							{% endif %}
+							<a class="hover11" href="/{{recommendedCourse.slug}}">
+								<li class="overlay-container item text-center">
+									<figure>
+										<img loading="lazy" class="img-thumbnail p-0" src="/public/files/sm-{{recommendedCourse.imgUrl}}"/>
+									</figure>
+								</li>
+							</a>
 						{% endfor %}
 					</ul>
 				</div>
