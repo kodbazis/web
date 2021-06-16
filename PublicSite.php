@@ -1382,7 +1382,7 @@ function getCourseItems($conn)
         15,
         0,
         [],
-        new OrderBy('createdAt', 'desc'),
+        new OrderBy('createdAt', 'asc'),
         []
     ));
 
