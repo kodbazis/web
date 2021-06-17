@@ -6,13 +6,11 @@
 		<div class="col-md-6">
 			<a href="{{item.course.slug}}">
 				<div class="card p-2 m-2">
-
 					<img src="/public/files/md-{{item.course.imgUrl}}" class="w-100"/>
-
+					<h1 style="min-height: 120px">{{item.course.title}}</h1>
 					<p class="lead p-2 text-center text-dark" style="min-height: 130px">
 						<b>{{item.course.description}}</b>
 					</p>
-
 					<div class="col-md-12 border bg-white">
 						<p class="text-center pt-1 text-dark">
 							<b>A teljes képzés ára:</b>
@@ -56,4 +54,65 @@
 			</a>
 		</div>
 	{% endfor %}
+
+
+	<div class="col-md-6">
+		<a target="_blank" href="https://www.youtube.com/watch?v=5jLHg660Wo0&list=PL6VA7Z5zO0dq-6NWrHzIy7dqLfeZhhhOz&index=1&ab_channel=K%C3%B3db%C3%A1zisK%C3%B3db%C3%A1zis">
+			<div class="card p-2 m-2">
+				<img src="/public/images/js_course_logo.png" class="w-100"/>
+				<h1>JavaScript az alapoktól</h1>
+				<p class="lead p-2 text-center text-dark" style="min-height: 130px">
+					<b>Alapozd meg JavaScript fejlesztői karriered, ezen tanfolyam elvégzésével!</b>
+					<br>
+					(Youtube)
+				</p>
+				<div class="col-md-12 border bg-white">
+					<p class="text-center pt-1 text-dark">
+						<b>A teljes képzés ára:</b>
+					</p>
+
+					<h1 class="p-3 no-discount" style="font-size: 3em; text-shadow: 2px 3px 5px #ccc;">
+						<b>Ingyenes</b>
+					</h1>
+
+					<button class="_3jJ8O sc-htpNat fMQhWV mt-2" format="primary" id="login_signup_button">
+						<span class="sc-bxivhb jrbrfM">
+							Érdekel
+							<i class="fa fa-arrow-circle-right"></i>
+						</span>
+					</button>
+				</div>
+			</div>
+		</a>
+	</div>
+
+	<div class="col-md-6">
+		<a target="_blank" href="https://www.youtube.com/watch?v=KWk65fmJVDs&list=PL6VA7Z5zO0drUomWpim2NLm9kUcqhZQhJ&index=1&ab_channel=K%C3%B3db%C3%A1zis">
+			<div class="card p-2 m-2">
+				<img src="/public/images/node-js-logo.png" class="w-100"/>
+				<h1>Node.js tutorial</h1>
+				<p class="lead p-2 text-center text-dark" style="min-height: 130px">
+					<b>Tanuld meg a Node.js szerver oldali programozás alapjait!</b>
+					<br>
+					(Youtube)
+				</p>
+				<div class="col-md-12 border bg-white">
+					<p class="text-center pt-1 text-dark">
+						<b>A teljes képzés ára:</b>
+					</p>
+
+					<h1 class="p-3 no-discount" style="font-size: 3em; text-shadow: 2px 3px 5px #ccc;">
+						<b>Ingyenes</b>
+					</h1>
+
+					<button class="_3jJ8O sc-htpNat fMQhWV mt-2" format="primary" id="login_signup_button">
+						<span class="sc-bxivhb jrbrfM">
+							Érdekel
+							<i class="fa fa-arrow-circle-right"></i>
+						</span>
+					</button>
+				</div>
+			</div>
+		</a>
+	</div>
 </div>
