@@ -255,6 +255,7 @@ class ExampleApis
             $newItem = [
                 'id' => uniqid(),
                 'name' => filter_var((string)$request->body['name'], FILTER_SANITIZE_STRING),
+                'brand' => filter_var((string)$request->body['brand'], FILTER_SANITIZE_STRING),
                 'price' => (int)$request->body['price'],
                 'quantity' => (int)$request->body['quantity'],
                 'imageURL' => filter_var((string)$request->body['imageURL'], FILTER_SANITIZE_STRING),
@@ -283,6 +284,7 @@ class ExampleApis
             $newItem = [
                 'id' => $instruments[$index]['id'],
                 'name' => filter_var((string)$request->body['name'], FILTER_SANITIZE_STRING),
+                'brand' => filter_var((string)$request->body['brand'], FILTER_SANITIZE_STRING),
                 'price' => (int)$request->body['price'],
                 'quantity' => (int)$request->body['quantity'],
                 'imageURL' => filter_var((string)$request->body['imageURL'], FILTER_SANITIZE_STRING),
