@@ -4,8 +4,7 @@
 <item>
     <timestamp>00:00</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 ]]>
@@ -15,8 +14,7 @@
 <item>
     <timestamp>01:30</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 $numbers = range(1, 10000);
@@ -28,8 +26,7 @@ $numbers = range(1, 10000);
 <item>
     <timestamp>01:37</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 $numbers = range(1, 10000);
@@ -42,8 +39,7 @@ shuffle($numbers);
 <item>
     <timestamp>01:45</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 $numbers = range(1, 10000);
@@ -58,8 +54,7 @@ $sorted = sortItems($numbers);
 <item>
     <timestamp>01:55</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 $numbers = range(1, 10000);
@@ -78,8 +73,7 @@ $end = microtime(true);
 <item>
     <timestamp>02:03</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 $numbers = range(1, 10000);
@@ -98,8 +92,7 @@ $time = number_format($end - $start, 4);
 <item>
     <timestamp>02:12</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 $numbers = range(1, 10000);
@@ -136,8 +129,7 @@ function sortItems(array $array): array
 <item>
     <timestamp>02:34</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 $numbers = range(1, 10000);
@@ -178,8 +170,7 @@ function sortItems(array $array): array
 <item>
     <timestamp>02:54</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 // Benchmark mérés
@@ -224,8 +215,7 @@ function sortItems(array $array): array
 <item>
     <timestamp>03:37</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 class BenchmarkCalculator
@@ -240,8 +230,7 @@ class BenchmarkCalculator
 <item>
     <timestamp>03:41</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 class BenchmarkCalculator
@@ -261,8 +250,7 @@ class BenchmarkCalculator
 <item>
     <timestamp>03:47</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 class BenchmarkCalculator
@@ -289,8 +277,7 @@ class BenchmarkCalculator
 <item>
     <timestamp>03:59</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 class BenchmarkCalculator
@@ -317,8 +304,7 @@ class BenchmarkCalculator
 <item>
     <timestamp>04:17</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 class BenchmarkCalculator
@@ -347,8 +333,7 @@ class BenchmarkCalculator
 <item>
     <timestamp>04:46</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 class BenchmarkCalculator
@@ -383,8 +368,7 @@ class BenchmarkCalculator
 <item>
     <timestamp>05:02</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 class BenchmarkCalculator
@@ -418,8 +402,7 @@ class BenchmarkCalculator
 <item>
     <timestamp>05:08</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 class BenchmarkCalculator
@@ -457,8 +440,7 @@ class BenchmarkCalculator
 <item>
     <timestamp>05:14</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 class BenchmarkCalculator
@@ -529,8 +511,7 @@ class BubbleSorter
 <item>
     <timestamp>08:55</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 interface Sorter
@@ -606,8 +587,7 @@ class BubbleSorter
 <item>
     <timestamp>09:52</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 interface Sorter
@@ -688,8 +668,7 @@ class BubbleSorter
 <item>
     <timestamp>10:31</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 interface Sorter
@@ -770,8 +749,7 @@ class BubbleSorter implements Sorter
 <item>
     <timestamp>11:03</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 interface Sorter
@@ -852,8 +830,7 @@ class BubbleSorter implements Sorter
 <item>
     <timestamp>11:34</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 interface Sorter
@@ -956,8 +933,7 @@ class QuickSorter implements Sorter
 <item>
     <timestamp>11:38</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 interface Sorter
@@ -1091,8 +1067,7 @@ class CocktailShakerSorter implements Sorter
 <item>
     <timestamp>12:08</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 interface Sorter
@@ -1234,8 +1209,7 @@ class CocktailShakerSorter implements Sorter
 <item>
     <timestamp>12:35</timestamp>
     <fileName>index.php</fileName>
-    <content>
-<![CDATA[
+    <content><![CDATA[
 <?php
 
 interface Sorter

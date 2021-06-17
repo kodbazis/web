@@ -1,0 +1,1684 @@
+<?xml version = "1.0"?>
+<root>
+
+<item>
+    <timestamp>01:10</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+]]>
+    </content>
+</item>
+<item>
+    <timestamp>01:41</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+require './vendor/autoload.php';
+
+$method = $_SERVER["REQUEST_METHOD"];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>02:00</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+require './vendor/autoload.php';
+
+$method = $_SERVER["REQUEST_METHOD"];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+$routeInfo = $dispatcher->dispatch($method, $path);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        $handler($vars);
+        break;
+}
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>02:25</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+require './vendor/autoload.php';
+
+$method = $_SERVER["REQUEST_METHOD"];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    $r->addRoute('GET', '/', 'home');
+    $r->addRoute('POST', '/submit-message', 'submitMessageHandler');
+    $r->addRoute('POST', '/send-mails', 'sendMailsHandler');
+});
+
+$routeInfo = $dispatcher->dispatch($method, $path);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        $handler($vars);
+        break;
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>02:57</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+require './vendor/autoload.php';
+
+$method = $_SERVER["REQUEST_METHOD"];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+// https://kodbazis.hu/php-tanfolyam-haladoknak/json-api-epitese
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    $r->addRoute('GET', '/', 'home');
+    $r->addRoute('POST', '/submit-message', 'submitMessageHandler');
+    $r->addRoute('POST', '/send-mails', 'sendMailsHandler');
+});
+
+$routeInfo = $dispatcher->dispatch($method, $path);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        $handler($vars);
+        break;
+}
+
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>03:14</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+require './vendor/autoload.php';
+
+$method = $_SERVER["REQUEST_METHOD"];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+function home()
+{
+
+}
+
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    $r->addRoute('GET', '/', 'home');
+    $r->addRoute('POST', '/submit-message', 'submitMessageHandler');
+    $r->addRoute('POST', '/send-mails', 'sendMailsHandler');
+});
+
+$routeInfo = $dispatcher->dispatch($method, $path);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        $handler($vars);
+        break;
+}
+
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>03:16</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+require './vendor/autoload.php';
+
+$method = $_SERVER["REQUEST_METHOD"];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+function home()
+{
+    echo render('home.phtml');
+}
+
+function render($path, $params = [])
+{
+    ob_start();
+    require __DIR__ . '/views/' . $path;
+    return ob_get_clean();
+}
+
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    $r->addRoute('GET', '/', 'home');
+    $r->addRoute('POST', '/submit-message', 'submitMessageHandler');
+    $r->addRoute('POST', '/send-mails', 'sendMailsHandler');
+});
+
+$routeInfo = $dispatcher->dispatch($method, $path);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        $handler($vars);
+        break;
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>03:38</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+require './vendor/autoload.php';
+
+$method = $_SERVER["REQUEST_METHOD"];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+function home()
+{
+    echo render('home.phtml');
+}
+
+function render($path, $params = [])
+{
+    ob_start();
+    require __DIR__ . '/views/' . $path;
+    return ob_get_clean();
+}
+
+function notFoundhandler()
+{
+    header('Location: /');
+}
+
+
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    $r->addRoute('GET', '/', 'home');
+    $r->addRoute('POST', '/submit-message', 'submitMessageHandler');
+    $r->addRoute('POST', '/send-mails', 'sendMailsHandler');
+});
+
+$routeInfo = $dispatcher->dispatch($method, $path);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        $handler($vars);
+        break;
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>04:11</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+require './vendor/autoload.php';
+
+$method = $_SERVER["REQUEST_METHOD"];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+function home()
+{
+    echo render('home.phtml');
+}
+
+function render($path, $params = [])
+{
+    ob_start();
+    require __DIR__ . '/views/' . $path;
+    return ob_get_clean();
+}
+
+function notFoundhandler()
+{
+    header('Location: /');
+}
+
+function submitMessageHandler()
+{
+    
+}
+
+
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    $r->addRoute('GET', '/', 'home');
+    $r->addRoute('POST', '/submit-message', 'submitMessageHandler');
+    $r->addRoute('POST', '/send-mails', 'sendMailsHandler');
+});
+
+$routeInfo = $dispatcher->dispatch($method, $path);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        $handler($vars);
+        break;
+}
+]]>
+    </content>
+</item>
+<item>
+    <timestamp>04:25</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+require './vendor/autoload.php';
+
+$method = $_SERVER["REQUEST_METHOD"];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+function home()
+{
+    echo render('home.phtml');
+}
+
+function render($path, $params = [])
+{
+    ob_start();
+    require __DIR__ . '/views/' . $path;
+    return ob_get_clean();
+}
+
+function notFoundhandler()
+{
+    header('Location: /');
+}
+
+function submitMessageHandler()
+{
+    $pdo = getConnection();
+}
+
+function getConnection()
+{
+    return new PDO(
+        'mysql:host=' . $_SERVER['DB_HOST'] . ';dbname=' . $_SERVER['DB_NAME'],
+        $_SERVER['DB_USER'],
+        $_SERVER['DB_PASSWORD']
+    );
+}
+
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    $r->addRoute('GET', '/', 'home');
+    $r->addRoute('POST', '/submit-message', 'submitMessageHandler');
+    $r->addRoute('POST', '/send-mails', 'sendMailsHandler');
+});
+
+$routeInfo = $dispatcher->dispatch($method, $path);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        $handler($vars);
+        break;
+}
+]]>
+    </content>
+</item>
+<item>
+    <timestamp>04:42</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+require './vendor/autoload.php';
+
+$method = $_SERVER["REQUEST_METHOD"];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+function home()
+{
+    echo render('home.phtml');
+}
+
+function render($path, $params = [])
+{
+    ob_start();
+    require __DIR__ . '/views/' . $path;
+    return ob_get_clean();
+}
+
+function notFoundhandler()
+{
+    header('Location: /');
+}
+
+function submitMessageHandler()
+{
+    $pdo = getConnection();
+    $statement = $pdo->prepare("INSERT INTO `messages` 
+    (`email`, `subject`, `body`, `status`, `numberOfAttempts`, `createdAt`) 
+    VALUES 
+    (?, ?, ?, ?, ?, ?);");
+}
+
+function getConnection()
+{
+    return new PDO(
+        'mysql:host=' . $_SERVER['DB_HOST'] . ';dbname=' . $_SERVER['DB_NAME'],
+        $_SERVER['DB_USER'],
+        $_SERVER['DB_PASSWORD']
+    );
+}
+
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    $r->addRoute('GET', '/', 'home');
+    $r->addRoute('POST', '/submit-message', 'submitMessageHandler');
+    $r->addRoute('POST', '/send-mails', 'sendMailsHandler');
+});
+
+$routeInfo = $dispatcher->dispatch($method, $path);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        $handler($vars);
+        break;
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>05:03</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+require './vendor/autoload.php';
+
+$method = $_SERVER["REQUEST_METHOD"];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+function home()
+{
+    echo render('home.phtml');
+}
+
+function render($path, $params = [])
+{
+    ob_start();
+    require __DIR__ . '/views/' . $path;
+    return ob_get_clean();
+}
+
+function notFoundhandler()
+{
+    header('Location: /');
+}
+
+function submitMessageHandler()
+{
+    $pdo = getConnection();
+    $statement = $pdo->prepare("INSERT INTO `messages` 
+    (`email`, `subject`, `body`, `status`, `numberOfAttempts`, `createdAt`) 
+    VALUES 
+    (?, ?, ?, ?, ?, ?);");
+
+    $body = render("email-template.phtml", [
+        'name' =>  $_POST['name'] ?? '',
+        'email' =>  $_POST['email'] ?? '',
+        'content' =>  $_POST['content'],
+    ]);
+}
+
+function getConnection()
+{
+    return new PDO(
+        'mysql:host=' . $_SERVER['DB_HOST'] . ';dbname=' . $_SERVER['DB_NAME'],
+        $_SERVER['DB_USER'],
+        $_SERVER['DB_PASSWORD']
+    );
+}
+
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    $r->addRoute('GET', '/', 'home');
+    $r->addRoute('POST', '/submit-message', 'submitMessageHandler');
+    $r->addRoute('POST', '/send-mails', 'sendMailsHandler');
+});
+
+$routeInfo = $dispatcher->dispatch($method, $path);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        $handler($vars);
+        break;
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>05:21</timestamp>
+    <fileName>email-template.phtml</fileName>
+    <content><![CDATA[
+<table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
+    <tr>
+        <td align="center" valign="top">
+            <table border="0" cellpadding="20" cellspacing="0" width="600" id="emailContainer">
+                <tr>
+                    <td align="center" valign="top">
+                        <table border="0" cellpadding="20" cellspacing="0" width="100%" id="emailHeader">
+                            <tr>
+                                <td align="center" valign="top">
+                                    <h1>Új üzenet érkezett</h1>
+                                    <br>
+                                    <h2>Feladó:</h2>
+                                    <p>
+                                        <b> <?= $params['name'] ?></b> <?= $params['email'] ?>
+                                    </p>
+                                    <br>
+                                    <h2>Tartalom:</h2>
+                                    <p>
+                                        <?= $params['content'] ?>
+                                    </p>
+                                    <br>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>05:30</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+require './vendor/autoload.php';
+
+$method = $_SERVER["REQUEST_METHOD"];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+function home()
+{
+    echo render('home.phtml');
+}
+
+function render($path, $params = [])
+{
+    ob_start();
+    require __DIR__ . '/views/' . $path;
+    return ob_get_clean();
+}
+
+function notFoundhandler()
+{
+    header('Location: /');
+}
+ 
+function submitMessageHandler()
+{
+    $pdo = getConnection();
+    $statement = $pdo->prepare("INSERT INTO `messages` 
+    (`email`, `subject`, `body`, `status`, `numberOfAttempts`, `createdAt`) 
+    VALUES 
+    (?, ?, ?, ?, ?, ?);");
+
+    $body = render("email-template.phtml", [
+        'name' =>  $_POST['name'] ?? '',
+        'email' =>  $_POST['email'] ?? '',
+        'content' =>  $_POST['content'],
+    ]);
+
+}
+
+function getConnection()
+{
+    return new PDO(
+        'mysql:host=' . $_SERVER['DB_HOST'] . ';dbname=' . $_SERVER['DB_NAME'],
+        $_SERVER['DB_USER'],
+        $_SERVER['DB_PASSWORD']
+    );
+}
+
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    $r->addRoute('GET', '/', 'home');
+    $r->addRoute('POST', '/submit-message', 'submitMessageHandler');
+    $r->addRoute('POST', '/send-mails', 'sendMailsHandler');
+});
+
+$routeInfo = $dispatcher->dispatch($method, $path);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        $handler($vars);
+        break;
+}
+]]>
+    </content>
+</item>
+<item>
+    <timestamp>05:36</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+require './vendor/autoload.php';
+
+$method = $_SERVER["REQUEST_METHOD"];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+function home()
+{
+    echo render('home.phtml');
+}
+
+function render($path, $params = [])
+{
+    ob_start();
+    require __DIR__ . '/views/' . $path;
+    return ob_get_clean();
+}
+
+function notFoundhandler()
+{
+    header('Location: /');
+}
+ 
+function submitMessageHandler()
+{
+    $pdo = getConnection();
+    $statement = $pdo->prepare("INSERT INTO `messages` 
+    (`email`, `subject`, `body`, `status`, `numberOfAttempts`, `createdAt`) 
+    VALUES 
+    (?, ?, ?, ?, ?, ?);");
+
+    $body = render("email-template.phtml", [
+        'name' =>  $_POST['name'] ?? '',
+        'email' =>  $_POST['email'] ?? '',
+        'content' =>  $_POST['content'],
+    ]);
+
+    $statement->execute([
+        $_SERVER['RECIPIENT_EMAIL'],
+        "Új üzenet érkezett",
+        $body,
+        'notSent',
+        0,
+        time()
+    ]);
+
+    header('Location: /?kuldesSikeres=1#contactForm');   
+}
+
+function getConnection()
+{
+    return new PDO(
+        'mysql:host=' . $_SERVER['DB_HOST'] . ';dbname=' . $_SERVER['DB_NAME'],
+        $_SERVER['DB_USER'],
+        $_SERVER['DB_PASSWORD']
+    );
+}
+
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    $r->addRoute('GET', '/', 'home');
+    $r->addRoute('POST', '/submit-message', 'submitMessageHandler');
+    $r->addRoute('POST', '/send-mails', 'sendMailsHandler');
+});
+
+$routeInfo = $dispatcher->dispatch($method, $path);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        $handler($vars);
+        break;
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>06:47</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+require './vendor/autoload.php';
+
+$method = $_SERVER["REQUEST_METHOD"];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+function home()
+{
+    echo render('home.phtml', [
+        'isSuccess' => isset($_GET['kuldesSikeres'])
+    ]);
+}
+
+function render($path, $params = [])
+{
+    ob_start();
+    require __DIR__ . '/views/' . $path;
+    return ob_get_clean();
+}
+
+function notFoundhandler()
+{
+    header('Location: /');
+}
+ 
+function submitMessageHandler()
+{
+    $pdo = getConnection();
+    $statement = $pdo->prepare("INSERT INTO `messages` 
+    (`email`, `subject`, `body`, `status`, `numberOfAttempts`, `createdAt`) 
+    VALUES 
+    (?, ?, ?, ?, ?, ?);");
+
+    $body = render("email-template.phtml", [
+        'name' =>  $_POST['name'] ?? '',
+        'email' =>  $_POST['email'] ?? '',
+        'content' =>  $_POST['content'],
+    ]);
+
+    $statement->execute([
+        $_SERVER['RECIPIENT_EMAIL'],
+        "Új üzenet érkezett",
+        $body,
+        'notSent',
+        0,
+        time()
+    ]);
+
+    header('Location: /?kuldesSikeres=1#contactForm');   
+}
+
+function getConnection()
+{
+    return new PDO(
+        'mysql:host=' . $_SERVER['DB_HOST'] . ';dbname=' . $_SERVER['DB_NAME'],
+        $_SERVER['DB_USER'],
+        $_SERVER['DB_PASSWORD']
+    );
+}
+
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    $r->addRoute('GET', '/', 'home');
+    $r->addRoute('POST', '/submit-message', 'submitMessageHandler');
+    $r->addRoute('POST', '/send-mails', 'sendMailsHandler');
+});
+
+$routeInfo = $dispatcher->dispatch($method, $path);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        $handler($vars);
+        break;
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>07:23</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+require './vendor/autoload.php';
+
+$method = $_SERVER["REQUEST_METHOD"];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+function home()
+{
+    echo render('home.phtml', [
+        'isSuccess' => isset($_GET['kuldesSikeres'])
+    ]);
+}
+
+function render($path, $params = [])
+{
+    ob_start();
+    require __DIR__ . '/views/' . $path;
+    return ob_get_clean();
+}
+
+function notFoundhandler()
+{
+    header('Location: /');
+}
+ 
+function submitMessageHandler()
+{
+    $pdo = getConnection();
+    $statement = $pdo->prepare("INSERT INTO `messages` 
+    (`email`, `subject`, `body`, `status`, `numberOfAttempts`, `createdAt`) 
+    VALUES 
+    (?, ?, ?, ?, ?, ?);");
+
+    $body = render("email-template.phtml", [
+        'name' =>  $_POST['name'] ?? '',
+        'email' =>  $_POST['email'] ?? '',
+        'content' =>  $_POST['content'],
+    ]);
+
+    $statement->execute([
+        $_SERVER['RECIPIENT_EMAIL'],
+        "Új üzenet érkezett",
+        $body,
+        'notSent',
+        0,
+        time()
+    ]);
+
+    header('Location: /?kuldesSikeres=1#contactForm');   
+}
+
+function getConnection()
+{
+    return new PDO(
+        'mysql:host=' . $_SERVER['DB_HOST'] . ';dbname=' . $_SERVER['DB_NAME'],
+        $_SERVER['DB_USER'],
+        $_SERVER['DB_PASSWORD']
+    );
+}
+
+function sendMailsHandler()
+{
+
+}
+
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    $r->addRoute('GET', '/', 'home');
+    $r->addRoute('POST', '/submit-message', 'submitMessageHandler');
+    $r->addRoute('POST', '/send-mails', 'sendMailsHandler');
+});
+
+$routeInfo = $dispatcher->dispatch($method, $path);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        $handler($vars);
+        break;
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>07:30</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+require './vendor/autoload.php';
+
+$method = $_SERVER["REQUEST_METHOD"];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+function home()
+{
+    echo render('home.phtml', [
+        'isSuccess' => isset($_GET['kuldesSikeres'])
+    ]);
+}
+
+function render($path, $params = [])
+{
+    ob_start();
+    require __DIR__ . '/views/' . $path;
+    return ob_get_clean();
+}
+
+function notFoundhandler()
+{
+    header('Location: /');
+}
+ 
+function submitMessageHandler()
+{
+    $pdo = getConnection();
+    $statement = $pdo->prepare("INSERT INTO `messages` 
+    (`email`, `subject`, `body`, `status`, `numberOfAttempts`, `createdAt`) 
+    VALUES 
+    (?, ?, ?, ?, ?, ?);");
+
+    $body = render("email-template.phtml", [
+        'name' =>  $_POST['name'] ?? '',
+        'email' =>  $_POST['email'] ?? '',
+        'content' =>  $_POST['content'],
+    ]);
+
+    $statement->execute([
+        $_SERVER['RECIPIENT_EMAIL'],
+        "Új üzenet érkezett",
+        $body,
+        'notSent',
+        0,
+        time()
+    ]);
+
+    header('Location: /?kuldesSikeres=1#contactForm');   
+}
+
+function getConnection()
+{
+    return new PDO(
+        'mysql:host=' . $_SERVER['DB_HOST'] . ';dbname=' . $_SERVER['DB_NAME'],
+        $_SERVER['DB_USER'],
+        $_SERVER['DB_PASSWORD']
+    );
+}
+
+function sendMailsHandler()
+{
+    $pdo = getConnection();
+    $statement = $pdo->prepare(
+        "SELECT * FROM messages 
+        WHERE 
+        status = 'notSent' AND 
+        numberOfAttempts < 10 
+        ORDER BY createdAt ASC"
+    );
+
+    $statement->execute();
+    $messages = $statement->fetchAll(PDO::FETCH_ASSOC);
+}
+
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    $r->addRoute('GET', '/', 'home');
+    $r->addRoute('POST', '/submit-message', 'submitMessageHandler');
+    $r->addRoute('POST', '/send-mails', 'sendMailsHandler');
+});
+
+$routeInfo = $dispatcher->dispatch($method, $path);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        $handler($vars);
+        break;
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>07:58</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+require './vendor/autoload.php';
+
+$method = $_SERVER["REQUEST_METHOD"];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+function home()
+{
+    echo render('home.phtml', [
+        'isSuccess' => isset($_GET['kuldesSikeres'])
+    ]);
+}
+
+function render($path, $params = [])
+{
+    ob_start();
+    require __DIR__ . '/views/' . $path;
+    return ob_get_clean();
+}
+
+function notFoundhandler()
+{
+    header('Location: /');
+}
+ 
+function submitMessageHandler()
+{
+    $pdo = getConnection();
+    $statement = $pdo->prepare("INSERT INTO `messages` 
+    (`email`, `subject`, `body`, `status`, `numberOfAttempts`, `createdAt`) 
+    VALUES 
+    (?, ?, ?, ?, ?, ?);");
+
+    $body = render("email-template.phtml", [
+        'name' =>  $_POST['name'] ?? '',
+        'email' =>  $_POST['email'] ?? '',
+        'content' =>  $_POST['content'],
+    ]);
+
+    $statement->execute([
+        $_SERVER['RECIPIENT_EMAIL'],
+        "Új üzenet érkezett",
+        $body,
+        'notSent',
+        0,
+        time()
+    ]);
+
+    header('Location: /?kuldesSikeres=1#contactForm');   
+}
+
+function getConnection()
+{
+    return new PDO(
+        'mysql:host=' . $_SERVER['DB_HOST'] . ';dbname=' . $_SERVER['DB_NAME'],
+        $_SERVER['DB_USER'],
+        $_SERVER['DB_PASSWORD']
+    );
+}
+
+function sendMailsHandler()
+{
+    $pdo = getConnection();
+    $statement = $pdo->prepare(
+        "SELECT * FROM messages 
+        WHERE 
+        status = 'notSent' AND 
+        numberOfAttempts < 10 
+        ORDER BY createdAt ASC"
+    );
+
+    $statement->execute();
+    $messages = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($messages as $message) {
+        
+    }
+}
+
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    $r->addRoute('GET', '/', 'home');
+    $r->addRoute('POST', '/submit-message', 'submitMessageHandler');
+    $r->addRoute('POST', '/send-mails', 'sendMailsHandler');
+});
+
+$routeInfo = $dispatcher->dispatch($method, $path);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        $handler($vars);
+        break;
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>08:26</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+require './vendor/autoload.php';
+
+$method = $_SERVER["REQUEST_METHOD"];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+function home()
+{
+    echo render('home.phtml', [
+        'isSuccess' => isset($_GET['kuldesSikeres'])
+    ]);
+}
+
+function render($path, $params = [])
+{
+    ob_start();
+    require __DIR__ . '/views/' . $path;
+    return ob_get_clean();
+}
+
+function notFoundhandler()
+{
+    header('Location: /');
+}
+ 
+function submitMessageHandler()
+{
+    $pdo = getConnection();
+    $statement = $pdo->prepare("INSERT INTO `messages` 
+    (`email`, `subject`, `body`, `status`, `numberOfAttempts`, `createdAt`) 
+    VALUES 
+    (?, ?, ?, ?, ?, ?);");
+
+    $body = render("email-template.phtml", [
+        'name' =>  $_POST['name'] ?? '',
+        'email' =>  $_POST['email'] ?? '',
+        'content' =>  $_POST['content'],
+    ]);
+
+    $statement->execute([
+        $_SERVER['RECIPIENT_EMAIL'],
+        "Új üzenet érkezett",
+        $body,
+        'notSent',
+        0,
+        time()
+    ]);
+
+    header('Location: /?kuldesSikeres=1#contactForm');   
+}
+
+function getConnection()
+{
+    return new PDO(
+        'mysql:host=' . $_SERVER['DB_HOST'] . ';dbname=' . $_SERVER['DB_NAME'],
+        $_SERVER['DB_USER'],
+        $_SERVER['DB_PASSWORD']
+    );
+}
+
+function sendMailsHandler()
+{
+    $pdo = getConnection();
+    $statement = $pdo->prepare(
+        "SELECT * FROM messages 
+        WHERE 
+        status = 'notSent' AND 
+        numberOfAttempts < 10 
+        ORDER BY createdAt ASC"
+    );
+
+    $statement->execute();
+    $messages = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($messages as $message) {
+        $pdo = getConnection();
+        $statement = $pdo->prepare(
+            "UPDATE `messages` SET 
+                status = 'sending', 
+                numberOfAttempts = ? 
+            WHERE id = ?;"
+        );
+
+        $statement->execute([
+            (int)$message['numberOfAttempts'] + 1,
+            $message['id']
+        ]);
+    }
+}
+
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    $r->addRoute('GET', '/', 'home');
+    $r->addRoute('POST', '/submit-message', 'submitMessageHandler');
+    $r->addRoute('POST', '/send-mails', 'sendMailsHandler');
+});
+
+$routeInfo = $dispatcher->dispatch($method, $path);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        $handler($vars);
+        break;
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>09:08</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+require './vendor/autoload.php';
+
+$method = $_SERVER["REQUEST_METHOD"];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+function home()
+{
+    echo render('home.phtml', [
+        'isSuccess' => isset($_GET['kuldesSikeres'])
+    ]);
+}
+
+function render($path, $params = [])
+{
+    ob_start();
+    require __DIR__ . '/views/' . $path;
+    return ob_get_clean();
+}
+
+function notFoundhandler()
+{
+    header('Location: /');
+}
+ 
+function submitMessageHandler()
+{
+    $pdo = getConnection();
+    $statement = $pdo->prepare("INSERT INTO `messages` 
+    (`email`, `subject`, `body`, `status`, `numberOfAttempts`, `createdAt`) 
+    VALUES 
+    (?, ?, ?, ?, ?, ?);");
+
+    $body = render("email-template.phtml", [
+        'name' =>  $_POST['name'] ?? '',
+        'email' =>  $_POST['email'] ?? '',
+        'content' =>  $_POST['content'],
+    ]);
+
+    $statement->execute([
+        $_SERVER['RECIPIENT_EMAIL'],
+        "Új üzenet érkezett",
+        $body,
+        'notSent',
+        0,
+        time()
+    ]);
+
+    header('Location: /?kuldesSikeres=1#contactForm');   
+}
+
+function getConnection()
+{
+    return new PDO(
+        'mysql:host=' . $_SERVER['DB_HOST'] . ';dbname=' . $_SERVER['DB_NAME'],
+        $_SERVER['DB_USER'],
+        $_SERVER['DB_PASSWORD']
+    );
+}
+
+function sendMailsHandler()
+{
+    $pdo = getConnection();
+    $statement = $pdo->prepare(
+        "SELECT * FROM messages 
+        WHERE 
+        status = 'notSent' AND 
+        numberOfAttempts < 10 
+        ORDER BY createdAt ASC"
+    );
+
+    $statement->execute();
+    $messages = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($messages as $message) {
+        $pdo = getConnection();
+        $statement = $pdo->prepare(
+            "UPDATE `messages` SET 
+                status = 'sending', 
+                numberOfAttempts = ? 
+            WHERE id = ?;"
+        );
+
+        $statement->execute([
+            (int)$message['numberOfAttempts'] + 1,
+            $message['id']
+        ]);
+
+        $isSent = sendMail(
+            $message['email'],
+            $message['subject'],
+            $message['body']
+        );
+    }
+}
+
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    $r->addRoute('GET', '/', 'home');
+    $r->addRoute('POST', '/submit-message', 'submitMessageHandler');
+    $r->addRoute('POST', '/send-mails', 'sendMailsHandler');
+});
+
+$routeInfo = $dispatcher->dispatch($method, $path);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        $handler($vars);
+        break;
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>09:32</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+require './vendor/autoload.php';
+
+$method = $_SERVER["REQUEST_METHOD"];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+function home()
+{
+    echo render('home.phtml', [
+        'isSuccess' => isset($_GET['kuldesSikeres'])
+    ]);
+}
+
+function render($path, $params = [])
+{
+    ob_start();
+    require __DIR__ . '/views/' . $path;
+    return ob_get_clean();
+}
+
+function notFoundhandler()
+{
+    header('Location: /');
+}
+ 
+function submitMessageHandler()
+{
+    $pdo = getConnection();
+    $statement = $pdo->prepare("INSERT INTO `messages` 
+    (`email`, `subject`, `body`, `status`, `numberOfAttempts`, `createdAt`) 
+    VALUES 
+    (?, ?, ?, ?, ?, ?);");
+
+    $body = render("email-template.phtml", [
+        'name' =>  $_POST['name'] ?? '',
+        'email' =>  $_POST['email'] ?? '',
+        'content' =>  $_POST['content'],
+    ]);
+
+    $statement->execute([
+        $_SERVER['RECIPIENT_EMAIL'],
+        "Új üzenet érkezett",
+        $body,
+        'notSent',
+        0,
+        time()
+    ]);
+
+    header('Location: /?kuldesSikeres=1#contactForm');   
+}
+
+function getConnection()
+{
+    return new PDO(
+        'mysql:host=' . $_SERVER['DB_HOST'] . ';dbname=' . $_SERVER['DB_NAME'],
+        $_SERVER['DB_USER'],
+        $_SERVER['DB_PASSWORD']
+    );
+}
+
+function sendMailsHandler()
+{
+    $pdo = getConnection();
+    $statement = $pdo->prepare(
+        "SELECT * FROM messages 
+        WHERE 
+        status = 'notSent' AND 
+        numberOfAttempts < 10 
+        ORDER BY createdAt ASC"
+    );
+
+    $statement->execute();
+    $messages = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($messages as $message) {
+        $pdo = getConnection();
+        $statement = $pdo->prepare(
+            "UPDATE `messages` SET 
+                status = 'sending', 
+                numberOfAttempts = ? 
+            WHERE id = ?;"
+        );
+
+        $statement->execute([
+            (int)$message['numberOfAttempts'] + 1,
+            $message['id']
+        ]);
+
+        $isSent = sendMail(
+            $message['email'],
+            $message['subject'],
+            $message['body']
+        );
+
+        if ($isSent) {
+            $statement = $pdo->prepare(
+                "UPDATE `messages` SET status = 'sent', sentAt = ? WHERE id = ?;"
+            );
+            $statement->execute([
+                time(),
+                $message['id'],
+            ]);
+        } else {
+            $statement = $pdo->prepare("UPDATE `messages` SET status = 'notSent' WHERE id = ?;");
+            $statement->execute([
+                $message['id']
+            ]);
+        }
+    }
+}
+
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    $r->addRoute('GET', '/', 'home');
+    $r->addRoute('POST', '/submit-message', 'submitMessageHandler');
+    $r->addRoute('POST', '/send-mails', 'sendMailsHandler');
+});
+
+$routeInfo = $dispatcher->dispatch($method, $path);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        $handler($vars);
+        break;
+}
+]]>
+    </content>
+</item>
+
+<item>
+    <timestamp>10:21</timestamp>
+    <fileName>index.php</fileName>
+    <content><![CDATA[
+<?php
+
+require './vendor/autoload.php';
+require './Mailer.php';
+
+$method = $_SERVER["REQUEST_METHOD"];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+function home()
+{
+    echo render('home.phtml', [
+        'isSuccess' => isset($_GET['kuldesSikeres'])
+    ]);
+}
+
+function render($path, $params = [])
+{
+    ob_start();
+    require __DIR__ . '/views/' . $path;
+    return ob_get_clean();
+}
+
+function notFoundhandler()
+{
+    header('Location: /');
+}
+ 
+function submitMessageHandler()
+{
+    $pdo = getConnection();
+    $statement = $pdo->prepare("INSERT INTO `messages` 
+    (`email`, `subject`, `body`, `status`, `numberOfAttempts`, `createdAt`) 
+    VALUES 
+    (?, ?, ?, ?, ?, ?);");
+
+    $body = render("email-template.phtml", [
+        'name' =>  $_POST['name'] ?? '',
+        'email' =>  $_POST['email'] ?? '',
+        'content' =>  $_POST['content'],
+    ]);
+
+    $statement->execute([
+        $_SERVER['RECIPIENT_EMAIL'],
+        "Új üzenet érkezett",
+        $body,
+        'notSent',
+        0,
+        time()
+    ]);
+
+    header('Location: /?kuldesSikeres=1#contactForm');   
+}
+
+function getConnection()
+{
+    return new PDO(
+        'mysql:host=' . $_SERVER['DB_HOST'] . ';dbname=' . $_SERVER['DB_NAME'],
+        $_SERVER['DB_USER'],
+        $_SERVER['DB_PASSWORD']
+    );
+}
+
+function sendMailsHandler()
+{
+    $pdo = getConnection();
+    $statement = $pdo->prepare(
+        "SELECT * FROM messages 
+        WHERE 
+        status = 'notSent' AND 
+        numberOfAttempts < 10 
+        ORDER BY createdAt ASC"
+    );
+
+    $statement->execute();
+    $messages = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($messages as $message) {
+        $pdo = getConnection();
+        $statement = $pdo->prepare(
+            "UPDATE `messages` SET 
+                status = 'sending', 
+                numberOfAttempts = ? 
+            WHERE id = ?;"
+        );
+
+        $statement->execute([
+            (int)$message['numberOfAttempts'] + 1,
+            $message['id']
+        ]);
+
+        $isSent = sendMail(
+            $message['email'],
+            $message['subject'],
+            $message['body']
+        );
+
+        if ($isSent) {
+            $statement = $pdo->prepare(
+                "UPDATE `messages` SET status = 'sent', sentAt = ? WHERE id = ?;"
+            );
+            $statement->execute([
+                time(),
+                $message['id'],
+            ]);
+        } else {
+            $statement = $pdo->prepare("UPDATE `messages` SET status = 'notSent' WHERE id = ?;");
+            $statement->execute([
+                $message['id']
+            ]);
+        }
+    }
+}
+
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    $r->addRoute('GET', '/', 'home');
+    $r->addRoute('POST', '/submit-message', 'submitMessageHandler');
+    $r->addRoute('POST', '/send-mails', 'sendMailsHandler');
+});
+
+$routeInfo = $dispatcher->dispatch($method, $path);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        notFoundHandler();
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        $handler($vars);
+        break;
+}
+]]>
+    </content>
+</item>
+
+
+
+</root>
