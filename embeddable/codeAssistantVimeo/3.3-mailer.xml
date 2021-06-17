@@ -1680,5 +1680,85 @@ switch ($routeInfo[0]) {
 </item>
 
 
+<item>
+    <timestamp>10:24</timestamp>
+    <fileName>Mailer.php</fileName>
+    <content><![CDATA[
+<?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+
+function sendMail($address, $subject, $body)
+{
+    try {
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->SMTPDebug = 3;
+        $mail->setFrom($_SERVER['SMTP_SENDER_EMAIL'], $_SERVER['SMTP_SENDER_NAME']);
+        $mail->addAddress($address);
+        $mail->Username = $_SERVER['SMTP_USERNAME'];
+        $mail->Password = $_SERVER['SMTP_PASSWORD'];
+        $mail->Host = $_SERVER['SMTP_HOST'];
+        $mail->CharSet = 'UTF-8';
+        $mail->Subject = $subject;
+        $mail->Body = $body;
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port = $_SERVER['SMTP_PORT'];
+        $mail->SMTPOptions = [
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            ]
+        ];
+        $mail->isHTML(true);
+        return $mail->send();
+    } catch (Exception $e) {
+        var_dump($e);
+        return false;
+    }
+}
+]]>
+    </content>
+</item>
+
+
+<item>
+    <timestamp>10:50</timestamp>
+    <fileName>.htaccess</fileName>
+    <content><![CDATA[
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Környezeti változók beállítása
+  SetEnv DB_HOST pelda_host
+  SetEnv DB_NAME test_db
+  SetEnv DB_USER user
+  SetEnv DB_PASSWORD password
+
+  SetEnv SMTP_SENDER_EMAIL teszt@kodbazis.com
+  SetEnv SMTP_SENDER_NAME "Kódbázis"
+  SetEnv SMTP_USERNAME teszt@kodbazis.com
+  SetEnv SMTP_PASSWORD NkZdDesWdUYShRaS
+  SetEnv SMTP_HOST smtp.rackhost.hu
+  SetEnv SMTP_PORT 465
+
+  SetEnv RECIPIENT_EMAIL teszt@kodbazis.com
+
+  # Public mappa és index.php beállítása
+  RewriteCond %{REQUEST_URI} ^.*favicon
+  RewriteRule ^(.*)$ src/favicon.ico [END]
+
+  RewriteCond %{REQUEST_URI} ^.*public/(.*)
+  RewriteRule ^(.*)$ src/public/%1 [END]
+
+  RewriteRule (.*)  src/index.php [QSA]
+</IfModule>
+]]>
+    </content>
+</item>
+
+
 
 </root>
