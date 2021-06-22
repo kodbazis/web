@@ -30,7 +30,6 @@
   scroll-snap-type: x proximity;
   padding-bottom: calc(0.75 * var(--gutter));
   margin-bottom: calc(-1.25 * var(--gutter));
-
   -webkit-overflow-scrolling: touch;
 }
 
