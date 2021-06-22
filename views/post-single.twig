@@ -13,12 +13,12 @@
 				<h4 class="pt-3 pb-2 text-center">
 					<strong>Ajánlott kurzusok:</strong>
 				</h4>
-				<div class="app mb-0 bg-light">
+				<div class="app mb-0 bg-light scrollbar-hidden">
 					<ul class="hs full">
 						{% for recommendedCourse in recommendedCourses %}
 							<a class="hover11" href="/{{recommendedCourse.slug}}">
 								<li class="overlay-container item text-center">
-									<figure>
+									<figure class="m-0">
 										<img loading="lazy" class="img-thumbnail p-0" src="/public/files/sm-{{recommendedCourse.imgUrl}}"/>
 									</figure>
 								</li>
