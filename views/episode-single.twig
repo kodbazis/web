@@ -286,12 +286,12 @@ btn.innerHTML = '<i class="fa fa-arrow-up m-auto"></i>';
 					</p>
 				</a>
 
-				<div class="app mb-3 bg-light" data-position="{{episode.position}}">
+				<div class="app mb-3 bg-light scrollbar-hidden" data-position="{{episode.position}}">
 					<ul class="hs full">
 						{% for ep in allEpisodesInCourse %}
 							<a class="hover11" href="/{{course.slug}}/{{ep.slug}}">
 								<li class="overlay-container item {{ep.id == episode.id ? 'selected-episode' : ''}} {{ep.isPreview ? 'preview' : 'lock'}}">
-									<figure {{ep.isPreview or isVerified? '' : 'style="opacity: 0.4"'}}>
+									<figure {{ep.isPreview or isVerified? '' : 'style="opacity: 0.4"'}} class="m-0">
 
 										{% if ep.imgUrl %}
 											<img loading="lazy" class="img-thumbnail p-0" src="/public/files/sm-{{ep.imgUrl}}"/>
@@ -353,12 +353,12 @@ btn.innerHTML = '<i class="fa fa-arrow-up m-auto"></i>';
 				<h4 class="pt-3 pb-2 text-center">
 					További ajánlott kurzusok:
 				</h4>
-				<div class="app mb-0 bg-light">
+				<div class="app mb-0 bg-light scrollbar-hidden">
 					<ul class="hs full">
 						{% for recommendedCourse in recommendedCourses %}
 							<a class="hover11" href="/{{recommendedCourse.slug}}">
 								<li class="overlay-container item text-center">
-									<figure>
+									<figure class="m-0">
 										<img loading="lazy" class="img-thumbnail p-0" src="/public/files/sm-{{recommendedCourse.imgUrl}}"/>
 									</figure>
 								</li>
