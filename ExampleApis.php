@@ -210,7 +210,15 @@ class ExampleApis
 
         $r->get('/api/instruments', function (Request $request) use ($folder, $getContent) {
             header('Content-Type: application/json');
-            echo $getContent($folder);
+            $items = json_decode($getContent($folder));
+
+            $ret = [];
+            foreach ($items as $item) {
+                unset($item['description']);
+                $ret[] = $item;
+            }
+
+            echo json_encode($ret);
         });
 
         $r->post('/api/prune-instruments', function (Request $request) use ($folder) {
