@@ -5,7 +5,8 @@
     "brand": "Fender",
     "price": 649900,
     "quantity": 1,
-    "imageURL": "https://www.fmicassets.com/Damroot/GuitarVertDesktopJpg/10002/0110132850_gtr_frt_001_rr.jpg"
+    "imageURL": "https://www.fmicassets.com/Damroot/GuitarVertDesktopJpg/10002/0110132850_gtr_frt_001_rr.jpg",
+    "description": "A"
   },
   {
     "id": "5fef84f891013",
@@ -13,7 +14,8 @@
     "brand": "Fender",
     "price": 469990,
     "quantity": 3,
-    "imageURL": "https://www.fmicassets.com/Damroot/GuitarVertDesktopJpg/10001/5300100338_gtr_frt_001_rr.jpg"
+    "imageURL": "https://www.fmicassets.com/Damroot/GuitarVertDesktopJpg/10001/5300100338_gtr_frt_001_rr.jpg",
+    "description": "B"
   },
   {
     "id": "5fef84f891014",
@@ -21,7 +23,8 @@
     "brand": "Fender",
     "price": 217500,
     "quantity": 8,
-    "imageURL": "https://www.fmicassets.com/Damroot/GuitarVertDesktopJpg/10001/0970322321_gtr_frt_001_rr.jpg"
+    "imageURL": "https://www.fmicassets.com/Damroot/GuitarVertDesktopJpg/10001/0970322321_gtr_frt_001_rr.jpg",
+    "description": "C"
   },
   {
     "id": "5fef84f891015",
@@ -29,7 +32,8 @@
     "brand": "Ibanez",
     "price": 474775,
     "quantity": 2,
-    "imageURL": "https://media.sweetwater.com/api/i/f-webp__q-85__ha-9a297ded42d50889__hmac-ea43dca50b7d9e5be6ad93b62b85d8379d251d3d/images/closeup/xl/1600-JEM77PBFP_front.jpg.auto.webp"
+    "imageURL": "https://media.sweetwater.com/api/i/f-webp__q-85__ha-9a297ded42d50889__hmac-ea43dca50b7d9e5be6ad93b62b85d8379d251d3d/images/closeup/xl/1600-JEM77PBFP_front.jpg.auto.webp",
+    "description": "D"
   },
   {
     "id": "5fef84f891016",
@@ -37,7 +41,8 @@
     "brand": "Ibanez",
     "price": 892800,
     "quantity": 1,
-    "imageURL": "https://media.sweetwater.com/api/i/q-85__ha-47176ee3683d876a__hmac-649b6388a154e14c76ada1cb754c089f2a6b9c76/images/items/1800/RG8527ZSDE-xlarge.jpg"
+    "imageURL": "https://media.sweetwater.com/api/i/q-85__ha-47176ee3683d876a__hmac-649b6388a154e14c76ada1cb754c089f2a6b9c76/images/items/1800/RG8527ZSDE-xlarge.jpg",
+    "description": "E"
   },
   {
     "id": "5fef84f891017",
@@ -45,7 +50,8 @@
     "brand": "ESP LTD",
     "price": 329000,
     "quantity": 4,
-    "imageURL": "https://www.evertune.com/shop/guitars/ESP_LTD/VIPER-1000/evertune__guitars__ESP_LTD_VIPER-1000__see_thru_black_cherry_satin__v1.jpg"
+    "imageURL": "https://www.evertune.com/shop/guitars/ESP_LTD/VIPER-1000/evertune__guitars__ESP_LTD_VIPER-1000__see_thru_black_cherry_satin__v1.jpg",
+    "description": "F"
   }
   
 ]
