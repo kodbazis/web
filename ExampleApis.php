@@ -210,7 +210,7 @@ class ExampleApis
 
         $r->get('/api/instruments', function (Request $request) use ($folder, $getContent) {
             header('Content-Type: application/json');
-            $items = json_decode($getContent($folder));
+            $items = json_decode($getContent($folder), true);
 
             $ret = [];
             foreach ($items as $item) {
