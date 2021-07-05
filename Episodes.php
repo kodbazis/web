@@ -341,15 +341,15 @@ function getEpisodeOgTags($episode)
         ],
         [
             'property' => 'og:image',
-            'content' => Router::siteUrl() . '/public/files/md-' . $episode->getImgUrl(),
+            'content' => Router::siteUrl() . '/public/files/l-' . $episode->getImgUrl(),
         ],
         [
             'property' => 'og:image:width',
-            'content' => "600",
+            'content' => "888",
         ],
         [
             'property' => 'og:image:height',
-            'content' => "337",
+            'content' => "499",
         ],
         [
             'property' => 'og:description',
