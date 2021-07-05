@@ -344,6 +344,14 @@ function getEpisodeOgTags($episode)
             'content' => Router::siteUrl() . '/public/files/md-' . $episode->getImgUrl(),
         ],
         [
+            'property' => 'og:image:width',
+            'content' => "600",
+        ],
+        [
+            'property' => 'og:image:height',
+            'content' => "337",
+        ],
+        [
             'property' => 'og:description',
             'content' => $episode->getDescription(),
         ],
