@@ -1312,6 +1312,14 @@ function getCourseOgTags($course)
             'content' => Router::siteUrl() . '/public/files/md-' . $course->getImgUrl(),
         ],
         [
+            'property' => 'og:image:width',
+            'content' => "600",
+        ],
+        [
+            'property' => 'og:image:height',
+            'content' => "337",
+        ],
+        [
             'property' => 'og:description',
             'content' => $course->getDescription(),
         ],
