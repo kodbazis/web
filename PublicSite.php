@@ -363,6 +363,7 @@ class PublicSite
                 'content' => $twig->render('subscriber-login.twig', [
                     'subscriberLabel' =>  getNick($request->vars),
                     'isLoggedIn' => isset($_SESSION['subscriberId']),
+                    "courses" => isset($_SESSION['subscriberId']) ? getCourseItems($conn) : [],
                     'error' => $_GET['error'] ?? '',
                     'loginSuccess' => isset($_GET['loginSuccess']),
                     'isPasswordModificationSuccess' => isset($_GET['isPasswordModificationSuccess']),

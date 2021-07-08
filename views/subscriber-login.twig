@@ -11,20 +11,25 @@
 				</div>
 			</div>
 
-			{% include 'home-links.twig' %}
-			<div class="row p-0 m-0 w-100 border-right border-muted">
-				<div class="col-sm-4 m-auto">
-					<h1 class="mt-5 mb-5" style="font-size: 2.5em">
-						<a href="/php-az-alapoktol">PHP az alapoktól</a>
-					</h1>
-				</div>
-				<div class="col-sm-4 m-auto" style="font-size: 2.5em"></div>
-				<div class="col-sm-4 m-auto">
-					<h1 class="mt-5 mb-5" style="font-size: 2.5em">
-						<a href="/react-kurzus">React egyszerűen elmagyarázva</a>
-					</h1>
-				</div>
+
+			<div class="row m-auto mb-4">
+				{% for item in courses %}
+					<div class="col-md-6">
+						<a href="{{item.course.slug}}">
+							<div class="card p-2 m-2 bg-muted" style="background-color: beige">
+								<img src="/public/files/md-{{item.course.imgUrl}}" class="w-100"/>
+								<button class="btn mt-2" format="primary" id="login_signup_button">
+									<span class="sc-bxivhb jrbrfM">
+										Tovább
+										<i class="fa fa-arrow-circle-right"></i>
+									</span>
+								</button>
+							</div>
+						</a>
+					</div>
+				{% endfor %}
 			</div>
+			{% include 'home-links.twig' %}
 
 		{% else %}
 			<div class="row m-0">
