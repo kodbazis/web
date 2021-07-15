@@ -29,7 +29,7 @@
 				</div>
 			{% else %}
 				{% if not isVerificationPhase and paymentUrl is not defined %}
-					{% include "coupon-form.twig" with {'courseId': course.id} %}
+					{# {% include "coupon-form.twig" with {'courseId': course.id} %} #}
 				{% endif %}
 			{% endif %}
 			{% if isInvoice %}
