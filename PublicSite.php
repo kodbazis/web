@@ -116,15 +116,12 @@ class PublicSite
         });
 
         $r->post('/api/comments', function (Request $request) use ($conn, $twig) {
-            (new MessageSaver($conn))->Save(new NewMessage(
+            self::enqueueEmail(
                 $_SERVER['SMTP_SENDER_EMAIL'],
                 'Új kérdés érkezett',
                 "EmbeddableId: " . $request->body['embeddableId'],
-                "notSent",
-                0,
-                null,
-                time()
-            ));
+                $conn
+            );
 
             echo (new CommentSaver)->getRoute($request);
         });
@@ -250,15 +247,12 @@ class PublicSite
                 'link' => Router::siteUrl() . "/jelszo-megvaltoztatasa/" . $token . "?referer=" . $_GET['referer'],
             ]);
 
-            (new MessageSaver($conn))->Save(new NewMessage(
+            self::enqueueEmail(
                 $subscriber->getEmail(),
                 'Jelszó megváltoztatása',
                 $body,
-                "notSent",
-                0,
-                null,
-                time()
-            ));
+                $conn
+            );
         });
 
         $r->post("/api/send-mails", function (Request $request) use ($conn, $twig) {
@@ -476,6 +470,7 @@ class PublicSite
                 'subscriberLabel' =>  getNick($request->vars),
                 'noIndex' => true,
                 'content' => $twig->render('subscriber-registration.twig', [
+                    "courses" => isset($_SESSION['subscriberId']) ? getCourseItems($conn) : [],
                     'isLoggedIn' => isset($_SESSION['subscriberId']),
                     'registrationSuccessful' => isset($_GET['registrationSuccessful']),
                     'registrationEmailSent' => isset($_GET['registrationEmailSent']),
@@ -484,7 +479,8 @@ class PublicSite
                     'email' => $_GET['email'] ?? '',
                 ]),
                 'styles' => [
-                    ['path' => 'css/login.css']
+                    ['path' => 'css/login.css'],
+                    ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
                 ],
             ]);
         });
@@ -687,15 +683,12 @@ class PublicSite
             $params = ['registrationEmailSent=1'];
             header('Location: ' .  $_SERVER['HTTP_REFERER']  . Router::mergeQueries($_SERVER['HTTP_REFERER'], $params));
 
-            (new MessageSaver($conn))->Save(new NewMessage(
+            self::enqueueEmail(
                 $request->body['email'],
                 'Megerősítés egyetlen kattintással',
                 $body,
-                "notSent",
-                0,
-                null,
-                time()
-            ));
+                $conn
+            );
         });
 
         $r->get('/megerosites/{token}', function (Request $request) use ($conn, $twig) {
@@ -966,6 +959,13 @@ class PublicSite
 
         $r->get('/cikkek/{slug}', $initSubscriberSession, Posts::postSingleHandler($conn, $twig));
 
+        // $r->get('/api/coupon-test', function (Request $request) use ($conn, $twig) {
+        //     $request->vars['subscriberId'] = 87;
+        //     $request->body['discount'] = 25;
+        //     Coupons::issueCouponsForSubscriber($conn, $twig)($request);
+        //     Coupons::enqueueCouponsForSubscriber($conn, $twig)($request);
+        // });
+
         $r->get('/{course-slug}', $initSubscriberSession, function (Request $request) use ($conn, $twig) {
             header('Content-Type: text/html; charset=UTF-8');
             $courseBySlug = (new CourseLister($conn))->list(Router::where('slug', 'eq', $request->vars['course-slug']));
@@ -1064,8 +1064,10 @@ class PublicSite
             ));
 
             // kupon?
-            $coupons = getRedeemedAndValidCoupon($conn, $course, $_SESSION['subscriberId']);
-            $isCouponRedeemed = $coupons->getCount() > 0;
+
+            $isCouponRedeemed = getRedeemedAndValidCoupon($conn, $course, $_SESSION['subscriberId'])
+                ->getCount() > 0;
+            $isCouponAvailable = isCouponAvailable($conn, $course, $_SESSION['subscriberId']);
 
             // not ordered
             if (!$subscriberCourses->getCount()) {
@@ -1083,6 +1085,7 @@ class PublicSite
                         'contentWithEmbeddables' => $course->getContent(),
                         'paywallForm' => $twig->render('paywall-form.twig', [
                             'isCouponRedeemed' => $isCouponRedeemed,
+                            'isCouponAvailable' => $isCouponAvailable,
                             'course' => $course,
                             'isInvoice' => isset($_GET['isInvoice']),
                             'error' => $_GET['error'] ?? '',
@@ -1120,6 +1123,7 @@ class PublicSite
                         'contentWithEmbeddables' => $course->getContent(),
                         'paywallForm' => $twig->render('paywall-form.twig', [
                             'isCouponRedeemed' => $isCouponRedeemed,
+                            'isCouponAvailable' => $isCouponAvailable,
                             'subscriberCourse' => $subscriberCourse,
                             'course' => $course,
                             'isInvoice' => $subscriberCourse->getPurchaseType() === 'invoice',
@@ -1158,6 +1162,7 @@ class PublicSite
                         'contentWithEmbeddables' => $course->getContent(),
                         'paywallForm' => $twig->render('paywall-form.twig', [
                             'isCouponRedeemed' => $isCouponRedeemed,
+                            'isCouponAvailable' => $isCouponAvailable,
                             'subscriberCourse' => $subscriberCourse,
                             'course' => $course,
                             'isInvoice' => $subscriberCourse->getPurchaseType() === 'invoice',
@@ -1204,6 +1209,19 @@ class PublicSite
             $initSubscriberSession,
             Episodes::episodeSingleHandler($conn, $twig)
         );
+    }
+
+    public static function enqueueEmail($recipientEmail, $subject, $body, $conn)
+    {
+        (new MessageSaver($conn))->Save(new NewMessage(
+            $recipientEmail,
+            $subject,
+            $body,
+            "notSent",
+            0,
+            null,
+            time()
+        ));
     }
 }
 
@@ -1363,6 +1381,26 @@ function getDiscount($course, $subscriberId, $conn = null)
     }
 
     return  $coupons->getEntities()[0]->getDiscount();
+}
+
+function isCouponAvailable($conn, $course, $subscriberId)
+{
+    return (new CouponLister($conn))->list(
+        new Query(
+            1,
+            0,
+            new Filter(
+                'and',
+                new Clause('eq', 'courseId', $course->getId()),
+                new Filter(
+                    'and',
+                    new Clause('eq', 'issuedTo', $subscriberId),
+                    new Clause('gt', 'validUntil', time()),
+                )
+            ),
+            new OrderBy('id', 'asc')
+        )
+    )->getCount() > 0;
 }
 
 function getRedeemedAndValidCoupon($conn, $course, $subscriberId)

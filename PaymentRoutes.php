@@ -228,6 +228,11 @@ class PaymentRoutes
                 $subscriberCourse->getId(),
                 new PatchedSubscriberCourse(null, null, null, null, null, null, null, null, null, true)
             );
+
+            $request->vars['subscriberId'] = $subscriberCourse->getSubscriberId();
+            $request->body['discount'] = 25;
+            Coupons::issueCouponsForSubscriber($conn, $twig)($request);
+            Coupons::enqueueCouponEmailsForSubscriber($conn, $twig)($request);
         });
 
         $r->get('/api/back/{subscriberCourseId}', PublicSite::initSubscriberSession($conn), function (Request $request) use ($conn) {

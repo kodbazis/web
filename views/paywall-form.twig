@@ -28,8 +28,8 @@
 					</p>
 				</div>
 			{% else %}
-				{% if not isVerificationPhase and paymentUrl is not defined %}
-					{# {% include "coupon-form.twig" with {'courseId': course.id} %} #}
+				{% if not isVerificationPhase and paymentUrl is not defined and isCouponAvailable %}
+					{% include "coupon-form.twig" with {'courseId': course.id} %}
 				{% endif %}
 			{% endif %}
 			{% if isInvoice %}
