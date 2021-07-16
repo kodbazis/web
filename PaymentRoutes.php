@@ -163,7 +163,7 @@ class PaymentRoutes
 
     public static function getRoutes(Pipeline $r, mysqli $conn, Environment $twig)
     {
-        $r->post('/api/ipn', function (Request $request) use ($conn) {
+        $r->post('/api/ipn', function (Request $request) use ($conn, $twig) {
             header('Content-Type: application/json; charset=utf-8');
 
             $subscriberCourses = (new SubscriberCourseLister($conn))->list(new Query(
