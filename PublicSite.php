@@ -1328,7 +1328,7 @@ function getCourseOgTags($course)
             'content' => $course->getTitle(),
         ],
         [
-            'property' => 'og:image:url',
+            'property' => 'og:image',
             'content' => Router::siteUrl() . '/public/files/' . $fileName . ".jpg",
         ],
         [
