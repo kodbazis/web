@@ -1331,6 +1331,10 @@ function getCourseOgTags($course)
             'content' => Router::siteUrl() . '/public/files/l-' . $course->getImgUrl(),
         ],
         [
+            'property' => 'og:image:secure_url',
+            'content' => Router::siteUrl() . '/public/files/l-' . $course->getImgUrl(),
+        ],
+        [
             'property' => 'og:image:width',
             'content' => "888",
         ],
