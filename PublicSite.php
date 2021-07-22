@@ -1321,7 +1321,7 @@ function getCourseOgTags($course)
         ],
         [
             'property' => 'og:type',
-            'content' => 'website',
+            'content' => 'article',
         ],
         [
             'property' => 'og:title',
