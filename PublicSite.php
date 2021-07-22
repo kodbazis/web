@@ -1332,8 +1332,8 @@ function getCourseOgTags($course)
             'content' => Router::siteUrl() . '/public/files/' . $fileName . ".jpg",
         ],
         [
-            'property' => 'og:image:type',
-            'content' => "image/jpeg",
+            'property' => 'og:image:alt',
+            'content' => "Kép nem elérhető",
         ],
         [
             'property' => 'og:description',
