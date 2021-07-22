@@ -1336,14 +1336,6 @@ function getCourseOgTags($course)
             'content' => "image/jpeg",
         ],
         [
-            'property' => 'og:image:width',
-            'content' => "888",
-        ],
-        [
-            'property' => 'og:image:height',
-            'content' => "499",
-        ],
-        [
             'property' => 'og:description',
             'content' => $course->getDescription(),
         ],
