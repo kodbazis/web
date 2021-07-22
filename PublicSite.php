@@ -1313,7 +1313,6 @@ function getNick($vars)
 
 function getCourseOgTags($course)
 {
-    $fileName = pathinfo($course->getImgUrl(), PATHINFO_FILENAME);
     return [
         [
             'property' => 'og:url',
@@ -1329,11 +1328,11 @@ function getCourseOgTags($course)
         ],
         [
             'property' => 'og:image',
-            'content' => Router::siteUrl() . '/public/files/' . $fileName . ".jpg",
+            'content' => Router::siteUrl() . '/public/files/' . $course->getImgUrl(),
         ],
         [
             'property' => 'og:image:secure_url',
-            'content' => Router::siteUrl() . '/public/files/' . $fileName . ".jpg",
+            'content' => Router::siteUrl() . '/public/files/' . $course->getImgUrl(),
         ],
         [
             'property' => 'og:image:alt',
