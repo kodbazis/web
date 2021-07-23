@@ -12,26 +12,10 @@
 					{{episode.shortDescription | raw}}
 				</div>
 				<img src="/public/files/l-{{episode.imgUrl}}" class="w-100" alt="{{episode.title}}" />
-				{# <p class="text-center lead">
-					<div class="row">
-						<div class="col-md-4"></div>
-						<div class="col-md-4">
-							{% include 'sub-reg-panel.twig' with {
-                                'isLogin': isLogin, 
-                                'error': error, 
-                                'registrationEmailSent': registrationEmailSent, 
-                                'isPasswordModificationSuccess':isPasswordModificationSuccess
-                            } %}
-						</div>
-						<div class="col-md-4"></div>
-					</div>
-				</p> #}
 				<h2 class="text-center p-3 font-weight-bold" style="color: red !important;">
 					Az epizód megtekintéséhez
 					<a href="/{{course.slug}}">vedd meg a kurzust</a>!
 				</h2>
-
-				<hr class="mb-3">
 			</div>
 
 			<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0&appId=705894336804251&autoLogAppEvents=1" nonce="GLaxzOjV"></script>
