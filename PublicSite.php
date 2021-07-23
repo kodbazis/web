@@ -604,6 +604,7 @@ class PublicSite
                 'description' => 'Személyre szabott tanítás JavaScript, React, Angular és PHP témákban.',
                 'styles' => [
                     ['path' => 'css/promo.css'],
+                    ['path' => 'css/fonts/fontawesome/css/fontawesome-all.css'],
                 ],
             ]);
         });
