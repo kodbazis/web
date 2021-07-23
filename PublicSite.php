@@ -1338,7 +1338,7 @@ function getCourseOgTags($course)
         ],
         [
             'property' => 'og:image:alt',
-            'content' => "Kép nem elérhető",
+            'content' => $course->getTitle(),
         ],
         [
             'property' => 'og:description',
