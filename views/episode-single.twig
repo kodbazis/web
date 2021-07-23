@@ -294,7 +294,7 @@ btn.innerHTML = '<i class="fa fa-arrow-up m-auto"></i>';
 									<figure {{ep.isPreview or isVerified? '' : 'style="opacity: 0.4"'}} class="m-0">
 
 										{% if ep.imgUrl %}
-											<img loading="lazy" class="img-thumbnail p-0" src="/public/files/sm-{{ep.imgUrl}}"/>
+											<img loading="lazy" class="img-thumbnail p-0" src="/public/files/sm-{{ep.imgUrl}}" alt="{{ep.title}}" />
 											{% if not isVerified %}
 												<div class="after"></div>
 											{% endif %}
@@ -359,7 +359,7 @@ btn.innerHTML = '<i class="fa fa-arrow-up m-auto"></i>';
 							<a class="hover11" href="/{{recommendedCourse.slug}}">
 								<li class="overlay-container item text-center">
 									<figure class="m-0">
-										<img loading="lazy" class="img-thumbnail p-0" src="/public/files/sm-{{recommendedCourse.imgUrl}}"/>
+										<img loading="lazy" class="img-thumbnail p-0" src="/public/files/sm-{{recommendedCourse.imgUrl}}" alt="{{recommendedCourse.title}}" />
 									</figure>
 								</li>
 							</a>

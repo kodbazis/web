@@ -5,7 +5,13 @@
 				<div class="card-title">
 					<h1 class="mb-4 mt-5">{{ episode.title }}</h1>
 				</div>
-				<hr>
+				<div class="card p-3 pl-5 mt-2">
+					<h2 class="lead">{{episode.description}}</h2>
+				
+					<span class="lead mb-2"><b>Témakörök:</b></span>
+					{{episode.shortDescription | raw}}
+				</div>
+				<img src="/public/files/l-{{episode.imgUrl}}" class="w-100" alt="{{episode.title}}" />
 				{# <p class="text-center lead">
 					<div class="row">
 						<div class="col-md-4"></div>
@@ -20,7 +26,7 @@
 						<div class="col-md-4"></div>
 					</div>
 				</p> #}
-				<h2 class="text-center p-3">
+				<h2 class="text-center p-3 font-weight-bold" style="color: red !important;">
 					Az epizód megtekintéséhez
 					<a href="/{{course.slug}}">vedd meg a kurzust</a>!
 				</h2>
